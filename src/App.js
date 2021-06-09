@@ -5,6 +5,15 @@ function App() {
     <div className="container">
       <header>
         <img src="images/logo.svg" alt="URGIFY Logo" />
+        <div className="powered-by">
+          <div>Powered by:</div>
+          <div className="powered-by-image ibm">
+            <img src="images/ibm.svg" alt="IBM logo" />
+          </div>
+          <div className="powered-by-image village-capital">
+            <img src="images/village-capital.svg" alt="Village capital logo" />
+          </div>
+        </div>
       </header>
       <div className="main">
         <div className="title">
@@ -14,7 +23,7 @@ function App() {
         <div className="description">
           We believe that great ideas come from everywhere. So, if you'd like to get a seat at the table and help us to build a product that you’ll love and create an impact, please get in touch or submit your idea through the portal, and we'll make sure we build what matters most to you.
         </div>
-        <a href="https://urgify.ideas.aha.io/" target="_blank" className="button">
+        <a href="https://urgify.ideas.aha.io/" target="_blank" className="button" rel="noreferrer">
           explore the idea
         </a>
       </div>
