@@ -16,16 +16,24 @@ function App() {
         </div>
       </header>
       <div className="main">
-        <div className="title">
-          <div>Hey,</div>
-          We make collecting medical bills easier for hospitals & less stressful for patients.
+        <div>
+          <div className="title">
+            <div>Hey,</div>
+            We make collecting medical bills easier for hospitals & less stressful for patients.
+          </div>
+          <div className="description">
+            We believe that great ideas come from everywhere. So, if you'd like to get a seat at the table and help us to build a product that you’ll love and create an impact, please get in touch or submit your idea through the portal, and we'll make sure we build what matters most to you.
+          </div>
+          <a href="https://urgify.ideas.aha.io/" target="_blank" className="button" rel="noreferrer">
+            explore the idea
+          </a>
         </div>
-        <div className="description">
-          We believe that great ideas come from everywhere. So, if you'd like to get a seat at the table and help us to build a product that you’ll love and create an impact, please get in touch or submit your idea through the portal, and we'll make sure we build what matters most to you.
+        <div className="part-of">
+          <img src="images/ideaction-logo.svg" alt="Ideaction logo" />
+          <div className="info">
+            Urgify is part of the <br /> <a href="https://ideaction.io" target="_blank" rel="noreferrer">IDEACTION Startup Studio family</a>
+          </div>
         </div>
-        <a href="https://urgify.ideas.aha.io/" target="_blank" className="button" rel="noreferrer">
-          explore the idea
-        </a>
       </div>
       <div className="pulse-block">
         <div className="pulse">
@@ -33,15 +41,15 @@ function App() {
         <img src="images/plus.svg" alt="Plus icon" />
       </div>
       <div className="socials">
-        <div className="item">
+        <a className="item" href="https://www.linkedin.com/company/urgify" target="_blank" rel="noreferrer">
           <img className="linkedin" src="images/linkedin.svg" alt="Linkedin logo" />
           <img className="linkedin-mobile" src="images/linkedin-mobile.svg" alt="Linkedin logo" />
           <div>Linkedin</div>
-        </div>
+        </a>
         <div className="item">
           <img className="youtube" src="images/youtube.svg" alt="Youtube logo" />
           <img className="youtube-mobile" src="images/youtube-mobile.svg" alt="Youtube logo" />
-          <div>Linkedin</div>
+          <div>Youtube</div>
         </div>
       </div>
     </div>
