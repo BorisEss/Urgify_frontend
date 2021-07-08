@@ -38,7 +38,7 @@ header {
     @media screen and (min-width: 601px) {
       display: flex;
       align-items: center;
-      
+
       div:not(:last-child) {
         margin-right: 16px;
       }
@@ -77,11 +77,18 @@ header {
     max-width: 400px;
   }
 
+  @media screen and (min-width: 721px) {
+    min-height: calc(100vh - 177px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   @media screen and (max-width: 720px) {
     margin-top: 40px;
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (max-width: 600px) {
     margin-top: -57px;
   }
 }
@@ -118,6 +125,34 @@ header {
   @media screen and (max-width: 720px) {
     font-size: 14px;
     line-height: 24px;
+  }
+}
+
+.part-of {
+  display: flex;
+  margin: 56px 0;
+
+  @media screen and (max-width: 720px) {
+    margin: 56px 0 0;
+  }
+
+  .info {
+    max-width: 384px;
+    font-size: 16px;
+    line-height: 28px;
+    color: #666;
+    font-family: "Poppins-Regular";
+    margin-left: 24px;
+
+    @media screen and (max-width: 720px) {
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    a {
+      color: #666;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -237,6 +272,7 @@ header {
     line-height: 36px;
     color: #2B364D;
     cursor: pointer;
+    text-decoration: none;
 
     @media screen and (min-width: 721px) {
       &:first-child {
