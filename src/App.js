@@ -7,9 +7,9 @@ function App() {
         <img src="images/logo.svg" alt="URGIFY Logo" />
         <div className="powered-by">
           <div>Powered by:</div>
-          <div className="powered-by-image ibm">
+          <a href="https://community.ibm.com/community/user/ibmz-and-linuxone/groups/group-home?CommunityKey=378eb0a9-b968-4c46-ad72-2e1670c4ee92" target="_blank" className="powered-by-image ibm" rel="noreferrer">
             <img src="images/ibm.svg" alt="IBM logo" />
-          </div>
+          </a>
           <div className="powered-by-image village-capital">
             <img src="images/village-capital.svg" alt="Village capital logo" />
           </div>
