@@ -39,7 +39,7 @@ header {
       display: flex;
       align-items: center;
 
-      div:not(:last-child) {
+      div:not(:last-child), a {
         margin-right: 16px;
       }
     }
