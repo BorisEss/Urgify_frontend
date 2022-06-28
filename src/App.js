@@ -24,9 +24,14 @@ function App() {
           <div className="description">
             We believe that great ideas come from everywhere. So, if you'd like to get a seat at the table and help us to build a product that you’ll love and create an impact, please get in touch or submit your idea through the portal, and we'll make sure we build what matters most to you.
           </div>
-          <a href="https://urgify.ideas.aha.io/" target="_blank" className="button" rel="noreferrer">
-            explore the idea
-          </a>
+          <div className="actions">
+            <a href="https://urgify.ideas.aha.io/" target="_blank" className="button" rel="noreferrer">
+              explore the idea
+            </a>
+            <a href="mailto:boris@urgify.io/" title="mailto:boris@urgify.io" className="outlined-button">
+              contact us
+            </a>
+          </div>
         </div>
         <div className="part-of">
           <img src="images/ideaction-logo.svg" alt="Ideaction logo" />
