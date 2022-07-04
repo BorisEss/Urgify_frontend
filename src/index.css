@@ -1,18 +1,3 @@
-@font-face {
-  font-family: 'Poppins-Regular';
-  src: url(./fonts/Poppins-Regular.ttf);
-}
-
-@font-face {
-  font-family: 'Poppins-Semibold';
-  src: url(./fonts/Poppins-SemiBold.ttf);
-}
-
-body {
-  margin: 0;
-  font-family: 'Poppins-SemiBold', sans-serif;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -22,4 +7,105 @@ body {
 *::after,
 *::before {
   box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins-regular", sans-serif;
+  background-color: #FFFFFF;
+  font-size: 16px;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+@font-face {
+  font-family: "Poppins-light";
+  src: url(../public/fonts/Poppins-Light.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-regular";
+  src: url(../public/fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-medium";
+  src: url(../public/fonts/Poppins-Medium.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-semibold";
+  src: url(../public/fonts/Poppins-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-bold";
+  src: url(../public/fonts/Poppins-Bold.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-extrabold";
+  src: url(../public/fonts/Poppins-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: "Poppins-black";
+  src: url(../public/fonts/Poppins-Black.ttf);
+}
+
+.unselectable {
+  user-select: none;
+}
+
+/*
+ * Stackoverflow animation
+ * https://stackoverflow.com/a/23985078/7003620
+ */
+ @keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
 }
