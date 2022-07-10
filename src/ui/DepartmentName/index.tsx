@@ -5,6 +5,12 @@ import {makeStyles} from 'tss-react/mui';
 import images from '../../images';
 
 const useStyles = makeStyles()((theme: Theme) => ({
+
+  main: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+
   wrap: {
     display: 'flex',
     alignItems: 'center',
@@ -16,7 +22,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     fontSize: 40,
     lineHeight: '52px',
     color: '#2B364D',
-    paddingRight: 16,
+    paddingLeft: 16,
 
     [theme.breakpoints.down('sm')]: {
       fontFamily: 'Poppins-regular',
@@ -29,20 +35,37 @@ const useStyles = makeStyles()((theme: Theme) => ({
     width: 48,
     height: 48,
   },
+  arrowUp: {
+    width: 48,
+    height: 48,
+  },
+  clickable: {
+    cursor: 'pointer',
+  },
 }));
 
-type DepartmentsNameType = {
+type DepartmentNameType = {
   title: string;
+  onClick?: () => void;
 };
 
-const DepartmentsName: React.FC<DepartmentsNameType> = ({title}) => {
-  const {classes} = useStyles();
+const DepartmentName: React.FC<DepartmentNameType> = ({title, onClick}) => {
+  const {classes, cx} = useStyles();
   return (
+  <div className={cx(classes.main, onClick ? classes.clickable : '')} onClick={onClick}>
     <div className={classes.wrap}>
       <img className={classes.img} src={images.building}/>
       <h2 className={classes.title}>{title}</h2>
     </div>
+
+    {onClick ?
+      <div>
+        <img className={classes.arrowUp} src={images.arrowUp}/>
+      </div>
+      : null
+    }
+  </div>
   );
 };
 
-export default DepartmentsName;
+export default DepartmentName;

@@ -2,6 +2,8 @@ import type {Theme} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import images from '../../images';
+
 const useStyles = makeStyles()((theme: Theme) => ({
   label: {
     fontFamily: 'Poppins-medium',
@@ -33,6 +35,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     color: '#2B364D',
     width: '100%',
 
+
     [theme.breakpoints.down('sm')]: {
       border: '1px solid #DBDBDB',
       fontFamily: 'Poppins-regular',
@@ -49,22 +52,44 @@ const useStyles = makeStyles()((theme: Theme) => ({
       border: '1px solid #F93822',
     },
   },
+  closeIcon: {
+    position: 'absolute',
+    right: 12,
+    bottom: 16,
+    cursor: 'pointer',
+    lineHeight: 0,
+  },
+  rootRelative: {
+    position: 'relative',
+  },
 }));
 
 type InputType = {
   type: string;
   label: string;
   name?: string;
+  value?: string;
   disabled?: boolean;
   error?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: () => void;
+  onDelete?: () => void;
 };
 
-const Input: React.FC<InputType> = ({type, label, name, disabled, onChange, onBlur, error}) => {
+const Input: React.FC<InputType> = ({
+  type,
+  label,
+  name,
+  disabled,
+  value,
+  onChange,
+  onBlur,
+  error,
+  onDelete,
+}) => {
   const {classes, cx} = useStyles();
   return (
-    <div>
+    <div className={cx(onDelete ? classes.rootRelative : '')}>
       <p className={classes.label}>{label}</p>
       <input
         name={name}
@@ -73,7 +98,13 @@ const Input: React.FC<InputType> = ({type, label, name, disabled, onChange, onBl
         disabled={disabled}
         onChange={(e) => (onChange ? onChange(e) : () => {})}
         onBlur={() => (onBlur ? onBlur() : () => {})}
+        value={value}
       />
+      {onDelete ? (
+        <div onClick={onDelete} className={classes.closeIcon}>
+          <img src={images.closeIcon} />
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../../images';
+import { navTypes } from '../../navigation/navTypes';
 import AuthPageTitle from '../AuthPageTitle';
 import AuthPageWrapper from '../AuthPageWrapper';
 import Button from '../Button';
@@ -108,7 +109,7 @@ const HospitalAdminUi = () => {
   const navigate = useNavigate();
 
   const navigateToAddDepartments = () => {
-    navigate('/add-departments');
+    navigate(navTypes.HospitalAddDepartments);
   };
 
   return (

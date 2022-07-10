@@ -65,7 +65,15 @@ type TextButtonType = {
   loading?: boolean;
 };
 
-const TextButton: React.FC<TextButtonType> = ({title, color, onClick, type = 'button', path, disabled, loading}) => {
+const TextButton: React.FC<TextButtonType> = ({
+  title,
+  color,
+  onClick,
+  type = 'button',
+  path,
+  disabled,
+  loading,
+}) => {
   let navigate = useNavigate();
   const {classes, cx} = useStyles();
 
