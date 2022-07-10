@@ -13,7 +13,8 @@ const SignUp = React.lazy(() => import('../pages/SignUp'));
 const SignIn = React.lazy(() => import('../pages/SignIn'));
 const ForgotPassword = React.lazy(() => import('../pages/ForgotPassword'));
 const HospitalAdmin = React.lazy(() => import('../pages/HospitalAdmin'));
-const AddDepartments = React.lazy(() => import('../pages/AddDepartments'));
+const HospitalAddDepartments = React.lazy(() => import('../pages/HospitalAddDepartments'));
+const HospitalDepartments = React.lazy(() => import('../pages/HospitalDepartments'));
 
 class AppRouter extends React.Component<ReduxProps> {
   render() {
@@ -33,7 +34,8 @@ class AppRouter extends React.Component<ReduxProps> {
             ) : (
               <>
                 <Route path={`${navTypes.HospitalAdmin}`} element={<HospitalAdmin />} />
-                <Route path={`${navTypes.AddDepartments}`} element={<AddDepartments />} />
+                <Route path={`${navTypes.HospitalAddDepartments}`} element={<HospitalAddDepartments />} />
+                <Route path={`${navTypes.HospitalDepartments}`} element={<HospitalDepartments />} />
               </>
             )}
 

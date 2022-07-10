@@ -376,6 +376,7 @@ const HomePageUi = () => {
               explore the idea
             </a>
             <OutlinedButton
+              color="orange"
               rounded
               title="Contact Us"
               type="link"

@@ -12,7 +12,8 @@ export enum navTypes {
   SignIn = '/sign-in',
   ForgotPassword = '/forgot-password',
   HospitalAdmin = '/hospital-admin',
-  AddDepartments = '/add-departments',
+  HospitalAddDepartments = '/hospital-add-departments',
+  HospitalDepartments = '/hospital-departments',
 }
 
 export const HomeRoute = () => {
@@ -31,6 +32,9 @@ export const ForgotPasswordRoute = () => {
 export const HospitalAdminRoute = () => {
   return navTypes.HospitalAdmin;
 };
-export const AddDepartmentsRoute = () => {
-  return navTypes.AddDepartments;
+export const HospitalAddDepartmentsRoute = () => {
+  return navTypes.HospitalAddDepartments;
+};
+export const HospitalDepartmentsRoute = () => {
+  return navTypes.HospitalDepartments;
 };

@@ -4,10 +4,10 @@ import {makeStyles} from 'tss-react/mui';
 
 import images from '../../images';
 
-export const useStyles = makeStyles()((theme: Theme) => ({
+export const useStyles = makeStyles<{width?: number, height?: number}>()((theme: Theme, { width,height}) => ({
   root: {
-    width: 207.5,
-    height: 40,
+    width: width ? width : 207.5,
+    height: height ? height : 40,
     lineHeight: 0,
     objectFit: 'cover',
 
@@ -18,8 +18,13 @@ export const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const Logo = () => {
-  const {classes} = useStyles();
+type LogoPropsType = {
+  width?: number,
+  height?: number,
+};
+
+const Logo: React.FC<LogoPropsType> = ({width, height}) => {
+  const {classes} = useStyles({width, height});
   return <img
     className={classes.root}
     src={images.logo}

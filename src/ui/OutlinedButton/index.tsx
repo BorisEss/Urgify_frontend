@@ -8,23 +8,18 @@ const useStyles = makeStyles()((theme: Theme) => ({
     fontFamily: 'Poppins-semibold',
     fontWeight: 600,
     fontSize: 16,
-    color: '#F93922',
     padding: '11px 23px',
-    border: '1px solid #F93922',
     cursor: 'pointer',
     textTransform: 'uppercase',
     lineHeight: '24px',
+    borderWidth: 1,
+    borderStyle: 'solid',
 
     [theme.breakpoints.down('sm')]: {
       fontFamily: 'Poppins-regular',
       fontSize: 12,
       lineHeight: '18px',
       padding: '7px 15px',
-    },
-
-    '&:hover': {
-      color: '#DE3922',
-      border: '1px solid #DE3922',
     },
   },
   disabled: {
@@ -35,8 +30,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   bigger: {
     padding: '13px 21px',
-    border: '3px solid #777777',
-    color: '#777777',
+    borderWidth: 3,
   },
   w100: {
     width: '100%',
@@ -44,9 +38,26 @@ const useStyles = makeStyles()((theme: Theme) => ({
   lowerCase: {
     textTransform: 'none',
   },
+  gray: {
+    color: '#777777',
+    borderColor: '#777777',
+    '&:hover': {
+      color: '#777777',
+      borderColor: '#777777',
+    },
+  },
+  orange: {
+    color: '#F93922',
+    borderColor: '#F93922',
+    '&:hover': {
+      color: '#DE3922',
+      borderColor: '#DE3922',
+    },
+  },
 }));
 
 type ButtonType = {
+  color: 'gray' | 'orange';
   disabled?: boolean;
   title: string;
   loading?: boolean;
@@ -58,9 +69,11 @@ type ButtonType = {
   href?: string;// only if use html <a> tag
   titleAttr?: string;// only if use html <a> tag
   extraClass?: string;
+  onClick?: () => void; //only for type 'button'
 };
 
 const OutlinedButton: React.FC<ButtonType> = ({
+  color,
   disabled,
   title,
   loading,
@@ -72,18 +85,22 @@ const OutlinedButton: React.FC<ButtonType> = ({
   bigger,
   w100,
   lowerCase,
+  onClick,
 }) => {
   const {classes, cx} = useStyles();
 
   if (type === 'button')  return (
-    <button className={cx(
+    <button
+      onClick={() => onClick ? onClick() : null}
+      className={cx(
       classes.button,
         disabled || loading ? classes.disabled : '',
         rounded ? classes.rounded : '',
         extraClass,
         bigger ? classes.bigger : '',
         w100 ? classes.w100 : '',
-        lowerCase ? classes.lowerCase : ''
+        lowerCase ? classes.lowerCase : '',
+        classes[color]
       )}>
       {title}
     </button>
@@ -97,7 +114,8 @@ const OutlinedButton: React.FC<ButtonType> = ({
         extraClass,
         bigger ? classes.bigger : '',
         w100 ? classes.w100 : '',
-        lowerCase ? classes.lowerCase : ''
+        lowerCase ? classes.lowerCase : '',
+        classes[color],
       )}
       href={href}
       title={titleAttr}

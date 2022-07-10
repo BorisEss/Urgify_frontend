@@ -24,3 +24,5 @@ export type ForgotPasswordUiErrors = Record<string, string>;
 export type SignInUiErrors = Record<string, string>;
 
 export type SignUpUiErrors = Record<string, string>;
+
+export type DepartmentsFieldsType = Record<string, string>;

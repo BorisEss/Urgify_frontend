@@ -18,11 +18,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-type PagesNameType = {
+type PageNameType = {
   title: string;
 };
 
-const PagesName: React.FC<PagesNameType> = ({title}) => {
+const PageName: React.FC<PageNameType> = ({title}) => {
   const {classes} = useStyles();
   return (
     <>
@@ -31,4 +31,4 @@ const PagesName: React.FC<PagesNameType> = ({title}) => {
   );
 };
 
-export default PagesName;
+export default PageName;

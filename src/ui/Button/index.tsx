@@ -9,7 +9,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     fontWeight: 600,
     fontSize: 16,
     color: '#fff',
-    padding: 16,
+    padding: '16px 24px',
     border: 'none',
     outline: 'none',
     cursor: 'pointer',
