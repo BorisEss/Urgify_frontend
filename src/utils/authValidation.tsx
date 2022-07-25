@@ -31,8 +31,8 @@ export const validate = (form: formObj[]): {field: string, message: string}[] =>
       case 'phone':
         if (!value) {
           errorMessages.push({field: 'phone', message:'Please enter a phone number'});
-        } else if (value.length !== 11) {
-          errorMessages.push({field: 'phone', message:'The number must contain 11 digits'});
+        } else if (value.length !== 10) {
+          errorMessages.push({field: 'phone', message:'The number must contain 10 digits'});
         }
         break;
       case 'code':

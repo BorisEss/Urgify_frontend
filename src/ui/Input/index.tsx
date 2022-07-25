@@ -35,7 +35,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
     color: '#2B364D',
     width: '100%',
 
-
     [theme.breakpoints.down('sm')]: {
       border: '1px solid #DBDBDB',
       fontFamily: 'Poppins-regular',

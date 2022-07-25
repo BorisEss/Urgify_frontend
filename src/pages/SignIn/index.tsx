@@ -19,7 +19,7 @@ const initialErrors: SignInUiErrors = {
 
 const SignIn: React.FC<ReduxProps> = ({
     loginByEmail,
-    addTokens,
+    // addTokens,
     // isAuth,
     // authErrors,
     // isFetching,
@@ -79,12 +79,7 @@ const SignIn: React.FC<ReduxProps> = ({
       Log.message(form);
       // TODO: Remove when connect real api
       loginByEmail(itemFields.email, itemFields.password)
-        .finally(() => {
-          addTokens({
-            accessToken: 'dummyAccessToken',
-            refreshToken: 'dummyRefreshToken',
-          });
-        });
+        .finally(() => {});
     }
   };
 

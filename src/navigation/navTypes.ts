@@ -11,15 +11,17 @@ export enum navTypes {
   SignUp = '/sign-up',
   SignIn = '/sign-in',
   ForgotPassword = '/forgot-password',
-  HospitalAdmin = '/hospital-admin',
-  HospitalAddDepartments = '/hospital-add-departments',
-  HospitalDepartments = '/hospital-departments',
+  HospitalAdmin = '/hospitals/add',
+  HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
+  HospitalDepartments = '/hospitals/:hospitalId/departments',
+  EmployeeDepartment = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
+  EmployeeList = '/hospitals/:hospitalId/departments/:departmentId/employees',
+  AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients',
 }
 
 export const HomeRoute = () => {
   return navTypes.Home;
 };
-
 export const SignUpRoute = () => {
   return navTypes.SignUp;
 };
@@ -37,4 +39,13 @@ export const HospitalAddDepartmentsRoute = () => {
 };
 export const HospitalDepartmentsRoute = () => {
   return navTypes.HospitalDepartments;
+};
+export const  EmployeeDepartmentRoute = () => {
+  return navTypes.EmployeeDepartment;
+};
+export const  EmployeeListRoute = () => {
+  return navTypes.EmployeeList;
+};
+export const  AddPatientsRoute = () => {
+  return navTypes.AddPatients;
 };

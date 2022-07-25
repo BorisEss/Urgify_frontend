@@ -4,7 +4,7 @@ import {makeStyles} from 'tss-react/mui';
 
 import images from '../../images';
 
-export const useStyles = makeStyles<{width?: number, height?: number}>()((theme: Theme, { width,height}) => ({
+const useStyles = makeStyles<{width?: number, height?: number}>()((theme: Theme, { width,height}) => ({
   root: {
     width: width ? width : 207.5,
     height: height ? height : 40,
