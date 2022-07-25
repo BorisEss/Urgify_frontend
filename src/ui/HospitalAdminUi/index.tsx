@@ -1,13 +1,15 @@
 import type {Theme} from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../../images';
-import { navTypes } from '../../navigation/navTypes';
+import { HospitalAddDepartmentsRoute } from '../../navigation/navTypes';
+import { maxLength, minLength } from '../../utils/strings';
 import AuthPageTitle from '../AuthPageTitle';
 import AuthPageWrapper from '../AuthPageWrapper';
 import Button from '../Button';
+import Dropzone from '../Dropzone';
 import Input from '../Input';
 import Logo from '../Logo';
 
@@ -24,7 +26,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingTop: 41,
     },
   },
-
   welcome: {
     fontFamily: 'Poppins-semibold',
     fontWeight: 600,
@@ -54,32 +55,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
       marginTop: 24,
     },
   },
-  authFormSpacing: {
+  mainForm: {
+    display: 'flex',
+    justifyContent: 'space-between',
     paddingTop: 32,
-
+  },
+  authFormSpacing: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: 23,
-    },
-  },
-  changeAuthSpacing: {
-    paddingTop: 32,
-    display: 'flex',
-
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: 16,
-    },
-  },
-  inputFlexBox: {
-    display: 'flex',
-    gap: 8,
-    [theme.breakpoints.down('sm')]: {
-      display: 'unset',
-    },
-  },
-  halfInput: {
-    flex: '50%',
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
     },
   },
   inputSpacing: {
@@ -101,16 +84,39 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingBottom: 16,
     },
   },
+  main: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  label: {
+    fontFamily: 'Poppins-medium',
+    fontWeight: 500,
+    fontSize: 16,
+    lineHeight: '24px',
+    textTransform: 'uppercase',
+    color: '#777777',
+    paddingBottom: 8,
+  },
 }));
 
-const HospitalAdminUi = () => {
+const HospitalAdminUi   = () => {
   const {classes} = useStyles();
-
+  const [hospitalName, setHospitalName] = React.useState<string>('');
   const navigate = useNavigate();
+  const [image, setImage] = React.useState<File | null>(null);
 
-  const navigateToAddDepartments = () => {
-    navigate(navTypes.HospitalAddDepartments);
+  const validate = () => {
+    if (!hospitalName || minLength(hospitalName, 2) || maxLength(hospitalName, 50)) return false;
+    if (!image || (image.type.split('/')[0] !== 'image') || !image.name) return false;
+    return true;
+   };
+
+  const navigateToAddDepartments = () => {//hospitalId need to get from response from BE, after creating a hospital
+    // make request. Then redirect
+    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: '1' }));
   };
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setHospitalName(e.target.value);
 
   return (
     <AuthPageWrapper
@@ -133,12 +139,27 @@ const HospitalAdminUi = () => {
           />
         </div>
         <div className={classes.divider} />
-        <div className={classes.authFormSpacing}>
-          <div className={classes.inputSpacing}>
-            <Input label="Hospital Name" type="text" />
-          </div>
-          <div className={classes.buttonContainer}>
-            <Button title="Add Hospital" onClick={navigateToAddDepartments} />
+        <div className={classes.mainForm}>
+        <div className={classes.main}>
+          <p className={classes.label}>hospital Logo</p>
+          <Dropzone image={image} setImage={setImage} />
+        </div>
+          <div className={classes.authFormSpacing}>
+            <div className={classes.inputSpacing}>
+              <Input
+                onChange={onInputChange}
+                label="Hospital Name"
+                type="text"
+                name="hospitalName"
+              />
+            </div>
+            <div className={classes.buttonContainer}>
+              <Button
+                title="Add Hospital"
+                onClick={navigateToAddDepartments}
+                disabled={!validate()}
+              />
+            </div>
           </div>
         </div>
       </div>

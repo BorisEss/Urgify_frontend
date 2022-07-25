@@ -1,13 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 import { v4 as uuidv4 } from 'uuid';
 
-import { navTypes } from '../../navigation/navTypes';
+import { HospitalDepartmentsRoute } from '../../navigation/navTypes';
 import type { DepartmentsFieldsType } from '../../types';
 import AuthPageTitle from '../AuthPageTitle';
 import Button from '../Button';
 import DepartmentName from '../DepartmentName';
+import Dropzone from '../Dropzone';
 import HospitalHeader from '../HospitalHeader';
 import Input from '../Input';
 import OutlinedButton from '../OutlinedButton';
@@ -40,6 +41,7 @@ const useStyles = makeStyles()({
     width: '100%',
     height: 1,
     background: '#DBDBDB',
+    marginBottom: 32,
   },
   formWrap: {
     maxWidth: 592,
@@ -64,13 +66,18 @@ const useStyles = makeStyles()({
   },
 });
 
-const HospitalAddDepartmentsUi = () => {
+type Props = {
+  hospitalId: string;
+  hospitalLogo?: string;
+}
+
+const HospitalAddDepartmentsUi: React.FC<Props> = ({ hospitalId, hospitalLogo }) => {
   const {classes} = useStyles();
   const navigate = useNavigate();
   const [fields, setFields] = React.useState<DepartmentsFieldsType>({'0': ''});
 
   const navigateToHospitalDepartments = () => {
-    navigate(navTypes.HospitalDepartments);
+    navigate(generatePath(HospitalDepartmentsRoute(), { hospitalId: hospitalId }));
   };
 
   const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>, id: string) => {
@@ -102,6 +109,7 @@ const HospitalAddDepartmentsUi = () => {
           <DepartmentName title="Hospital Pediatric WA" />
         </div>
         <div className={classes.divider} />
+        {hospitalLogo ? <Dropzone  uploadedImage={hospitalLogo} disableRemove /> : null}
         <div className={classes.formWrap}>
           <div className={classes.titleSpacing}>
             <AuthPageTitle

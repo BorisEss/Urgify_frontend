@@ -1,9 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../../images';
-import { navTypes } from '../../navigation/navTypes';
+import { AddPatientsRoute, EmployeeDepartmentRoute, HospitalAddDepartmentsRoute } from '../../navigation/navTypes';
 import DepartmentName from '../DepartmentName';
 import HospitalHeader from '../HospitalHeader';
 import IconButton from '../IconButton';
@@ -46,6 +46,7 @@ const useStyles = makeStyles()({
     lineHeight: '48px',
     color: '#2B364D',
     paddingRight: 8,
+    cursor: 'pointer',
   },
   actionOutlined: {
     flex: '0 0 292px',
@@ -61,7 +62,11 @@ type DepartmentType = {
   value: string;
 }
 
-const HospitalDepartmentsUi = () => {
+type Props = {
+  hospitalId: string;
+}
+
+const HospitalDepartmentsUi: React.FC<Props> = ({ hospitalId }) => {
   const {classes} = useStyles();
   const navigate = useNavigate();
   const [departments, _setDepartments] = React.useState<DepartmentType[]>([
@@ -73,12 +78,21 @@ const HospitalDepartmentsUi = () => {
   ]);
 
   const navigateToAddDepartments = () => {
-    navigate(navTypes .HospitalAddDepartments);
+    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: hospitalId }));
   };
 
   const onDepartmentRemove = (_id: string) => {
     // make request to delete department
   };
+
+  const redirectToAddEmployee = (id: string) => {
+    navigate(generatePath(EmployeeDepartmentRoute(), { hospitalId: hospitalId, departmentId: id }));
+  };
+
+  const redirectToAddPatients = (id: string) => {//TODO: check if it's correct. Maybe you don't need to add a redirect here
+    navigate(generatePath(AddPatientsRoute(), { hospitalId: hospitalId, departmentId: id }));
+  };
+
   return (
     <div>
       <HospitalHeader buttonTitle="Add another hospital" />
@@ -93,7 +107,7 @@ const HospitalDepartmentsUi = () => {
         {departments.length && departments.map(item => (
           <div className={classes.menuItem} key={item.id}>
             <div className={classes.itemTitle}>
-              <h2 className={classes.title}>{item.value}</h2>
+              <h2 className={classes.title} onClick={() => redirectToAddPatients(item.id)}>{item.value}</h2>
               <IconButton onClick={() => onDepartmentRemove(item.id)} source={images.trashCan} />
             </div>
             <div className={classes.actionOutlined}>
@@ -104,6 +118,7 @@ const HospitalDepartmentsUi = () => {
                 title="Add employee"
                 lowerCase
                 w100
+                onClick={() => redirectToAddEmployee(item.id)}
               />
             </div>
           </div>

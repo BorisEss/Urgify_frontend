@@ -5,7 +5,7 @@ import {makeStyles} from 'tss-react/mui';
 import Button from '../Button';
 import Logo from '../Logo';
 
-export const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
+const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
   main: {
     paddingLeft: 112,
   },
@@ -28,38 +28,42 @@ export const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title})
     color: '#2B364D',
     paddingLeft: 24,
   },
+  disablePaddingLeft: {
+    paddingLeft: 0,
+  },
 }));
 
 type HospitalHeaderType = {
   title?: string;
   buttonTitle?: string;
+  disablePaddingLeft?: boolean,
 };
 
 const HospitalHeader: React.FC<HospitalHeaderType> = ({title, buttonTitle}) => {
-  const {classes} = useStyles({title});
+  const {classes, cx} = useStyles({title});
 
   return (
-  <>
-    <div className={classes.header}>
-      <div className={classes.leftSideWrap}>
-        <Logo
-          width={83}
-          height={16}
-        />
-        {title ? (
-          <div className={classes.hospitalName}>
-            <p>{title}</p>
+    <>
+      <div className={cx(classes.header, classes.disablePaddingLeft)}>
+        <div className={classes.leftSideWrap}>
+          <Logo
+            width={83}
+            height={16}
+          />
+          {title ? (
+            <div className={classes.hospitalName}>
+              <p>{title}</p>
+            </div>
+          ) : null }
+        </div>
+
+        {buttonTitle ? (
+          <div>
+            <Button title={buttonTitle} />
           </div>
         ) : null }
       </div>
-
-      {buttonTitle ? (
-        <div>
-          <Button title={buttonTitle} />
-        </div>
-      ) : null }
-    </div>
-  </>
+    </>
   );
 };
 
