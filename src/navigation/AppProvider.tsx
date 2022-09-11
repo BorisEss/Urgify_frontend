@@ -12,7 +12,9 @@ import Log from '../services/logger';
 import { customTheme } from '../theme';
 import AppRouter from './AppRouter';
 
-const stripePromise = loadStripe('pk_test_WPcftmoQvTkHygaegAGocRwD', {
+let stripeKey: string = process.env.REACT_APP_STRIPE_KEY || '';
+
+const stripePromise = loadStripe(stripeKey, {
   locale: 'en',
 });
 
