@@ -6,7 +6,7 @@ import type {
 } from '../actions/actionsTypes';
 import { networkActions } from '../actions/network';
 import {
-  API_HOST,
+  API_HOST, WITHOUT_API_HOST,
 } from '../constants/backend';
 import { getApiToken } from '../selectors/auth';
 import Log from '../services/logger';
@@ -27,8 +27,9 @@ let authRefreshAction: AppAsyncThunkCreator<any> | undefined;
 export const createRequestConfig = (
   request: Request,
   state: AppState,
+  isApi: boolean,
 ): AxiosRequestConfig => {
-  const apiHost: string = API_HOST;
+  const apiHost: string = isApi ? API_HOST : WITHOUT_API_HOST;
   const config: AxiosRequestConfig = {
     method: request.method,
     url: `${apiHost}${request.path}`,
@@ -66,7 +67,7 @@ export function createCancelSource(): AbortControl {
   return axios.CancelToken.source();
 }
 
-export const makeRequest = (request: Request): AppAsyncThunk<any> => (
+export const makeRequest = (request: Request, isApi: boolean = true): AppAsyncThunk<any> => (
   dispatch,
   getState,
 ) => {
@@ -78,7 +79,7 @@ export const makeRequest = (request: Request): AppAsyncThunk<any> => (
   const requestMeta: RequestMeta = {
     start: startTimestamp,
   };
-  const config = createRequestConfig(request, state);
+  const config = createRequestConfig(request, state, isApi);
   if (typeof config.data === 'string') {
     requestMeta.reqSize = config.data.length;
   }
@@ -106,7 +107,7 @@ export const makeRequest = (request: Request): AppAsyncThunk<any> => (
       cleanupTimeout();
       requestMeta.respData = response.data;
       requestMeta.respSize = response.headers['content-length'] || 'unknown';
-      return extractResponseData(response.data);
+      return extractResponseData(response);
     })
     .catch((error) => {
       if (error.request.status === 401) {
@@ -136,7 +137,6 @@ export const makeRequest = (request: Request): AppAsyncThunk<any> => (
     });
 };
 
-// ApiResponse TODO: refactor extractor for bad responses from server
 function extractResponseData(responseData: unknown): any {
   if (!responseData) {
     throw new ApiError('ProtocolError', 'Incorrect server response: empty');
@@ -159,8 +159,7 @@ function extractResponseData(responseData: unknown): any {
     throw e;
   }
   const apiResponse: ApiResponse = responseData as ApiResponse;
-  // TODO: write correct decoder
-  if (!apiResponse.isSuccess) {
+  if (apiResponse.status !== 200 && apiResponse.status !== 201) {
     throw new ApiError(
       apiResponse.errorCode || 'UnknownError',
       apiResponse.errors?.join('') || 'Unknown error',

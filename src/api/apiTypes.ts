@@ -2,9 +2,9 @@ import type { CancelTokenSource } from 'axios';
 
 export type ApiResponse = {
   data: unknown;
-  isSuccess: boolean;
   errors?: Record<string, string>[];
   errorCode?: string;
+  status: number
 };
 
 export type Request = {
@@ -40,6 +40,7 @@ type FormDataEntry = {
   value: string | File;
 };
 
+// auth
 export type AuthTokens = {
   accessToken: string;
   refreshToken: string;
@@ -51,12 +52,35 @@ export type AuthByMailRequest = {
 };
 
 export type RegByMailRequest = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
 };
 
+export type ConfirmEmailCodeRequest = {
+  key: string;
+};
+
+export type ForgotSendPasswordsRequest = {
+  new_password1: string;
+  new_password2: string;
+  uid: string;
+  token: string;
+}
+
+// payment
+export type PaymentIntentRequest = {
+  amount: number;
+  currency: string;
+  payment_method_types: string;
+  hospital_name: string;
+  email: string;
+  invoices: number;
+  months: number;
+}
+
+// excel - example
 export type ExcelTemplateResponse = {
   fileUrl: string;
   lastUpdated: number;

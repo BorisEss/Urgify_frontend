@@ -41,13 +41,95 @@ export const authByMail = (email: string, password: string): AppAsyncThunk => (
 export const regByMail = (firstName: string, lastName: string, email: string, password: string): AppAsyncThunk => (
   dispatch,
 ) => {
-  return dispatch(api.registrateByMail({ firstName, lastName, email, password }))
+  return dispatch(api.registrateByMail({ first_name: firstName, last_name: lastName, email, password: password }))
     .then((response) => {
       if (!response) return;
-      dispatch(getUserInfoOnTokenUpdate(response));
     })
-    .catch(() => {
+    .catch((e: any) => {
       dispatch(authActions.setErrors(['You have entered incorrect authorization data']));
+      if (e && e.response && e.response.data) throw e.response.data;
+    });
+};
+
+export const confirmEmailCode = (key: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.confirmEmailCode({ key }))
+    .then((response) => {
+      if (!response) return;
+    })
+    .catch((e: any) => {
+      dispatch(authActions.setErrors(['You have entered incorrect confirmation code']));
+      if (e && e.response && e.response.data) throw e.response.data;
+    });
+};
+
+export const forgotSendMail = (email: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.forgotSendMail({ email }))
+    .then((response) => {
+      if (!response) return;
+    })
+    .catch((e) => {
+      dispatch(authActions.setErrors(['You have entered incorrect email']));
+      throw e.response.data;
+    });
+};
+
+export const forgotSendPasswords = (new_password1: string, new_password2: string, uid: string, token: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.forgotSendPasswords({ new_password1, new_password2, uid, token }))
+    .then((response) => {
+      if (!response) return;
+    })
+    .catch((e) => {
+      dispatch(authActions.setErrors(['You have entered invalid password']));
+      throw e.response.data;
+    });
+};
+
+// explore idea
+export const submitWaitingList = (email: string): AppAsyncThunk<string> => (
+  dispatch,
+) => {
+  return dispatch(api.submitWaitingList({ email }))
+    .then((response) => {
+      if (!response) return '';
+      return response;
+    })
+    .catch((e) => {
+      throw e.response.data;
+    });
+};
+
+export const createPaymentIntent = (
+  amount: number,
+  currency: string,
+  payment_method_type: string,
+  hospital_name: string,
+  email: string,
+  invoices: number,
+  months: number,
+): AppAsyncThunk<string> => (
+  dispatch,
+) => {
+  return dispatch(api.createPaymentIntent({
+    amount,
+    currency,
+    payment_method_types: payment_method_type,
+    hospital_name,
+    email,
+    invoices,
+    months,
+  }))
+    .then((response) => {
+      if (!response) return '';
+      return response;
+    })
+    .catch((e) => {
+      throw e.response.data;
     });
 };
 

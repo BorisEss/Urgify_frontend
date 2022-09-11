@@ -13,6 +13,20 @@ switch (key) {
     API_HOST = `https://${API_PROD_DOMAIN}`;
     break;
   default:
-    API_HOST = '/api';
+    API_HOST = 'http://142.93.163.218:8007/api';
+    break;
+}
+
+export let WITHOUT_API_HOST: string;
+
+switch (key) {
+  case 'stage':
+    WITHOUT_API_HOST = `https://${API_DOMAIN}`;
+    break;
+  case 'production':
+    WITHOUT_API_HOST = `https://${API_PROD_DOMAIN}`;
+    break;
+  default:
+    WITHOUT_API_HOST = 'http://142.93.163.218:8007';
     break;
 }

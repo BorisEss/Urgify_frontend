@@ -1,5 +1,5 @@
 import type { AppAsyncThunk } from '../actions/actionsTypes';
-import type { AuthByMailRequest, AuthTokens, RegByMailRequest } from './apiTypes';
+import type { AuthByMailRequest, AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, RegByMailRequest } from './apiTypes';
 import { decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
@@ -10,7 +10,7 @@ export const authByMail = (
     makeRequest({
       key: 'auth',
       method: 'post',
-      path: '/login/withemail',
+      path: '/auth/login/',
       isAuth: true,
       params,
     }),
@@ -20,11 +20,60 @@ export const authByMail = (
 export const registrateByMail = (
   params: RegByMailRequest,
 ): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
+  const payload = {
+    first_name: params.first_name,
+    last_name: params.last_name,
+    email: params.email,
+    password1: params.password,
+    password2: params.password,
+  };
   return dispatch(
     makeRequest({
       key: 'auth',
       method: 'post',
-      path: '/registrate/withemail',
+      path: '/auth/register/',
+      isAuth: true,
+      params: payload,
+    }),
+  ).then(decodeTokens);
+};
+
+export const confirmEmailCode = (
+  params: ConfirmEmailCodeRequest,
+): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'auth',
+      method: 'post',
+      path: '/auth/account-confirm-email/',
+      isAuth: true,
+      params,
+    }),
+  ).then(decodeTokens);
+};
+
+export const forgotSendMail = (
+  params: {email: string},
+): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'auth',
+      method: 'post',
+      path: '/auth/password-reset/',
+      isAuth: true,
+      params,
+    }),
+  ).then(decodeTokens);
+};
+
+export const forgotSendPasswords = (
+  params: ForgotSendPasswordsRequest,
+): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'auth',
+      method: 'post',
+      path: '/auth/password-reset-confirm/',
       isAuth: true,
       params,
     }),
@@ -47,7 +96,7 @@ export const refreshTokens = (
 const decodeTokens = (data: any): AuthTokens | undefined => {
   if (!data) return undefined;
   return {
-    accessToken: decodeString(data.accessToken),
-    refreshToken: decodeString(data.refreshToken),
+    accessToken: decodeString(data.access_token),
+    refreshToken: decodeString(data.refresh_token),
   };
 };
