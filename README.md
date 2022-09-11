@@ -21,8 +21,3 @@
   `REACT_APP_PUBLIC_SERVER_ENV` - dev(local), stage(testing on server), production(real server)
   
   `REACT_APP_GOOGLE_CLIENT_ID`  
-  
-
-## Logout
-
-### !!!Important - To logout clear localStorage 

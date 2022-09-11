@@ -1,4 +1,4 @@
-import {emailIsValid, maxLength, minLength} from './strings';
+import {emailIsValid, hasLowerCaseLetter, hasNumber, hasSpecialCharacter, hasUpperCaseLetter, maxLength, minLength} from './strings';
 
 export type formObj = {
   valueType: string;
@@ -21,10 +21,18 @@ export const validate = (form: formObj[]): {field: string, message: string}[] =>
         if (!value) {
           errorMessages.push({field: 'password', message:'Please, enter password'});
         } else {
-          if (minLength(value, 6)) {
-            errorMessages.push({field: 'password', message:'Password must be more than 6 characters'});
+          if (minLength(value, 8)) {
+            errorMessages.push({field: 'password', message:'Password must be more than 7 characters'});
           } else if (maxLength(value, 50)) {
             errorMessages.push({field: 'password', message:'Password must not be more than 50 characters'});
+          } else if (!hasNumber(value)) {
+            errorMessages.push({field: 'password', message:'Password must contain a number character'});
+          } else if (!hasLowerCaseLetter(value)) {
+            errorMessages.push({field: 'password', message:'Password must contain an lowercase character'});
+          } else if (!hasUpperCaseLetter(value)) {
+            errorMessages.push({field: 'password', message:'Password must contain an uppercase character'});
+          } else if (!hasSpecialCharacter(value)) {
+            errorMessages.push({field: 'password', message:'Password must contain a special character'});
           }
         }
         break;
@@ -46,10 +54,21 @@ export const validate = (form: formObj[]): {field: string, message: string}[] =>
         if (!value) {
           errorMessages.push({field: 'firstName', message:'Please enter a name'});
         } else {
-          if (minLength(value, 2)) {
-            errorMessages.push({field: 'firstName', message:'Name must be more than 2 characters'});
+          if (minLength(value, 1)) {
+            errorMessages.push({field: 'firstName', message:'Name must be more than 1 characters'});
           } else if (maxLength(value, 50)) {
             errorMessages.push({field: 'firstName', message:'Name must not exceed 50 characters'});
+          }
+        }
+        break;
+      case 'hospitalName':
+        if (!value) {
+          errorMessages.push({field: 'hospitalName', message:'Please enter a hospital name'});
+        } else {
+          if (minLength(value, 1)) {
+            errorMessages.push({field: 'hospitalName', message:'Hospital name must be more than 1 characters'});
+          } else if (maxLength(value, 50)) {
+            errorMessages.push({field: 'hospitalName', message:'Hospital name must not exceed 50 characters'});
           }
         }
         break;
@@ -57,8 +76,8 @@ export const validate = (form: formObj[]): {field: string, message: string}[] =>
         if (!value) {
           errorMessages.push({field: 'lastName', message:'Please enter your last name'});
         } else {
-          if (minLength(value, 2)) {
-            errorMessages.push({field: 'lastName', message:'Last name must be more than 2 characters'});
+          if (minLength(value, 1)) {
+            errorMessages.push({field: 'lastName', message:'Last name must be more than 1 characters'});
           } else if (maxLength(value, 50)) {
             errorMessages.push({field: 'lastName', message:'Last name must not be more than 50 characters'});
           }
