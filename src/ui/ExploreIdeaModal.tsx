@@ -166,7 +166,7 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
         <img className={classes.image} src={dialogType === 1 ? images.exploreBackground : images.exploreBackgroundPatients} />
         <div className={classes.buttons}>
           <button className={cx(classes.button, dialogType === 1 ? classes.buttonActive : '')} onClick={() => setDialogType(1)}>Healthcare Providers</button>
-          <button className={cx(classes.button, dialogType === 2 ? classes.buttonActive : '')} onClick={() => setDialogType(2)}>For Patients</button>
+          <button className={cx(classes.button, dialogType === 2 ? classes.buttonActive : '')} onClick={() => setDialogType(2)}>Patients</button>
         </div>
       </div>
       {dialogType === 1 ? (
