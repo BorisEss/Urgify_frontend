@@ -402,7 +402,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
       <div className={classes.charges}>
         <h6 className={classes.chargesTitle}>Total Charges</h6>
           <div className={classes.priceContainer}>
-            <p className={classes.price}>{charges}$</p>
+            <p className={classes.price}>${charges}</p>
             <p className={classes.bonus}>+ 2.99% of each amount paid by the patient, charged by Stripe</p>
           </div>
       </div>
@@ -473,7 +473,6 @@ const PreOrderForm: React.FC<ReduxProps> = ({
         backgroundColor="#F1F1F1"
         maxWidth={800}
         borderRadius={24}
-        charges={charges}
         children={
           <ConfirmHospitalModal charges={charges} handleClose={handleClose} />
         }

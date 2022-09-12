@@ -8,7 +8,6 @@ import {makeStyles} from 'tss-react/mui';
 const useStyles = makeStyles<{
   maxWidth?: number,
   borderRadius?: number,
-  charges?: number,
   backgroundColor?: string,
 }>()((_theme: Theme, { maxWidth, borderRadius, backgroundColor}) => ({
   dialogPaper: {
@@ -36,7 +35,6 @@ type ModalType = {
   maxWidth?: number;
   borderRadius?: number;
   backgroundColor?: string;
-  charges?: number,
 }
 
 const Modal: React.FC<ModalType> = ({
@@ -46,9 +44,8 @@ const Modal: React.FC<ModalType> = ({
   maxWidth,
   borderRadius,
   backgroundColor,
-  charges,
 }) => {
-  const {classes} = useStyles({maxWidth, borderRadius, backgroundColor, charges});
+  const {classes} = useStyles({maxWidth, borderRadius, backgroundColor});
 
   return (
     <div>
