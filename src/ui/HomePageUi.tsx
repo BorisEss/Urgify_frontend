@@ -440,9 +440,7 @@ const HomePageUi = () => {
               <p className={classes.subtitle}>We make collecting medical bills easier for hospitals & less stressful for patients.</p>
             </div>
             <div className={classes.description}>
-              We believe that great ideas come from everywhere. So, if you'd like to get a seat at the table and help us
-              to build a product that you’ll love and create an impact, please get in touch or submit your idea through
-              the portal, and we'll make sure we build what matters most to you.
+              We believe that great ideas come from everywhere. So, if you would like to get a seat at the table and help us to make a product that you want and create an impact on, please get in touch and submit your idea, and we will make sure we build what matters most to you.
             </div>
             <div className={classes.actions}>
               <ExploreIdea />

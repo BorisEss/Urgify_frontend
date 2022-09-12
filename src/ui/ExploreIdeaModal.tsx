@@ -174,22 +174,22 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
         <div className={classes.item}>
           <img className={classes.ellipseImg} src={images.ellipse} />
           <div>
-            <h5 className={classes.itemTitle}>Send a special invoice to patients</h5>
-            <p className={classes.itemSubtitle}>when emergencies happen and they are struggling to pay the large medical bills associated with them. </p>
+            <h5 className={classes.itemTitle}>Send a particular invoice to patients</h5>
+            <p className={classes.itemSubtitle}>when emergencies happen, and they struggle to pay the hefty medical bills.</p>
           </div>
         </div>
         <div className={classes.item}>
           <img className={classes.ellipseImg} src={images.ellipse} />
           <div>
             <h5 className={classes.itemTitle}>Increase Revenue Cycle & Access to aid</h5>
-            <p className={classes.itemSubtitle}>when collecting payments from patients based on different financial sources instantly available to them through URGIFY. </p>
+            <p className={classes.itemSubtitle}>when collecting payments from patients based on different financial sources instantly available to them through URGIFY.</p>
           </div>
         </div>
         <div className={classes.item}>
           <img className={classes.ellipseImg} src={images.ellipse} />
           <div>
-            <h5 className={classes.itemTitle}>Avoid third party collectors </h5>
-            <p className={classes.itemSubtitle}>when patients don’t pay and you have to eat those costs or shift them onto others.  </p>
+            <h5 className={classes.itemTitle}>Avoid third-party collectors</h5>
+            <p className={classes.itemSubtitle}>when patients do not pay, and you have to eat those costs or shift them onto others.</p>
           </div>
         </div>
       </div>
@@ -199,21 +199,21 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
             <img className={classes.ellipseImg} src={images.ellipse} />
             <div>
               <h5 className={classes.itemTitle}>Receive financial help</h5>
-              <p className={classes.itemSubtitle}>when life get tough and you need instant support from family memebrs, friends, charity grants, and loans all in one single place.</p>
+              <p className={classes.itemSubtitle}>when life gets tough, and you need instant support from family members, friends, charity grants, and loans in one place.</p>
             </div>
           </div>
           <div className={classes.item}>
             <img className={classes.ellipseImg} src={images.ellipse} />
             <div>
-              <h5 className={classes.itemTitle}>Avoid collection agencies </h5>
-              <p className={classes.itemSubtitle}>when you are forced to pay on time full amount and you end up with credit reports.</p>
+              <h5 className={classes.itemTitle}>Avoid collection agencies</h5>
+              <p className={classes.itemSubtitle}>when they force you to pay the total amount on time and report to credit bureaus if you cannot afford it.</p>
             </div>
           </div>
           <div className={cx(classes.item, classes.lastItem)}>
             <img className={classes.ellipseImg} src={images.ellipse} />
             <div>
-              <h5 className={classes.itemTitle}>Build, improve credit score </h5>
-              <p className={classes.itemSubtitle}>when chosing flexible payment plans available through URGIFY based on your revenu streams without compromising your normal life and habits.</p>
+              <h5 className={classes.itemTitle}>Build, and improve your credit score</h5>
+              <p className={classes.itemSubtitle}>when choosing flexible payment plans available through URGIFY based on revenue streams without compromising everyday life and habits.</p>
             </div>
           </div>
         </div>
