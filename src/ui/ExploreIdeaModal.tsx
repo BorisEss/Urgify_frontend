@@ -7,7 +7,7 @@ import CloseButton from './Buttons/CloseButton';
 import JoinWaitingListForm from './JoinWaitingListForm';
 import PreOrderForm from './PreOrderForm';
 
-const useStyles = makeStyles()((_theme: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   dialogPaper: {
     marginTop: 0,
     marginBottom: 0,
@@ -113,6 +113,10 @@ const useStyles = makeStyles()((_theme: Theme) => ({
   },
   formWrapPatients: {
     padding: '312px 208px 48px',
+
+    [theme.breakpoints.down(1200)]: {
+      padding: 100,
+    },
   },
   form: {
     backgroundColor: '#F1F1F1',
@@ -230,7 +234,7 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
         </div>
         ) : (
         <div className={classes.formWrapPatients}>
-          <div className={cx(classes.form, classes.formSmall)}>
+            <div className={cx(classes.form, classes.formSmall)}>
             <div className={classes.formHeader}>
               <h5 className={classes.formTitle}>Join our waiting list </h5>
               <p className={classes.formSubtitle}>We'll inform you about the launch</p>
