@@ -227,8 +227,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
   outlinedButtonSpacing: {
     marginLeft: 24,
 
-    [theme.breakpoints.down(720)]: {
-      marginLeft: 16,
+    // [theme.breakpoints.down(720)]: {
+    //   marginLeft: 16,
+    // },
+
+    [theme.breakpoints.down(1025)]: {
+      marginLeft: 0,
     },
   },
   pulseBlock: {
@@ -381,8 +385,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 const HomePageUi = () => {
   const {classes, cx} = useStyles();
-  const isTablet = useMediaQuery('(max-width:1300px)');
+  const isSmallPC = useMediaQuery('(max-width:1300px)');
   const isMobile = useMediaQuery('(max-width:890px)');
+  const isTablet = useMediaQuery('(max-width:1024px)');
 
   return (
     <>
@@ -393,7 +398,7 @@ const HomePageUi = () => {
           {!isMobile ? <Sticker /> : null}
           <div className={classes.topLabels}>
             <div className={classes.poweredAndVillageCapital}>
-              {!isTablet ? (
+              {!isSmallPC ? (
                 <div className={classes.startupSchool}>
                   <div className={classes.labelText}>Top 10% on:</div>
                   <a
@@ -419,7 +424,7 @@ const HomePageUi = () => {
                 <img src={images.villageCapital} alt="Village capital logo" />
               </div>
             </div>
-            {isTablet ? (
+            {isSmallPC ? (
               <div className={classes.startupSchool}>
                 <div className={classes.labelText}>Top 10% on:</div>
                 <a
@@ -443,7 +448,7 @@ const HomePageUi = () => {
               We believe that great ideas come from everywhere. So, if you would like to get a seat at the table and help us to make a product that you want and create an impact on, please get in touch and submit your idea, and we will make sure we build what matters most to you.
             </div>
             <div className={classes.actions}>
-              <ExploreIdea />
+            {!isTablet ? <ExploreIdea /> : null}
               <OutlinedButton
                 color="orange"
                 rounded
