@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { createSelector } from 'redux-views';
 
-import { authActions, authByMail } from '../actions/auth';
+import { authActions, loginByMail } from '../actions/auth';
 import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -109,7 +109,7 @@ const getData = createSelector(
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  loginByEmail: authByMail,
+  loginByEmail: loginByMail,
   setErrors: authActions.setErrors,
 });
 

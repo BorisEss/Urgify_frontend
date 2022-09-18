@@ -1,10 +1,10 @@
 import type { AppAsyncThunk } from '../actions/actionsTypes';
-import type { AuthByMailRequest, AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, RegByMailRequest } from './apiTypes';
+import type { AuthByGoogleRequest,AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, LogInByMailRequest, RegByMailRequest } from './apiTypes';
 import { decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
-export const authByMail = (
-  params: AuthByMailRequest,
+export const loginByMail = (
+  params: LogInByMailRequest,
 ): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
   return dispatch(
     makeRequest({
@@ -74,6 +74,20 @@ export const forgotSendPasswords = (
       key: 'auth',
       method: 'post',
       path: '/auth/password-reset-confirm/',
+      isAuth: true,
+      params,
+    }),
+  ).then(decodeTokens);
+};
+
+export const authByGoogle = (
+  params: AuthByGoogleRequest,
+): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'auth',
+      method: 'post',
+      path: '/auth/google/login/callback/',
       isAuth: true,
       params,
     }),

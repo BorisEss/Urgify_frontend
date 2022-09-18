@@ -2,12 +2,12 @@ import type {Theme} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import GoogleAuthWrapper from '../components/GoogleAuthWrapper';
 import {navTypes} from '../navigation/navTypes';
 import type { SignInUiErrors } from '../types';
 import AuthPageTitle from './AuthPageTitle';
 import AuthPageWrapper from './AuthPageWrapper';
 import Button from './Buttons/Button';
-import GoogleButton from './Buttons/GoogleButton';
 import TextButton from './Buttons/TextButton';
 import ChangeAuthMethod from './ChangeAuthMethod';
 import Input from './Inputs/Input';
@@ -130,14 +130,8 @@ const SignInUi: React.FC<SignInUiType> = ({
           <AuthPageTitle title="Sign in to Urgify" />
         </div>
         <div className={classes.googleWrapper}>
-          <GoogleButton
+          <GoogleAuthWrapper
             title="Sign in with Google"
-            clientId={process.env.REACT_APP_GOOGLE_SIGNOUT_CLIENT_ID}
-            // onSuccess
-            // onFailure
-            // setDisabled
-            // disabled
-            // loading
           />
         </div>
         <div className={classes.divider} />

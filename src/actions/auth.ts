@@ -25,10 +25,10 @@ export const getTokens = (): AppThunk => (dispatch) => {
   } else return Promise.resolve();
 };
 
-export const authByMail = (email: string, password: string): AppAsyncThunk => (
+export const loginByMail = (email: string, password: string): AppAsyncThunk => (
   dispatch,
 ) => {
-  return dispatch(api.authByMail({ email, password }))
+  return dispatch(api.loginByMail({ email, password }))
     .then((response) => {
       if (!response) return;
       dispatch(getUserInfoOnTokenUpdate(response));
@@ -87,6 +87,20 @@ export const forgotSendPasswords = (new_password1: string, new_password2: string
     .catch((e) => {
       dispatch(authActions.setErrors(['You have entered invalid password']));
       throw e.response.data;
+    });
+};
+
+// Login/Registrate by Google
+export const authByGoogle = (access_token: string, code: string, id_token: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.authByGoogle({ access_token, code, id_token }))
+    .then((response) => {
+      if (!response) return;
+      dispatch(getUserInfoOnTokenUpdate(response));
+    })
+    .catch(() => {
+      // dispatch(authActions.setErrors(['You have entered incorrect authorization data']));
     });
 };
 

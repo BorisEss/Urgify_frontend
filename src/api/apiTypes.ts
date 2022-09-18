@@ -46,7 +46,7 @@ export type AuthTokens = {
   refreshToken: string;
 };
 
-export type AuthByMailRequest = {
+export type LogInByMailRequest = {
   email: string;
   password: string;
 };
@@ -68,6 +68,12 @@ export type ForgotSendPasswordsRequest = {
   uid: string;
   token: string;
 }
+
+export type AuthByGoogleRequest = {
+  access_token: string;
+  code: string;
+  id_token: string;
+};
 
 // payment
 export type PaymentIntentRequest = {
