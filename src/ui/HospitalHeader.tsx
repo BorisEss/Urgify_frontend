@@ -1,10 +1,15 @@
 import type {Theme} from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import LogoutWrapper from '../components/LogoutWrapper';
+import { HospitalAdminRoute } from '../navigation/navTypes';
+import Button from './Buttons/Button';
 // import Button from './Buttons/Button';
 import Logo from './Logo';
+
+
 
 const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
   main: {
@@ -42,6 +47,11 @@ type HospitalHeaderType = {
 
 const HospitalHeader: React.FC<HospitalHeaderType> = ({title, buttonTitle, disablePaddingLeft}) => {
   const {classes, cx} = useStyles({title});
+  const navigate = useNavigate();
+
+  const navigateToHospitalAdmin = () => {
+    navigate(HospitalAdminRoute());
+  };
 
   return (
     <>
@@ -60,7 +70,11 @@ const HospitalHeader: React.FC<HospitalHeaderType> = ({title, buttonTitle, disab
 
         {buttonTitle ? (
           <div>
-            {/* <Button title={buttonTitle} w100 /> */}
+            <Button
+              title={buttonTitle}
+              w100
+              onClick={navigateToHospitalAdmin}
+            />
           </div>
         ) : null }
       </div>

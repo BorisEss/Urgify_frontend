@@ -3,6 +3,7 @@ import React from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
+import { hospitalNumber } from '../constants/hospitals';
 import images from '../images';
 import { HospitalAddDepartmentsRoute } from '../navigation/navTypes';
 import { maxLength, minLength } from '../utils/strings';
@@ -117,7 +118,8 @@ const HospitalAdminUi   = () => {
   };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setHospitalName(e.target.value);
-
+  // To do : remove after having real data
+  const hospitalCount: number = 0;
   return (
     <AuthPageWrapper
       centeredContent
@@ -131,7 +133,7 @@ const HospitalAdminUi   = () => {
         </div>
         <div className={classes.titleSpacing}>
           <AuthPageTitle
-            title="Let’s add your first hospital"
+            title={`Let’s add your ${hospitalCount < 20 ? hospitalNumber[hospitalCount+1] : hospitalCount+1} hospital`}
             subtitle={
               <p className={classes.subtitle}>
                 Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.
