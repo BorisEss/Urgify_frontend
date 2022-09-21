@@ -1,12 +1,9 @@
 import type {Theme} from '@mui/material';
 import React from 'react';
-import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import { hospitalNumber } from '../constants/hospitals';
 import images from '../images';
-import { HospitalAddDepartmentsRoute } from '../navigation/navTypes';
-import { maxLength, minLength } from '../utils/strings';
 import AuthPageTitle from './AuthPageTitle';
 import AuthPageWrapper from './AuthPageWrapper';
 import Button from './Buttons/Button';
@@ -100,26 +97,29 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const HospitalAdminUi   = () => {
+type HospitalAdminUiType = {
+  hospitalCount: number;
+  isFetching: boolean;
+  image: File | null;
+  setImage: (image: File | null) => void;
+  validate: () => boolean;
+  onSubmit: () => void;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  hospitalError: string;
+};
+
+const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
+  hospitalCount,
+  // isFetching,
+  image,
+  setImage,
+  validate,
+  onSubmit,
+  onInputChange,
+  hospitalError,
+}) => {
   const {classes} = useStyles();
-  const [hospitalName, setHospitalName] = React.useState<string>('');
-  const navigate = useNavigate();
-  const [image, setImage] = React.useState<File | null>(null);
 
-  const validate = () => {
-    if (!hospitalName || minLength(hospitalName, 2) || maxLength(hospitalName, 50)) return false;
-    if (!image || (image.type.split('/')[0] !== 'image') || !image.name) return false;
-    return true;
-   };
-
-  const navigateToAddDepartments = () => {//hospitalId need to get from response from BE, after creating a hospital
-    // make request. Then redirect
-    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: '1' }));
-  };
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setHospitalName(e.target.value);
-  // To do : remove after having real data
-  const hospitalCount: number = 0;
   return (
     <AuthPageWrapper
       centeredContent
@@ -133,7 +133,7 @@ const HospitalAdminUi   = () => {
         </div>
         <div className={classes.titleSpacing}>
           <AuthPageTitle
-            title={`Let’s add your ${hospitalCount < 20 ? hospitalNumber[hospitalCount+1] : hospitalCount+1} hospital`}
+            title={`Let’s add your ${hospitalCount < 20 ? hospitalNumber[hospitalCount + 1] : hospitalCount + 1} hospital`}
             subtitle={
               <p className={classes.subtitle}>
                 Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.
@@ -154,12 +154,13 @@ const HospitalAdminUi   = () => {
                 label="Hospital Name"
                 type="text"
                 name="hospitalName"
+                error={!!hospitalError}
               />
             </div>
             <div className={classes.buttonContainer}>
               <Button
                 title="Add Hospital"
-                onClick={navigateToAddDepartments}
+                onClick={onSubmit}
                 disabled={!validate()}
                 w100
               />

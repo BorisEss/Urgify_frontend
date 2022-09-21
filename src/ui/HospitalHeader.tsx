@@ -9,8 +9,6 @@ import Button from './Buttons/Button';
 // import Button from './Buttons/Button';
 import Logo from './Logo';
 
-
-
 const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
   main: {
     paddingLeft: 112,

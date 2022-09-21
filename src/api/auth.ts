@@ -86,9 +86,9 @@ export const refreshTokens = (
   return dispatch(
     makeRequest({
       method: 'post',
-      path: '/token/refresh',
+      path: '/auth/token/refresh/',
       isAuth: true,
-      params,
+      params: { refresh: params.refreshToken },
     }),
   ).then(decodeTokens);
 };
@@ -96,7 +96,7 @@ export const refreshTokens = (
 const decodeTokens = (data: any): AuthTokens | undefined => {
   if (!data) return undefined;
   return {
-    accessToken: decodeString(data.access_token),
-    refreshToken: decodeString(data.refresh_token),
+    accessToken: decodeString(data.access_token || data.access),
+    refreshToken: decodeString(data.refresh_token || data.refresh),
   };
 };

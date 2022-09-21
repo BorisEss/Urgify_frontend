@@ -110,10 +110,15 @@ export const makeRequest = (request: Request, isApi: boolean = true): AppAsyncTh
       return extractResponseData(response);
     })
     .catch((error) => {
-      if (error.request.status === 401) {
+
+      if (error.response.status === 401 || error.response.status === 0) {
         const currentToken = getApiToken(getState());
+
         // If we have not tokens, than we should not got AuthRequired error
         if (!requestToken || !currentToken) throw error;
+        if (request.path === '/auth/token/refresh/' && error.response.data && error.response.data && (error.response.data.code === 'token_not_valid')) {
+          throw error;
+        }
         if (requestToken === currentToken) {
           return dispatch(reauthThenRetry({ ...request, noReauth: true }));
         } else {
