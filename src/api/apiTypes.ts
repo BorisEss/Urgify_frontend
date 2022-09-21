@@ -80,6 +80,20 @@ export type PaymentIntentRequest = {
   months: number;
 }
 
+// hospitals
+export type HospitalType = {
+  name: string;
+  id: string;
+  logo: string;
+}
+
+export type HospitalsArray = HospitalType[];
+
+export type AddHospitalRequest = {
+  name: string;
+  logo: File;
+}
+
 // excel - example
 export type ExcelTemplateResponse = {
   fileUrl: string;

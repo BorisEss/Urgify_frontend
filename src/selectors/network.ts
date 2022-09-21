@@ -15,3 +15,9 @@ export const getExploreIdeaIsFetching = createSelector([getNetworkState], (state
   if (!byKey) return false;
   return !!byKey.exploreIdea;
 });
+
+export const getHospitalsIsFetching = createSelector([getNetworkState], (state) => {
+  const byKey = state.activeRequestsByKey;
+  if (!byKey) return false;
+  return !!byKey.hospitals;
+});
