@@ -1,10 +1,8 @@
 import React from 'react';
-import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
-import { v4 as uuidv4 } from 'uuid';
 
-import { HospitalDepartmentsRoute } from '../navigation/navTypes';
-import type { DepartmentsFieldsType } from '../types';
+import { textNumbers } from '../constants/hospitals';
+import type { DepartmentsFieldErrosType, DepartmentsFieldsType } from '../types';
 import AuthPageTitle from './AuthPageTitle';
 import Button from './Buttons/Button';
 import OutlinedButton from './Buttons/OutlinedButton';
@@ -59,45 +57,39 @@ const useStyles = makeStyles()({
     gap: 8,
   },
   actionsButton: {
-    flex: '0 0 50%',
-  },
-  actionsOutlined: {
-    flex: '0 0 50%',
+    flex: 1,
   },
 });
 
 type Props = {
-  hospitalId: string;
   hospitalLogo?: string;
+  fields: DepartmentsFieldsType;
+  handleInputChange: (e:React.ChangeEvent<HTMLInputElement>, id: string) => void;
+  handleRemoveClick: (id: string) => void;
+  onSubmit: () => void;
+  handleAddMoreClick: () => void;
+  isFetching: boolean;
+  createdDepartmentsCount: number;
+  newDepartmentsCount: number;
+  validateFieldslength: () => boolean;
+  fieldErrors: DepartmentsFieldErrosType;
 }
 
-const HospitalAddDepartmentsUi: React.FC<Props> = ({ hospitalId, hospitalLogo }) => {
+const HospitalAddDepartmentsUi: React.FC<Props> = ({
+  hospitalLogo,
+  fields,
+  handleInputChange,
+  handleRemoveClick,
+  onSubmit,
+  handleAddMoreClick,
+  // isFetching,
+  createdDepartmentsCount,
+  newDepartmentsCount,
+  validateFieldslength,
+  fieldErrors,
+}) => {
   const {classes} = useStyles();
-  const navigate = useNavigate();
-  const [fields, setFields] = React.useState<DepartmentsFieldsType>({'0': ''});
 
-  const navigateToHospitalDepartments = () => {
-    navigate(generatePath(HospitalDepartmentsRoute(), { hospitalId: hospitalId }));
-  };
-
-  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>, id: string) => {
-    const { value } = e.target;
-    const list = {...fields, [id]: value};
-
-    setFields(list);
-  };
-
-  const handleAddMoreClick = () => {
-    const newDepartmentKey: string = uuidv4();
-    setFields({...fields, [newDepartmentKey]: ''});
-  };
-
-  const handleRemoveClick = (key: string) => {
-    delete fields[key];
-    setFields({ ...fields });
-  };
-
-  const fieldQnty: number = Object.keys(fields).length;
   return (
     <div>
       <HospitalHeader buttonTitle="Add another hospital" />
@@ -113,7 +105,7 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({ hospitalId, hospitalLogo })
         <div className={classes.formWrap}>
           <div className={classes.titleSpacing}>
             <AuthPageTitle
-              title="Let’s add your first department"
+              title={`Let’s add your ${createdDepartmentsCount < 20 ? textNumbers[createdDepartmentsCount + 1] : createdDepartmentsCount + 1} department`}
               subtitle={
                 <p className={classes.subtitle}>
                   Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.
@@ -129,7 +121,8 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({ hospitalId, hospitalLogo })
                   type="text"
                   value={fields[key]}
                   onChange={e => handleInputChange(e, key)}
-                  onDelete={fieldQnty > 1 ? () => handleRemoveClick(key) : undefined}
+                  onDelete={newDepartmentsCount > 1 ? () => handleRemoveClick(key) : undefined}
+                  error={!!fieldErrors[key]}
                 />
               </div>
             ))}
@@ -137,11 +130,12 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({ hospitalId, hospitalLogo })
               <div className={classes.actionsButton}>
                 <Button
                   title="Save department"
-                  onClick={navigateToHospitalDepartments}
+                  onClick={onSubmit}
+                  disabled={!validateFieldslength()}
                   w100
                 />
               </div>
-              <div className={classes.actionsOutlined}>
+              <div className={classes.actionsButton}>
                 <OutlinedButton
                   color="gray"
                   bigger

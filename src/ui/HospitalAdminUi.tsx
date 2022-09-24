@@ -2,7 +2,7 @@ import type {Theme} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import { hospitalNumber } from '../constants/hospitals';
+import { textNumbers } from '../constants/hospitals';
 import images from '../images';
 import AuthPageTitle from './AuthPageTitle';
 import AuthPageWrapper from './AuthPageWrapper';
@@ -102,10 +102,10 @@ type HospitalAdminUiType = {
   isFetching: boolean;
   image: File | null;
   setImage: (image: File | null) => void;
-  validate: () => boolean;
   onSubmit: () => void;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  hospitalError: string;
+  hospitalNameError: string;
+  hospitalImageError: string;
 };
 
 const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
@@ -113,10 +113,10 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
   // isFetching,
   image,
   setImage,
-  validate,
   onSubmit,
   onInputChange,
-  hospitalError,
+  hospitalNameError,
+  hospitalImageError,
 }) => {
   const {classes} = useStyles();
 
@@ -133,7 +133,7 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
         </div>
         <div className={classes.titleSpacing}>
           <AuthPageTitle
-            title={`Let’s add your ${hospitalCount < 20 ? hospitalNumber[hospitalCount + 1] : hospitalCount + 1} hospital`}
+            title={`Let’s add your ${hospitalCount < 20 ? textNumbers[hospitalCount + 1] : hospitalCount + 1} hospital`}
             subtitle={
               <p className={classes.subtitle}>
                 Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.
@@ -145,7 +145,11 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
         <div className={classes.mainForm}>
         <div className={classes.main}>
           <p className={classes.label}>hospital Logo</p>
-          <Dropzone image={image} setImage={setImage} />
+          <Dropzone
+            image={image}
+            setImage={setImage}
+            error={!!hospitalImageError}
+          />
         </div>
           <div className={classes.authFormSpacing}>
             <div className={classes.inputSpacing}>
@@ -154,14 +158,14 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
                 label="Hospital Name"
                 type="text"
                 name="hospitalName"
-                error={!!hospitalError}
+                error={!!hospitalNameError}
               />
             </div>
             <div className={classes.buttonContainer}>
               <Button
                 title="Add Hospital"
                 onClick={onSubmit}
-                disabled={!validate()}
+                disabled={!!hospitalNameError || !!hospitalImageError}
                 w100
               />
             </div>

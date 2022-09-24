@@ -21,3 +21,9 @@ export const getHospitalsIsFetching = createSelector([getNetworkState], (state) 
   if (!byKey) return false;
   return !!byKey.hospitals;
 });
+
+export const getDepartmentsIsFetching = createSelector([getNetworkState], (state) => {
+  const byKey = state.activeRequestsByKey;
+  if (!byKey) return false;
+  return !!byKey.departments;
+});

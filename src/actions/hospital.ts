@@ -1,14 +1,19 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import * as api from '../api';
-import type { HospitalsArray, HospitalType } from '../api/apiTypes';
+import type { DepartmentsArray, DepartmentType, HospitalsArray, HospitalType } from '../api/apiTypes';
 import type { AppAsyncThunk } from './actionsTypes';
 
 export const hospitalActions = {
   setHospitals: createAction('hospitalSetHospitals', (hospitals: HospitalsArray) => ({
     payload: hospitals,
   })),
+  setDepartments: createAction('hospitalSetDepartments', (departments: DepartmentsArray) => ({
+    payload: departments,
+  })),
 };
+
+// hospital
 
 export const getHospitals = (): AppAsyncThunk => (
   dispatch,
@@ -32,3 +37,27 @@ export const addHospital = (name: string, logo: File): AppAsyncThunk<HospitalTyp
       throw e.response.data;
     });
 };
+
+// department
+
+export const getDepartments = (hospitalId: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.getDepartments(hospitalId))
+    .then((response) => {
+      if (!response) return;
+      dispatch(hospitalActions.setDepartments(response));
+    });
+};
+
+export const addDepartments = (hospitalId: string, departmentNames: string[]): AppAsyncThunk<DepartmentsArray | undefined[]> => (
+  dispatch,
+) => {
+  const requests: Promise<DepartmentType>[] = [];
+  for (const departmentName of departmentNames) {
+    requests.push(dispatch(api.addDepartment(hospitalId, departmentName)));
+  }
+  return Promise.all(requests);
+};
+
+

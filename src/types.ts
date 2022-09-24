@@ -74,6 +74,8 @@ export type EmployeeDepartmentUiErrors = Record<string, string>;
 
 export type DepartmentsFieldsType = Record<string, string>;
 
+export type DepartmentsFieldErrosType = Record<string, string>;
+
 export type EmployeeAttributeItem = {
   id: string;
   title: string;

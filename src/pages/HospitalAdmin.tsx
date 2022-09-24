@@ -20,35 +20,44 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
   const hospitalCount: number = hospitals.length;
 
   const [hospitalName, setHospitalName] = React.useState<string>('');
-  const [hospitalError, setHospitalError] = React.useState<string>('');
+  const [hospitalNameError, setHospitalNameError] = React.useState<string>('');
+  const [hospitalImageError, setHospitalImageError] = React.useState<string>('');
   const navigate = useNavigate();
   const [image, setImage] = React.useState<File | null>(null);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHospitalError('');
+    setHospitalNameError('');
     setHospitalName(e.target.value);
   };
 
   const onImageChange = (img: File | null) => {
-    setHospitalError('');
+    setHospitalImageError('');
     setImage(img);
   };
 
   const validate = () => {
+    let nameError: string = '';
+    let imageError: string = '';
     if (!hospitalName || minLength(hospitalName, 2) || maxLength(hospitalName, 50)) {
-      setHospitalError('Hospital name should have from 2 to 50 symbols');
+      nameError = 'Hospital name should have from 2 to 50 symbols';
+    }
+    if (!image || (image.type.split('/')[0] !== 'image') || !image.name) {
+      imageError = 'The hospital logo must be a picture';
+    }
+    if (nameError || imageError) {
+      setHospitalNameError(nameError);
+      setHospitalImageError(imageError);
       return false;
     }
-    if (!image || (image.type.split('/')[0] !== 'image') || !image.name) return false;
     return true;
-   };
+  };
 
   const navigateToAddDepartments = (hospitalId: string) => {
     navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: hospitalId }));
   };
 
   const onSubmit = () => {
-    if (image) {
+    if (validate() && image) {
       createHospital(hospitalName, image)
         .then(hospital => {
           if (hospital && hospital.id) {
@@ -57,7 +66,10 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
         })
         .catch((e: any) => {
           if (e && e.name) {
-            setHospitalError(e.name);
+            setHospitalNameError(e.name);
+          }
+          if (e && e.logo) {
+            setHospitalImageError(e.logo);
           }
         });
     }
@@ -77,10 +89,10 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
     isFetching={isFetching}
     image={image}
     setImage={onImageChange}
-    validate={validate}
     onSubmit={onSubmit}
     onInputChange={onInputChange}
-    hospitalError={hospitalError}
+    hospitalNameError={hospitalNameError}
+    hospitalImageError={hospitalImageError}
   />;
 };
 

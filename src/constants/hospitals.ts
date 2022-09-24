@@ -1,4 +1,4 @@
-export const hospitalNumber:Record<number, string> =  {
+export const textNumbers:Record<number, string> =  {
   1: 'first',
   2: 'second',
   3: 'third',
