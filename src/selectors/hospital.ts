@@ -7,3 +7,7 @@ export const getHospitalState = (state: AppState) => state.hospital;
 export const getHospitalsArray = createSelector([getHospitalState], (hospitalState) => {
   return hospitalState.hospitals;
 });
+
+export const getDepartmentsArray = createSelector([getHospitalState], (hospitalState) => {
+  return hospitalState.departments;
+});

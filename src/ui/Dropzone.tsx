@@ -4,13 +4,12 @@ import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
 
-const useStyles = makeStyles()((_theme: Theme) => ({
-
+const useStyles = makeStyles<{error?: boolean}>()((_theme: Theme, { error}) => ({
   dropzone: {
     width: 268,
     height: 144,
     backgroundColor: '#fff',
-    border: '2px dashed #DBDBDB',
+    border: !error ? '2px dashed #DBDBDB' : '2px dashed #F93822',
     borderRadius: 4,
     display:' flex',
     alignItems: 'center',
@@ -36,7 +35,7 @@ const useStyles = makeStyles()((_theme: Theme) => ({
     width: 268,
     height: 144,
     backgroundColor: '#fff',
-    border: '2px solid #DBDBDB',
+    border: !error ? '2px dashed #DBDBDB' : '2px dashed #F93822',
     borderRadius: 4,
     display:' flex',
     alignItems: 'center',
@@ -72,10 +71,17 @@ type Props = {
   disableRemove?: boolean;
   image?: File | null;
   setImage?: (image: File | null) => void;
+  error?: boolean;
 }
 
-  const Dropzone: React.FC<Props> = ({ uploadedImage, disableRemove, image, setImage }) => {
-  const {classes} = useStyles();
+const Dropzone: React.FC<Props> = ({
+  uploadedImage,
+  disableRemove,
+  image,
+  setImage,
+  error,
+}) => {
+  const {classes} = useStyles({error});
   const inputField = React.useRef<HTMLInputElement>(null);
 
   const handleFileUpload = (e:React.ChangeEvent<HTMLInputElement>) => {

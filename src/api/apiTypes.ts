@@ -94,6 +94,15 @@ export type AddHospitalRequest = {
   logo: File;
 }
 
+// departments
+
+export type DepartmentType = {
+  name: string;
+  id: string;
+}
+
+export type DepartmentsArray = DepartmentType[];
+
 // excel - example
 export type ExcelTemplateResponse = {
   fileUrl: string;
