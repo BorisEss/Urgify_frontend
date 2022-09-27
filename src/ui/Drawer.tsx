@@ -8,15 +8,19 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { CSSObject, styled,  Theme } from '@mui/material/styles';
 import * as React from 'react';
+import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
-import { AddPatientsListRoute, InvoicesListRoute } from '../navigation/navTypes';
+import type { DrawerLinkType } from '../types';
 
 const useStyles = makeStyles()({
   padding: {
    paddingTop: 12,
    paddingBottom: 12,
+  },
+  listItemActive: {
+    backgroundColor: 'rgba(184, 184, 184, 0.2)',
   },
   paddingList: {
     padding: 0,
@@ -31,12 +35,6 @@ const useStyles = makeStyles()({
     },
   },
 });
-
-type DrawerLinkType = {
-  title: string;
-  icon: string;
-  to: string;
-}
 
 const drawerWidth = 184;
 
@@ -88,11 +86,16 @@ const CustomizedDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !
 
 type DrawerProps = {
   children: React.ReactNode;
+  links: DrawerLinkType[];
 }
 
-const Drawer: React.FC<DrawerProps> = ({children}) => {
-  const {classes} = useStyles();
+const Drawer: React.FC<DrawerProps> = ({
+  children,
+  links,
+}) => {
+  const {classes, cx} = useStyles();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -102,10 +105,9 @@ const Drawer: React.FC<DrawerProps> = ({children}) => {
     setOpen(false);
   };
 
-  const links: DrawerLinkType[] = [
-    {title: 'Patients', icon: images.idCard, to: AddPatientsListRoute()},
-    {title: 'Invoices', icon: images.fileBlank, to: InvoicesListRoute()},
-  ];
+  const handleRedirect = (path: string, pathParams: Record<string, string>) => {
+    navigate(generatePath(path, pathParams));
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -134,9 +136,14 @@ const Drawer: React.FC<DrawerProps> = ({children}) => {
             </ListItemButton>
           </ListItem>
           {links.map((item) => (
-            <ListItem key={item.title} disablePadding sx={{ display: 'block' }}>
+            <ListItem
+              key={item.title}
+              disablePadding
+              sx={{ display: 'block' }}
+              onClick={() => handleRedirect(item.to, item.pathParams)}
+            >
               <ListItemButton
-                className={classes.padding}
+                className={cx(classes.padding, item.isActive && classes.listItemActive)}
                 sx={{
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,

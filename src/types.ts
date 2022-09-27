@@ -89,3 +89,11 @@ export type PaymentOption = {
   title2?: string;
   checked: boolean;
 }
+
+export type DrawerLinkType = {
+  title: string;
+  icon: string;
+  to: string;
+  pathParams: Record<string, string>;
+  isActive?: boolean;
+}
