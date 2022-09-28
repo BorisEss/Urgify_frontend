@@ -11,7 +11,7 @@ const useStyles = makeStyles<{popoverWidth?: number}>()((_theme: Theme, { popove
   },
   clickable: {
     display: 'flex',
-    justifyContent: 'space-between',
+    gap: 8,
     alignItems: 'center',
     cursor: 'pointer',
   },

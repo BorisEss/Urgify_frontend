@@ -7,7 +7,6 @@ import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-
 const useStyles = makeStyles()({
   th: {
     fontFamily: 'Poppins-medium',
@@ -31,7 +30,7 @@ const useStyles = makeStyles()({
     color: '#2B364D',
   },
   status: {
-    padding: '3px 8px',
+    padding: '3px 22px',
     background: '#2FC77B',
     borderRadius: 2,
     fontSize: 12,
@@ -45,6 +44,9 @@ const useStyles = makeStyles()({
     fontSize: 12,
     lineHeight:'18px',
     color: '#fff',
+  },
+  disputeWrap: {
+    textAlign: 'end',
   },
 });
 
@@ -111,7 +113,7 @@ const TablePacientsInformationModal = () => {
                   {row.status}
                 </span>
               </TableCell>
-              <TableCell align="left" className={classes.td}>
+              <TableCell align="left" className={cx(classes.td,classes.disputeWrap)}>
                 <span className={cx(classes.tdTitle, classes.dispute)}>
                   {row.openDispute}
                 </span>

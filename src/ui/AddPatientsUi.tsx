@@ -1,8 +1,8 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import OutlinedButton from './Buttons/OutlinedButton';
-import Drawer from './Drawer';
+import AddPatientWrapper from '../components/AddPatientWrapper';
+import HospitalDashboardWrapper from '../components/HospitalDashboardWrapper';
 import DropzonePatients from './DropzonePatients';
 import HospitalHeader from './HospitalHeader';
 
@@ -15,25 +15,9 @@ const useStyles = makeStyles()({
     marginRight: 216,
     marginBottom: 80,
   },
-  departmentName: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    paddingTop: 32,
-    paddingBottom: 80,
-  },
-  title: {
-    fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
-    fontSize: 32,
-    lineHeight: '48px',
-    color: '#2B364D',
-  },
-  button: {
-    fontSize: 12,
-    lineHeight: '18px',
-    color: '#F93822',
-    padding: '6px 14px',
-    border: '2px solid #F93822',
+  contentMargin: {
+    marginTop: 87,
+    width: '100%',
   },
 });
 
@@ -41,7 +25,7 @@ const AddPatientsUi = () => {
   const {classes} = useStyles();
 
   return (
-    <Drawer children={
+    <HospitalDashboardWrapper children={
       <>
         <div className={classes.headerWrap}>
           <HospitalHeader
@@ -50,16 +34,8 @@ const AddPatientsUi = () => {
           />
         </div>
         <div className={classes.content}>
-          <div className={classes.departmentName}>
-            <h2 className={classes.title}>Patients</h2>
-            <OutlinedButton
-              type="button"
-              title="Create new"
-              color="orange"
-              lowerCase
-              extraClass={classes.button}
-            />
-          </div>
+          <AddPatientWrapper />
+          <div className={classes.contentMargin} />
           <DropzonePatients />
         </div>
       </>

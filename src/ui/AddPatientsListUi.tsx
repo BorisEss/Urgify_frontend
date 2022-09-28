@@ -1,12 +1,11 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import Modal from '../ui/Modal';
-import OutlinedButton from './Buttons/OutlinedButton';
-import Drawer from './Drawer';
+import AddPatientWrapper from '../components/AddPatientWrapper';
+import HospitalDashboardWrapper from '../components/HospitalDashboardWrapper';
 import HospitalHeader from './HospitalHeader';
 import SearchInput from './Inputs/SearchInput';
-import NewPatientModal from './NewPatientModal';
+import PaginationControls from './PagintationControls';
 import TablePatients from './TablePatients';
 
 const useStyles = makeStyles()({
@@ -17,48 +16,32 @@ const useStyles = makeStyles()({
     marginLeft: 216,
     marginRight: 216,
   },
-  departmentName: {
-    display: 'flex',
-    justifyContent: 'space-between',
+  tableWrap: {
     paddingTop: 32,
     paddingBottom: 16,
   },
-  title: {
-    fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
-    fontSize: 32,
-    lineHeight: '48px',
-    color: '#2B364D',
+  divider: {
+    width: '100%',
+    height: 1,
+    background: '#DBDBDB',
+    marginBottom: 23,
   },
-  button: {
-    fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
-    fontSize: 12,
-    lineHeight: '18px',
-    color: '#F93822',
-    padding: '8px 16px',
-    border: '2px solid #F93822',
-  },
-  tableWrap: {
-    paddingTop: 32,
-    paddingBottom: 32,
+  contentMargin: {
+    marginTop: 23,
+    width: '100%',
   },
 });
 
 const AddPatientsListUi = () => {
   const {classes} = useStyles();
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const onChangePage = (page: number) => {
+    console.log(page);
+    // setPage(page);
+    // getRequest
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
-    <Drawer children={
+    <HospitalDashboardWrapper children={
       <>
         <div className={classes.headerWrap}>
           <HospitalHeader
@@ -69,31 +52,20 @@ const AddPatientsListUi = () => {
         </div>
         <div className={classes.content}>
           <div>
-            <div className={classes.departmentName}>
-              <h2 className={classes.title}>Patients</h2>
-              <OutlinedButton
-                type="button"
-                title="Create new"
-                color="orange"
-                lowerCase
-                extraClass={classes.button}
-                onClick={handleClickOpen}
-
-              />
-            </div>
-              <SearchInput />
+            <AddPatientWrapper />
+            <div className={classes.contentMargin} />
+            <SearchInput />
             <div className={classes.tableWrap}>
               <TablePatients />
             </div>
+            <div className={classes.divider} />
+            <PaginationControls
+              totalProducts={800}
+              currentPage={1}
+              pageSize={10}
+              onChangePage={onChangePage}
+            />
           </div>
-          <Modal
-            open={open}
-            handleClose={handleClose}
-            borderRadius={4}
-            children={
-              <NewPatientModal handleClose={handleClose} />
-            }
-          />
         </div>
       </>
     } />

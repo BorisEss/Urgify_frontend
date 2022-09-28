@@ -68,6 +68,9 @@ const useStyles = makeStyles()({
     color: '#fff',
     display: 'inline-block',
   },
+  disputeWrap: {
+    textAlign: 'end',
+  },
   disputeOutlined: {
     color: '#2B364D',
     border: '2px solid #2B364D',
@@ -156,8 +159,8 @@ const InvoicesListTable = () => {
                     {row.status}
                   </span>
                 </TableCell>
-                <TableCell align="left" className={classes.td}>
-                  <span className={cx(classes.tdTitle, classes.dispute, classes.disputeOutlined)}>
+                <TableCell align="left" className={cx(classes.td,classes.disputeWrap)}>
+                  <span className={cx(classes.tdTitle, classes.dispute, classes.disputeOutlined,)}>
                     {row.dispute}
                   </span>
                 </TableCell>
