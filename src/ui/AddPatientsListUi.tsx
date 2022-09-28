@@ -18,7 +18,13 @@ const useStyles = makeStyles()({
   },
   tableWrap: {
     paddingTop: 32,
-    paddingBottom: 32,
+    paddingBottom: 16,
+  },
+  divider: {
+    width: '100%',
+    height: 1,
+    background: '#DBDBDB',
+    marginBottom: 23,
   },
   contentMargin: {
     marginTop: 23,
@@ -52,6 +58,7 @@ const AddPatientsListUi = () => {
             <div className={classes.tableWrap}>
               <TablePatients />
             </div>
+            <div className={classes.divider} />
             <PaginationControls
               totalProducts={800}
               currentPage={1}

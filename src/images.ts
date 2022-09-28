@@ -1,6 +1,7 @@
 import adminMainPhoto from './images/admin-main-photo.png';
 import arrowDown from './images/arrow-down.svg';
 import arrowLeft from './images/arrow-left.svg';
+import arrowRight from './images/arrow-right.svg';
 import arrowUp from './images/arrow-up.svg';
 import building from './images/building.svg';
 import burger from './images/burger.svg';
@@ -52,6 +53,7 @@ const images = {
   closeIcon,
   trashCan,
   arrowLeft,
+  arrowRight,
   arrowDown,
   radio,
   cloudUp,

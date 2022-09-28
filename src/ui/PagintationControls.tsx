@@ -2,29 +2,40 @@ import { Pagination } from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import TextButton from './Buttons/TextButton';
+import PaginationButton from './Buttons/PaginationButton';
 
 const useStyles = makeStyles()({
   root: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderRadius: 0,
   },
   ul: {
-    // color: customTheme.color.stroke,
-    // '& .MuiPaginationItem-outlined': {
-    //   border: `2px solid ${customTheme.color.stroke}`,
-    //   color: customTheme.color.grayscale,
-    // },
-    // '& .Mui-selected': {
-    //   backgroundColor: 'transparent',
-    //   borderColor: customTheme.color.lime,
-    //   color: customTheme.color.lime,
-    //   '&:hover': {
-    //     backgroundColor: 'transparent',
-    //   },
-    // },
+    '& .MuiPaginationItem-outlined': {
+      border: 'none',
+      color: '#777777',
+      borderRadius: 0,
+      margin: 0,
+      padding: 8,
+      fontFamily: 'Poppins-semibold',
+      fontWeight: 600,
+      fontSize: 16,
+      lineHeight: '24px',
+      minWidth: 40,
+      height: 40,
+    },
+
+    '& .Mui-selected': {
+      backgroundColor: '#2B364D',
+      color: '#fff',
+
+      '&:hover': {
+          backgroundColor: '#2B364D',
+      },
+    },
   },
+
 });
 
 interface IProps {
@@ -55,11 +66,11 @@ const PaginationControls: React.FC<IProps> = (props) => {
 
   return (
     <div className={classes.root}>
-      <TextButton
-        color={isNotFirstPage ? 'orange' : 'gray'}
-        onClick={() => handleChange(null, props.currentPage - 1)}
+       <PaginationButton
         title="Previous"
         disabled={!isNotFirstPage}
+        onClick={() => handleChange(null, props.currentPage - 1)}
+        isPrevious
       />
       <Pagination
         classes={{ul: classes.ul}}
@@ -72,11 +83,10 @@ const PaginationControls: React.FC<IProps> = (props) => {
         shape="rounded"
         siblingCount={isNotFirstPage && isNotLastPage ? 1 : 0}
       />
-      <TextButton
-        color={isNotLastPage ? 'orange' : 'gray'}
-        onClick={() => handleChange(null, props.currentPage + 1)}
+      <PaginationButton
         title="Next"
         disabled={!isNotLastPage}
+        onClick={() => handleChange(null, props.currentPage + 1)}
       />
     </div>
   );
