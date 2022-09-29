@@ -17,8 +17,8 @@ export enum navTypes {
   HospitalDepartments = '/hospitals/:hospitalId/departments',
   EmployeeDepartment = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
   EmployeeList = '/hospitals/:hospitalId/departments/:departmentId/employees',
-  AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients',
-  AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients-list',
+  AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients/import',
+  AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients',
   InvoicesList = '/hospitals/:hospitalId/departments/:departmentId/invoices-list',
   CodeConfirmation = '/code-confirmation',
 }
