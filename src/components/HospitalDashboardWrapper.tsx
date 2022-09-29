@@ -27,7 +27,7 @@ const HospitalDashboardWrapper: React.FC<Props> = ({
         hospitalId,
         departmentId,
       },
-      isActive: location.pathname.includes('/patients-list'),
+      isActive: location.pathname.includes('/patients'),
     },
     {
       title: 'Invoices',
