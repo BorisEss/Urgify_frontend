@@ -12,6 +12,7 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
+import { SettingsPageRoute } from '../navigation/navTypes';
 import type { DrawerLinkType } from '../types';
 
 const useStyles = makeStyles()({
@@ -109,6 +110,10 @@ const Drawer: React.FC<DrawerProps> = ({
     navigate(generatePath(path, pathParams));
   };
 
+  const navigateToSettingsPage = () => {
+    navigate(generatePath(SettingsPageRoute(),));
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -163,7 +168,11 @@ const Drawer: React.FC<DrawerProps> = ({
             </ListItem>
           ))}
         </List>
-        <ListItem disablePadding sx={{ display: 'block' }}>
+        <ListItem
+          disablePadding
+          sx={{ display: 'block' }}
+          onClick={() => navigateToSettingsPage()}
+        >
           <ListItemButton
             className={classes.padding}
             sx={{
@@ -180,7 +189,11 @@ const Drawer: React.FC<DrawerProps> = ({
             >
               <img src={images.settings} />
             </ListItemIcon>
-            <ListItemText className={classes.itemText} primary="Settings" sx={{ opacity: open ? 1 : 0 }} />
+            <ListItemText
+              className={classes.itemText}
+              primary="Settings"
+              sx={{ opacity: open ? 1 : 0 }}
+            />
           </ListItemButton>
         </ListItem>
       </CustomizedDrawer>

@@ -124,7 +124,6 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
     <AuthPageWrapper
       centeredContent
       rightExtraClass={classes.rightPageSide}
-      logout
     >
       <div>
         <div>
