@@ -21,6 +21,7 @@ export enum navTypes {
   AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients',
   InvoicesList = '/hospitals/:hospitalId/departments/:departmentId/invoices-list',
   CodeConfirmation = '/code-confirmation',
+  SettingsPage = '/settings-page',
 }
 
 export const HomeRoute = () => {
@@ -64,4 +65,7 @@ export const  InvoicesListRoute = () => {
 };
 export const CodeConfirmationRoute = () => {
   return navTypes.CodeConfirmation;
+};
+export const SettingsPageRoute = () => {
+  return navTypes.SettingsPage;
 };

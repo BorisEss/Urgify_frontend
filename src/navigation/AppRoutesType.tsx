@@ -18,6 +18,7 @@ const EmployeeList = React.lazy(() => import('../pages/EmployeeList'));
 const AddPatients = React.lazy(() => import('../pages/AddPatients'));
 const InvoicesList = React.lazy(() => import('../pages/InvoicesList'));
 const CodeConfirmation = React.lazy(() => import('../pages/CodeConfirmation'));
+const SettingsPage = React.lazy(() => import('../pages/SettingsPage'));
 
 type AppRoutesType = {
   isAuth: boolean;
@@ -48,6 +49,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
           <Route path={`${navTypes.AddPatients}`} element={<AddPatients />} />
           <Route path={`${navTypes.AddPatientsList}`} element={<AddPatientsList />} />
           <Route path={`${navTypes.InvoicesList}`} element={<InvoicesList />} />
+          <Route path={`${navTypes.SettingsPage}`} element={<SettingsPage />} />
         </>
       )}
 

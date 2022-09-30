@@ -3,7 +3,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
-import LogoutWrapper from '../components/LogoutWrapper';
 import { HospitalAdminRoute } from '../navigation/navTypes';
 import Button from './Buttons/Button';
 // import Button from './Buttons/Button';
@@ -76,7 +75,6 @@ const HospitalHeader: React.FC<HospitalHeaderType> = ({title, buttonTitle, disab
           </div>
         ) : null }
       </div>
-      <LogoutWrapper />
     </>
   );
 };

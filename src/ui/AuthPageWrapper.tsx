@@ -3,8 +3,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import LogoutWrapper from '../components/LogoutWrapper';
-
 const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     display: 'flex',
@@ -76,10 +74,9 @@ type AuthPageWrapperType = {
   rightText?: string;
   centeredContent?: boolean;
   rightExtraClass?: string;
-  logout?: boolean;
 };
 
-const AuthPageWrapper: React.FC<AuthPageWrapperType> = ({children, rightText, centeredContent, rightExtraClass, logout}) => {
+const AuthPageWrapper: React.FC<AuthPageWrapperType> = ({children, rightText, centeredContent, rightExtraClass}) => {
   const {classes, cx} = useStyles();
 
   const isMobile = useMediaQuery('(max-width:720px)');
@@ -93,7 +90,6 @@ const AuthPageWrapper: React.FC<AuthPageWrapperType> = ({children, rightText, ce
           {rightText ? <p>{rightText}</p> : null}
         </div>
       ) : null}
-      {logout ? <LogoutWrapper /> : null}
     </div>
   );
 };
