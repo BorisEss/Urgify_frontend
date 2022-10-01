@@ -5,17 +5,14 @@ import {makeStyles} from 'tss-react/mui';
 import images from '../images';
 
 const useStyles = makeStyles()((theme: Theme) => ({
-
   main: {
     display: 'flex',
     justifyContent: 'space-between',
   },
-
   wrap: {
     display: 'flex',
     alignItems: 'center',
   },
-
   title: {
     fontFamily: 'Poppins-semibold',
     fontWeight: 600,
@@ -35,9 +32,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
     width: 48,
     height: 48,
   },
-  arrowUp: {
+  image: {
     width: 48,
     height: 48,
+  },
+  arrowDown: {
+    transform: 'rotate(180deg)',
   },
   clickable: {
     cursor: 'pointer',
@@ -47,9 +47,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
 type DepartmentNameType = {
   title: string;
   onClick?: () => void;
+  open?: boolean;
 };
 
-const DepartmentName: React.FC<DepartmentNameType> = ({title, onClick}) => {
+const DepartmentName: React.FC<DepartmentNameType> = ({
+  title,
+  onClick,
+  open,
+}) => {
   const {classes, cx} = useStyles();
   return (
   <div className={cx(classes.main, onClick ? classes.clickable : '')} onClick={onClick}>
@@ -60,7 +65,7 @@ const DepartmentName: React.FC<DepartmentNameType> = ({title, onClick}) => {
 
     {onClick ?
       <div>
-        <img className={classes.arrowUp} src={images.arrowUp}/>
+        <img className={cx(classes.image, !open && classes.arrowDown)} src={images.arrowUp}/>
       </div>
       : null
     }

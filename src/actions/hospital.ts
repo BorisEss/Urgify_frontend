@@ -15,13 +15,14 @@ export const hospitalActions = {
 
 // hospital
 
-export const getHospitals = (): AppAsyncThunk => (
+export const getHospitals = (): AppAsyncThunk<HospitalsArray> => (
   dispatch,
 ) => {
   return dispatch(api.getHospitals())
     .then((response) => {
-      if (!response) return;
+      if (!response) return [];
       dispatch(hospitalActions.setHospitals(response));
+      return response;
     });
 };
 
@@ -40,13 +41,14 @@ export const addHospital = (name: string, logo: File): AppAsyncThunk<HospitalTyp
 
 // department
 
-export const getDepartments = (hospitalId: string): AppAsyncThunk => (
+export const getDepartments = (hospitalId: string): AppAsyncThunk<DepartmentsArray> => (
   dispatch,
 ) => {
   return dispatch(api.getDepartments(hospitalId))
     .then((response) => {
-      if (!response) return;
+      if (!response) return [];
       dispatch(hospitalActions.setDepartments(response));
+      return response;
     });
 };
 
@@ -60,4 +62,22 @@ export const addDepartments = (hospitalId: string, departmentNames: string[]): A
   return Promise.all(requests);
 };
 
+// Hospitals and Depratments
+export const getHospitalsAndDepartments = (): AppAsyncThunk<HospitalsArray> => async (
+  dispatch,
+) => {
+  let hospitals: HospitalsArray | void = await dispatch(api.getHospitals());
+  const departmentsRequests: Promise<void>[] = [];
+  if (!hospitals || !hospitals.length) return [];
 
+  for (const hospital of hospitals) {
+    const departmentsRequest: Promise<void> = dispatch(api.getDepartments(hospital.id))
+      .then((departments) => {
+        hospital.departments = departments;
+      });
+    departmentsRequests.push(departmentsRequest);
+  }
+  await Promise.all(departmentsRequests);
+  dispatch(hospitalActions.setHospitals(hospitals));
+  return hospitals;
+};

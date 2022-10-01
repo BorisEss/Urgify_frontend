@@ -12,7 +12,7 @@ const ForgotPassword = React.lazy(() => import('../pages/ForgotPassword'));
 const ForgotNewPassword = React.lazy(() => import('../pages/ForgotNewPassword'));
 const HospitalAdmin = React.lazy(() => import('../pages/HospitalAdmin'));
 const HospitalAddDepartments = React.lazy(() => import('../pages/HospitalAddDepartments'));
-const HospitalDepartments = React.lazy(() => import('../pages/HospitalDepartments'));
+const Hospitals = React.lazy(() => import('../pages/Hospitals'));
 const EmployeeDepartment = React.lazy(() => import('../pages/EmployeeDepartment'));
 const EmployeeList = React.lazy(() => import('../pages/EmployeeList'));
 const AddPatients = React.lazy(() => import('../pages/AddPatients'));
@@ -43,7 +43,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
         <>
           <Route path={`${navTypes.HospitalAdmin}`} element={<HospitalAdmin />} />
           <Route path={`${navTypes.HospitalAddDepartments}`} element={<HospitalAddDepartments />} />
-          <Route path={`${navTypes.HospitalDepartments}`} element={<HospitalDepartments />} />
+          <Route path={`${navTypes.Hospitals}`} element={<Hospitals />} />
           <Route path={`${navTypes.EmployeeDepartment}`} element={<EmployeeDepartment />} />
           <Route path={`${navTypes.EmployeeList}`} element={<EmployeeList />} />
           <Route path={`${navTypes.AddPatients}`} element={<AddPatients />} />

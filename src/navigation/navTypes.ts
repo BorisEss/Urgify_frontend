@@ -14,7 +14,7 @@ export enum navTypes {
   ForgotNewPassword = '/password-reset/:uid/:token',
   HospitalAdmin = '/hospitals/add',
   HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
-  HospitalDepartments = '/hospitals/:hospitalId/departments',
+  Hospitals = '/hospitals/',
   EmployeeDepartment = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
   EmployeeList = '/hospitals/:hospitalId/departments/:departmentId/employees',
   AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients/import',
@@ -45,8 +45,8 @@ export const HospitalAdminRoute = () => {
 export const HospitalAddDepartmentsRoute = () => {
   return navTypes.HospitalAddDepartments;
 };
-export const HospitalDepartmentsRoute = () => {
-  return navTypes.HospitalDepartments;
+export const HospitalsRoute = () => {
+  return navTypes.Hospitals;
 };
 export const  EmployeeDepartmentRoute = () => {
   return navTypes.EmployeeDepartment;
