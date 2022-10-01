@@ -85,6 +85,7 @@ export type HospitalType = {
   name: string;
   id: string;
   logo: string;
+  departments: DepartmentsArray;
 }
 
 export type HospitalsArray = HospitalType[];

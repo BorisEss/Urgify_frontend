@@ -76,6 +76,7 @@ const decodeHospital = (data: any): HospitalType => ({
   name: decodeString(data.name),
   id: decodeString(data.slug),
   logo: decodeString(data.logo),
+  departments: [],
 });
 
 const decodeDepartmentsArray = (data: any): DepartmentsArray => {

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { addDepartments,getDepartments } from '../actions/hospital';
 import images from '../images';
-import { HospitalDepartmentsRoute } from '../navigation/navTypes';
+import { HospitalsRoute } from '../navigation/navTypes';
 import { getDepartmentsArray } from '../selectors/hospital';
 import { getDepartmentsIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -34,8 +34,8 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
   const createdDepartmentsCount: number = departments.length;
   const newDepartmentsCount: number = Object.keys(fields).length;
 
-  const navigateToHospitalDepartments = () => {
-    navigate(generatePath(HospitalDepartmentsRoute(), { hospitalId: hospitalId }));
+  const navigateToHospitals = () => {
+    navigate(generatePath(HospitalsRoute()));
   };
 
   const validateFieldslength = () => {
@@ -129,7 +129,7 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
     if (nameMatchingValidate()) {
       createDepartments(hospitalId, Object.values(fields))
         .then(() => {
-          navigateToHospitalDepartments();
+          navigateToHospitals();
         })
         .catch((e: any) => {
           Log.message(e);
@@ -139,7 +139,7 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
 
   React.useEffect(() => {
     if (hospitalId) {
-      // here also need to make getHospitalDataRequest
+      // here also need to make getHospitalDataRequest or only 1 big request - to get All Hospital Data
       fetchDepartments(hospitalId);
     }
   }, [fetchDepartments, hospitalId]);
