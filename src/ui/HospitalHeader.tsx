@@ -1,9 +1,7 @@
 import type {Theme} from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
-import { HospitalAdminRoute } from '../navigation/navTypes';
 import Button from './Buttons/Button';
 // import Button from './Buttons/Button';
 import Logo from './Logo';
@@ -39,16 +37,17 @@ const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
 type HospitalHeaderType = {
   title?: string;
   buttonTitle?: string;
-  disablePaddingLeft?: boolean,
+  disablePaddingLeft?: boolean;
+  onClick?: () => void;
 };
 
-const HospitalHeader: React.FC<HospitalHeaderType> = ({title, buttonTitle, disablePaddingLeft}) => {
+const HospitalHeader: React.FC<HospitalHeaderType> = ({
+    title,
+    buttonTitle,
+    disablePaddingLeft,
+    onClick,
+  }) => {
   const {classes, cx} = useStyles({title});
-  const navigate = useNavigate();
-
-  const navigateToHospitalAdmin = () => {
-    navigate(HospitalAdminRoute());
-  };
 
   return (
     <>
@@ -70,7 +69,7 @@ const HospitalHeader: React.FC<HospitalHeaderType> = ({title, buttonTitle, disab
             <Button
               title={buttonTitle}
               w100
-              onClick={navigateToHospitalAdmin}
+              onClick={onClick}
             />
           </div>
         ) : null }

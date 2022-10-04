@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import images from '../images';
-import { AddPatientsListRoute, InvoicesListRoute } from '../navigation/navTypes';
+import { AddPatientsListRoute, HospitalsRoute, InvoicesListRoute } from '../navigation/navTypes';
 import type { DrawerLinkType } from '../types';
 import Drawer from '../ui/Drawer';
 
@@ -19,6 +19,13 @@ const HospitalDashboardWrapper: React.FC<Props> = ({
   if (!hospitalId || !departmentId) return null;
 
   const links: DrawerLinkType[] = [
+    {
+      title: 'Hospitals',
+      icon: images.building,
+      to: HospitalsRoute(),
+      pathParams: {
+      },
+    },
     {
       title: 'Patients',
       icon: images.idCard,

@@ -1,8 +1,10 @@
 import React from 'react';
+import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import AddPatientWrapper from '../components/AddPatientWrapper';
 import HospitalDashboardWrapper from '../components/HospitalDashboardWrapper';
+import { AddPatientsRoute } from '../navigation/navTypes';
 import HospitalHeader from './HospitalHeader';
 import SearchInput from './Inputs/SearchInput';
 import PaginationControls from './PagintationControls';
@@ -32,8 +34,21 @@ const useStyles = makeStyles()({
   },
 });
 
-const AddPatientsListUi = () => {
+type Props = {
+  hospitalId: string,
+  departmentId: string,
+}
+
+const AddPatientsListUi: React.FC<Props> = ({
+  hospitalId,
+  departmentId,
+}) => {
   const {classes} = useStyles();
+  const navigate = useNavigate();
+
+  const navigateToImportPacients = () => {
+    navigate(generatePath(AddPatientsRoute(), { hospitalId, departmentId }));
+  };
 
   const onChangePage = (page: number) => {
     console.log(page);
@@ -48,6 +63,7 @@ const AddPatientsListUi = () => {
             title="Hospital Pediatric WA – Billings"
             buttonTitle="Import patients"
             disablePaddingLeft
+            onClick={navigateToImportPacients}
           />
         </div>
         <div className={classes.content}>

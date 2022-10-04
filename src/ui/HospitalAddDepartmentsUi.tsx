@@ -1,8 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
+import type { HospitalsArray, HospitalType } from '../api/apiTypes';
 import { textNumbers } from '../constants/hospitals';
+import { HospitalAdminRoute } from '../navigation/navTypes';
 import type { DepartmentsFieldErrosType, DepartmentsFieldsType } from '../types';
+import { checkHospitalsLimit } from '../utils/loginRedirectFlow';
 import AuthPageTitle from './AuthPageTitle';
 import Button from './Buttons/Button';
 import OutlinedButton from './Buttons/OutlinedButton';
@@ -62,7 +66,6 @@ const useStyles = makeStyles()({
 });
 
 type Props = {
-  hospitalLogo?: string;
   fields: DepartmentsFieldsType;
   handleInputChange: (e:React.ChangeEvent<HTMLInputElement>, id: string) => void;
   handleRemoveClick: (id: string) => void;
@@ -73,10 +76,11 @@ type Props = {
   newDepartmentsCount: number;
   validateFieldslength: () => boolean;
   fieldErrors: DepartmentsFieldErrosType;
+  hospitals: HospitalsArray;
+  hospital: HospitalType;
 }
 
 const HospitalAddDepartmentsUi: React.FC<Props> = ({
-  hospitalLogo,
   fields,
   handleInputChange,
   handleRemoveClick,
@@ -87,21 +91,33 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({
   newDepartmentsCount,
   validateFieldslength,
   fieldErrors,
+  hospitals,
+  hospital,
 }) => {
   const {classes} = useStyles();
+  const navigate = useNavigate();
+
+  const navigateToHospitalAdmin = () => {
+    navigate(HospitalAdminRoute());
+  };
+
+  const showAddHospitalButton = !checkHospitalsLimit(hospitals.length);
 
   return (
     <div>
-      <HospitalHeader buttonTitle="Add another hospital" />
+      <HospitalHeader
+        buttonTitle={showAddHospitalButton ? 'Add another hospital' : ''}
+        onClick={navigateToHospitalAdmin}
+      />
       <div className={classes.content}>
         <div className={classes.pagesNameSpace}>
           <PageName title="Your hospitals" />
         </div>
         <div className={classes.departmentsNameSpace}>
-          <DepartmentName title="Hospital Pediatric WA" />
+          <DepartmentName title={hospital.name} />
         </div>
         <div className={classes.divider} />
-        {hospitalLogo ? <Dropzone  uploadedImage={hospitalLogo} disableRemove /> : null}
+        {hospital.logo ? <Dropzone uploadedImage={hospital.logo} disableRemove /> : null}
         <div className={classes.formWrap}>
           <div className={classes.titleSpacing}>
             <AuthPageTitle
@@ -129,7 +145,7 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({
             <div className={classes.actions}>
               <div className={classes.actionsButton}>
                 <Button
-                  title="Save department"
+                  title={`Save department${newDepartmentsCount > 1 ? 's' : ''}`}
                   onClick={onSubmit}
                   disabled={!validateFieldslength()}
                   w100
