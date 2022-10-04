@@ -5,11 +5,11 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 import { v4 as uuidv4 } from 'uuid';
 
-import { addDepartments,getDepartments } from '../actions/hospital';
-import images from '../images';
+import { addDepartments, getHospitalsAndDepartments } from '../actions/hospital';
+import type { DepartmentsArray, HospitalType } from '../api/apiTypes';
 import { HospitalsRoute } from '../navigation/navTypes';
-import { getDepartmentsArray } from '../selectors/hospital';
-import { getDepartmentsIsFetching } from '../selectors/network';
+import { getHospitalsArray } from '../selectors/hospital';
+import { getHospitalsOrDepartmentsIsFetching } from '../selectors/network';
 import Log from '../services/logger';
 import type { AppState } from '../store';
 import type { DepartmentsFieldErrosType, DepartmentsFieldsType } from '../types';
@@ -17,19 +17,22 @@ import HospitalAddDepartmentsUi from '../ui/HospitalAddDepartmentsUi';
 import { maxLength, minLength } from '../utils/strings';
 
 const HospitalAddDepartments: React.FC<ReduxProps> = ({
-  departments,
+  hospitals,
   isFetching,
-  fetchDepartments,
+  fetchHospitals,
   createDepartments,
 }) => {
   let { hospitalId } = useParams();
   // TODO: Here need to loader when hospital loading and departments.
   // TODO: Add redirect to createHospital if NO hospitalId or hospitalDataRequest return error
+  // But how understand if request finished?
 
   const navigate = useNavigate();
   const [fields, setFields] = React.useState<DepartmentsFieldsType>({'0': ''});
   const [fieldErrors, setFieldErrors] = React.useState<DepartmentsFieldErrosType>({'0': ''});
   const [resetErrors, setResetErrors] = React.useState<boolean>(false);
+  const currentHospital: HospitalType | undefined = hospitals.length ? hospitals.find(item => item.id === hospitalId) : undefined;
+  const departments: DepartmentsArray = currentHospital ? currentHospital.departments : [];
 
   const createdDepartmentsCount: number = departments.length;
   const newDepartmentsCount: number = Object.keys(fields).length;
@@ -139,14 +142,12 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
 
   React.useEffect(() => {
     if (hospitalId) {
-      // here also need to make getHospitalDataRequest or only 1 big request - to get All Hospital Data
-      fetchDepartments(hospitalId);
+      fetchHospitals();
     }
-  }, [fetchDepartments, hospitalId]);
-  if (hospitalId) return (
+  }, [fetchHospitals, hospitalId]);
+  if (hospitalId && currentHospital) return (
     <HospitalAddDepartmentsUi
       onSubmit={onSubmit}
-      hospitalLogo={images.logo}
       fields={fields}
       handleInputChange={handleInputChange}
       handleAddMoreClick={handleAddMoreClick}
@@ -156,23 +157,28 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
       newDepartmentsCount={newDepartmentsCount}
       validateFieldslength={validateFieldslength}
       fieldErrors={fieldErrors}
+      hospitals={hospitals}
+      hospital={currentHospital}
     />
   );
   return null;
 };
 
 const getData = createSelector(
-  [getDepartmentsArray, getDepartmentsIsFetching],
-  (departments, isFetching) => {
+  [
+    getHospitalsArray,
+    getHospitalsOrDepartmentsIsFetching,
+  ],
+  (hospitals, isFetching) => {
     return {
-      departments,
+      hospitals,
       isFetching,
     };
   },
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  fetchDepartments: getDepartments,
+  fetchHospitals: getHospitalsAndDepartments,
   createDepartments: addDepartments,
 });
 

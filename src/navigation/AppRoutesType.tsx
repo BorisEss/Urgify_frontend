@@ -52,14 +52,11 @@ const AppRoutes: React.FC<AppRoutesType> = ({
           <Route path={`${navTypes.SettingsPage}`} element={<SettingsPage />} />
         </>
       )}
-
       {/* Redirect with React router 6 */}
-
-      {/* TODO: Specify what flow will be after authorization */}
-      {/* first page will be AddHospitalAdmin, but then first will be another(maybe dashboard or smth) */}
-      {/* After sign up - AddHospitalAdmin!, but after sign in - another(!!!or add hospital if not added before) */}
       {!(location.pathname.includes('docs') || location.pathname.includes('swagger')) && (
-        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.HospitalAdmin} />} />
+        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.HospitalAdmin} state={
+          isAuth ? {from: navTypes.SignIn} : null
+        } />} />
       )}
     </Routes>
   );

@@ -5,6 +5,9 @@ import type { DepartmentsArray, DepartmentType, HospitalsArray, HospitalType } f
 import type { AppAsyncThunk } from './actionsTypes';
 
 export const hospitalActions = {
+  setCurrentHospital: createAction('hospitalSetCurrentHospital', (hospital: HospitalType | null) => ({
+    payload: hospital,
+  })),
   setHospitals: createAction('hospitalSetHospitals', (hospitals: HospitalsArray) => ({
     payload: hospitals,
   })),
@@ -14,6 +17,17 @@ export const hospitalActions = {
 };
 
 // hospital
+
+export const getHospital = (hospitalId: string): AppAsyncThunk<HospitalType | null> => (
+  dispatch,
+) => {
+  return dispatch(api.getHospital(hospitalId))
+    .then((response) => {
+      if (!response) return null;
+      dispatch(hospitalActions.setCurrentHospital(response));
+      return response;
+    });
+};
 
 export const getHospitals = (): AppAsyncThunk<HospitalsArray> => (
   dispatch,

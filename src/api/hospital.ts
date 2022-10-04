@@ -4,6 +4,17 @@ import { decodeList, decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
 // hospital
+export const getHospital = (hospitalId: string): AppAsyncThunk<HospitalType> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'hospitals',
+      method: 'get',
+      path: `/hospitals/${hospitalId}/`,
+      isAuth: true,
+    }),
+  ).then(decodeHospital);
+};
+
 export const getHospitals = (): AppAsyncThunk<HospitalsArray> => (dispatch) => {
   return dispatch(
     makeRequest({

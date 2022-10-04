@@ -35,7 +35,7 @@ const useStyles = makeStyles<{error?: boolean}>()((_theme: Theme, { error}) => (
     width: 268,
     height: 144,
     backgroundColor: '#fff',
-    border: !error ? '2px dashed #DBDBDB' : '2px dashed #F93822',
+    border: !error ? '2px solid #DBDBDB' : '2px dashed #F93822',
     borderRadius: 4,
     display:' flex',
     alignItems: 'center',

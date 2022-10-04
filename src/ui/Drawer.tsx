@@ -35,6 +35,10 @@ const useStyles = makeStyles()({
       color:'#2B364D',
     },
   },
+  icon: {
+    width: 24,
+    height: 24,
+  },
 });
 
 const drawerWidth = 184;
@@ -161,7 +165,7 @@ const Drawer: React.FC<DrawerProps> = ({
                     justifyContent: 'center',
                   }}
                 >
-                  <img src={item.icon} />
+                  <img className={classes.icon} src={item.icon} />
                 </ListItemIcon>
                 <ListItemText className={classes.itemText} primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

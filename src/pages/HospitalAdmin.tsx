@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { generatePath, useLocation, useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { addHospital, getHospitals } from '../actions/hospital';
-import { HospitalAddDepartmentsRoute } from '../navigation/navTypes';
+import { addHospital, getHospitalsAndDepartments } from '../actions/hospital';
+import { HospitalAddDepartmentsRoute, HospitalsRoute } from '../navigation/navTypes';
 import { getHospitalsArray } from '../selectors/hospital';
 import { getHospitalsIsFetching } from '../selectors/network';
 import type { AppState } from '../store';
 import HospitalAdminUi from '../ui/HospitalAdminUi';
+import { checkExistenceHospitalsAndDepartments, checkHospitalsLimit, isUrlFromAuth } from '../utils/loginRedirectFlow';
 import { maxLength, minLength } from '../utils/strings';
 
 const HospitalAdmin: React.FC<ReduxProps> = ({
@@ -22,8 +23,37 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
   const [hospitalName, setHospitalName] = React.useState<string>('');
   const [hospitalNameError, setHospitalNameError] = React.useState<string>('');
   const [hospitalImageError, setHospitalImageError] = React.useState<string>('');
-  const navigate = useNavigate();
   const [image, setImage] = React.useState<File | null>(null);
+  const navigate = useNavigate();
+  let location = useLocation();
+
+  const navigateToHospitals = () => {
+    navigate(generatePath(HospitalsRoute()));
+  };
+
+  const navigateToAddDepartments = (hospitalId: string) => {
+    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: hospitalId }));
+  };
+
+  const checkHospitalsExistence = () => {
+    if (checkHospitalsLimit(hospitals.length)) {
+      navigateToHospitals();
+      return;
+    }
+
+    if (isUrlFromAuth(location.state)) {
+      const [hospitalExists, departmentExist] = checkExistenceHospitalsAndDepartments(hospitals);
+      if (hospitalExists && departmentExist) {
+        navigateToHospitals();
+        return;
+      }
+
+      if (hospitalExists && !departmentExist) {
+        navigateToAddDepartments(hospitals[0].id);
+        return;
+      }
+    }
+  };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHospitalNameError('');
@@ -52,10 +82,6 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
     return true;
   };
 
-  const navigateToAddDepartments = (hospitalId: string) => {
-    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: hospitalId }));
-  };
-
   const onSubmit = () => {
     if (validate() && image) {
       createHospital(hospitalName, image)
@@ -75,14 +101,13 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
     }
   };
 
-  // TODO: make logic if exist at least 1 hospital
-  // need to redirect or to add department(if no departments(need to make another request))
-  // or to departments list page
-  // !Need to confirm with Boris
-
   React.useEffect(() => {
     fetchHospitals();
   }, [fetchHospitals]);
+
+  if (!isFetching) {
+    checkHospitalsExistence();
+  }
 
   return <HospitalAdminUi
     hospitalCount={hospitalCount}
@@ -107,7 +132,7 @@ const getData = createSelector(
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  fetchHospitals: getHospitals,
+  fetchHospitals: getHospitalsAndDepartments,
   createHospital: addHospital,
 });
 
