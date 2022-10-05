@@ -164,7 +164,7 @@ function extractResponseData(responseData: unknown): any {
     throw e;
   }
   const apiResponse: ApiResponse = responseData as ApiResponse;
-  if (apiResponse.status !== 200 && apiResponse.status !== 201) {
+  if (apiResponse.status !== 200 && apiResponse.status !== 201 && apiResponse.status !== 204) {
     throw new ApiError(
       apiResponse.errorCode || 'UnknownError',
       apiResponse.errors?.join('') || 'Unknown error',

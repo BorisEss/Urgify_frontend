@@ -8,7 +8,7 @@ export type ApiResponse = {
 };
 
 export type Request = {
-  method: 'post' | 'get';
+  method: 'post' | 'get' | 'delete';
   path: string;
   /** body parameters */
   params?: any;

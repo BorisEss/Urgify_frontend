@@ -14,7 +14,8 @@ import Log from '../services/logger';
 import type { AppState } from '../store';
 import type { DepartmentsFieldErrosType, DepartmentsFieldsType } from '../types';
 import HospitalAddDepartmentsUi from '../ui/HospitalAddDepartmentsUi';
-import { maxLength, minLength } from '../utils/strings';
+import { checkDepartmentsLimit } from '../utils/loginRedirectFlow';
+import { checkTwoStringsWithNoCase, maxLength, minLength } from '../utils/strings';
 
 const HospitalAddDepartments: React.FC<ReduxProps> = ({
   hospitals,
@@ -89,7 +90,7 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
     if (departments.length) {
       for (const createdDepartment of departments) {
         for (const [key, newDepartmentname] of Object.entries(fields)) {
-          if (newDepartmentname === createdDepartment.name) {
+          if (checkTwoStringsWithNoCase(newDepartmentname, createdDepartment.name)) {
             // need to create array of errors, before update State
             errors[key] = 'Department with that name still exists';
           }
@@ -113,7 +114,7 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
         const departmentKeyNext = departmentKeys[j];
         const departmentNameNext = fields[departmentKeyNext];
         if ((departmentKeyCurrent !== departmentKeyNext)
-          && (departmentNameCurrent === departmentNameNext)) {
+          && (checkTwoStringsWithNoCase(departmentNameCurrent, departmentNameNext))) {
           errors[departmentKeyCurrent] = 'The name of the department is the same as another.';
           errors[departmentKeyNext] = 'The name of the department is the same as another.';
         }
@@ -145,6 +146,10 @@ const HospitalAddDepartments: React.FC<ReduxProps> = ({
       fetchHospitals();
     }
   }, [fetchHospitals, hospitalId]);
+
+  if (currentHospital?.departments && checkDepartmentsLimit(currentHospital.departments.length)) {
+    navigateToHospitals();
+  }
   if (hospitalId && currentHospital) return (
     <HospitalAddDepartmentsUi
       onSubmit={onSubmit}

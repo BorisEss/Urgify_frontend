@@ -24,3 +24,7 @@ export function checkExistenceHospitalsAndDepartments (hospitals: HospitalsArray
 export function checkHospitalsLimit (hospitalsCount: number): boolean {
   return hospitalsCount > 19;
 }
+
+export function checkDepartmentsLimit (departmentsCount: number): boolean {
+  return departmentsCount > 19;
+}
