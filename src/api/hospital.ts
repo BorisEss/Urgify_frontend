@@ -77,6 +77,17 @@ export const addDepartment = (hospitalId: string, departmentName: string): AppAs
   ).then(decodeDepartment);
 };
 
+export const removeDepartment = (hospitalId: string, departmentId: string): AppAsyncThunk => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'departments',
+      method: 'delete',
+      path: `/hospitals/${hospitalId}/departments/${departmentId}/`,
+      isAuth: true,
+    }),
+  );
+};
+
 // decoders
 const decodeHospitalsArray = (data: any): HospitalsArray => {
   if (!data) return [];

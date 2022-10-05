@@ -3,6 +3,7 @@ import {makeStyles} from 'tss-react/mui';
 
 import type { HospitalType } from '../api/apiTypes';
 import images from '../images';
+import { checkDepartmentsLimit } from '../utils/loginRedirectFlow';
 import IconButton from './Buttons/IconButton';
 import OutlinedButton from './Buttons/OutlinedButton';
 import DepartmentName from './DepartmentName';
@@ -103,7 +104,7 @@ const HospitalToggleItem: React.FC<Props> = ({
           </div>
         </div>
       )) : null}
-      {open && <div className={classes.addDepartmentAction}>
+      {open && !checkDepartmentsLimit(hospital.departments.length) && <div className={classes.addDepartmentAction}>
         <OutlinedButton
           color="gray"
           bigger

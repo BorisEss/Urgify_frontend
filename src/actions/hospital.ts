@@ -76,6 +76,18 @@ export const addDepartments = (hospitalId: string, departmentNames: string[]): A
   return Promise.all(requests);
 };
 
+export const removeDepartment = (hospitalId: string, departmentId: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.removeDepartment(hospitalId, departmentId))
+    .then((response) => {
+      return response;
+    })
+    .catch(e => {
+      throw e.response.data;
+    });
+};
+
 // Hospitals and Depratments
 export const getHospitalsAndDepartments = (): AppAsyncThunk<HospitalsArray> => async (
   dispatch,

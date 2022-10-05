@@ -57,3 +57,7 @@ export function editNumberString(number: string): string {
 export function lowercaseFirstLetter(str: string): string {
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
+
+export function checkTwoStringsWithNoCase(str1:string, str2: string) {
+  return str1.toLowerCase() === str2.toLowerCase();
+}
