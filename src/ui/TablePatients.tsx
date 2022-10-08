@@ -46,25 +46,54 @@ const useStyles = makeStyles()({
     height: 24,
     marginRight: 8,
   },
+  total: {
+    backgroundColor: '#2B364D',
+    borderRadius: 99,
+    color: '#fff',
+    gap: 6,
+    paddingLeft: 4,
+  },
+  paid: {
+    backgroundColor: '#2FC77B',
+    borderRadius: 99,
+    color: '#fff',
+    gap: 6,
+    paddingLeft: 4,
+  },
+  remain: {
+    backgroundColor: '#F93822',
+    borderRadius: 99,
+    color: '#fff',
+    gap: 6,
+    paddingLeft: 4,
+  },
+  coloured: {
+    display: 'flex',
+    paddingLeft: 4,
+    paddingRight: 11,
+  },
 });
 
 function createData(
-  name: string,
-  email: string,
-  phone: string,
-  birthDate: string,
+  medicalNumber: string,
   ssn: string,
+  name: string,
+  total: string,
+  paid: string,
+  remain: string,
 ) {
-  return { name, email, phone, birthDate, ssn };
+  return { medicalNumber, ssn, name, total, paid, remain};
 }
 
 const rows = [
-  createData('Bastian Schweinsteiger', 'sample@mail.com', '(201) 555-0124', '9/23/2016', '999-88-7777'),
-  createData('Courtney Henry', 'binhan628@gmail.com', '(209) 555-0104', '8/2/2019', '111-22-3333'),
+  createData('SD9212969', '999-88-7777', 'Bastian Schweinsteiger', '$567,890', '$247,890','$320,000'),
+  createData('SD9212969', '010-14-1234', 'Annette Black', '$1,574.09', '$943.65','$630.44'),
+  createData('SD9212969', '010-87-6541', 'Savannah Nguyen', '$778.35', '$778.35','Unpaid'),
+  createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', '$475.22', '$475.22','Paid'),
 ];
 
 const TablePatients = () => {
-  const {classes} = useStyles();
+  const {classes,cx} = useStyles();
   const [open, setOpen] = React.useState(false);
 
 
@@ -82,11 +111,12 @@ const TablePatients = () => {
         <MaterialTable sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className={classes.th}>Name</TableCell>
-              <TableCell align="left" className={classes.th}>Email</TableCell>
-              <TableCell align="left" className={classes.th}>Birth Date</TableCell>
+              <TableCell className={classes.th}>Medical Record Number</TableCell>
               <TableCell align="left" className={classes.th}>SSN</TableCell>
-              <TableCell align="left" className={classes.th}>Phone</TableCell>
+              <TableCell align="left" className={classes.th}>Name</TableCell>
+              <TableCell align="left" className={classes.th}>Total</TableCell>
+              <TableCell align="left" className={classes.th}>Paid</TableCell>
+              <TableCell align="left" className={classes.th}>Remain</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -100,17 +130,7 @@ const TablePatients = () => {
                 <TableCell className={classes.td}>
                   <span className={classes.tdTitle}>
                   <img className={classes.icon} src={images.show}/>
-                  {row.name}
-                  </span>
-                </TableCell>
-                <TableCell align="left" className={classes.td}>
-                  <span className={classes.tdTitle}>
-                    {row.email}
-                  </span>
-                </TableCell>
-                <TableCell align="left" className={classes.td}>
-                  <span className={classes.tdTitle}>
-                    {row.birthDate}
+                  {row.medicalNumber}
                   </span>
                 </TableCell>
                 <TableCell align="left" className={classes.td}>
@@ -120,7 +140,24 @@ const TablePatients = () => {
                 </TableCell>
                 <TableCell align="left" className={classes.td}>
                   <span className={classes.tdTitle}>
-                    {row.phone}
+                    {row.name}
+                  </span>
+                </TableCell>
+                <TableCell align="left" className={cx(classes.td,classes.coloured)}>
+                  <span className={cx(classes.tdTitle, classes.total)}>
+                    <img src={images.dollarSign} />
+                    {row.total}
+                  </span>
+                </TableCell>
+                <TableCell align="left" className={classes.td}>
+                  <span className={cx(classes.tdTitle,classes.paid)}>
+                    <img src={images.dollarSign} />
+                    {row.paid}
+                  </span>
+                </TableCell>
+                <TableCell align="left" className={classes.td}>
+                  <span className={cx(classes.tdTitle,classes.remain)}>
+                    {row.remain}
                   </span>
                 </TableCell>
               </TableRow>
