@@ -33,7 +33,7 @@ export type SignUpUiFields = {
   firstName: string;
   lastName: string;
 };
-export type EmployeeDepartmentUiFields = {
+export type AddDepartmentEmployeeUiFields = {
   email: string;
   phone: string;
   firstName: string;
@@ -70,7 +70,7 @@ export type NewPatientFormErrors = Record<string, string>;
 
 export type SignUpUiErrors = Record<string, string>;
 
-export type EmployeeDepartmentUiErrors = Record<string, string>;
+export type AddDepartmentEmployeeUiErrors = Record<string, string>;
 
 export type DepartmentsFieldsType = Record<string, string>;
 

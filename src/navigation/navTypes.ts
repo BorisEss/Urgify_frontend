@@ -15,7 +15,7 @@ export enum navTypes {
   HospitalAdmin = '/hospitals/add',
   HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
   Hospitals = '/hospitals/',
-  EmployeeDepartment = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
+  AddDepartmentEmployee = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
   EmployeeList = '/hospitals/:hospitalId/departments/:departmentId/employees',
   AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients/import',
   AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients',
@@ -48,8 +48,8 @@ export const HospitalAddDepartmentsRoute = () => {
 export const HospitalsRoute = () => {
   return navTypes.Hospitals;
 };
-export const  EmployeeDepartmentRoute = () => {
-  return navTypes.EmployeeDepartment;
+export const  AddDepartmentEmployeeRoute = () => {
+  return navTypes.AddDepartmentEmployee;
 };
 export const  EmployeeListRoute = () => {
   return navTypes.EmployeeList;

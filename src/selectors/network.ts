@@ -32,3 +32,14 @@ export const getHospitalsOrDepartmentsIsFetching = createSelector([getHospitalsI
   (hospitalsIsFetching, departmentsIsFetching) => {
   return hospitalsIsFetching || departmentsIsFetching;
 });
+
+export const getEmployeesIsFetching = createSelector([getNetworkState], (state) => {
+  const byKey = state.activeRequestsByKey;
+  if (!byKey) return false;
+  return !!byKey.employee;
+});
+
+export const getHospitalsOrDepartmentsOrEmployeeIsFetching = createSelector([getHospitalsOrDepartmentsIsFetching, getEmployeesIsFetching],
+  (hospitalsAndDepIsFetching, employeesIsFetching) => {
+  return hospitalsAndDepIsFetching || employeesIsFetching;
+});

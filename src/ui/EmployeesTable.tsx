@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import type { EmployeesArray } from '../api/apiTypes';
 import type { EmployeeAttributeItem } from '../types';
 import AttributionDropdown from './AttributionDropdown';
 
@@ -56,7 +57,13 @@ const rows = [
   createData('Nataly Forested', 'nataly.ped@hospital.com', '(201) 555-0124', 'Pending', undefined),
 ];
 
-const Table = () => {
+type Props = {
+  employees: EmployeesArray;
+};
+
+const EmployeesTable: React.FC<Props> = ({
+  // employees,
+}) => {
   const {classes, cx} = useStyles();
   const [attributes, setAttributes] = React.useState<EmployeeAttributeItem[]>([
     {
@@ -130,4 +137,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default EmployeesTable;

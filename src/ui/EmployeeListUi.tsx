@@ -1,11 +1,12 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import type { EmployeesArray } from '../api/apiTypes';
 import BackButton from './Buttons/BackButton';
 import Button from './Buttons/Button';
 import OutlinedButton from './Buttons/OutlinedButton';
+import EmployeesTable from './EmployeesTable';
 import HospitalHeader from './HospitalHeader';
-import Table from './Table';
 
 const useStyles = makeStyles()({
   content: {
@@ -38,15 +39,29 @@ const useStyles = makeStyles()({
   },
 });
 
-const EmployeeListUi = () => {
+type Props = {
+  isFetching: boolean;
+  hospitalName: string;
+  departmentName: string;
+  employees: EmployeesArray;
+  navigateToAddEmployee: () => void;
+}
+
+const EmployeeListUi: React.FC<Props> = ({
+  // isFetching,
+  hospitalName,
+  departmentName,
+  employees,
+  navigateToAddEmployee,
+}) => {
   const {classes} = useStyles();
 
   return (
     <div>
-      <HospitalHeader title="Hospital Pediatric WA" />
+      <HospitalHeader title={hospitalName} />
       <div className={classes.content}>
         <div className={classes.buttonsWrap}>
-          <BackButton title="Admitting" />
+          <BackButton title={departmentName} />
           <OutlinedButton
             title="Manage department"
             color="gray"
@@ -56,11 +71,14 @@ const EmployeeListUi = () => {
             />
         </div>
         <div className={classes.divider} />
-        <Table />
+        <EmployeesTable
+          employees={employees}
+        />
         <div className={classes.buttonWrap}>
           <Button
             title="Add employee"
             w100
+            onClick={navigateToAddEmployee}
           />
         </div>
       </div>

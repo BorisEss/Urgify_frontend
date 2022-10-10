@@ -52,16 +52,10 @@ const useStyles = makeStyles()({
     color: '#fff',
     gap: 6,
     paddingLeft: 4,
+    paddingRight: 4,
   },
   paid: {
     backgroundColor: '#2FC77B',
-    borderRadius: 99,
-    color: '#fff',
-    gap: 6,
-    paddingLeft: 4,
-  },
-  remain: {
-    backgroundColor: '#F93822',
     borderRadius: 99,
     color: '#fff',
     gap: 6,
@@ -79,17 +73,16 @@ function createData(
   ssn: string,
   name: string,
   total: string,
-  paid: string,
-  remain: string,
+  paidRemain: string,
 ) {
-  return { medicalNumber, ssn, name, total, paid, remain};
+  return { medicalNumber, ssn, name, total, paidRemain};
 }
 
 const rows = [
-  createData('SD9212969', '999-88-7777', 'Bastian Schweinsteiger', '$567,890', '$247,890','$320,000'),
-  createData('SD9212969', '010-14-1234', 'Annette Black', '$1,574.09', '$943.65','$630.44'),
-  createData('SD9212969', '010-87-6541', 'Savannah Nguyen', '$778.35', '$778.35','Unpaid'),
-  createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', '$475.22', '$475.22','Paid'),
+  createData('SD9212969', '999-88-7777', 'Bastian Schweinsteiger', '$567,890', '$247,890 $320,000'),
+  createData('SD9212969', '010-14-1234', 'Annette Black', '$1,574.09', '$943.65 $630.44'),
+  createData('SD9212969', '010-87-6541', 'Savannah Nguyen', '$778.35', '$778.35 Unpaid'),
+  createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', '$475.22', '$475.22 Paid'),
 ];
 
 const TablePatients = () => {
@@ -115,8 +108,7 @@ const TablePatients = () => {
               <TableCell align="left" className={classes.th}>SSN</TableCell>
               <TableCell align="left" className={classes.th}>Name</TableCell>
               <TableCell align="left" className={classes.th}>Total</TableCell>
-              <TableCell align="left" className={classes.th}>Paid</TableCell>
-              <TableCell align="left" className={classes.th}>Remain</TableCell>
+              <TableCell align="left" className={classes.th}>Paid Remain</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -152,12 +144,7 @@ const TablePatients = () => {
                 <TableCell align="left" className={classes.td}>
                   <span className={cx(classes.tdTitle,classes.paid)}>
                     <img src={images.dollarSign} />
-                    {row.paid}
-                  </span>
-                </TableCell>
-                <TableCell align="left" className={classes.td}>
-                  <span className={cx(classes.tdTitle,classes.remain)}>
-                    {row.remain}
+                    {row.paidRemain}
                   </span>
                 </TableCell>
               </TableRow>
