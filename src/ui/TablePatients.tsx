@@ -11,7 +11,6 @@ import images from '../images';
 import Modal from '../ui/Modal';
 import PatientInformationModal from './PatientInformationModal';
 
-
 const useStyles = makeStyles()({
   tr: {
     cursor: 'pointer',
@@ -50,21 +49,53 @@ const useStyles = makeStyles()({
     backgroundColor: '#2B364D',
     borderRadius: 99,
     color: '#fff',
-    gap: 6,
     paddingLeft: 4,
     paddingRight: 4,
+    width: '100%',
   },
-  paid: {
+  doubleWrap: {
+    position: 'relative',
+  },
+  colouredBlocks: {
+    width: '100%',
+    height: 24,
+    position: 'absolute',
+    zIndex: -1,
+  },
+  colouredGreen: {
+    width: '40%',
     backgroundColor: '#2FC77B',
-    borderRadius: 99,
-    color: '#fff',
-    gap: 6,
+    height: '100%',
+    display: 'inline-block',
+    borderRadius: '99px 0 0 99px',
+  },
+  colouredRed: {
+    width: '60%',
+    backgroundColor: '#F93822',
+    height: '100%',
+    display: 'inline-block',
+    borderRadius: '0 99px 99px 0',
+  },
+  textsBlock: {
+    display: 'flex',
+    justifyContent: 'space-between',
     paddingLeft: 4,
+    paddingRight: 12,
+    gap: 8,
   },
   coloured: {
     display: 'flex',
     paddingLeft: 4,
     paddingRight: 11,
+  },
+  priceText: {
+    color: '#fff',
+  },
+  remainItem: {
+    paddingLeft: 65,
+  },
+  iconDollar: {
+    marginRight: 6,
   },
 });
 
@@ -73,16 +104,17 @@ function createData(
   ssn: string,
   name: string,
   total: string,
-  paidRemain: string,
+  paid: string,
+  remain: string,
 ) {
-  return { medicalNumber, ssn, name, total, paidRemain};
+  return { medicalNumber, ssn, name, total, paid, remain};
 }
 
 const rows = [
-  createData('SD9212969', '999-88-7777', 'Bastian Schweinsteiger', '$567,890', '$247,890 $320,000'),
-  createData('SD9212969', '010-14-1234', 'Annette Black', '$1,574.09', '$943.65 $630.44'),
-  createData('SD9212969', '010-87-6541', 'Savannah Nguyen', '$778.35', '$778.35 Unpaid'),
-  createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', '$475.22', '$475.22 Paid'),
+  createData('SD9212969', '999-88-7777', 'Bastian Schweinsteiger', '$567,890', '$247,890', '$320,000'),
+  createData('SD9212969', '010-14-1234', 'Annette Black', '$1,574.09', '$943.65', '$630.44'),
+  createData('SD9212969', '010-87-6541', 'Savannah Nguyen', '$778.35', '$778.35', 'Unpaid'),
+  createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', '$475.22', '$475.22', 'Paid'),
 ];
 
 const TablePatients = () => {
@@ -108,7 +140,12 @@ const TablePatients = () => {
               <TableCell align="left" className={classes.th}>SSN</TableCell>
               <TableCell align="left" className={classes.th}>Name</TableCell>
               <TableCell align="left" className={classes.th}>Total</TableCell>
-              <TableCell align="left" className={classes.th}>Paid Remain</TableCell>
+              <TableCell
+                align="left"
+                className={cx(classes.th,)}>
+                <span>Paid</span>
+                <span className={classes.remainItem}>Remain</span>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -137,15 +174,28 @@ const TablePatients = () => {
                 </TableCell>
                 <TableCell align="left" className={cx(classes.td,classes.coloured)}>
                   <span className={cx(classes.tdTitle, classes.total)}>
-                    <img src={images.dollarSign} />
+                    <img className={classes.iconDollar} src={images.dollarSign} />
                     {row.total}
                   </span>
                 </TableCell>
-                <TableCell align="left" className={classes.td}>
-                  <span className={cx(classes.tdTitle,classes.paid)}>
-                    <img src={images.dollarSign} />
-                    {row.paidRemain}
-                  </span>
+                <TableCell width={216} align="left" className={classes.td}>
+                  <div className={classes.doubleWrap}>
+                    <div className={classes.colouredBlocks}>
+                      <div className={classes.colouredGreen}>
+                      </div>
+                      <div className={classes.colouredRed}>
+                      </div>
+                    </div>
+                    <div className={classes.textsBlock}>
+                      <span className={cx(classes.tdTitle, classes.priceText)}>
+                        <img className={classes.iconDollar} src={images.dollarSign} />
+                        {row.paid}
+                      </span>
+                      <span className={cx(classes.tdTitle, classes.priceText)}>
+                        {row.remain}
+                      </span>
+                    </div>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

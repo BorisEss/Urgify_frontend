@@ -3,7 +3,6 @@ import {makeStyles} from 'tss-react/mui';
 
 import Button from './Buttons/Button';
 import CloseButton from './Buttons/CloseButton';
-import SocialCard from './SocialCard';
 import TablePacientsInformationModal from './TablePacientsInformationModal';
 
 const useStyles = makeStyles()((_theme) => ({
@@ -17,7 +16,23 @@ const useStyles = makeStyles()((_theme) => ({
   },
   personInfo: {
     display: 'flex',
+    justifyContent:'space-between',
+    width:'80%',
+  },
+  personID: {
+    display: 'flex',
     flexDirection: 'column',
+  },
+  medicalNumber: {
+    fontFamily: 'Poppins-semibold',
+    fontWeight: 600,
+    fontSize: 32,
+    lineHeight: '48px',
+    color: ' #FFFFFF',
+    backgroundColor: '#0D99FF',
+    borderRadius: 12,
+    padding:'20px 16px',
+    textAlign: 'center',
   },
   title: {
     fontFamily: 'Poppins-semibold',
@@ -40,8 +55,10 @@ const useStyles = makeStyles()((_theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  info: {
-
+  addressSocialWrap: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '121%',
   },
   infoItem: {
     paddingBottom: 32,
@@ -90,19 +107,30 @@ const PatientInformationModal: React.FC<PatientInformationModalType> = ({handleC
     <div className={classes.main}>
       <div className={classes.header}>
         <div className={classes.personInfo}>
-          <h2 className={classes.title}>Courtney Henry</h2>
-          <span className={classes.email}>binhan628@gmail.com</span>
+          <div className={classes.personID}>
+            <h2 className={classes.title}>Courtney Henry</h2>
+            <span className={classes.email}>binhan628@gmail.com</span>
+          </div>
+          <div className={classes.medicalNumber}>
+            <span>SD9212969</span>
+          </div>
         </div>
         <div className={classes.buttonWrap}>
           <CloseButton handleClose={handleClose} />
         </div>
       </div>
       <div className={classes.infoWrap}>
-        <div className={classes.info}>
+        <div>
+          <div className={classes.addressSocialWrap}>
             <div className={classes.infoItem}>
-              <h6 className={classes.label}>address</h6>
-              <p className={classes.data}>1100 Bellevue Way NE Suite 900,<br/> Bellevue, WA 98004, United States</p>
-            </div>
+                <h6 className={classes.label}>address</h6>
+                <p className={classes.data}>1100 Bellevue Way NE Suite 900,<br/> Bellevue, WA 98004, United States</p>
+              </div>
+              <div className={classes.infoItem}>
+                <h6 className={classes.label}>social security number</h6>
+                <p className={classes.data}>010-87-6341</p>
+              </div>
+          </div>
             <div className={classes.infoItem}>
               <h6 className={classes.label}>birth date</h6>
               <p className={classes.data}>8/2/2019</p>
@@ -112,7 +140,6 @@ const PatientInformationModal: React.FC<PatientInformationModalType> = ({handleC
               <p className={classes.data}>(209) 555-0104</p>
             </div>
           </div>
-          <SocialCard />
       </div>
       <div className={classes.divider} />
       <div className={classes.tableWrap}>
