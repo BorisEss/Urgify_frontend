@@ -6,20 +6,23 @@ import { createSelector } from 'redux-views';
 import { addHospital, getHospitalsAndDepartments } from '../actions/hospital';
 import { HospitalAddDepartmentsRoute, HospitalsRoute } from '../navigation/navTypes';
 import { getHospitalsArray } from '../selectors/hospital';
-import { getHospitalsIsFetching } from '../selectors/network';
+import { getAddHospitalIsFetching, getHospitalsIsFetching } from '../selectors/network';
 import type { AppState } from '../store';
 import HospitalAdminUi from '../ui/HospitalAdminUi';
+import LoaderBox from '../ui/LoaderBox';
 import { checkExistenceHospitalsAndDepartments, checkHospitalsLimit, isUrlFromAuth } from '../utils/loginRedirectFlow';
 import { maxLength, minLength } from '../utils/strings';
 
 const HospitalAdmin: React.FC<ReduxProps> = ({
   hospitals,
-  isFetching,
+  hospitalsIsFetching,
+  addHospitalIsFetching,
   fetchHospitals,
   createHospital,
 }) => {
   const hospitalCount: number = hospitals.length;
 
+  const [isFetching, setIsFetching] = React.useState<boolean>(true);
   const [hospitalName, setHospitalName] = React.useState<string>('');
   const [hospitalNameError, setHospitalNameError] = React.useState<string>('');
   const [hospitalImageError, setHospitalImageError] = React.useState<string>('');
@@ -102,31 +105,38 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
   };
 
   React.useEffect(() => {
-    fetchHospitals();
+    fetchHospitals()
+      .finally(() => {
+        setIsFetching(false);
+      });
   }, [fetchHospitals]);
 
-  if (!isFetching) {
+  if (!hospitalsIsFetching) {
     checkHospitalsExistence();
   }
-
-  return <HospitalAdminUi
-    hospitalCount={hospitalCount}
-    isFetching={isFetching}
-    image={image}
-    setImage={onImageChange}
-    onSubmit={onSubmit}
-    onInputChange={onInputChange}
-    hospitalNameError={hospitalNameError}
-    hospitalImageError={hospitalImageError}
-  />;
+  if (hospitalsIsFetching || isFetching) return <LoaderBox />;
+  if (!hospitalsIsFetching && !isFetching) {
+    return <HospitalAdminUi
+      hospitalCount={hospitalCount}
+      isFetching={addHospitalIsFetching}
+      image={image}
+      setImage={onImageChange}
+      onSubmit={onSubmit}
+      onInputChange={onInputChange}
+      hospitalNameError={hospitalNameError}
+      hospitalImageError={hospitalImageError}
+    />;
+  }
+  return null;
 };
 
 const getData = createSelector(
-  [getHospitalsArray, getHospitalsIsFetching],
-  (hospitals, isFetching) => {
+  [getHospitalsArray, getHospitalsIsFetching, getAddHospitalIsFetching],
+  (hospitals, hospitalsIsFetching, addHospitalIsFetching) => {
     return {
       hospitals,
-      isFetching,
+      hospitalsIsFetching,
+      addHospitalIsFetching,
     };
   },
 );

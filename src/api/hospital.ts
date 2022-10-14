@@ -29,7 +29,7 @@ export const getHospitals = (): AppAsyncThunk<HospitalsArray> => (dispatch) => {
 export const addHospital = (params: AddHospitalRequest): AppAsyncThunk<HospitalType> => (dispatch) => {
   return dispatch(
     makeRequest({
-      key: 'hospitals',
+      key: 'hospital',
       method: 'post',
       path: '/hospitals/',
       isAuth: true,
