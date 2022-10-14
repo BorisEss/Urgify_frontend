@@ -15,3 +15,7 @@ export const getHospitalsArray = createSelector([getHospitalState], (hospitalSta
 export const getDepartmentsArray = createSelector([getHospitalState], (hospitalState) => {
   return hospitalState.departments;
 });
+
+export const getEmployeesArray = createSelector([getHospitalState], (hospitalState) => {
+  return hospitalState.employees;
+});

@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import * as api from '../api';
-import type { DepartmentsArray, DepartmentType, HospitalsArray, HospitalType } from '../api/apiTypes';
+import type { DepartmentEmployeeType, DepartmentsArray, DepartmentType, EmployeesArray, HospitalsArray, HospitalType } from '../api/apiTypes';
 import type { AppAsyncThunk } from './actionsTypes';
 
 export const hospitalActions = {
@@ -14,6 +14,10 @@ export const hospitalActions = {
   setDepartments: createAction('hospitalSetDepartments', (departments: DepartmentsArray) => ({
     payload: departments,
   })),
+  setEmployees: createAction('hospitalSetEmployees', (employees: EmployeesArray) => ({
+    payload: employees,
+  })),
+
 };
 
 // hospital
@@ -24,8 +28,12 @@ export const getHospital = (hospitalId: string): AppAsyncThunk<HospitalType | nu
   return dispatch(api.getHospital(hospitalId))
     .then((response) => {
       if (!response) return null;
-      dispatch(hospitalActions.setCurrentHospital(response));
-      return response;
+      return dispatch(getDepartments(hospitalId))
+        .then(departments => {
+          const hospital = { ...response, departments };
+          dispatch(hospitalActions.setCurrentHospital(hospital));
+          return hospital;
+        });
     });
 };
 
@@ -61,7 +69,6 @@ export const getDepartments = (hospitalId: string): AppAsyncThunk<DepartmentsArr
   return dispatch(api.getDepartments(hospitalId))
     .then((response) => {
       if (!response) return [];
-      dispatch(hospitalActions.setDepartments(response));
       return response;
     });
 };
@@ -106,4 +113,36 @@ export const getHospitalsAndDepartments = (): AppAsyncThunk<HospitalsArray> => a
   await Promise.all(departmentsRequests);
   dispatch(hospitalActions.setHospitals(hospitals));
   return hospitals;
+};
+
+// Employee
+export const getEmployees = (hospitalId: string, departmentId: string): AppAsyncThunk<EmployeesArray> => (
+  dispatch,
+) => {
+  return dispatch(api.getEmployees(hospitalId, departmentId))
+    .then((response) => {
+      if (!response) return [];
+      dispatch(hospitalActions.setEmployees(response));
+      return response;
+    });
+};
+
+export const addEmployee = (
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+  hospitalId: string,
+  departmentId: string,
+): AppAsyncThunk<DepartmentEmployeeType | undefined> => (
+  dispatch,
+) => {
+  return dispatch(api.addEmployee({firstName, lastName, email, phone, hospitalId, departmentId}))
+    .then((response) => {
+      if (!response.id) return;
+      return response;
+    })
+    .catch(e => {
+      throw e.response.data;
+    });
 };

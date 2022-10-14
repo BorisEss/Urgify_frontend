@@ -9,6 +9,7 @@ import circleCheck from './images/circle-check.svg';
 import closeBurger from './images/close-burger.svg';
 import closeIcon from './images/close-icon.svg';
 import cloudUp from './images/cloud-up.svg';
+import dollarSign from './images/dollar-sign.svg';
 import dueArrow from './images/due-arrow.png';
 import ellipse from './images/ellipse.svg';
 import exploreBackground from './images/explore-background.png';
@@ -74,6 +75,7 @@ const images = {
   sample,
   filePDF,
   startupSchool,
+  dollarSign,
 };
 
 export default images;

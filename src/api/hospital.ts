@@ -1,5 +1,5 @@
 import type { AppAsyncThunk } from '../actions/actionsTypes';
-import type { AddHospitalRequest, DepartmentsArray, DepartmentType, HospitalsArray, HospitalType } from './apiTypes';
+import type { AddEmployeeRequest, AddHospitalRequest, DepartmentEmployeeType, DepartmentsArray, DepartmentType, EmployeesArray, HospitalsArray, HospitalType } from './apiTypes';
 import { decodeList, decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
@@ -29,7 +29,7 @@ export const getHospitals = (): AppAsyncThunk<HospitalsArray> => (dispatch) => {
 export const addHospital = (params: AddHospitalRequest): AppAsyncThunk<HospitalType> => (dispatch) => {
   return dispatch(
     makeRequest({
-      key: 'hospitals',
+      key: 'hospital',
       method: 'post',
       path: '/hospitals/',
       isAuth: true,
@@ -88,6 +88,35 @@ export const removeDepartment = (hospitalId: string, departmentId: string): AppA
   );
 };
 
+// employee
+export const addEmployee = (params: AddEmployeeRequest): AppAsyncThunk<DepartmentEmployeeType> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'employee',
+      method: 'post',
+      path: `/hospitals/${params.hospitalId}/departments/${params.departmentId}/employee/`,
+      isAuth: true,
+      params: {
+        firstName: params.firstName,
+        lastName: params.lastName,
+        email: params.email,
+        phone: params.phone,
+      },
+    }),
+  ).then(decodeEmployee);
+};
+
+export const getEmployees = (hospitalId: string, departmentId: string): AppAsyncThunk<EmployeesArray> => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'employee',
+      method: 'get',
+      path: `/hospitals/${hospitalId}/departments/${departmentId}/employee/`,
+      isAuth: true,
+    }),
+  ).then(decodeEmployeesArray);
+};
+
 // decoders
 const decodeHospitalsArray = (data: any): HospitalsArray => {
   if (!data) return [];
@@ -109,4 +138,17 @@ const decodeDepartmentsArray = (data: any): DepartmentsArray => {
 const decodeDepartment = (data: any): DepartmentType => ({
   name: decodeString(data.name),
   id: decodeString(data.slug),
+});
+
+const decodeEmployeesArray = (data: any): EmployeesArray => {
+  if (!data) return [];
+  return decodeList(data, decodeEmployee);
+};
+
+const decodeEmployee = (data: any): DepartmentEmployeeType => ({
+  id: decodeString(data.slug),
+  firstName: decodeString(data.firstName),
+  lastName: decodeString(data.lastName),
+  email: decodeString(data.email),
+  phone: decodeString(data.phone),
 });

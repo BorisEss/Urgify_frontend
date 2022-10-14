@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import type { EmployeeDepartmentUiErrors, EmployeeDepartmentUiFields } from '../types';
+import type { AddDepartmentEmployeeUiErrors, AddDepartmentEmployeeUiFields } from '../types';
 import AuthPageTitle from './AuthPageTitle';
 import BackButton from './Buttons/BackButton';
 import Button from './Buttons/Button';
@@ -53,29 +53,35 @@ const useStyles = makeStyles()({
   },
 });
 
-type EmployeeDepartmentUiType = {
-  errors: EmployeeDepartmentUiErrors;
+type AddDepartmentEmployeeUiType = {
+  errors: AddDepartmentEmployeeUiErrors;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPhoneNumberChange: (value: string) => void;
-  itemFields: EmployeeDepartmentUiFields;
+  itemFields: AddDepartmentEmployeeUiFields;
   validateField: (field: string) => void;
   onSubmit: () => void;
+  isFetching: boolean;
+  hospitalName: string;
+  departmentName: string;
 };
 
-const EmployeeDepartmentUi: React.FC<EmployeeDepartmentUiType> = ({
+const AddDepartmentEmployeeUi: React.FC<AddDepartmentEmployeeUiType> = ({
   onInputChange,
   onPhoneNumberChange,
   onSubmit,
   errors,
   itemFields,
+  // isFetching,
+  hospitalName,
+  departmentName,
 }) => {
   const {classes, cx} = useStyles();
 
   return (
     <div>
-      <HospitalHeader title="Hospital Pediatric WA" />
+      <HospitalHeader title={hospitalName} />
       <div className={classes.content}>
-        <BackButton title="Admitting" />
+        <BackButton title={departmentName} />
         <div className={classes.divider} />
         <div className={classes.formWrap}>
           <div className={classes.titleSpacing}>
@@ -96,17 +102,19 @@ const EmployeeDepartmentUi: React.FC<EmployeeDepartmentUiType> = ({
                   error={!!errors.firstName}
                   type="string"
                   name="firstName"
+                  value={itemFields.firstName}
                   onChange={onInputChange}
-                  />
+                />
               </div>
               <div className={classes.halfInput}>
                 <Input
                   label="Last Name"
                   type="string"
                   name="lastName"
+                  value={itemFields.lastName}
                   error={!!errors.lastName}
                   onChange={onInputChange}
-                  />
+                />
               </div>
             </div>
             <div className={classes.inputSpacing}>
@@ -114,9 +122,10 @@ const EmployeeDepartmentUi: React.FC<EmployeeDepartmentUiType> = ({
                 label="Email"
                 type="email"
                 name="email"
+                value={itemFields.email}
                 error={!!errors.email}
                 onChange={onInputChange}
-                />
+              />
             </div>
             <div className={classes.inputSpacing}>
               <PhoneInput
@@ -141,4 +150,4 @@ const EmployeeDepartmentUi: React.FC<EmployeeDepartmentUiType> = ({
   );
 };
 
-export default  EmployeeDepartmentUi;
+export default  AddDepartmentEmployeeUi;

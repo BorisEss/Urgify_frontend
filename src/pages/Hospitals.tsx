@@ -4,7 +4,7 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { getHospitalsAndDepartments, removeDepartment } from '../actions/hospital';
-import { AddPatientsRoute, EmployeeDepartmentRoute, HospitalAddDepartmentsRoute } from '../navigation/navTypes';
+import { AddDepartmentEmployeeRoute, AddPatientsRoute, HospitalAddDepartmentsRoute } from '../navigation/navTypes';
 import { getHospitalsArray } from '../selectors/hospital';
 import { getHospitalsOrDepartmentsIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -34,7 +34,7 @@ const Hospitals:React.FC<ReduxProps> = ({
   };
 
   const redirectToAddEmployee = (hospitalId: string, departmentId: string) => {
-    navigate(generatePath(EmployeeDepartmentRoute(), { hospitalId, departmentId }));
+    navigate(generatePath(AddDepartmentEmployeeRoute(), { hospitalId, departmentId }));
   };
 
   const redirectToAddPatients = (hospitalId: string, departmentId: string) => {

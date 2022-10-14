@@ -1,12 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 import { hospitalActions } from '../actions/hospital';
-import type { DepartmentsArray, HospitalsArray, HospitalType } from '../api/apiTypes';
+import type { DepartmentsArray, EmployeesArray, HospitalsArray, HospitalType } from '../api/apiTypes';
 
 export interface HospitalState {
   currentHospital: HospitalType | null;
   hospitals: HospitalsArray;
   departments: DepartmentsArray;
+  employees: EmployeesArray;
 }
 
 export default createReducer(createInitialState(), (builder) => {
@@ -19,6 +20,9 @@ export default createReducer(createInitialState(), (builder) => {
   builder.addCase(hospitalActions.setDepartments, (state, action) => {
     state.departments = action.payload;
   });
+  builder.addCase(hospitalActions.setEmployees, (state, action) => {
+    state.employees = action.payload;
+  });
 });
 
 function createInitialState(): HospitalState {
@@ -26,5 +30,6 @@ function createInitialState(): HospitalState {
     currentHospital: null,
     hospitals: [],
     departments: [],
+    employees: [],
   };
 }
