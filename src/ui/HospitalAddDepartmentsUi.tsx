@@ -10,9 +10,9 @@ import { checkHospitalsLimit } from '../utils/loginRedirectFlow';
 import AuthPageTitle from './AuthPageTitle';
 import Button from './Buttons/Button';
 import OutlinedButton from './Buttons/OutlinedButton';
-import DepartmentName from './DepartmentName';
 import Dropzone from './Dropzone';
 import HospitalHeader from './HospitalHeader';
+import HospitalName from './HospitalName';
 import Input from './Inputs/Input';
 import PageName from './PageName';
 
@@ -114,7 +114,7 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({
           <PageName title="Your hospitals" />
         </div>
         <div className={classes.departmentsNameSpace}>
-          <DepartmentName title={hospital.name} />
+          <HospitalName title={hospital.name} />
         </div>
         <div className={classes.divider} />
         {hospital.logo ? <Dropzone uploadedImage={hospital.logo} disableRemove /> : null}

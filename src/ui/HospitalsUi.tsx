@@ -28,6 +28,7 @@ type Props = {
   redirectToAddEmployee: (hospitalId: string, departmentId: string) => void;
   redirectToAddPatients: (hospitalId: string, departmentId: string) => void;
   isFetching: boolean;
+  onHospitalRemove: (hospitalId: string) => void;
 }
 
 const HospitalsUi: React.FC<Props> = ({
@@ -36,6 +37,7 @@ const HospitalsUi: React.FC<Props> = ({
   onDepartmentRemove,
   redirectToAddEmployee,
   redirectToAddPatients,
+  onHospitalRemove,
   // isFetching,
 }) => {
   const {classes} = useStyles();
@@ -65,6 +67,7 @@ const HospitalsUi: React.FC<Props> = ({
             onDepartmentRemove={onDepartmentRemove}
             redirectToAddEmployee={redirectToAddEmployee}
             redirectToAddPatients={redirectToAddPatients}
+            onHospitalRemove={onHospitalRemove}
           />
         )) : null}
       </div>

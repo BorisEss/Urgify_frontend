@@ -50,6 +50,18 @@ export const addHospital = (params: AddHospitalRequest): AppAsyncThunk<HospitalT
   ).then(decodeHospital);
 };
 
+
+export const removeHospital = (hospitalId: string): AppAsyncThunk => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'hospital',
+      method: 'delete',
+      path: `/hospitals/${hospitalId}/`,
+      isAuth: true,
+    }),
+  );
+};
+
 // department
 
 export const getDepartments = (hospitalId: string): AppAsyncThunk<DepartmentsArray> => (dispatch) => {

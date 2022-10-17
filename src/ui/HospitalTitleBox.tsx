@@ -27,8 +27,8 @@ const useStyles = makeStyles()({
 
 type Props = {
   title: string;
-  btnTitle: string;
-  onClick: () => void;
+  btnTitle?: string;
+  onClick?: () => void;
 };
 
 const HospitalTitleBox: React.FC<Props> = ({
@@ -41,14 +41,16 @@ const HospitalTitleBox: React.FC<Props> = ({
   return (
     <div className={classes.departmentName}>
       <h2 className={classes.title}>{title}</h2>
-      <OutlinedButton
-        onClick={onClick}
-        type="button"
-        title={btnTitle}
-        color="orange"
-        lowerCase
-        extraClass={classes.button}
-      />
+      {btnTitle && onClick && (
+        <OutlinedButton
+          onClick={onClick}
+          type="button"
+          title={btnTitle}
+          color="orange"
+          lowerCase
+          extraClass={classes.button}
+        />
+      )}
     </div>
   );
 };
