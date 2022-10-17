@@ -106,13 +106,13 @@ export const addEmployee = (params: AddEmployeeRequest): AppAsyncThunk<Departmen
     makeRequest({
       key: 'employee',
       method: 'post',
-      path: `/hospitals/${params.hospitalId}/departments/${params.departmentId}/employee/`,
+      path: `/accounts/invite-member/${params.hospitalId}/${params.departmentId}/`,
       isAuth: true,
       params: {
-        firstName: params.firstName,
-        lastName: params.lastName,
+        first_name: params.firstName,
+        last_name: params.lastName,
         email: params.email,
-        phone: params.phone,
+        phone: params.phone ? params.phone : undefined,
       },
     }),
   ).then(decodeEmployee);

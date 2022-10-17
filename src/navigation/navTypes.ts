@@ -12,6 +12,7 @@ export enum navTypes {
   SignIn = '/sign-in',
   ForgotPassword = '/forgot-password',
   ForgotNewPassword = '/password-reset/:uid/:token',
+  AcceptInvite = '/accept-invite/:hash',
   HospitalAdmin = '/hospitals/add',
   HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
   Hospitals = '/hospitals/',
@@ -38,6 +39,9 @@ export const ForgotPasswordRoute = () => {
 };
 export const ForgotNewPasswordRoute = () => {
   return navTypes.ForgotNewPassword;
+};
+export const AcceptInviteRoute = () => {
+  return navTypes.AcceptInvite;
 };
 export const HospitalAdminRoute = () => {
   return navTypes.HospitalAdmin;

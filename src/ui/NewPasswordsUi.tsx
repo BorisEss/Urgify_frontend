@@ -2,7 +2,7 @@ import type {Theme} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import type { ForgotNewPasswordUiErrors } from '../types';
+import type { NewPasswordsErrors } from '../types';
 import type { PasswordSecureFields} from '../types';
 import AuthPageTitle from './AuthPageTitle';
 import AuthPageWrapper from './AuthPageWrapper';
@@ -105,15 +105,15 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-type ForgotNewPasswordType = {
-  errors: ForgotNewPasswordUiErrors;
+type NewPasswordsUiType = {
+  errors: NewPasswordsErrors;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateField: (field: string) => void;
   onSubmit: () => void;
   passwordSecure: PasswordSecureFields;
 };
 
-const ForgotNewPasswordUi : React.FC<ForgotNewPasswordType> = ({
+const NewPasswordsUi : React.FC<NewPasswordsUiType> = ({
   errors,
   onInputChange,
   validateField,
@@ -203,4 +203,4 @@ const ForgotNewPasswordUi : React.FC<ForgotNewPasswordType> = ({
   );
 };
 
-export default ForgotNewPasswordUi;
+export default NewPasswordsUi;

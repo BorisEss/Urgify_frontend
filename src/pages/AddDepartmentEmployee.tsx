@@ -50,8 +50,7 @@ const AddDepartmentEmployee: React.FC<ReduxProps> = ({
       case 'firstName':
       case 'lastName':
       case 'email':
-      case 'phone':
-        updateErrors(field, !itemFields[field] ? 'Required field' + '! ' : '');
+        updateErrors(field, !itemFields[field] ? 'Required field! ' : '');
         break;
     }
   };
@@ -60,9 +59,8 @@ const AddDepartmentEmployee: React.FC<ReduxProps> = ({
     switch (field) {
       case 'firstName':
       case 'lastName':
-      case 'email':
-      case 'phone': {
-        updateErrors(field, !value ? 'Required field' + '! ' : '');
+      case 'email': {
+        updateErrors(field, !value ? 'Required field! ' : '');
         break;
       }
     }
@@ -82,11 +80,10 @@ const AddDepartmentEmployee: React.FC<ReduxProps> = ({
   const onSubmit = () => {
     const form: formObj[] = [
       {valueType: 'email', value: itemFields.email},
-      {valueType: 'phone', value: itemFields.phone},
       {valueType: 'firstName', value: itemFields.firstName},
       {valueType: 'lastName', value: itemFields.lastName},
     ];
-
+    // phone not required
     const errorMessages: {field: string, message: string}[] = validate(form);
     if (!hospitalId || !departmentId || errorMessages.length) {
       const newErrors: AddDepartmentEmployeeUiErrors = {...initialErrors};

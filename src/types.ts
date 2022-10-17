@@ -51,14 +51,14 @@ export type PasswordSecureFields = {
 export type ForgotPasswordUiFields = {
   email: string;
 };
-export type ForgotNewPasswordUiFields = {
+export type NewPasswordsFields = {
   password: string;
   repeatPassword: string;
 };
 
 export type ForgotPasswordUiErrors = Record<string, string>;
 
-export type ForgotNewPasswordUiErrors = Record<string, string>;
+export type NewPasswordsErrors = Record<string, string>;
 
 export type SignInUiErrors = Record<string, string>;
 
