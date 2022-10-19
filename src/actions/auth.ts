@@ -90,10 +90,10 @@ export const forgotSendPasswords = (new_password1: string, new_password2: string
     });
 };
 
-export const acceptInvite = (new_password1: string, new_password2: string, hash: string): AppAsyncThunk => (
+export const acceptInvite = (password: string, hash: string): AppAsyncThunk => (
   dispatch,
 ) => {
-  return dispatch(api.acceptInvite({ new_password1, new_password2, hash }))
+  return dispatch(api.acceptInvite({ password, hash }))
     .catch((e) => {
       dispatch(authActions.setErrors(['You have entered invalid password']));
       throw e.response.data;

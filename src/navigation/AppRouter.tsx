@@ -5,7 +5,7 @@ import { createSelector } from 'redux-views';
 
 import { isAuthenticated } from '../selectors/auth';
 import type { AppState } from '../store';
-import AppRoutes from './AppRoutesType';
+import AppRoutes from './AppRoutes';
 
 class AppRouter extends React.Component<ReduxProps> {
   render() {

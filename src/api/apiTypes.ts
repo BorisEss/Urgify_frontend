@@ -70,8 +70,7 @@ export type ForgotSendPasswordsRequest = {
 };
 
 export type AcceptInviteRequest = {
-  new_password1: string;
-  new_password2: string;
+  password: string;
   hash: string;
 };
 

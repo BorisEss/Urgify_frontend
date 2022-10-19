@@ -87,12 +87,9 @@ export const acceptInvite = (
     makeRequest({
       key: 'auth',
       method: 'post',
-      path: `/accounts/accept-invite/${params.hash}`,
+      path: '/accounts/accept-invite/',
       isAuth: true,
-      params: {
-        new_password1: params.new_password1,
-        new_password2: params.new_password2,
-      },
+      params,
     }),
   );
 };

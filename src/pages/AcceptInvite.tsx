@@ -16,9 +16,9 @@ const AcceptInvite: React.FC<ReduxProps> = ({
   const navigate = useNavigate();
   let { hash } = useParams();
 
-  const onSubmit = (password:string, repeatPassword:string): Promise<any> => {
+  const onSubmit = (password:string, _repeatPassword:string): Promise<any> => {
     if (hash) {
-      return acceptInviteSendPassword(password, repeatPassword, hash)
+      return acceptInviteSendPassword(password, hash)
         .then(() => {
           navigate(SignInRoute());
           return;
