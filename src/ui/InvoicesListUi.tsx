@@ -68,7 +68,7 @@ const useStyles = makeStyles()({
   },
   hideButtonBox: {
     paddingBottom: 32,
-    paddingLeft: 21,
+    marginLeft: 21,
     width: 176,
   },
   hideBtn: {
@@ -147,7 +147,6 @@ const InvoicesListUi = () => {
                 <div className={classes.hideButtonBox}>
                   <Button
                     title="Hide paid invoices"
-                    disabled
                     extraClass={classes.hideBtn}
                   />
                 </div>

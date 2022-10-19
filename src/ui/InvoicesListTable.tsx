@@ -8,8 +8,11 @@ import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
+import {ReactComponent as ArrowIcon} from '../images/arrow-up.svg';
 import Modal from '../ui/Modal';
+import TextButton from './Buttons/TextButton';
 import InvoicesInformationModal from './InvoicesInformationModal';
+
 
 const useStyles = makeStyles()({
   tr: {
@@ -39,21 +42,29 @@ const useStyles = makeStyles()({
     color: '#2B364D',
     display: 'flex',
   },
+  itemWrap: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  arrowIcon: {
+    width: 16,
+    height: 16,
+    marginLeft: 8,
+
+    '& path': {
+      fill: ' #777777',
+    },
+  },
+  paid: {
+    color: '#777777',
+  },
   remainUnpaid: {
     color: '#F93822',
-  },
-  actions: {
-    textDecoration: 'underline',
-    cursor: 'pointer',
   },
   actionsSent: {
     textDecoration: 'none',
     color: '#777777',
     fontFamily: 'Poppins-regular',
-  },
-  actionsUnpaid: {
-    color: '#F93822',
-    textDecoration: 'underline',
   },
   icon: {
     width:24,
@@ -100,10 +111,30 @@ const InvoicesListTable = () => {
           <TableHead>
             <TableRow>
               <TableCell className={classes.th}>Invoice Id</TableCell>
-              <TableCell align="left" className={classes.th}>Issued Date</TableCell>
-              <TableCell align="left" className={classes.th}>Invoice Amount</TableCell>
-              <TableCell align="left" className={classes.th}>Paid</TableCell>
-              <TableCell align="left" className={classes.th}>Remain</TableCell>
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Issued Date</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Invoice Amount</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Paid</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Remain</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
               <TableCell align="left" className={classes.th}>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -131,7 +162,7 @@ const InvoicesListTable = () => {
                   </span>
                 </TableCell>
                 <TableCell align="left" className={classes.td}>
-                  <span className={classes.tdTitle}>
+                  <span className={cx(classes.tdTitle,classes.paid)}>
                     <img className={classes.icon} src={images.error}/>
                     {row.paid}
                   </span>
@@ -143,9 +174,12 @@ const InvoicesListTable = () => {
                   </span>
                 </TableCell>
                 <TableCell align="left" className={classes.td}>
-                  <span className={cx(classes.tdTitle,classes.actions)}>
-                    {row.actions}
-                  </span>
+                  <TextButton
+                    title={row.actions}
+                    color="black"
+                    fontWeight="semibold"
+                  />
+                  {/* <span className={cx(classes.tdTitle,classes.actionsSent)}>Reminder was sent</span> */}
                 </TableCell>
               </TableRow>
             ))}
