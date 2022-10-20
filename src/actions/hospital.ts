@@ -61,6 +61,18 @@ export const addHospital = (name: string, logo: File): AppAsyncThunk<HospitalTyp
     });
 };
 
+export const removeHospital = (hospitalId: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.removeHospital(hospitalId))
+    .then((response) => {
+      return response;
+    })
+    .catch(e => {
+      throw e.response.data;
+    });
+};
+
 // department
 
 export const getDepartments = (hospitalId: string): AppAsyncThunk<DepartmentsArray> => (

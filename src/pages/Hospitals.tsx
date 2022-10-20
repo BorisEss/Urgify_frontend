@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { getHospitalsAndDepartments, removeDepartment } from '../actions/hospital';
+import { getHospitalsAndDepartments, removeDepartment, removeHospital } from '../actions/hospital';
 import { AddDepartmentEmployeeRoute, AddPatientsRoute, HospitalAddDepartmentsRoute } from '../navigation/navTypes';
 import { getHospitalsArray } from '../selectors/hospital';
 import { getHospitalsOrDepartmentsIsFetching } from '../selectors/network';
@@ -16,11 +16,22 @@ const Hospitals:React.FC<ReduxProps> = ({
   hospitals,
   fetchHospitals,
   fetchRemoveDepartment,
+  fetchRemoveHospital,
 }) => {
   const navigate = useNavigate();
 
   const navigateToAddDepartments = (hospitalId: string) => {
     navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId }));
+  };
+
+  const onHospitalRemove = (hospitalId: string) => {
+    fetchRemoveHospital(hospitalId)
+      .then(() => {
+        fetchHospitals();
+      })
+      .catch(() => {
+        Log.message('Cannot remove hospital');
+      });
   };
 
   const onDepartmentRemove = (hospitalId: string, departmentId: string) => {
@@ -55,6 +66,7 @@ const Hospitals:React.FC<ReduxProps> = ({
     redirectToAddEmployee={redirectToAddEmployee}
     redirectToAddPatients={redirectToAddPatients}
     isFetching={isFetching}
+    onHospitalRemove={onHospitalRemove}
   />;
 };
 
@@ -71,6 +83,7 @@ const getData = createSelector(
 const connector = connect((state: AppState) => getData(state), {
   fetchHospitals: getHospitalsAndDepartments,
   fetchRemoveDepartment: removeDepartment,
+  fetchRemoveHospital: removeHospital,
 });
 
 type ReduxProps = ConnectedProps<typeof connector>;

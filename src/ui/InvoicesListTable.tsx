@@ -7,9 +7,12 @@ import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import images from '../images';
+import {ReactComponent as ArrowIcon} from '../images/arrow-up.svg';
 import Modal from '../ui/Modal';
+import TextButton from './Buttons/TextButton';
 import InvoicesInformationModal from './InvoicesInformationModal';
-import InvoicesListDropdown from './InvoicesListDropdown';
+
 
 const useStyles = makeStyles()({
   tr: {
@@ -34,67 +37,58 @@ const useStyles = makeStyles()({
   },
   tdTitle: {
     fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
     fontSize: 16,
     lineHeight: '24px',
     color: '#2B364D',
     display: 'flex',
   },
-  status: {
-    padding: '3px 8px',
-    borderRadius: 2,
-    fontSize: 12,
-    lineHeight:'18px',
-    color: '#fff',
-    display: 'inline-block',
-    textAlign: 'center',
-    width: 73,
+  itemWrap: {
+    display: 'flex',
+    alignItems: 'center',
   },
-  statusPaid: {
-    background: '#2FC77B',
+  arrowIcon: {
+    width: 16,
+    height: 16,
+    marginLeft: 8,
+
+    '& path': {
+      fill: ' #777777',
+    },
   },
-  statusUnpaid: {
-    background: '#F93822',
+  paid: {
+    color: '#777777',
   },
-  statusOngoing: {
-    background: '#F1DF37',
+  remainUnpaid: {
+    color: '#F93822',
   },
-  dispute: {
-    padding: '3px 8px',
-    background: '#B8B8B8',
-    borderRadius: 2,
-    fontSize: 12,
-    lineHeight:'18px',
-    color: '#fff',
-    display: 'inline-block',
+  actionsSent: {
+    textDecoration: 'none',
+    color: '#777777',
+    fontFamily: 'Poppins-regular',
   },
-  disputeWrap: {
-    textAlign: 'end',
-  },
-  disputeOutlined: {
-    color: '#2B364D',
-    border: '2px solid #2B364D',
-    borderRadius: 2,
-    backgroundColor: 'transparent',
+  icon: {
+    width:24,
+    height:24,
+    marginRight: 8,
   },
 });
 
 function createData(
   invoiceId: string,
   issuedDate: string,
-  dueDate: string,
   invoiceAmount: string,
-  status: string,
-  dispute: string,
+  paid: string,
+  remain: string,
+  actions: string,
 ) {
-  return { invoiceId, issuedDate, dueDate, invoiceAmount, status, dispute };
+  return { invoiceId, issuedDate,  invoiceAmount, paid, remain, actions };
 }
 
 const rows = [
-  createData('#123456', '9/23/2021', '11/23/2022', '$567,890', 'Paid', 'Open dispute'),
-  createData('#ABH678', '8/2/2019', '10/2/2019', '$1,890', 'Paid', 'Open dispute'),
-  createData('#456789', '3/5/2010', '6/20/2022', '$57,344', 'Unpaid', 'Open dispute'),
-  createData('#234567', '5/19/1964', '5/19/1964', '$79', 'On going', 'Open dispute'),
+  createData('#123456', '9/23/2021','$567,890', '$247,890', '$320,000', 'Send reminder'),
+  createData('#ABH678', '8/2/2019','$1,574.09', '$943.65', '$630.44', 'Reminder was sent'),
+  createData('#456789', '3/5/2010','$778.35', 'Unpaid', '$778.35', 'Send invoice again'),
+  createData('#234567', '5/19/1964','$567.890', '$567.890', 'Paid', ''),
 ];
 
 const InvoicesListTable = () => {
@@ -117,13 +111,31 @@ const InvoicesListTable = () => {
           <TableHead>
             <TableRow>
               <TableCell className={classes.th}>Invoice Id</TableCell>
-              <TableCell align="left" className={classes.th}>Issued Date</TableCell>
-              <TableCell align="left" className={classes.th}>Due Date</TableCell>
-              <TableCell align="left" className={classes.th}>Invoice Amount</TableCell>
               <TableCell align="left" className={classes.th}>
-                <InvoicesListDropdown />
+                <div className={classes.itemWrap}>
+                  <span>Issued Date</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
               </TableCell>
-              <TableCell align="left" className={classes.th} />
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Invoice Amount</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Paid</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
+              <TableCell align="left" className={classes.th}>
+                <div className={classes.itemWrap}>
+                  <span>Remain</span>
+                  <ArrowIcon className={classes.arrowIcon} />
+                </div>
+              </TableCell>
+              <TableCell align="left" className={classes.th}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -146,23 +158,28 @@ const InvoicesListTable = () => {
                 </TableCell>
                 <TableCell align="left" className={classes.td}>
                   <span className={classes.tdTitle}>
-                    {row.dueDate}
-                  </span>
-                </TableCell>
-                <TableCell align="left" className={classes.td}>
-                  <span className={classes.tdTitle}>
                     {row.invoiceAmount}
                   </span>
                 </TableCell>
                 <TableCell align="left" className={classes.td}>
-                  <span className={cx(classes.tdTitle, classes.status, classes.statusPaid)}>
-                    {row.status}
+                  <span className={cx(classes.tdTitle,classes.paid)}>
+                    <img className={classes.icon} src={images.error}/>
+                    {row.paid}
                   </span>
                 </TableCell>
-                <TableCell align="left" className={cx(classes.td,classes.disputeWrap)}>
-                  <span className={cx(classes.tdTitle, classes.dispute, classes.disputeOutlined,)}>
-                    {row.dispute}
+                <TableCell align="left" className={classes.td}>
+                  <span className={cx(classes.tdTitle,)}>
+                    <img className={classes.icon} src={images.circleCheck}/>
+                    {row.remain}
                   </span>
+                </TableCell>
+                <TableCell align="left" className={classes.td}>
+                  <TextButton
+                    title={row.actions}
+                    color="black"
+                    fontWeight="semibold"
+                  />
+                  {/* <span className={cx(classes.tdTitle,classes.actionsSent)}>Reminder was sent</span> */}
                 </TableCell>
               </TableRow>
             ))}

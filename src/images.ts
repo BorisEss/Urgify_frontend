@@ -12,6 +12,7 @@ import cloudUp from './images/cloud-up.svg';
 import dollarSign from './images/dollar-sign.svg';
 import dueArrow from './images/due-arrow.png';
 import ellipse from './images/ellipse.svg';
+import error from './images/error.svg';
 import exploreBackground from './images/explore-background.png';
 import exploreBackgroundPatients from './images/explore-background-patients.png';
 import fileBlank from './images/file-blank.svg';
@@ -76,6 +77,7 @@ const images = {
   filePDF,
   startupSchool,
   dollarSign,
+  error,
 };
 
 export default images;

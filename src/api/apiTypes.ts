@@ -69,6 +69,11 @@ export type ForgotSendPasswordsRequest = {
   token: string;
 };
 
+export type AcceptInviteRequest = {
+  password: string;
+  hash: string;
+};
+
 // payment
 export type PaymentIntentRequest = {
   amount: number;

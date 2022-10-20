@@ -1,6 +1,7 @@
 import React from 'react';
 import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
 
+import AcceptInvite from '../pages/AcceptInvite';
 import AddPatientsList from '../pages/AddPatientsList';
 import {navTypes} from './navTypes';
 
@@ -37,6 +38,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
           <Route path={`${navTypes.SignUp}`} element={<SignUp />} />
           <Route path={`${navTypes.ForgotPassword}`} element={<ForgotPassword />} />
           <Route path={`${navTypes.ForgotNewPassword}`} element={<ForgotNewPassword />} />
+          <Route path={`${navTypes.AcceptInvite}`} element={<AcceptInvite />} />
           <Route path={`${navTypes.CodeConfirmation}`} element={<CodeConfirmation />} />
         </>
       ) : (

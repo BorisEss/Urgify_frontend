@@ -49,6 +49,7 @@ type ButtonType = {
   w100?: boolean;
   round?: boolean;
   type?: 'submit' | 'button';
+  extraClass?: string;
 };
 
 const Button: React.FC<ButtonType> = ({
@@ -61,6 +62,7 @@ const Button: React.FC<ButtonType> = ({
   w100,
   round,
   type,
+  extraClass,
 }) => {
   const {classes, cx} = useStyles();
   return <button
@@ -73,6 +75,7 @@ const Button: React.FC<ButtonType> = ({
     smaller ? classes.smaller : '',
     w100 ? classes.w100 : '',
     round ? classes.round : '',
+    extraClass,
   )}>{title}</button>;
 };
 

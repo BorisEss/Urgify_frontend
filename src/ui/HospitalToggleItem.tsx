@@ -6,7 +6,7 @@ import images from '../images';
 import { checkDepartmentsLimit } from '../utils/loginRedirectFlow';
 import IconButton from './Buttons/IconButton';
 import OutlinedButton from './Buttons/OutlinedButton';
-import DepartmentName from './DepartmentName';
+import HospitalName from './HospitalName';
 
 const useStyles = makeStyles()({
   root: {
@@ -56,6 +56,7 @@ type Props = {
   redirectToAddEmployee: (hospitalId: string, departmentId: string) => void;
   redirectToAddPatients: (hospitalId: string, departmentId: string) => void;
   isOpenInitial?: boolean;
+  onHospitalRemove: (hospitalId: string) => void;
 }
 
 const HospitalToggleItem: React.FC<Props> = ({
@@ -65,6 +66,7 @@ const HospitalToggleItem: React.FC<Props> = ({
   redirectToAddEmployee,
   redirectToAddPatients,
   isOpenInitial = false,
+  onHospitalRemove,
 }) => {
   const {classes} = useStyles();
   const [open, setOpen] = React.useState(isOpenInitial);
@@ -75,10 +77,11 @@ const HospitalToggleItem: React.FC<Props> = ({
   return (
     <div className={classes.root}>
       <div className={classes.hospitalTitleBox}>
-        <DepartmentName
+        <HospitalName
           title={hospital.name}
           onClick={toggleHospital}
           open={open}
+          onRemoveClick={() => onHospitalRemove(hospital.id)}
         />
       </div>
       <div className={classes.divider} />

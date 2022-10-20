@@ -5,8 +5,6 @@ import {makeStyles} from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   textButton: {
-    fontFamily: 'Poppins-regular',
-    fontWeight: 400,
     fontSize: 16,
     lineHeight: '24px',
 
@@ -27,6 +25,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
       fontSize: 14,
       lineHeight: '24px',
     },
+  },
+  normal: {
+    fontFamily: 'Poppins-regular',
+  },
+  semibold: {
+    fontFamily: 'Poppins-semibold',
   },
   gray: {
     color: '#666666',
@@ -50,6 +54,22 @@ const useStyles = makeStyles()((theme: Theme) => ({
       },
     },
   },
+  black: {
+    color: ' #2B364D',
+    '&::after': {
+      background: ' #2B364D',
+    },
+    '&:hover': {
+      '&::after': {
+        background: 'transparent',
+      },
+    },
+  },
+  noUnderline: {
+    '&::after': {
+      height: 0,
+    },
+  },
   disabled: {
     pointerEvents: 'none',
   },
@@ -57,12 +77,15 @@ const useStyles = makeStyles()((theme: Theme) => ({
 
 type TextButtonType = {
   title: string;
-  color: 'gray' | 'orange';
+  color: 'gray' | 'orange' | 'black';
+  fontWeight?: 'normal' | 'semibold';
   onClick?: () => void; //only for type 'button'
   type?: 'link' | 'button';
   path?: string; //only for type 'link'
   disabled?: boolean;
   loading?: boolean;
+  extraClass?: string;
+  noUnderline?: boolean;
 };
 
 const TextButton: React.FC<TextButtonType> = ({
@@ -73,6 +96,8 @@ const TextButton: React.FC<TextButtonType> = ({
   path,
   disabled,
   loading,
+  noUnderline,
+  fontWeight = 'normal',
 }) => {
   let navigate = useNavigate();
   const {classes, cx} = useStyles();
@@ -83,7 +108,13 @@ const TextButton: React.FC<TextButtonType> = ({
   };
   return (
     <button
-      className={cx(classes.textButton, classes[color], disabled || loading ? classes.disabled : '')}
+      className={cx(
+        classes.textButton,
+        classes[color],
+        noUnderline || noUnderline ? classes.noUnderline : '',
+        disabled || loading ? classes.disabled : '',
+        classes[fontWeight],
+      )}
       onClick={onClickHandle}>
       {title}
     </button>
