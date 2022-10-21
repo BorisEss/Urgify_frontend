@@ -11,6 +11,7 @@ import images from '../images';
 import {ReactComponent as ArrowIcon} from '../images/arrow-up.svg';
 import Modal from '../ui/Modal';
 import TextButton from './Buttons/TextButton';
+import InvoiceReminderModal from './InvoiceReminderModal';
 import InvoicesInformationModal from './InvoicesInformationModal';
 
 
@@ -94,6 +95,7 @@ const rows = [
 const InvoicesListTable = () => {
   const {classes, cx} = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [openReminder, setOpenReminder] = React.useState(false);
 
 
   const handleClickOpen = () => {
@@ -102,6 +104,13 @@ const InvoicesListTable = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClickOpenReminder = () => {
+    setOpenReminder(true);
+  };
+
+  const handleCloseReminder = () => {
+    setOpenReminder(false);
   };
 
   return (
@@ -178,6 +187,7 @@ const InvoicesListTable = () => {
                     title={row.actions}
                     color="black"
                     fontWeight="semibold"
+                    onClick={handleClickOpenReminder}
                   />
                   {/* <span className={cx(classes.tdTitle,classes.actionsSent)}>Reminder was sent</span> */}
                 </TableCell>
@@ -192,6 +202,14 @@ const InvoicesListTable = () => {
         borderRadius={4}
         children={
           <InvoicesInformationModal handleClose={handleClose}  />
+        }
+      />
+      <Modal
+        open={openReminder}
+        handleClose={handleCloseReminder}
+        borderRadius={4}
+        children={
+          <InvoiceReminderModal handleClose={handleCloseReminder}  />
         }
       />
     </>
