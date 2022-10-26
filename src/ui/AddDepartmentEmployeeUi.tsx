@@ -100,6 +100,7 @@ const AddDepartmentEmployeeUi: React.FC<AddDepartmentEmployeeUiType> = ({
                 <Input
                   label="First Name"
                   error={!!errors.firstName}
+                  errorText={errors.firstName}
                   type="string"
                   name="firstName"
                   value={itemFields.firstName}
@@ -113,6 +114,7 @@ const AddDepartmentEmployeeUi: React.FC<AddDepartmentEmployeeUiType> = ({
                   name="lastName"
                   value={itemFields.lastName}
                   error={!!errors.lastName}
+                  errorText={errors.lastName}
                   onChange={onInputChange}
                 />
               </div>
@@ -124,6 +126,7 @@ const AddDepartmentEmployeeUi: React.FC<AddDepartmentEmployeeUiType> = ({
                 name="email"
                 value={itemFields.email}
                 error={!!errors.email}
+                errorText={errors.email}
                 onChange={onInputChange}
               />
             </div>
@@ -133,6 +136,7 @@ const AddDepartmentEmployeeUi: React.FC<AddDepartmentEmployeeUiType> = ({
                 inputValue={itemFields.phone}
                 onInputChange={onPhoneNumberChange}
                 error={!!errors.phone}
+                errorText={errors.phone}
               />
             </div>
           </div>

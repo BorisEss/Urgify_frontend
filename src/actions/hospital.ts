@@ -17,7 +17,6 @@ export const hospitalActions = {
   setEmployees: createAction('hospitalSetEmployees', (employees: EmployeesArray) => ({
     payload: employees,
   })),
-
 };
 
 // hospital
@@ -155,6 +154,42 @@ export const addEmployee = (
       return response;
     })
     .catch(e => {
+
       throw e.response.data;
     });
+};
+
+// Hospitals and Depratments and Employess
+export const getHospitalsAndDepartmentsAndEmployees = (): AppAsyncThunk<HospitalsArray> => async (
+  dispatch,
+) => {
+  let hospitals: HospitalsArray | void = await dispatch(api.getHospitals());
+  const departmentsRequests: Promise<void>[] = [];
+  if (!hospitals || !hospitals.length) return [];
+
+  for (const hospital of hospitals) {
+    const departmentsRequest: Promise<void> = dispatch(api.getDepartments(hospital.id))
+      .then((departments) => {
+        hospital.departments = departments;
+      });
+    departmentsRequests.push(departmentsRequest);
+  }
+  await Promise.all(departmentsRequests);
+
+  const employeesRequests: Promise<void>[] = [];
+
+  for (const hospital of hospitals) {
+    if (!hospital.departments || !hospital.departments.length) continue;
+    for (const department of hospital.departments) {
+      const employeesRequest: Promise<void> = dispatch(api.getEmployees(hospital.id, department.id))
+        .then((employees) => {
+          department.employees = employees;
+        });
+        employeesRequests.push(employeesRequest);
+    }
+  }
+  await Promise.all(employeesRequests);
+
+  dispatch(hospitalActions.setHospitals(hospitals));
+  return hospitals;
 };

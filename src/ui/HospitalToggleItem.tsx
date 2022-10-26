@@ -51,20 +51,22 @@ const useStyles = makeStyles()({
 
 type Props = {
   hospital: HospitalType;
-  navigateToAddDepartments: (hospitalId: string) => void;
   onDepartmentRemove: (hospitalId: string, departmentId: string) => void;
+  redirectToAddDepartments: (hospitalId: string) => void;
   redirectToAddEmployee: (hospitalId: string, departmentId: string) => void;
   redirectToAddPatients: (hospitalId: string, departmentId: string) => void;
+  redirectToEmployeesList: (hospitalId: string, departmentId: string) => void;
   isOpenInitial?: boolean;
   onHospitalRemove: (hospitalId: string) => void;
 }
 
 const HospitalToggleItem: React.FC<Props> = ({
   hospital,
-  navigateToAddDepartments,
   onDepartmentRemove,
+  redirectToAddDepartments,
   redirectToAddEmployee,
   redirectToAddPatients,
+  redirectToEmployeesList,
   isOpenInitial = false,
   onHospitalRemove,
 }) => {
@@ -99,10 +101,13 @@ const HospitalToggleItem: React.FC<Props> = ({
               color="orange"
               bigger
               type="button"
-              title="Add employee"
+              title={!department.employees.length ? 'Add employee' : 'View Employees'}
               lowerCase
               w100
-              onClick={() => redirectToAddEmployee(hospital.id, department.id)}
+              onClick={() => !department.employees.length
+                ? redirectToAddEmployee(hospital.id, department.id)
+                : redirectToEmployeesList(hospital.id, department.id)
+              }
             />
           </div>
         </div>
@@ -115,7 +120,7 @@ const HospitalToggleItem: React.FC<Props> = ({
           title="Add department"
           lowerCase
           w100
-          onClick={() => navigateToAddDepartments(hospital.id)}
+          onClick={() => redirectToAddDepartments(hospital.id)}
         />
       </div>}
     </div>

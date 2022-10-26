@@ -77,7 +77,7 @@ export type DepartmentsFieldsType = Record<string, string>;
 export type DepartmentsFieldErrosType = Record<string, string>;
 
 export type EmployeeAttributeItem = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   checked: boolean;

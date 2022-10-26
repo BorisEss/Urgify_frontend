@@ -5,7 +5,7 @@ import { createSelector } from 'redux-views';
 
 import { getEmployees, getHospital } from '../actions/hospital';
 import type { DepartmentType } from '../api/apiTypes';
-import { AddDepartmentEmployeeRoute } from '../navigation/navTypes';
+import { AddDepartmentEmployeeRoute, AddPatientsRoute } from '../navigation/navTypes';
 import { getCurrentHospital, getEmployeesArray } from '../selectors/hospital';
 import { getHospitalsOrDepartmentsOrEmployeeIsFetching } from '../selectors/network';
 import type { AppState } from '../store';
@@ -27,6 +27,10 @@ const EmployeeList: React.FC<ReduxProps> = ({
     navigate(generatePath(AddDepartmentEmployeeRoute(), { hospitalId, departmentId }));
   };
 
+  const navigateToAddPatients = () => {
+    navigate(generatePath(AddPatientsRoute(), { hospitalId, departmentId }));
+  };
+
   React.useEffect(() => {
     if (hospitalId && departmentId) {
       fetchHospital(hospitalId);
@@ -40,6 +44,7 @@ const EmployeeList: React.FC<ReduxProps> = ({
       departmentName={currentDepartment.name}
       employees={employees}
       navigateToAddEmployee={navigateToAddEmployee}
+      navigateToAddPatients={navigateToAddPatients}
     />
   );
   return null;

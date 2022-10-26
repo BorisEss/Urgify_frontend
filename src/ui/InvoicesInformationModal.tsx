@@ -1,11 +1,10 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import images from '../images';
-import {ReactComponent as Show} from '../images/show.svg';
 import CloseButton from './Buttons/CloseButton';
+import DownloadPdfButton from './Buttons/DownloadPdfButton';
+import OutlinedButton from './Buttons/OutlinedButton';
 import TableInvoicesInformationModal from './TableInvoicesInformationModal';
-
 
 const useStyles = makeStyles()((_theme) => ({
   main: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles()((_theme) => ({
     justifyContent: 'space-between',
     paddingBottom: 32,
   },
-  personInfo: {
+  invoice: {
     display: 'flex',
     gap: 24,
   },
@@ -28,68 +27,60 @@ const useStyles = makeStyles()((_theme) => ({
     color: '#2B364D',
     paddingBottom: 4,
   },
-  status: {
-    fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
-    fontSize: 16,
-    lineHeight: '24px',
-    color: '#fff',
-    backgroundColor:'#2FC77B',
-    borderRadius: 2,
-    padding: '16px 24px',
-    textAlign: 'center',
-  },
   infoWrap: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
     gap: 65,
-  },
-  infoItem: {
     paddingBottom: 32,
   },
-  label: {
-    fontFamily: 'Poppins-medium',
-    fontWeight: 500,
-    fontSize: 16,
-    lineHeight: '24px',
-    color: '#777777',
-    paddingBottom: 4,
-    textTransform: 'uppercase',
-  },
-  nameWrap: {
+  priceBlock: {
     display: 'flex',
-    gap: 8,
+    justifyContent: 'space-between',
+    gap: 32,
   },
-  showIcon: {
-    width: 32,
-    height: 32,
-
-    '& path': {
-      fill: ' #0D99FF',
-    },
-  },
-  pacientName: {
+  personName: {
     fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
     fontSize: 24,
     lineHeight: '36px',
     color: '#2B364D',
     textDecoration: 'underline',
+    paddingBottom: 8,
   },
-  leftWrap: {
-    flex: 1,
-  },
-  dueWrap: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'relative',
-  },
-  data: {
+  personAddress: {
     fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
+    fontSize: 16,
+    lineHeight: '24px',
+    color: '#2B364D',
+    paddingBottom: 8,
+  },
+  personMail: {
+    fontFamily: 'Poppins-semibold',
+    fontSize: 16,
+    lineHeight: '24px',
+    color: '#0D99FF',
+  },
+  subtitle: {
+    fontFamily: 'Poppins-semibold',
+    fontSize: 16,
+    lineHeight: '24px',
+    color: '#2B364D',
+  },
+  price: {
+    fontFamily: 'Poppins-semibold',
+    fontSize: 32,
+    lineHeight: '48px',
+    color: '#2B364D',
+  },
+  remain: {
+    color: '#F93822',
+  },
+  tablesTitle: {
+    fontFamily: 'Poppins-semibold',
     fontSize: 24,
     lineHeight: '36px',
     color: '#2B364D',
+    paddingTop: 32,
+    paddingBottom: 16,
   },
   buttonWrap: {
     position: 'absolute',
@@ -99,54 +90,35 @@ const useStyles = makeStyles()((_theme) => ({
     width: '100%',
     height: 1,
     background: '#DBDBDB',
-    marginBottom: 31,
-  },
-  dueImg: {
-    width: 79,
-    height: 10,
-    position: 'absolute',
-    left: 188,
-    bottom: 66,
-  },
-  documentWrap: {
-    borderRadius: 4,
-    flex: '0 0 44%',
-    cursor: 'pointer',
-    position:'relative',
-  },
-  docImg: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
-  },
-  docDarker: {
-    position: 'absolute',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  pdfIcon: {
-    width: 48,
-    height: 48,
-  },
-  pdfLink: {
-    fontFamily: 'Poppins-medium',
-    fontWeight: 500,
-    fontSize: 16,
-    lineHeight: '24px',
-    color: '#FFFFFF',
-    textDecoration: 'underline',
-    cursor: 'pointer',
-    textTransform: 'uppercase',
-    textAlign:'center',
   },
   tableWrap: {
     paddingBottom: 32,
+  },
+  recurringPayment: {
+    paddingTop: 31,
+    paddingBottom: 31,
+    width: '100%',
+  },
+  recurringHeader: {
+    fontFamily: 'Poppins-semibold',
+    fontSize: 16,
+    lineHeight: '24px',
+    color: '#2B364D',
+  },
+  invoicePaid: {
+    fontFamily: 'Poppins-semibold',
+    fontSize: 24,
+    lineHeight: '36px',
+    color: '#777777',
+  },
+  paymentDate: {
+    color: '#2B364D',
+  },
+  outlinedBtnWrap: {
+    paddingTop: 32,
+  },
+  outlinedBtn: {
+    border: '3px solid #777777',
   },
 }));
 
@@ -155,55 +127,65 @@ type InvoicesInformationModalType = {
 };
 
 const InvoicesInformationModal: React.FC<InvoicesInformationModalType> = ({handleClose}) => {
-  const {classes} = useStyles();
+  const {cx,classes} = useStyles();
 
   return (
     <div className={classes.main}>
       <div className={classes.header}>
-        <div className={classes.personInfo}>
-          <span className={classes.status}>Paid</span>
-          <h2 className={classes.title}>&#x23;123456</h2>
+        <div className={classes.invoice}>
+          <h2 className={classes.title}>Invoice &#x23;123456</h2>
         </div>
         <div className={classes.buttonWrap}>
           <CloseButton handleClose={handleClose} />
         </div>
       </div>
       <div className={classes.infoWrap}>
-        <div className={classes.leftWrap}>
-          <div className={classes.infoItem}>
-          <div className={classes.divider} />
-            <h6 className={classes.label}>Patient Name</h6>
-            <div className={classes.nameWrap}>
-              <Show className={classes.showIcon} />
-              <p className={classes.pacientName}>Courtney Henry</p>
-            </div>
+        <div className={classes.priceBlock}>
+          <div>
+              <h2 className={classes.personName}>Jacob Jones</h2>
+              <p className={classes.personAddress}>1100 Bellevue Way NE Suite 900, Bellevue,<br/> WA 98004, United States</p>
+              <p className={classes.personMail}>binhan628@gmail.com</p>
           </div>
-          <div className={classes.dueWrap}>
-            <div className={classes.infoItem}>
-              <h6 className={classes.label}>issued DATE</h6>
-              <p className={classes.data}>9/23/2021</p>
-            </div>
-            <img className={classes.dueImg} src={images.dueArrow} />
-            <div className={classes.infoItem}>
-              <h6 className={classes.label}>due DATE</h6>
-              <p className={classes.data}>11/23/2022</p>
-            </div>
-          </div>
-          <div className={classes.infoItem}>
-            <h6 className={classes.label}>INVOICE AMOUNT</h6>
-            <p className={classes.data}>$567,890</p>
+          <div>
+            <p className={classes.subtitle}>Total Charges</p>
+            <h2 className={classes.price}>$1,574.09</h2>
           </div>
         </div>
-        <div className={classes.documentWrap}>
-          <div className={classes.docDarker}>
-            <img className={classes.pdfIcon} src={images.filePDF}/>
-            <span className={classes.pdfLink}>explanation<br/> of benefits</span>
+        <div className={classes.priceBlock}>
+        <div>
+            <p className={classes.subtitle}>Already paid</p>
+            <h2 className={classes.price}>$943.65</h2>
           </div>
-          <img src={images.sample} className={classes.docImg} />
+          <div>
+            <p className={classes.subtitle}>Remain to pay</p>
+            <h2 className={cx(classes.price,classes.remain)}>$630.44</h2>
+          </div>
         </div>
       </div>
+      <DownloadPdfButton url={'Explanation of Benefits.pdf'} />
+      <div className={classes.tablesTitle}>
+        <p>Summary of inpatient service </p>
+      </div>
       <div className={classes.tableWrap}>
-          <TableInvoicesInformationModal />
+        <TableInvoicesInformationModal />
+      </div>
+      <div className={classes.divider} />
+      <div className={classes.recurringPayment}>
+        <h6 className={classes.recurringHeader}>This patient has recurring payment</h6>
+        <div>
+          <h2 className={classes.invoicePaid}>The invoice should be fully paid on <span className={classes.paymentDate}>11/20/2022</span>(estimated)</h2>
+        </div>
+      </div>
+      <div className={classes.divider} />
+      <div className={classes.outlinedBtnWrap}>
+        <OutlinedButton
+          color="gray"
+          title="View detailed info"
+          w100
+          lowerCase
+          extraClass={classes.outlinedBtn}
+          type="button"
+        />
       </div>
     </div>
   );

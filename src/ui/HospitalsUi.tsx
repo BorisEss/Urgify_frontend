@@ -23,20 +23,22 @@ const useStyles = makeStyles()({
 
 type Props = {
   hospitals: HospitalsArray;
-  navigateToAddDepartments: (hospitalId: string) => void;
+  redirectToAddDepartments: (hospitalId: string) => void;
   onDepartmentRemove: (hospitalId: string, departmentId: string) => void;
   redirectToAddEmployee: (hospitalId: string, departmentId: string) => void;
   redirectToAddPatients: (hospitalId: string, departmentId: string) => void;
+  redirectToEmployeesList: (hospitalId: string, departmentId: string) => void;
   isFetching: boolean;
   onHospitalRemove: (hospitalId: string) => void;
 }
 
 const HospitalsUi: React.FC<Props> = ({
   hospitals,
-  navigateToAddDepartments,
   onDepartmentRemove,
+  redirectToAddDepartments,
   redirectToAddEmployee,
   redirectToAddPatients,
+  redirectToEmployeesList,
   onHospitalRemove,
   // isFetching,
 }) => {
@@ -48,7 +50,6 @@ const HospitalsUi: React.FC<Props> = ({
   };
 
   const showAddHospitalButton = !checkHospitalsLimit(hospitals.length);
-
   return (
     <div>
       <HospitalHeader
@@ -63,10 +64,11 @@ const HospitalsUi: React.FC<Props> = ({
           <HospitalToggleItem
             key={hospital.name}
             hospital={hospital}
-            navigateToAddDepartments={navigateToAddDepartments}
             onDepartmentRemove={onDepartmentRemove}
+            redirectToAddDepartments={redirectToAddDepartments}
             redirectToAddEmployee={redirectToAddEmployee}
             redirectToAddPatients={redirectToAddPatients}
+            redirectToEmployeesList={redirectToEmployeesList}
             onHospitalRemove={onHospitalRemove}
           />
         )) : null}

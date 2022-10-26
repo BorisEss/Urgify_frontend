@@ -3,10 +3,10 @@ import { connect, ConnectedProps } from 'react-redux';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { getHospitalsAndDepartments, removeDepartment, removeHospital } from '../actions/hospital';
-import { AddDepartmentEmployeeRoute, AddPatientsRoute, HospitalAddDepartmentsRoute } from '../navigation/navTypes';
+import { getHospitalsAndDepartmentsAndEmployees, removeDepartment, removeHospital } from '../actions/hospital';
+import { AddDepartmentEmployeeRoute, AddPatientsRoute, EmployeeListRoute, HospitalAddDepartmentsRoute } from '../navigation/navTypes';
 import { getHospitalsArray } from '../selectors/hospital';
-import { getHospitalsOrDepartmentsIsFetching } from '../selectors/network';
+import { getHospitalsOrDepartmentsOrEmployeeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
 import type { AppState } from '../store';
 import HospitalsUi from '../ui/HospitalsUi';
@@ -19,10 +19,6 @@ const Hospitals:React.FC<ReduxProps> = ({
   fetchRemoveHospital,
 }) => {
   const navigate = useNavigate();
-
-  const navigateToAddDepartments = (hospitalId: string) => {
-    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId }));
-  };
 
   const onHospitalRemove = (hospitalId: string) => {
     fetchRemoveHospital(hospitalId)
@@ -44,12 +40,20 @@ const Hospitals:React.FC<ReduxProps> = ({
       });
   };
 
+  // Redirects
+  const redirectToAddDepartments = (hospitalId: string) => {
+    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId }));
+  };
+
   const redirectToAddEmployee = (hospitalId: string, departmentId: string) => {
     navigate(generatePath(AddDepartmentEmployeeRoute(), { hospitalId, departmentId }));
   };
 
   const redirectToAddPatients = (hospitalId: string, departmentId: string) => {
     navigate(generatePath(AddPatientsRoute(), { hospitalId, departmentId }));
+  };
+  const redirectToEmployeesList = (hospitalId: string, departmentId: string) => {
+    navigate(generatePath(EmployeeListRoute(), { hospitalId, departmentId }));
   };
 
   React.useEffect(() => {
@@ -61,17 +65,18 @@ const Hospitals:React.FC<ReduxProps> = ({
 
   return <HospitalsUi
     hospitals={hospitals}
-    navigateToAddDepartments={navigateToAddDepartments}
     onDepartmentRemove={onDepartmentRemove}
+    redirectToAddDepartments={redirectToAddDepartments}
     redirectToAddEmployee={redirectToAddEmployee}
     redirectToAddPatients={redirectToAddPatients}
+    redirectToEmployeesList={redirectToEmployeesList}
     isFetching={isFetching}
     onHospitalRemove={onHospitalRemove}
   />;
 };
 
 const getData = createSelector(
-  [getHospitalsArray, getHospitalsOrDepartmentsIsFetching],
+  [getHospitalsArray, getHospitalsOrDepartmentsOrEmployeeIsFetching],
   (hospitals, isFetching) => {
     return {
       hospitals,
@@ -81,7 +86,7 @@ const getData = createSelector(
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  fetchHospitals: getHospitalsAndDepartments,
+  fetchHospitals: getHospitalsAndDepartmentsAndEmployees,
   fetchRemoveDepartment: removeDepartment,
   fetchRemoveHospital: removeHospital,
 });

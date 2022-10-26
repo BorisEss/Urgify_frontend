@@ -83,13 +83,19 @@ const AddDepartmentEmployee: React.FC<ReduxProps> = ({
       {valueType: 'firstName', value: itemFields.firstName},
       {valueType: 'lastName', value: itemFields.lastName},
     ];
-    // phone not required
     const errorMessages: {field: string, message: string}[] = validate(form);
-    if (!hospitalId || !departmentId || errorMessages.length) {
+    let phoneError: {field: string, message: string} = {field: 'phone', message: ''};
+    if (itemFields.phone) { // phone not required, but if exist need to check
+      phoneError = validate([
+        {valueType: 'phone', value: itemFields.email},
+      ])[0];
+    }
+    if (!hospitalId || !departmentId || errorMessages.length || phoneError.message) {
       const newErrors: AddDepartmentEmployeeUiErrors = {...initialErrors};
       for (const message of errorMessages) {
         newErrors[message.field] = message.message;
       }
+      newErrors.phone = phoneError.message;
       setErrors(newErrors);
     } else {
       setErrors(initialErrors);
@@ -111,17 +117,17 @@ const AddDepartmentEmployee: React.FC<ReduxProps> = ({
           Log.message(e);
           if (e) {
             const newErrors: AddDepartmentEmployeeUiErrors = {...initialErrors};
+            if (e.firstName) {
+              newErrors.firstName = e.firstName[0];
+            }
+            if (e.lastName) {
+              newErrors.lastName = e.lastName[0];
+            }
             if (e.email) {
-              newErrors.firstName = e.email[0];
+              newErrors.email = e.email[0];
             }
-            if (e.password) {
-              newErrors.lastName = e.password[0];
-            }
-            if (e.password) {
-              newErrors.email = e.password[0];
-            }
-            if (e.password) {
-              newErrors.phone = e.password[0];
+            if (e.phone) {
+              newErrors.phone = e.phone[0];
             }
             setErrors(newErrors);
           }

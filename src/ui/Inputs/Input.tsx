@@ -87,6 +87,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
   fullWidth: {
     width: '100%',
   },
+  errorHelper: {
+    fontFamily: 'Poppins-regular',
+    fontSize: 12,
+    lineHeight: '18px',
+    color: '#F93822',
+    paddingTop: 3,
+  },
 }));
 
 type InputType = {
@@ -97,6 +104,7 @@ type InputType = {
   value?: string;
   disabled?: boolean;
   error?: boolean;
+  errorText?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: () => void;
   onDelete?: () => void;
@@ -114,6 +122,7 @@ const Input: React.FC<InputType> = ({
   onChange,
   onBlur,
   error,
+  errorText,
   onDelete,
   placeholder,
   labelCenter,
@@ -137,6 +146,9 @@ const Input: React.FC<InputType> = ({
         value={value}
         placeholder={placeholder}
       />
+      {error && errorText
+      ? <p className={classes.errorHelper}>{errorText}</p>
+      : null}
       {onDelete ? (
         <div onClick={onDelete} className={classes.closeIcon}>
           <img src={images.closeIcon} />
