@@ -10,10 +10,6 @@ import {makeStyles} from 'tss-react/mui';
 
 const useStyles = makeStyles()({
   tr: {
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: 'rgba(184, 184, 184, 0.2)',
-    },
   },
   th: {
     fontFamily: 'Poppins-medium',
@@ -22,7 +18,7 @@ const useStyles = makeStyles()({
     lineHeight: '24px',
     textTransform: 'uppercase',
     color: '#777777',
-    borderBottom: '8px solid #2B364D',
+    borderBottom: 'none',
     padding: 8,
   },
   td: {
@@ -36,38 +32,34 @@ const useStyles = makeStyles()({
     lineHeight: '24px',
     color: '#2B364D',
   },
-  tdRight: {
-    textAlign: 'right',
-  },
 });
 
 function createData(
   date: string,
-  sum: string,
-  paymentType: string,
+  description: string,
+  amount: string,
+  dueDate: string,
 ) {
-  return { date, sum, paymentType};
+  return { date, description, amount,dueDate};
 }
 
 const rows = [
-  createData('11/22/2022', '$67,890', 'MasterCard*2589',),
-  createData('11/15/2022', '$90,000', 'MasterCard*2589',),
-  createData('10/22/2022', '$90,000', 'MasterCard*2589',),
-  createData('9/24/2022', '$320,000', 'Visa**4589',),
+  createData('9/23/2021', 'Medical care', '$78,000','30 days'),
+  createData('to 9/27/2021', 'Lab test', '$1,005.3',''),
 ];
 
 const TableInvoicesInformationModal = () => {
-  const {cx,classes} = useStyles();
+  const {classes} = useStyles();
 
   return (
     <TableContainer>
       <MaterialTable sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.th}>payment history</TableCell>
-            <TableCell align="left" className={classes.th} />
-            <TableCell align="left" className={classes.th} />
-            <TableCell align="left" className={classes.th} />
+            <TableCell className={classes.th}>date</TableCell>
+            <TableCell align="left" className={classes.th}>description</TableCell>
+            <TableCell align="left" className={classes.th}>amount</TableCell>
+            <TableCell align="left" className={classes.th}>due date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -82,14 +74,19 @@ const TableInvoicesInformationModal = () => {
                   {row.date}
                 </span>
               </TableCell>
-              <TableCell align="left" className={classes.td}>
+              <TableCell className={classes.td}>
                 <span className={classes.tdTitle}>
-                  {row.sum}
+                  {row.description}
                 </span>
               </TableCell>
-              <TableCell align="left" className={cx(classes.td, classes.tdRight)}>
+              <TableCell className={classes.td}>
                 <span className={classes.tdTitle}>
-                  {row.paymentType}
+                  {row.amount}
+                </span>
+              </TableCell>
+              <TableCell className={classes.td}>
+                <span className={classes.tdTitle}>
+                  {row.dueDate}
                 </span>
               </TableCell>
             </TableRow>

@@ -150,6 +150,7 @@ const decodeDepartmentsArray = (data: any): DepartmentsArray => {
 const decodeDepartment = (data: any): DepartmentType => ({
   name: decodeString(data.name),
   id: decodeString(data.slug),
+  employees: [],
 });
 
 const decodeEmployeesArray = (data: any): EmployeesArray => {
@@ -158,9 +159,10 @@ const decodeEmployeesArray = (data: any): EmployeesArray => {
 };
 
 const decodeEmployee = (data: any): DepartmentEmployeeType => ({
-  id: decodeString(data.slug),
-  firstName: decodeString(data.firstName),
-  lastName: decodeString(data.lastName),
+  id: decodeString(data.id),
+  fullName: decodeString(data.user),
   email: decodeString(data.email),
+  status: decodeString(data.status),
   phone: decodeString(data.phone),
+  attribution: decodeString(data.attribution),
 });

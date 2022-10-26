@@ -45,6 +45,7 @@ type Props = {
   departmentName: string;
   employees: EmployeesArray;
   navigateToAddEmployee: () => void;
+  navigateToAddPatients: () => void;
 }
 
 const EmployeeListUi: React.FC<Props> = ({
@@ -53,6 +54,7 @@ const EmployeeListUi: React.FC<Props> = ({
   departmentName,
   employees,
   navigateToAddEmployee,
+  navigateToAddPatients,
 }) => {
   const {classes} = useStyles();
 
@@ -68,7 +70,8 @@ const EmployeeListUi: React.FC<Props> = ({
             lowerCase
             type="button"
             extraClass={classes.outlinedExtra}
-            />
+            onClick={navigateToAddPatients}
+          />
         </div>
         <div className={classes.divider} />
         <EmployeesTable

@@ -42,8 +42,7 @@ const useStyles = makeStyles<{popoverWidth?: number}>()((_theme: Theme, { popove
     background: '#FFFFFF',
     padding: 8,
     paddingBottom: 0,
-    top: -8,
-    width: popoverWidth ? popoverWidth + 8 : 100,
+    width: popoverWidth ? popoverWidth + 16 : 100,
   },
   withCheckbox: {
     justifyContent: 'unset',
@@ -81,7 +80,7 @@ const AttributionDropdown: React.FC<AttributionDropdownProps> = ({
     setAnchorEl(null);
   };
 
-  const handleRadioClick = (id: string) => {
+  const handleRadioClick = (id: number) => {
     setAttributes([
       ...attributes.map(item => {
         if (item.id === id) return {...item, checked: true};

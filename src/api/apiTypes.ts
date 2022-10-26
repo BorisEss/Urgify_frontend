@@ -105,6 +105,7 @@ export type AddHospitalRequest = {
 export type DepartmentType = {
   name: string;
   id: string;
+  employees: EmployeesArray;
 };
 
 export type DepartmentsArray = DepartmentType[];
@@ -112,10 +113,11 @@ export type DepartmentsArray = DepartmentType[];
 // employee
 export type DepartmentEmployeeType = {
   id: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   phone: string;
+  status: string;
+  attribution: string;
 };
 
 export type AddEmployeeRequest = {

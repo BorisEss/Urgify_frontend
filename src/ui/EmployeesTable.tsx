@@ -8,8 +8,7 @@ import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
 import type { EmployeesArray } from '../api/apiTypes';
-import type { EmployeeAttributeItem } from '../types';
-import AttributionDropdown from './AttributionDropdown';
+import EmployeeTableRow from './EmployeeTableRow';
 
 const useStyles = makeStyles()({
   th: {
@@ -22,69 +21,16 @@ const useStyles = makeStyles()({
     borderBottom: '8px solid #2B364D',
     padding: 8,
   },
-  td: {
-    padding: '16px 8px',
-    lineHeight: 0,
-  },
-  tdTitle: {
-    fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
-    fontSize: 16,
-    lineHeight: '24px',
-    color: '#2B364D',
-  },
-  status: {
-    padding: '3px 8px',
-    background: '#F1DF37',
-    borderRadius: 2,
-    fontSize: 12,
-    lineHeight:'18px',
-  },
 });
-
-function createData(
-  name: string,
-  email: string,
-  phone: string,
-  status: string,
-  attribution: undefined,
-) {
-  return { name, email, phone, status, attribution };
-}
-
-const rows = [
-  createData('Nataly Forestedd', 'nataly.ped@hospital.com', '(201) 555-0124', 'Pending', undefined),
-  createData('Nataly Forested', 'nataly.ped@hospital.com', '(201) 555-0124', 'Pending', undefined),
-];
 
 type Props = {
   employees: EmployeesArray;
 };
 
 const EmployeesTable: React.FC<Props> = ({
-  // employees,
+  employees,
 }) => {
-  const {classes, cx} = useStyles();
-  const [attributes, setAttributes] = React.useState<EmployeeAttributeItem[]>([
-    {
-      id: '0',
-      title: 'Finance',
-      description: 'Person who manage all invoices',
-      checked: true,
-    },
-    {
-      id: '1',
-      title: 'Patients',
-      description: 'Person who first interact with the patient',
-      checked: false,
-    },
-    {
-      id: '2',
-      title: 'Editor',
-      description: 'At ornare in viverra tellus suspendisse etiam at. Quis vel.',
-      checked: false,
-    },
-  ]);
+  const {classes} = useStyles();
   return (
     <TableContainer>
       <MaterialTable sx={{ minWidth: 650 }} aria-label="simple table">
@@ -98,39 +44,7 @@ const EmployeesTable: React.FC<Props> = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '& td, & th': { border: 0 } }}
-            >
-              <TableCell className={classes.td}>
-                <span className={classes.tdTitle}>
-                  {row.name}
-                </span>
-              </TableCell>
-              <TableCell align="left" className={classes.td}>
-                <span className={classes.tdTitle}>
-                  {row.email}
-                </span>
-              </TableCell>
-              <TableCell align="left" className={classes.td}>
-                <span className={classes.tdTitle}>
-                  {row.phone}
-                </span>
-              </TableCell>
-              <TableCell align="left" className={classes.td}>
-                <span className={cx(classes.tdTitle, classes.status)}>
-                  {row.status}
-                </span>
-              </TableCell>
-              <TableCell align="left" className={classes.td}>
-                <AttributionDropdown
-                  attributes={attributes}
-                  setAttributes={setAttributes}
-                />
-              </TableCell>
-            </TableRow>
-          ))}
+          {employees.map((employee) => <EmployeeTableRow key={employee.id} employee={employee} />)}
         </TableBody>
       </MaterialTable>
     </TableContainer>

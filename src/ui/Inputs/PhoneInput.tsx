@@ -42,12 +42,20 @@ const useStyles = makeStyles()((theme: Theme) => ({
     color: '#777777',
     paddingBottom: 8,
   },
+  errorHelper: {
+    fontFamily: 'Poppins-regular',
+    fontSize: 12,
+    lineHeight: '18px',
+    color: '#F93822',
+    paddingTop: 3,
+  },
 }));
 
 type PhoneInputType = {
   inputValue: string;
   onInputChange: (value: string) => void;
   error?: boolean;
+  errorText?: string;
   disabled?: boolean;
   label: string;
 };
@@ -57,6 +65,7 @@ const PhoneInput: React.FC<PhoneInputType> = ({
   inputValue,
   onInputChange,
   error,
+  errorText,
   disabled,
 }) => {
   const {classes, cx} = useStyles();
@@ -78,6 +87,9 @@ const PhoneInput: React.FC<PhoneInputType> = ({
       overwrite
       eager
     />
+    {error && errorText
+      ? <p className={classes.errorHelper}>{errorText}</p>
+      : null}
   </div>
   );
 

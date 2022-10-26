@@ -6,8 +6,10 @@ import arrowUp from './images/arrow-up.svg';
 import building from './images/building.svg';
 import burger from './images/burger.svg';
 import circleCheck from './images/circle-check.svg';
+import circleCheckWhite from './images/circle-checkwhite.svg';
 import closeBurger from './images/close-burger.svg';
 import closeIcon from './images/close-icon.svg';
+import cloudDown from './images/cloud-down.svg';
 import cloudUp from './images/cloud-up.svg';
 import dollarSign from './images/dollar-sign.svg';
 import dueArrow from './images/due-arrow.png';
@@ -78,6 +80,8 @@ const images = {
   startupSchool,
   dollarSign,
   error,
+  cloudDown,
+  circleCheckWhite,
 };
 
 export default images;
