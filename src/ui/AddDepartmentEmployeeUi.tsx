@@ -46,7 +46,7 @@ const useStyles = makeStyles()({
     flex: '50%',
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,// Change to 11 because I added 21 px min height to show error message below inputs
   },
   buttonWrap: {
     width: 292,
