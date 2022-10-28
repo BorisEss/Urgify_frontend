@@ -4,15 +4,22 @@ import * as api from '../api';
 import type { AuthTokens } from '../api/apiTypes';
 import { getApiRefreshToken, getApiToken } from '../selectors/auth';
 import Log from '../services/logger';
+import type { RedirectParamsType } from '../types';
 import type { AppAsyncThunk, AppThunk } from './actionsTypes';
 
 export const authActions = {
   setTokens: createAction('authSetTokens', (tokens: AuthTokens) => ({
     payload: tokens,
   })),
+  setAuthenticated: createAction('authSetAuthenticated', (authenticated: boolean) => ({
+    payload: authenticated,
+  })),
   deleteTokens: createAction('authDeleteTokens'),
   setErrors: createAction('authSetErrors', (errorMessage: string[]) => ({
     payload: errorMessage,
+  })),
+  setRedirectParams: createAction('authSetRedirectParams', (redirectParams?: RedirectParamsType) => ({
+    payload: redirectParams,
   })),
 };
 
@@ -21,17 +28,29 @@ export const getTokens = (): AppThunk => (dispatch) => {
   if (localTokensJSON) {
     const token = JSON.parse(localTokensJSON);
     dispatch(authActions.setTokens(token));
+    dispatch(authActions.setAuthenticated(true));
     return Promise.resolve();
   } else return Promise.resolve();
 };
 
-export const authByMail = (email: string, password: string): AppAsyncThunk => (
+export const authByMail = (
+  email: string,
+  password: string,
+  redirectParams?: RedirectParamsType
+): AppAsyncThunk => (
   dispatch,
 ) => {
   return dispatch(api.authByMail({ email, password }))
     .then((response) => {
       if (!response) return;
+      // save authenticated flag just after other loadings. IF needed
+      // Make if to prevent changing page. Fom nonAuth pages to authPages.
+      // But to leave possibility to make authRequests
       dispatch(getUserInfoOnTokenUpdate(response));
+      if (redirectParams) {
+        dispatch(authActions.setRedirectParams(redirectParams));
+      }
+      dispatch(authActions.setAuthenticated(true));
     })
     .catch(() => {
       dispatch(authActions.setErrors(['You have entered incorrect authorization data']));
@@ -184,6 +203,7 @@ export const saveTokens = (response: AuthTokens | undefined): AppAsyncThunk => (
 ) => {
   if (!response) return Promise.resolve();
   dispatch(authActions.setTokens(response));
+  dispatch(authActions.setAuthenticated(true));
   localStorage.setItem('auth', JSON.stringify(response));
   return Promise.resolve();
 };

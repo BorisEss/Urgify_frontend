@@ -3,6 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { createSelector } from 'redux-views';
 
 import { authActions, authByMail } from '../actions/auth';
+import { navTypes } from '../navigation/navTypes';
 import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -74,7 +75,20 @@ const SignIn: React.FC<ReduxProps> = ({
     } else {
       setErrors(initialErrors);
       Log.message(form);
-      loginByEmail(itemFields.email, itemFields.password)
+      const redirectToFromUrl: boolean = false;//temporary
+      loginByEmail(itemFields.email, itemFields.password,
+        redirectToFromUrl ? {
+          to: navTypes.AddPatients,
+          options: {
+            hospitalId: 'dsaadasfd',
+            departmentId: 'tfyghjijnk',
+          },
+        }
+        : {
+          to: navTypes.HospitalAdmin,
+          from: navTypes.SignIn,
+        }
+      )
         .catch((e: any) => {
           if (e) {
             const newErrors: SignInUiErrors = {...initialErrors};

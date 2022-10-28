@@ -5,7 +5,7 @@ import { createSelector } from 'redux-views';
 
 import { regByMail } from '../actions/auth';
 import { CodeConfirmationRoute } from '../navigation/navTypes';
-import { getAuthErrors, isAuthenticated } from '../selectors/auth';
+import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
 import type { AppState } from '../store';
@@ -144,7 +144,7 @@ const SignUp: React.FC<ReduxProps> = ({
 };
 
 const getData = createSelector(
-  [isAuthenticated, getAuthErrors, getAuthorizeIsFetching],
+  [getAuthErrors, getAuthorizeIsFetching],
   (authErrors, isFetching) => {
     return {
       authErrors,

@@ -3,9 +3,9 @@ import { connect, ConnectedProps } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { authActions, forgotSendMail, getUserInfoOnTokenUpdate } from '../actions/auth';
+import { authActions, forgotSendMail } from '../actions/auth';
 // import { ForgotNewPasswordRoute } from '../navigation/navTypes';
-import { getAuthErrors, isAuthenticated } from '../selectors/auth';
+import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
 import type { AppState } from '../store';
@@ -94,10 +94,9 @@ const ForgotPassword: React.FC<ReduxProps> = ({
 };
 
 const getData = createSelector(
-  [isAuthenticated, getAuthErrors, getAuthorizeIsFetching],
-  (isAuth, authErrors, isFetching) => {
+  [getAuthErrors, getAuthorizeIsFetching],
+  (authErrors, isFetching) => {
     return {
-      isAuth,
       authErrors,
       isFetching,
     };
@@ -107,7 +106,6 @@ const getData = createSelector(
 const connector = connect((state: AppState) => getData(state), {
   forgotPasswordSendEmail: forgotSendMail,
   setErrors: authActions.setErrors,
-  addTokens: getUserInfoOnTokenUpdate,
 });
 
 type ReduxProps = ConnectedProps<typeof connector>;

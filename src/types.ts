@@ -97,3 +97,10 @@ export type DrawerLinkType = {
   pathParams: Record<string, string>;
   isActive?: boolean;
 }
+
+export type RedirectParamsType = {
+  to: string;
+  from?: string;
+  options?: Record<string, string>;
+}
+
