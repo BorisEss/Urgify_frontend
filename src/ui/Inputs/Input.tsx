@@ -93,6 +93,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     lineHeight: '18px',
     color: '#F93822',
     paddingTop: 3,
+    minHeight: 21, // Do this to avoid changing height when error appears/disappers
   },
 }));
 
@@ -146,9 +147,8 @@ const Input: React.FC<InputType> = ({
         value={value}
         placeholder={placeholder}
       />
-      {error && errorText
-      ? <p className={classes.errorHelper}>{errorText}</p>
-      : null}
+      {/* Show this everytime to avoid changing height when error appears/disappers */}
+      <p className={classes.errorHelper}>{errorText}</p>
       {onDelete ? (
         <div onClick={onDelete} className={classes.closeIcon}>
           <img src={images.closeIcon} />

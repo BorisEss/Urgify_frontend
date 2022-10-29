@@ -29,7 +29,6 @@ const useStyles = makeStyles()({
     fontFamily: 'Poppins-semibold',
     fontWeight: 600,
     fontSize: 16,
-    lineHeight: '24px',
     color: '#2B364D',
   },
 });

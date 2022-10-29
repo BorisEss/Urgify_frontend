@@ -48,6 +48,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     lineHeight: '18px',
     color: '#F93822',
     paddingTop: 3,
+    minHeight: 21, // Do this to avoid changing height when error appears/disappers
   },
 }));
 
@@ -87,9 +88,8 @@ const PhoneInput: React.FC<PhoneInputType> = ({
       overwrite
       eager
     />
-    {error && errorText
-      ? <p className={classes.errorHelper}>{errorText}</p>
-      : null}
+    {/* Show this everytime to avoid changing height when error appears/disappers */}
+    <p className={classes.errorHelper}>{errorText}</p>
   </div>
   );
 

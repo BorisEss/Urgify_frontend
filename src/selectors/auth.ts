@@ -8,10 +8,15 @@ export const getApiToken = (state: AppState) => state.auth.accessToken;
 export const getApiRefreshToken = (state: AppState) => state.auth.refreshToken;
 
 export const isAuthenticated = createSelector([getAuthState], (authState) => {
-  return !!authState.accessToken;
+  return !!authState.accessToken && authState.authenticated;
 });
 
 export const getAuthErrors = createSelector(
   [getAuthState],
   (authState) => authState.errors,
+);
+
+export const getRedirectAuthParams = createSelector(
+  [getAuthState],
+  (authState) => authState.redirectParams,
 );

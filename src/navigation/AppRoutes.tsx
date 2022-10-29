@@ -1,8 +1,9 @@
 import React from 'react';
-import {Navigate, Route, Routes, useLocation} from 'react-router-dom';
+import {generatePath, Navigate, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 
 import AcceptInvite from '../pages/AcceptInvite';
 import AddPatientsList from '../pages/AddPatientsList';
+import type { RedirectParamsType } from '../types';
 import {navTypes} from './navTypes';
 
 // import screens
@@ -23,12 +24,33 @@ const SettingsPage = React.lazy(() => import('../pages/SettingsPage'));
 
 type AppRoutesType = {
   isAuth: boolean;
+  redirectAuthParams?: RedirectParamsType;
+  setRedirectParams: (redirectParams?: RedirectParamsType) => void;
 };
 
 const AppRoutes: React.FC<AppRoutesType> = ({
   isAuth,
+  redirectAuthParams,
+  setRedirectParams,
 }) => {
   let location = useLocation();
+  const navigate = useNavigate();
+  if (isAuth && redirectAuthParams) {
+    navigate(
+      generatePath(
+        redirectAuthParams.to,
+        redirectAuthParams.options
+      ),
+      {
+        state: {
+          from: redirectAuthParams.from,
+        },
+      }
+    );
+    setRedirectParams(undefined);
+    return <></>; // Need to prevent executing first router from authorized
+  }
+
   return (
     <Routes>
       {!isAuth ? (
@@ -56,9 +78,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
       )}
       {/* Redirect with React router 6 */}
       {!(location.pathname.includes('docs') || location.pathname.includes('swagger')) && (
-        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.HospitalAdmin} state={
-          isAuth ? {from: navTypes.SignIn} : null
-        } />} />
+        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.HospitalAdmin} />} />
       )}
     </Routes>
   );
