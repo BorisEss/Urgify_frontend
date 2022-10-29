@@ -1,5 +1,5 @@
 import type { AppAsyncThunk } from '../actions/actionsTypes';
-import type { AcceptInviteRequest, AuthByMailRequest, AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, RegByMailRequest } from './apiTypes';
+import type { AcceptInviteNewUserRequest, AuthByMailRequest, AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, RegByMailRequest } from './apiTypes';
 import { decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
@@ -80,16 +80,32 @@ export const forgotSendPasswords = (
   ).then(decodeTokens);
 };
 
-export const acceptInvite = (
-  params: AcceptInviteRequest,
+export const acceptInviteNewUser = (
+  params: AcceptInviteNewUserRequest,
 ): AppAsyncThunk => (dispatch) => {
   return dispatch(
     makeRequest({
       key: 'auth',
       method: 'post',
-      path: '/accounts/accept-invite/',
+      path: '/accounts/accept-invite-new-user/',
       isAuth: true,
       params,
+    }),
+  );
+};
+
+export const acceptInviteExistingUser = (
+  hash: string,
+): AppAsyncThunk => (dispatch) => {
+  return dispatch(
+    makeRequest({
+      key: 'auth',
+      method: 'post',
+      path: '/accounts/accept-invite-existing-user/',
+      isAuth: true,
+      params: {
+        hash,
+      },
     }),
   );
 };

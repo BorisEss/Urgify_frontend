@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { authActions, authByMail } from '../actions/auth';
@@ -22,6 +23,7 @@ const SignIn: React.FC<ReduxProps> = ({
     // authErrors,
     // isFetching,
   }) => {
+  let { hospitalId, departmentId } = useParams();
 
   const [itemFields, setItemFields] = React.useState<SignInUiFields>({
     email: '',
@@ -75,13 +77,12 @@ const SignIn: React.FC<ReduxProps> = ({
     } else {
       setErrors(initialErrors);
       Log.message(form);
-      const redirectToFromUrl: boolean = false;//temporary
       loginByEmail(itemFields.email, itemFields.password,
-        redirectToFromUrl ? {
+        hospitalId && departmentId ? {
           to: navTypes.AddPatients,
           options: {
-            hospitalId: 'dsaadasfd',
-            departmentId: 'tfyghjijnk',
+            hospitalId,
+            departmentId,
           },
         }
         : {

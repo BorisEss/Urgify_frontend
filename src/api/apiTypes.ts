@@ -69,7 +69,7 @@ export type ForgotSendPasswordsRequest = {
   token: string;
 };
 
-export type AcceptInviteRequest = {
+export type AcceptInviteNewUserRequest = {
   password: string;
   hash: string;
 };

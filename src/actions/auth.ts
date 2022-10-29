@@ -109,12 +109,21 @@ export const forgotSendPasswords = (new_password1: string, new_password2: string
     });
 };
 
-export const acceptInvite = (password: string, hash: string): AppAsyncThunk => (
+export const acceptInviteNewUser = (password: string, hash: string): AppAsyncThunk => (
   dispatch,
 ) => {
-  return dispatch(api.acceptInvite({ password, hash }))
+  return dispatch(api.acceptInviteNewUser({ password, hash }))
     .catch((e) => {
       dispatch(authActions.setErrors(['You have entered invalid password']));
+      throw e.response.data;
+    });
+};
+
+export const acceptInviteExistingUser = (hash: string): AppAsyncThunk => (
+  dispatch,
+) => {
+  return dispatch(api.acceptInviteExistingUser(hash))
+    .catch((e) => {
       throw e.response.data;
     });
 };
