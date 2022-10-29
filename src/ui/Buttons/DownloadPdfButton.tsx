@@ -26,6 +26,9 @@ const useStyles = makeStyles()((_theme) => ({
     height: 24,
     marginRight: 8,
   },
+  widthCloser: {
+    flex:'0 0 30%',
+  },
 }));
 
 type DownloadPdfButtonType = {
@@ -33,7 +36,7 @@ type DownloadPdfButtonType = {
 };
 
 const DownloadPdfButton: React.FC<DownloadPdfButtonType> = ({url}) => {
-  const {classes} = useStyles();
+  const {cx,classes} = useStyles();
   return (
     <a
       href={url}
@@ -46,7 +49,7 @@ const DownloadPdfButton: React.FC<DownloadPdfButtonType> = ({url}) => {
         <img className={classes.icon} src={images.circleCheckWhite}/>
         <p>{url}</p>
       </div>
-      <div className={classes.item}>
+      <div className={cx(classes.item,classes.widthCloser)}>
         <img className={classes.icon} src={images.cloudDown}/>
         <p>Download</p>
       </div>
