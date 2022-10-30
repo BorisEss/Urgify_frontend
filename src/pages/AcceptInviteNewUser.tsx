@@ -1,26 +1,26 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { acceptInvite } from '../actions/auth';
+import { acceptInviteNewUser } from '../actions/auth';
 import NewPasswordsWrapper from '../components/NewPasswordsWrapper';
-import { SignInRoute } from '../navigation/navTypes';
+import { SignInWithParamsRoute } from '../navigation/navTypes';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
 import type { AppState } from '../store';
 
-const AcceptInvite: React.FC<ReduxProps> = ({
+const AcceptInviteNewUser: React.FC<ReduxProps> = ({
   acceptInviteSendPassword,
 }) => {
   const navigate = useNavigate();
-  let { hash } = useParams();
+  let { hash, hospitalId, departmentId } = useParams();
 
   const onSubmit = (password:string, _repeatPassword:string): Promise<any> => {
     if (hash) {
       return acceptInviteSendPassword(password, hash)
         .then(() => {
-          navigate(SignInRoute());
+          navigate(generatePath(SignInWithParamsRoute(), { hospitalId, departmentId }));
           return;
         })
         .catch((e: any) => {
@@ -49,9 +49,9 @@ const getData = createSelector(
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  acceptInviteSendPassword: acceptInvite,
+  acceptInviteSendPassword: acceptInviteNewUser,
 });
 
 type ReduxProps = ConnectedProps<typeof connector>;
 
-export default connector(AcceptInvite);
+export default connector(AcceptInviteNewUser);

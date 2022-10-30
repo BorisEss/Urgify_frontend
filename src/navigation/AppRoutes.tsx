@@ -1,8 +1,7 @@
 import React from 'react';
 import {generatePath, Navigate, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 
-import AcceptInvite from '../pages/AcceptInvite';
-import AddPatientsList from '../pages/AddPatientsList';
+import AcceptInviteExistingUser from '../pages/AcceptInviteExistingUser';
 import type { RedirectParamsType } from '../types';
 import {navTypes} from './navTypes';
 
@@ -12,6 +11,8 @@ const SignUp = React.lazy(() => import('../pages/SignUp'));
 const SignIn = React.lazy(() => import('../pages/SignIn'));
 const ForgotPassword = React.lazy(() => import('../pages/ForgotPassword'));
 const ForgotNewPassword = React.lazy(() => import('../pages/ForgotNewPassword'));
+const AcceptInviteNewUser = React.lazy(() => import('../pages/AcceptInviteNewUser'));
+const AddPatientsList = React.lazy(() => import('../pages/AddPatientsList'));
 const HospitalAdmin = React.lazy(() => import('../pages/HospitalAdmin'));
 const HospitalAddDepartments = React.lazy(() => import('../pages/HospitalAddDepartments'));
 const Hospitals = React.lazy(() => import('../pages/Hospitals'));
@@ -56,12 +57,17 @@ const AppRoutes: React.FC<AppRoutesType> = ({
       {!isAuth ? (
         <>
           <Route path={`${navTypes.Home}`} element={<Home />} />
-          <Route path={`${navTypes.SignIn}`} element={<SignIn />} />
+          <Route path={`${navTypes.SignIn}`} element={<SignIn />}>
+            <Route path={':hospitalId'} element={<SignIn />}>
+              <Route path={':departmentId'} element={<SignIn />} />
+            </Route>
+          </Route>
           <Route path={`${navTypes.SignUp}`} element={<SignUp />} />
           <Route path={`${navTypes.ForgotPassword}`} element={<ForgotPassword />} />
           <Route path={`${navTypes.ForgotNewPassword}`} element={<ForgotNewPassword />} />
-          <Route path={`${navTypes.AcceptInvite}`} element={<AcceptInvite />} />
+          <Route path={`${navTypes.AcceptInviteNewUser}`} element={<AcceptInviteNewUser />} />
           <Route path={`${navTypes.CodeConfirmation}`} element={<CodeConfirmation />} />
+          <Route path={`${navTypes.AcceptInviteExistingUser}`} element={<AcceptInviteExistingUser />} />
         </>
       ) : (
         <>
@@ -74,6 +80,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
           <Route path={`${navTypes.AddPatientsList}`} element={<AddPatientsList />} />
           <Route path={`${navTypes.InvoicesList}`} element={<InvoicesList />} />
           <Route path={`${navTypes.SettingsPage}`} element={<SettingsPage />} />
+          <Route path={`${navTypes.AcceptInviteExistingUser}`} element={<AcceptInviteExistingUser />} />
         </>
       )}
       {/* Redirect with React router 6 */}

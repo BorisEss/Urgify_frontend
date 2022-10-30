@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { authActions, forgotSendMail } from '../actions/auth';
-// import { ForgotNewPasswordRoute } from '../navigation/navTypes';
 import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -20,8 +18,6 @@ const initialErrors: ForgotPasswordUiErrors = {
 const ForgotPassword: React.FC<ReduxProps> = ({
   forgotPasswordSendEmail,
 }) => {
-  // const navigate = useNavigate();
-
   const [itemFields, setItemFields] = React.useState<ForgotPasswordUiFields>({
     email: '',
   });
@@ -71,8 +67,6 @@ const ForgotPassword: React.FC<ReduxProps> = ({
       setErrors(initialErrors);
       Log.message(form);
       forgotPasswordSendEmail(itemFields.email)
-        // .then(() => {
-        // })
         .catch((e: any) => {
           if (e) {
             const newErrors: ForgotPasswordUiErrors = {...initialErrors};

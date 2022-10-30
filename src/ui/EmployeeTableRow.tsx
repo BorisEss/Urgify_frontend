@@ -5,7 +5,7 @@ import { IMask } from 'react-imask';
 import {makeStyles} from 'tss-react/mui';
 
 import type { DepartmentEmployeeType } from '../api/apiTypes';
-import { employeeAttributes, employeeStatuses } from '../constants/employee';
+import { employeeAttributes, patientStatuses } from '../constants/employee';
 import type { EmployeeAttributeItem } from '../types';
 import AttributionDropdown from './AttributionDropdown';
 
@@ -38,9 +38,6 @@ const useStyles = makeStyles()({
   },
   gray: {
     background: '#B8B8B8',
-  },
-  red: {
-    background: '#F93822',
   },
 });
 
@@ -78,10 +75,8 @@ const EmployeeTableRow: React.FC<Props> = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case employeeStatuses.Pending: return 'yellow';
-      case employeeStatuses.Accepted: return 'green';
-      case employeeStatuses.Expired: return 'gray';
-      case employeeStatuses.Declined: return 'red';
+      case patientStatuses.Pending: return 'yellow';
+      case patientStatuses.Active: return 'green';
       default: return 'gray';
     }
   };

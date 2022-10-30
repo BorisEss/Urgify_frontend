@@ -10,9 +10,11 @@ export enum navTypes {
   Home = '/',
   SignUp = '/sign-up',
   SignIn = '/sign-in',
+  SignInWithParams = '/sign-in/:hospitalId/:departmentId',
   ForgotPassword = '/forgot-password',
   ForgotNewPassword = '/password-reset/:uid/:token',
-  AcceptInvite = '/accept-invite/:hash',
+  AcceptInviteNewUser = '/accept-invite-new-user/:hash/:hospitalId/:departmentId',
+  AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:hospitalId/:departmentId',
   HospitalAdmin = '/hospitals/add',
   HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
   Hospitals = '/hospitals/',
@@ -34,14 +36,17 @@ export const SignUpRoute = () => {
 export const SignInRoute = () => {
   return navTypes.SignIn;
 };
+export const SignInWithParamsRoute = () => {
+  return navTypes.SignInWithParams;
+};
 export const ForgotPasswordRoute = () => {
   return navTypes.ForgotPassword;
 };
 export const ForgotNewPasswordRoute = () => {
   return navTypes.ForgotNewPassword;
 };
-export const AcceptInviteRoute = () => {
-  return navTypes.AcceptInvite;
+export const AcceptInviteNewUserRoute = () => {
+  return navTypes.AcceptInviteNewUser;
 };
 export const HospitalAdminRoute = () => {
   return navTypes.HospitalAdmin;
