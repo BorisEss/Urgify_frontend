@@ -1,8 +1,6 @@
-export const employeeStatuses = {
+export const patientStatuses = {
   Pending: 'Pending',
-  Accepted: 'Accepted',
-  Expired: 'Expired',
-  Declined: 'Declined',
+  Active: 'Active',
 };
 
 export const employeeAttributes = {

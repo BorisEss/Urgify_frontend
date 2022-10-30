@@ -4,7 +4,7 @@ import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { acceptInviteExistingUser } from '../actions/auth';
-import { AddPatientsRoute, SignInRoute } from '../navigation/navTypes';
+import { AddPatientsRoute, SignInWithParamsRoute } from '../navigation/navTypes';
 import { isAuthenticated } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -22,14 +22,10 @@ const AcceptInviteExistingUser: React.FC<ReduxProps> = ({
     if (hash) {
       acceptInviteExisting(hash)
         .then(() => {
-          console.log('confirm succeed');
-          console.log('succeed hospitalId', hospitalId);
-          console.log('succeed departmentId', departmentId);
-          console.log('isAuth', isAuth);
           if (isAuth) {
             navigate(generatePath(AddPatientsRoute(), { hospitalId, departmentId }));
           } else {
-            navigate(generatePath(SignInRoute(), { hospitalId, departmentId }));
+            navigate(generatePath(SignInWithParamsRoute(), { hospitalId, departmentId }));
           }
           return;
         })

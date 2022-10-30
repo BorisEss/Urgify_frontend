@@ -10,6 +10,7 @@ export enum navTypes {
   Home = '/',
   SignUp = '/sign-up',
   SignIn = '/sign-in',
+  SignInWithParams = '/sign-in/:hospitalId/:departmentId',
   ForgotPassword = '/forgot-password',
   ForgotNewPassword = '/password-reset/:uid/:token',
   AcceptInviteNewUser = '/accept-invite-new-user/:hash/:hospitalId/:departmentId',
@@ -34,6 +35,9 @@ export const SignUpRoute = () => {
 };
 export const SignInRoute = () => {
   return navTypes.SignIn;
+};
+export const SignInWithParamsRoute = () => {
+  return navTypes.SignInWithParams;
 };
 export const ForgotPasswordRoute = () => {
   return navTypes.ForgotPassword;

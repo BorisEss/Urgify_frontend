@@ -5,7 +5,7 @@ import { createSelector } from 'redux-views';
 
 import { acceptInviteNewUser } from '../actions/auth';
 import NewPasswordsWrapper from '../components/NewPasswordsWrapper';
-import { SignInRoute } from '../navigation/navTypes';
+import { SignInWithParamsRoute } from '../navigation/navTypes';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
 import type { AppState } from '../store';
@@ -20,7 +20,7 @@ const AcceptInviteNewUser: React.FC<ReduxProps> = ({
     if (hash) {
       return acceptInviteSendPassword(password, hash)
         .then(() => {
-          navigate(generatePath(SignInRoute(), { hospitalId, departmentId }));
+          navigate(generatePath(SignInWithParamsRoute(), { hospitalId, departmentId }));
           return;
         })
         .catch((e: any) => {
