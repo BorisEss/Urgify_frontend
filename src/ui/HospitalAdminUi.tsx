@@ -64,10 +64,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   buttonContainer: {
@@ -148,6 +148,7 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
             image={image}
             setImage={setImage}
             error={!!hospitalImageError}
+            errorText={hospitalImageError}
           />
         </div>
           <div className={classes.authFormSpacing}>
@@ -158,6 +159,7 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
                 type="text"
                 name="hospitalName"
                 error={!!hospitalNameError}
+                errorText={hospitalNameError}
               />
             </div>
             <div className={classes.buttonContainer}>

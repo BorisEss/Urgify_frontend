@@ -17,7 +17,7 @@ import Input from './Inputs/Input';
 
 const useStyles = makeStyles()((_theme: Theme) => ({
   buttonContainer: {
-    paddingTop: 32,
+    paddingTop: 11,
   },
 }));
 
@@ -109,6 +109,7 @@ const JoinWaitingListForm: React.FC<ReduxProps> = ({
         onChange={onInputChange}
         name="email"
         error={!!errors.email}
+        errorText={errors.email}
         onBlur={() => validateField('email')}
       />
       <div className={classes.buttonContainer}>

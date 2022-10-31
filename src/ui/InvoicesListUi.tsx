@@ -7,6 +7,8 @@ import HospitalHeader from './HospitalHeader';
 import HospitalTitleBox from './HospitalTitleBox';
 import SearchInput from './Inputs/SearchInput';
 import InvoicesListTable from './InvoicesListTable';
+import Modal from './Modal';
+import NewInvoiceModal from './NewInvoiceModal';
 
 const useStyles = makeStyles()({
   headerWrap: {
@@ -97,6 +99,16 @@ const useStyles = makeStyles()({
 
 const InvoicesListUi = () => {
   const {cx,classes} = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <HospitalDashboardWrapper children={
@@ -156,7 +168,10 @@ const InvoicesListUi = () => {
             <div className={classes.contentMargin} />
             <div className={classes.actionsWrap}>
               <div className={classes.createBtnWrap}>
-                <Button title="Create new invoice" />
+                <Button
+                  title="Create new invoice"
+                  onClick={handleClickOpen}
+                />
               </div>
               <div className={classes.searchWrap}>
                 <SearchInput />
@@ -167,6 +182,14 @@ const InvoicesListUi = () => {
             </div>
           </div>
         </div>
+        <Modal
+        open={open}
+        handleClose={handleClose}
+        borderRadius={4}
+        children={
+          <NewInvoiceModal handleClose={handleClose}  />
+        }
+      />
       </>
     } />
   );

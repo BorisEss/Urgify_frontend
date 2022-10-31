@@ -105,7 +105,7 @@ const useStyles = makeStyles()((_theme: Theme) => ({
   dataHospital: {
     display: 'flex',
     gap: 32,
-    paddingBottom: 32,
+    paddingBottom: 11,
   },
   halfInput: {
     flex: '50%',
@@ -416,6 +416,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
             onChange={onInputChange}
             name="email"
             error={!!errors.email}
+            errorText={errors.email}
             onBlur={() => validateField('email')}
           />
         </div>
@@ -428,6 +429,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
             onChange={onInputChange}
             name="hospitalName"
             error={!!errors.hospitalName}
+            errorText={errors.hospitalName}
             onBlur={() => validateField('hospitalName')}
           />
         </div>

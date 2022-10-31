@@ -72,6 +72,7 @@ type Props = {
   image?: File | null;
   setImage?: (image: File | null) => void;
   error?: boolean;
+  errorText?: string;
 }
 
 const Dropzone: React.FC<Props> = ({

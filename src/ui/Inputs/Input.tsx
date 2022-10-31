@@ -77,11 +77,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
   closeIcon: {
     position: 'absolute',
     right: 12,
-    bottom: 16,
+    top: 16,
     cursor: 'pointer',
     lineHeight: 0,
   },
   rootRelative: {
+    position: 'relative',
+  },
+  inputWrap: {
     position: 'relative',
   },
   fullWidth: {
@@ -133,27 +136,29 @@ const Input: React.FC<InputType> = ({
   return (
     <div className={cx(onDelete ? classes.rootRelative : '', classes.fullWidth )}>
       <p className={cx(classes.label, labelCenter ? classes.labelCenter : '')}>{label}</p>
-      <input
-        name={name}
-        type={type}
-        className={cx(
-          classes.input,
-          error ? classes.error : '',
-          darkerPlaceholderColor ? classes.darkerPlaceholderColor : '',
-        )}
-        disabled={disabled}
-        onChange={(e) => (onChange ? onChange(e) : () => {})}
-        onBlur={() => (onBlur ? onBlur() : () => {})}
-        value={value}
-        placeholder={placeholder}
-      />
+      <div className={classes.inputWrap}>
+        <input
+          name={name}
+          type={type}
+          className={cx(
+            classes.input,
+            error ? classes.error : '',
+            darkerPlaceholderColor ? classes.darkerPlaceholderColor : '',
+          )}
+          disabled={disabled}
+          onChange={(e) => (onChange ? onChange(e) : () => {})}
+          onBlur={() => (onBlur ? onBlur() : () => {})}
+          value={value}
+          placeholder={placeholder}
+        />
+        {onDelete ? (
+          <div onClick={onDelete} className={classes.closeIcon}>
+            <img src={images.closeIcon} />
+          </div>
+        ) : null}
+      </div>
       {/* Show this everytime to avoid changing height when error appears/disappers */}
       <p className={classes.errorHelper}>{errorText}</p>
-      {onDelete ? (
-        <div onClick={onDelete} className={classes.closeIcon}>
-          <img src={images.closeIcon} />
-        </div>
-      ) : null}
     </div>
   );
 };

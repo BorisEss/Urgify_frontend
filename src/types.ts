@@ -26,6 +26,14 @@ export type NewPatientFormFields = {
   phone: string;
   address: string;
 };
+export type NewInvoiceFormFields = {
+  patientName: string;
+  dateServiceStart: string;
+  dateServiceEnd: string;
+  serviceDescription: string;
+  chargesAmount: string;
+  dueDate: string;
+};
 
 export type SignUpUiFields = {
   email: string;
@@ -67,6 +75,8 @@ export type JoinWaitingListFormErrors = Record<string, string>;
 export type PreOrderFormErrors = Record<string, string>;
 
 export type NewPatientFormErrors = Record<string, string>;
+
+export type NewInvoiceFormErrors = Record<string, string>;
 
 export type SignUpUiErrors = Record<string, string>;
 

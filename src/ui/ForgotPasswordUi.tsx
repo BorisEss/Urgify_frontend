@@ -67,10 +67,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   actions: {
@@ -153,6 +153,7 @@ const ForgotPasswordUi : React.FC<ForgotPasswordType> = ({
               onChange={onInputChange}
               name="email"
               error={!!errors.email}
+              errorText={errors.email}
               onBlur={() => validateField('email')}
               />
           </div>

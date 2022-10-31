@@ -52,7 +52,7 @@ const useStyles = makeStyles()({
     paddingTop: 32,
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
   },
   actions: {
     display: 'flex',
@@ -139,6 +139,7 @@ const HospitalAddDepartmentsUi: React.FC<Props> = ({
                   onChange={e => handleInputChange(e, key)}
                   onDelete={newDepartmentsCount > 1 ? () => handleRemoveClick(key) : undefined}
                   error={!!fieldErrors[key]}
+                  errorText={fieldErrors[key]}
                 />
               </div>
             ))}

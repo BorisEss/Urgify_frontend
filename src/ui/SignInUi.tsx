@@ -68,10 +68,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   actions: {
@@ -149,6 +149,7 @@ const SignInUi: React.FC<SignInUiType> = ({
               onChange={onInputChange}
               name="email"
               error={!!errors.email}
+              errorText={errors.email}
               onBlur={() => validateField('email')}
             />
           </div>
@@ -159,6 +160,7 @@ const SignInUi: React.FC<SignInUiType> = ({
               onChange={onInputChange}
               name="password"
               error={!!errors.password}
+              errorText={errors.password}
               onBlur={() => validateField('password')}
             />
           </div>

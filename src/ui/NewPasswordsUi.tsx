@@ -44,10 +44,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   actions: {
@@ -144,6 +144,7 @@ const NewPasswordsUi : React.FC<NewPasswordsUiType> = ({
               onChange={onInputChange}
               name="password"
               error={!!errors.password}
+              errorText={errors.password}
               onBlur={() => validateField('password')}
               placeholder="New password"
             />
@@ -154,6 +155,7 @@ const NewPasswordsUi : React.FC<NewPasswordsUiType> = ({
             onChange={onInputChange}
             name="repeatPassword"
             error={!!errors.repeatPassword}
+            errorText={errors.repeatPassword}
             onBlur={() => validateField('password')}
             placeholder="Repeat new password"
           />

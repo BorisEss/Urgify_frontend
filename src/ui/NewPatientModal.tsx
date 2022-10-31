@@ -32,7 +32,7 @@ const useStyles = makeStyles()((_theme) => ({
   },
   halfInput: {
     flex: '0 0 calc(50% - 16px)',
-    paddingBottom: 32,
+    paddingBottom: 11,
   },
   button: {
     paddingTop: 32,
@@ -140,74 +140,81 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
       </div>
       <div className={classes.patientForm}>
         <div className={classes.halfInput}>
-            <Input
-              type="text"
-              label="First Name"
-              onChange={onInputChange}
-              name="firstName"
-              error={!!errors.firstName}
-              onBlur={() => validateField('firstName')}
-            />
+          <Input
+            type="text"
+            label="First Name"
+            onChange={onInputChange}
+            name="firstName"
+            error={!!errors.firstName}
+            errorText={errors.firstName}
+            onBlur={() => validateField('firstName')}
+          />
         </div>
         <div className={classes.halfInput}>
-            <Input
-              type="text"
-              label="Last Name"
-              onChange={onInputChange}
-              name="lastName"
-              error={!!errors.lastName}
-              onBlur={() => validateField('lastName')}
-            />
+          <Input
+            type="text"
+            label="Last Name"
+            onChange={onInputChange}
+            name="lastName"
+            error={!!errors.lastName}
+            errorText={errors.lastName}
+            onBlur={() => validateField('lastName')}
+          />
         </div>
         <div className={classes.halfInput}>
-            <Input
-              type="email"
-              label="Email"
-              onChange={onInputChange}
-              name="email"
-              error={!!errors.email}
-              onBlur={() => validateField('email')}
-            />
+          <Input
+            type="email"
+            label="Email"
+            onChange={onInputChange}
+            name="email"
+            error={!!errors.email}
+            errorText={errors.email}
+            onBlur={() => validateField('email')}
+          />
         </div>
         <div className={classes.halfInput}>
-            <Input
-              type="text"
-              label="Birth Date"
-              onChange={onInputChange}
-              name="birthDate"
-              error={!!errors.birthDate}
-              onBlur={() => validateField('birthDate')}
-            />
+          <Input
+            type="text"
+            label="Birth Date"
+            onChange={onInputChange}
+            name="birthDate"
+            error={!!errors.birthDate}
+            errorText={errors.birthDate}
+            onBlur={() => validateField('birthDate')}
+          />
         </div>
         <div className={classes.halfInput}>
-            <Input
-              type="text"
-              label="Social Security Number"
-              onChange={onInputChange}
-              name="socialSecurityNumber"
-              error={!!errors.socialSecurityNumber}
-              onBlur={() => validateField('socialSecurityNumber')}
-            />
+          <Input
+            type="text"
+            label="Social Security Number"
+            onChange={onInputChange}
+            name="socialSecurityNumber"
+            error={!!errors.socialSecurityNumber}
+            errorText={errors.socialSecurityNumber}
+            onBlur={() => validateField('socialSecurityNumber')}
+          />
         </div>
         <div className={classes.halfInput}>
-            <Input
-              type="text"
-              label="Phone"
-              onChange={onInputChange}
-              name="phone"
-              error={!!errors.phone}
-              onBlur={() => validateField('phone')}
-            />
+          <Input
+            type="text"
+            label="Phone"
+            onChange={onInputChange}
+            name="phone"
+            error={!!errors.phone}
+            errorText={errors.phone}
+            onBlur={() => validateField('phone')}
+          />
         </div>
-            <Input
-              type="text"
-              label="Address"
-              fullWidth
-              onChange={onInputChange}
-              name="address"
-              error={!!errors.address}
-              onBlur={() => validateField('address')}
-            />
+          <Input
+            type="text"
+            label="Address"
+            fullWidth
+            onChange={onInputChange}
+            name="address"
+            error={!!errors.address}
+            errorText={errors.address}
+            onBlur={() => validateField('address')}
+          />
          <div className={classes.button}>
           <Button
             title="Add new patient"
