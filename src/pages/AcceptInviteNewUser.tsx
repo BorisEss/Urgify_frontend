@@ -25,7 +25,6 @@ const AcceptInviteNewUser: React.FC<ReduxProps> = ({
         })
         .catch((e: any) => {
           Log.message(e);
-          // here can be shown global error, about hash
           throw e;
         });
     }

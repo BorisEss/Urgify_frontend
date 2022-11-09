@@ -10,6 +10,7 @@ import Button from './Buttons/Button';
 import Input from './Inputs/Input';
 import Logo from './Logo';
 import MustContain from './MustContain';
+import SubmitErrorMessage from './SubmitErrorMessage';
 
 const useStyles = makeStyles()((theme: Theme) => ({
   logoBox: {
@@ -103,6 +104,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
   },
+  errorWrap: {
+    paddingBottom: 8,
+  },
 }));
 
 type NewPasswordsUiType = {
@@ -111,6 +115,7 @@ type NewPasswordsUiType = {
   validateField: (field: string) => void;
   onSubmit: () => void;
   passwordSecure: PasswordSecureFields;
+  submitError: any;
 };
 
 const NewPasswordsUi : React.FC<NewPasswordsUiType> = ({
@@ -119,6 +124,7 @@ const NewPasswordsUi : React.FC<NewPasswordsUiType> = ({
   validateField,
   onSubmit,
   passwordSecure,
+  submitError,
 }) => {
   const {classes} = useStyles();
 
@@ -190,6 +196,7 @@ const NewPasswordsUi : React.FC<NewPasswordsUiType> = ({
             />
           </div>
         </div>
+        {submitError && <div className={classes.errorWrap}><SubmitErrorMessage message={submitError} /></div> }
         <div className={classes.actions}>
           <div className={classes.buttonContainer}>
             <Button

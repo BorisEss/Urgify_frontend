@@ -54,6 +54,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
       borderColor: '#DE3922',
     },
   },
+  flexBtnContent: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
 }));
 
 type ButtonType = {
@@ -69,6 +75,7 @@ type ButtonType = {
   href?: string;// only if use html <a> tag
   titleAttr?: string;// only if use html <a> tag
   extraClass?: string;
+  icon?: React.ReactNode;
   onClick?: () => void; //only for type 'button'
 };
 
@@ -85,6 +92,7 @@ const OutlinedButton: React.FC<ButtonType> = ({
   bigger,
   w100,
   lowerCase,
+  icon,
   onClick,
 }) => {
   const {classes, cx} = useStyles();
@@ -100,8 +108,10 @@ const OutlinedButton: React.FC<ButtonType> = ({
         bigger ? classes.bigger : '',
         w100 ? classes.w100 : '',
         lowerCase ? classes.lowerCase : '',
+        icon ? classes.flexBtnContent : '',
         classes[color]
       )}>
+      {icon ? icon : null}
       {title}
     </button>
   );

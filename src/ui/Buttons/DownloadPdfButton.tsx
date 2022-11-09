@@ -49,7 +49,7 @@ const DownloadPdfButton: React.FC<DownloadPdfButtonType> = ({url}) => {
         <img className={classes.icon} src={images.circleCheckWhite}/>
         <p>{url}</p>
       </div>
-      <div className={cx(classes.item,classes.widthCloser)}>
+      <div className={cx(classes.item, classes.widthCloser)}>
         <img className={classes.icon} src={images.cloudDown}/>
         <p>Download</p>
       </div>

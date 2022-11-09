@@ -80,19 +80,6 @@ export type NewInvoiceFormErrors = Record<string, string>;
 
 export type SignUpUiErrors = Record<string, string>;
 
-export type AddDepartmentEmployeeUiErrors = Record<string, string>;
-
-export type DepartmentsFieldsType = Record<string, string>;
-
-export type DepartmentsFieldErrosType = Record<string, string>;
-
-export type EmployeeAttributeItem = {
-  id: number;
-  title: string;
-  description: string;
-  checked: boolean;
-}
-
 export type PaymentOption = {
   id: number;
   title: string;

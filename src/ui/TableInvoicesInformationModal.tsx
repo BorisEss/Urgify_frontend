@@ -7,7 +7,6 @@ import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-
 const useStyles = makeStyles()({
   tr: {
   },

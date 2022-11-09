@@ -16,36 +16,8 @@ export const getExploreIdeaIsFetching = createSelector([getNetworkState], (state
   return !!byKey.exploreIdea;
 });
 
-export const getHospitalsIsFetching = createSelector([getNetworkState], (state) => {
-  const byKey = state.activeRequestsByKey;
-  if (!byKey) return false;
-  return !!byKey.hospitals;
-});
-
-export const getAddHospitalIsFetching = createSelector([getNetworkState], (state) => {
+export const getHospitalIsFetching = createSelector([getNetworkState], (state) => {
   const byKey = state.activeRequestsByKey;
   if (!byKey) return false;
   return !!byKey.hospital;
-});
-
-export const getDepartmentsIsFetching = createSelector([getNetworkState], (state) => {
-  const byKey = state.activeRequestsByKey;
-  if (!byKey) return false;
-  return !!byKey.departments;
-});
-
-export const getHospitalsOrDepartmentsIsFetching = createSelector([getHospitalsIsFetching, getDepartmentsIsFetching],
-  (hospitalsIsFetching, departmentsIsFetching) => {
-  return hospitalsIsFetching || departmentsIsFetching;
-});
-
-export const getEmployeesIsFetching = createSelector([getNetworkState], (state) => {
-  const byKey = state.activeRequestsByKey;
-  if (!byKey) return false;
-  return !!byKey.employee;
-});
-
-export const getHospitalsOrDepartmentsOrEmployeeIsFetching = createSelector([getHospitalsOrDepartmentsIsFetching, getEmployeesIsFetching],
-  (hospitalsAndDepIsFetching, employeesIsFetching) => {
-  return hospitalsAndDepIsFetching || employeesIsFetching;
 });

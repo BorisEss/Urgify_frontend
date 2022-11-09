@@ -2,7 +2,6 @@ import type {Theme} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import { textNumbers } from '../constants/hospitals';
 import images from '../images';
 import AuthPageTitle from './AuthPageTitle';
 import AuthPageWrapper from './AuthPageWrapper';
@@ -98,7 +97,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 type HospitalAdminUiType = {
-  hospitalCount: number;
   isFetching: boolean;
   image: File | null;
   setImage: (image: File | null) => void;
@@ -109,7 +107,6 @@ type HospitalAdminUiType = {
 };
 
 const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
-  hospitalCount,
   // isFetching,
   image,
   setImage,
@@ -132,7 +129,7 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
         </div>
         <div className={classes.titleSpacing}>
           <AuthPageTitle
-            title={`Let’s add your ${hospitalCount < 20 ? textNumbers[hospitalCount + 1] : hospitalCount + 1} hospital`}
+            title={'Let’s add your hospital'}
             subtitle={
               <p className={classes.subtitle}>
                 Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.

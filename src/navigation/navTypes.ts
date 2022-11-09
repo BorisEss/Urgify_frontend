@@ -16,10 +16,6 @@ export enum navTypes {
   AcceptInviteNewUser = '/accept-invite-new-user/:hash/:hospitalId/:departmentId',
   AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:hospitalId/:departmentId',
   HospitalAdmin = '/hospitals/add',
-  HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
-  Hospitals = '/hospitals/',
-  AddDepartmentEmployee = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
-  EmployeeList = '/hospitals/:hospitalId/departments/:departmentId/employees',
   AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients/import',
   AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients',
   InvoicesList = '/hospitals/:hospitalId/departments/:departmentId/invoices-list',
@@ -50,18 +46,6 @@ export const AcceptInviteNewUserRoute = () => {
 };
 export const HospitalAdminRoute = () => {
   return navTypes.HospitalAdmin;
-};
-export const HospitalAddDepartmentsRoute = () => {
-  return navTypes.HospitalAddDepartments;
-};
-export const HospitalsRoute = () => {
-  return navTypes.Hospitals;
-};
-export const  AddDepartmentEmployeeRoute = () => {
-  return navTypes.AddDepartmentEmployee;
-};
-export const  EmployeeListRoute = () => {
-  return navTypes.EmployeeList;
 };
 export const  AddPatientsRoute = () => {
   return navTypes.AddPatients;

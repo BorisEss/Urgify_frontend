@@ -1,60 +1,34 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { generatePath, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { addHospital, getHospitalsAndDepartments } from '../actions/hospital';
-import { HospitalAddDepartmentsRoute, HospitalsRoute } from '../navigation/navTypes';
-import { getHospitalsArray } from '../selectors/hospital';
-import { getAddHospitalIsFetching, getHospitalsIsFetching } from '../selectors/network';
+import { addHospital, getHospital } from '../actions/hospital';
+import { getCurrentHospital } from '../selectors/hospital';
+import { getHospitalIsFetching } from '../selectors/network';
 import type { AppState } from '../store';
 import HospitalAdminUi from '../ui/HospitalAdminUi';
 import LoaderBox from '../ui/LoaderBox';
-import { checkExistenceHospitalsAndDepartments, checkHospitalsLimit, isUrlFromAuth } from '../utils/loginRedirectFlow';
+import { isUrlFromAuth } from '../utils/loginRedirectFlow';
 import { maxLength, minLength } from '../utils/strings';
 
 const HospitalAdmin: React.FC<ReduxProps> = ({
-  hospitals,
-  hospitalsIsFetching,
-  addHospitalIsFetching,
-  fetchHospitals,
+  hospital,
+  hospitalIsFetching,
+  fetchHospital,
   createHospital,
 }) => {
-  const hospitalCount: number = hospitals.length;
-
   const [isFetching, setIsFetching] = React.useState<boolean>(true);
   const [hospitalName, setHospitalName] = React.useState<string>('');
   const [hospitalNameError, setHospitalNameError] = React.useState<string>('');
   const [hospitalImageError, setHospitalImageError] = React.useState<string>('');
   const [image, setImage] = React.useState<File | null>(null);
-  const navigate = useNavigate();
   let location = useLocation();
 
-  const navigateToHospitals = () => {
-    navigate(generatePath(HospitalsRoute()));
-  };
-
-  const navigateToAddDepartments = (hospitalId: string) => {
-    navigate(generatePath(HospitalAddDepartmentsRoute(), { hospitalId: hospitalId }));
-  };
-
-  const checkHospitalsExistence = () => {
-    if (checkHospitalsLimit(hospitals.length)) {
-      navigateToHospitals();
-      return;
-    }
-
+  const checkHospitalExistence = () => {
+    console.log(hospital);
     if (isUrlFromAuth(location.state)) {
-      const [hospitalExists, departmentExist] = checkExistenceHospitalsAndDepartments(hospitals);
-      if (hospitalExists && departmentExist) {
-        navigateToHospitals();
-        return;
-      }
 
-      if (hospitalExists && !departmentExist) {
-        navigateToAddDepartments(hospitals[0].id);
-        return;
-      }
     }
   };
 
@@ -88,9 +62,9 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
   const onSubmit = () => {
     if (validate() && image) {
       createHospital(hospitalName, image)
-        .then(hospital => {
-          if (hospital && hospital.id) {
-            navigateToAddDepartments(hospital.id);
+        .then(resp => {
+          if (resp && resp.id) {
+            // navigate to dashboard
           }
         })
         .catch((e: any) => {
@@ -105,20 +79,19 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
   };
 
   React.useEffect(() => {
-    fetchHospitals()
+    fetchHospital()
       .finally(() => {
         setIsFetching(false);
       });
-  }, [fetchHospitals]);
+  }, [fetchHospital]);
 
-  if (!hospitalsIsFetching) {
-    checkHospitalsExistence();
+  if (!hospitalIsFetching) {
+    checkHospitalExistence();
   }
-  if (hospitalsIsFetching || isFetching) return <LoaderBox />;
-  if (!hospitalsIsFetching && !isFetching) {
+  if (hospitalIsFetching || isFetching) return <LoaderBox />;
+  if (!hospitalIsFetching && !isFetching) {
     return <HospitalAdminUi
-      hospitalCount={hospitalCount}
-      isFetching={addHospitalIsFetching}
+      isFetching={hospitalIsFetching}
       image={image}
       setImage={onImageChange}
       onSubmit={onSubmit}
@@ -131,18 +104,17 @@ const HospitalAdmin: React.FC<ReduxProps> = ({
 };
 
 const getData = createSelector(
-  [getHospitalsArray, getHospitalsIsFetching, getAddHospitalIsFetching],
-  (hospitals, hospitalsIsFetching, addHospitalIsFetching) => {
+  [getCurrentHospital, getHospitalIsFetching],
+  (hospital, hospitalIsFetching) => {
     return {
-      hospitals,
-      hospitalsIsFetching,
-      addHospitalIsFetching,
+      hospital,
+      hospitalIsFetching,
     };
   },
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  fetchHospitals: getHospitalsAndDepartments,
+  fetchHospital: getHospital,
   createHospital: addHospital,
 });
 

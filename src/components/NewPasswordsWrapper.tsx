@@ -20,13 +20,13 @@ type NewPasswordsType = {
 const NewPasswordsWrapper: React.FC<NewPasswordsType> = ({
   fetchPasswrodsUpdate,
 }) => {
-
   const [itemFields, setItemFields] = React.useState<NewPasswordsFields>({
     password: '',
     repeatPassword: '',
   });
 
   const [errors, setErrors] = React.useState<NewPasswordsErrors>(initialErrors);
+  const [submitError, setSubmitError] = React.useState<any>();
 
   const updateErrors = (field: string, error: string) => {
     setErrors({...errors, [field]: error});
@@ -81,7 +81,6 @@ const NewPasswordsWrapper: React.FC<NewPasswordsType> = ({
       setErrors(newErrors);
     } else {
       setErrors(initialErrors);
-      // but catch can be handled here, because need to set errors
       fetchPasswrodsUpdate(itemFields.password, itemFields.repeatPassword)
         .catch((e: any) => {
           Log.message(e);
@@ -95,6 +94,7 @@ const NewPasswordsWrapper: React.FC<NewPasswordsType> = ({
               newErrors.repeatPassword = e.new_password2;
             }
             setErrors(newErrors);
+            setSubmitError(e);
           }
         });
     }
@@ -123,6 +123,7 @@ const NewPasswordsWrapper: React.FC<NewPasswordsType> = ({
     validateField={validateField}
     onSubmit={onSubmit}
     errors={errors}
+    submitError={submitError}
     passwordSecure={passwordSecure}
   />;
 };

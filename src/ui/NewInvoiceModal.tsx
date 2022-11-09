@@ -1,13 +1,15 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import images from '../images';
+import {ReactComponent as ShowIcon} from '../images/show.svg';
 import Log from '../services/logger';
 import type { NewInvoiceFormErrors, NewInvoiceFormFields} from '../types';
 import { formObj, validate } from '../utils/authValidation';
 import Button from './Buttons/Button';
 import CloseButton from './Buttons/CloseButton';
 import OutlinedButton from './Buttons/OutlinedButton';
+import DropzoneInput from './DropzoneInput';
+import DatePicker from './Inputs/DatePicker';
 import Input from './Inputs/Input';
 
 const useStyles = makeStyles()((_theme) => ({
@@ -36,8 +38,10 @@ const useStyles = makeStyles()((_theme) => ({
     flex: '0 0 calc(50% - 16px)',
     paddingBottom: 11,
   },
-  button: {
-    paddingTop: 32,
+  medicalNumberWrap: {
+    display:'flex',
+    alignItems: 'center',
+    width:'47%',
   },
   medicalNumber: {
     fontFamily: 'Poppins-semibold',
@@ -51,13 +55,36 @@ const useStyles = makeStyles()((_theme) => ({
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'space-between',
+    width:'100%',
   },
   addMore: {
     display:'flex',
-    gap: 32,
+    width: '100%',
+    justifyContent: 'space-between',
   },
-  uploadFile: {
-    border: '1px dashed #777777',
+  divider: {
+    width: '100%',
+    height: 1,
+    background: '#DBDBDB',
+  },
+  buttonsWrap: {
+    paddingTop: 32,
+    width:'100%',
+    display: 'flex',
+    gap: 32,
+    alignItems: 'center',
+  },
+  button: {
+    width:'100%',
+  },
+  previewBtn: {
+    width: '100%',
+  },
+  dueDatePaddingTop: {
+    paddingTop: 21,
+  },
+  datePickerPaddingBottom: {
+    paddingBottom: 32,
   },
 }));
 
@@ -66,7 +93,7 @@ type NewInvoiceModalType = {
 };
 
 const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
-  const {classes} = useStyles();
+  const {classes, cx} = useStyles();
 
   const [itemFields, setItemFields] = React.useState<NewInvoiceFormFields>({
     patientName: '',
@@ -166,30 +193,28 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
             onBlur={() => validateField('patientName')}
           />
         </div>
-        <div className={classes.halfInput}>
+        <div className={classes.medicalNumberWrap}>
           <div className={classes.medicalNumber}>
             <p>Medical record Number</p>
             <p>SD9212969</p>
           </div>
         </div>
-        <div className={classes.halfInput}>
-          <Input
-            type="text"
+        <div className={cx(classes.halfInput, classes.datePickerPaddingBottom)}>
+          {/* onChange={onInputChange}
+          name="dateServiceStart"
+          error={!!errors.dateServiceStart}
+          onBlur={() => validateField('dateServiceStart')} */}
+          <DatePicker
             label="date of service start"
-            onChange={onInputChange}
-            name="dateServiceStart"
-            error={!!errors.dateServiceStart}
-            onBlur={() => validateField('dateServiceStart')}
           />
         </div>
-        <div className={classes.halfInput}>
-          <Input
-            type="text"
+        <div className={cx(classes.halfInput, classes.datePickerPaddingBottom)}>
+          {/* onChange={onInputChange}
+          name="dateServiceEnd"
+          error={!!errors.dateServiceEnd}
+          onBlur={() => validateField('dateServiceEnd')} */}
+          <DatePicker
             label="date of service end"
-            onChange={onInputChange}
-            name="dateServiceEnd"
-            error={!!errors.dateServiceEnd}
-            onBlur={() => validateField('dateServiceEnd')}
           />
         </div>
         <div className={classes.halfInput}>
@@ -210,37 +235,55 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
             name="chargesAmount"
             error={!!errors.chargesAmount}
             onBlur={() => validateField('chargesAmount')}
+            onDelete={() => {}}
           />
         </div>
         <div className={classes.addMore}>
-          <OutlinedButton
-            color="gray"
-            type="button"
-            title="+  Add one more"
-            w100
-            lowerCase
-          />
-          <div className={classes.uploadFile}>
-            <img src={images.filePDF} />
-            <span>Upload EOB (Explanation of Benefits)</span>
+          <div className={classes.halfInput}>
+            <OutlinedButton
+              color="gray"
+              type="button"
+              title="+  Add one more"
+              w100
+              lowerCase
+              bigger
+            />
+          </div>
+          <div className={classes.halfInput}>
+            <DropzoneInput />
           </div>
         </div>
-        {/* <div className={classes.halfInput}>
-            <Input
-              type="text"
-              label="due date"
-              onChange={onInputChange}
-              name="dueDate"
-              error={!!errors.dueDate}
-              onBlur={() => validateField('dueDate')}
-            />
-        </div> */}
-         <div className={classes.button}>
-          <Button
-            title="Send Invoice"
-            onClick={onSubmit}
+        <div className={cx(classes.halfInput, classes.dueDatePaddingTop)}>
+          <Input
+            type="text"
+            label="due date"
+            onChange={onInputChange}
+            name="dueDate"
+            error={!!errors.dueDate}
+            onBlur={() => validateField('dueDate')}
           />
-         </div>
+        </div>
+        <div className={classes.divider} />
+        <div className={classes.buttonsWrap}>
+          <div className={classes.previewBtn}>
+            <OutlinedButton
+              color="gray"
+              icon={<ShowIcon/>}
+              title="Preview Invoice"
+              lowerCase
+              w100
+              type="button"
+              bigger
+            />
+          </div>
+          <div className={classes.button}>
+            <Button
+              title="Send Invoice"
+              onClick={onSubmit}
+              w100
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

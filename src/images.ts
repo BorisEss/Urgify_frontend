@@ -23,9 +23,10 @@ import google from './images/google.svg';
 import ibm from './images/ibm.svg';
 import idCard from './images/id-card.svg';
 import ideactionLogo from './images/ideaction-logo.svg';
-import linkedin from './images/linkedin.svg';
+import linkedIn from './images/linked-in.svg';
 import linkedinMobile from './images/linkedin-mobile.svg';
 import logo from './images/logo.svg';
+import background from './images/logo1.png';
 import plus from './images/plus.svg';
 import radio from './images/radio.svg';
 import sample from './images/sample.png';
@@ -35,6 +36,7 @@ import show from './images/show.svg';
 import startupSchool from './images/startup-school.svg';
 import sticker from './images/sticker.svg';
 import trashCan from './images/trash-can.svg';
+import twitter from './images/twitter-modern.svg';
 import uploadTrash from './images/upload-trash.svg';
 import villageCapital from './images/village-capital.svg';
 import youtube from './images/youtube.svg';
@@ -46,7 +48,6 @@ const images = {
   ibm,
   ideactionLogo,
   linkedinMobile,
-  linkedin,
   logo,
   plus,
   villageCapital,
@@ -82,6 +83,9 @@ const images = {
   error,
   cloudDown,
   circleCheckWhite,
+  background,
+  linkedIn,
+  twitter,
 };
 
 export default images;
