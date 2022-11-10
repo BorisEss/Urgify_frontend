@@ -5,7 +5,7 @@ import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
 import OutlinedButton from './Buttons/OutlinedButton';
-import ExploreIdea from './ExploreIdea';
+// import ExploreIdea from './ExploreIdea';
 import Sticker from './Sticker';
 
 const useStyles = makeStyles()((theme: Theme) => ({
@@ -225,7 +225,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
   },
   outlinedButtonSpacing: {
-    marginLeft: 24,
+    // marginLeft: 24,
 
     // [theme.breakpoints.down(720)]: {
     //   marginLeft: 16,
@@ -387,7 +387,7 @@ const HomePageUi = () => {
   const {classes, cx} = useStyles();
   const isSmallPC = useMediaQuery('(max-width:1300px)');
   const isMobile = useMediaQuery('(max-width:890px)');
-  const isTablet = useMediaQuery('(max-width:1024px)');
+  // const isTablet = useMediaQuery('(max-width:1024px)');
 
   return (
     <>
@@ -448,7 +448,7 @@ const HomePageUi = () => {
               We believe that great ideas come from everywhere. So, if you would like to get a seat at the table and help us to make a product that you want and create an impact on, please get in touch and submit your idea, and we will make sure we build what matters most to you.
             </div>
             <div className={classes.actions}>
-            {!isTablet ? <ExploreIdea /> : null}
+              {/* {!isTablet ? <ExploreIdea /> : null} */}
               <OutlinedButton
                 color="orange"
                 rounded
