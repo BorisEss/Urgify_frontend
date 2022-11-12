@@ -23,7 +23,7 @@ const SignIn: React.FC<ReduxProps> = ({
     // authErrors,
     // isFetching,
   }) => {
-  let { hospitalId, departmentId } = useParams();
+  let { companyId, departmentId } = useParams();
 
   const [itemFields, setItemFields] = React.useState<SignInUiFields>({
     email: '',
@@ -78,15 +78,15 @@ const SignIn: React.FC<ReduxProps> = ({
       setErrors(initialErrors);
       Log.message(form);
       loginByEmail(itemFields.email, itemFields.password,
-        hospitalId && departmentId ? {
+        companyId && departmentId ? {
           to: navTypes.AddPatients,
           options: {
-            hospitalId,
+            companyId,
             departmentId,
           },
         }
         : {
-          to: navTypes.HospitalAdmin,
+          to: navTypes.CompanyAdmin,
           from: navTypes.SignIn,
         }
       )

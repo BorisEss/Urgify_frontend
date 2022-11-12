@@ -16,16 +16,16 @@ const AcceptInviteExistingUser: React.FC<ReduxProps> = ({
   acceptInviteExisting,
 }) => {
   const navigate = useNavigate();
-  let { hash, hospitalId, departmentId } = useParams();
+  let { hash, companyId, departmentId } = useParams();
 
   const sendAcceptRequest = () => {
     if (hash) {
       acceptInviteExisting(hash)
         .then(() => {
           if (isAuth) {
-            navigate(generatePath(AddPatientsRoute(), { hospitalId, departmentId }));
+            navigate(generatePath(AddPatientsRoute(), { companyId, departmentId }));
           } else {
-            navigate(generatePath(SignInWithParamsRoute(), { hospitalId, departmentId }));
+            navigate(generatePath(SignInWithParamsRoute(), { companyId, departmentId }));
           }
           return;
         })

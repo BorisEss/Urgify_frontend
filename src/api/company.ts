@@ -1,26 +1,26 @@
 import type { AppAsyncThunk } from '../actions/actionsTypes';
-import type { AddHospitalRequest, HospitalType } from './apiTypes';
+import type { AddCompanyRequest, CompanyType } from './apiTypes';
 import { decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
-// hospital
-export const getHospital = (): AppAsyncThunk<HospitalType> => (dispatch) => {
+// Company
+export const getCompany = (): AppAsyncThunk<CompanyType> => (dispatch) => {
   return dispatch(
     makeRequest({
-      key: 'hospitals',
+      key: 'companies',
       method: 'get',
-      path: '/hospitals/',
+      path: '/companies/',
       isAuth: true,
     }),
-  ).then(decodeHospital);
+  ).then(decodeCompany);
 };
 
-export const addHospital = (params: AddHospitalRequest): AppAsyncThunk<HospitalType> => (dispatch) => {
+export const addCompany = (params: AddCompanyRequest): AppAsyncThunk<CompanyType> => (dispatch) => {
   return dispatch(
     makeRequest({
-      key: 'hospital',
+      key: 'company',
       method: 'post',
-      path: '/hospitals/',
+      path: '/companies/',
       isAuth: true,
       params: {
         name: params.name,
@@ -36,23 +36,23 @@ export const addHospital = (params: AddHospitalRequest): AppAsyncThunk<HospitalT
         },
       ],
     }),
-  ).then(decodeHospital);
+  ).then(decodeCompany);
 };
 
 
-export const removeHospital = (hospitalId: string): AppAsyncThunk => (dispatch) => {
+export const removeCompany = (companyId: string): AppAsyncThunk => (dispatch) => {
   return dispatch(
     makeRequest({
-      key: 'hospital',
+      key: 'company',
       method: 'delete',
-      path: `/hospitals/${hospitalId}/`,
+      path: `/companies/${companyId}/`,
       isAuth: true,
     }),
   );
 };
 
 // decoders
-const decodeHospital = (data: any): HospitalType => ({
+const decodeCompany = (data: any): CompanyType => ({
   name: decodeString(data.name),
   id: decodeString(data.slug),
   logo: decodeString(data.logo),

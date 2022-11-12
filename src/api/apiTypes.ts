@@ -79,20 +79,20 @@ export type PaymentIntentRequest = {
   amount: number;
   currency: string;
   payment_method_types: string;
-  hospital_name: string;
+  company_name: string;
   email: string;
   invoices: number;
   months: number;
 };
 
-// hospitals
-export type HospitalType = {
+// Companies
+export type CompanyType = {
   name: string;
   id: string;
   logo: string;
 };
 
-export type AddHospitalRequest = {
+export type AddCompanyRequest = {
   name: string;
   logo: File;
 };

@@ -31,7 +31,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const HospitalTitleBox: React.FC<Props> = ({
+const CompanyTitleBox: React.FC<Props> = ({
   title,
   btnTitle,
   onClick,
@@ -55,4 +55,4 @@ const HospitalTitleBox: React.FC<Props> = ({
   );
 };
 
-export default  HospitalTitleBox;
+export default  CompanyTitleBox;

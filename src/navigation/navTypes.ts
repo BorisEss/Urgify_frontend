@@ -10,15 +10,15 @@ export enum navTypes {
   Home = '/',
   SignUp = '/sign-up',
   SignIn = '/sign-in',
-  SignInWithParams = '/sign-in/:hospitalId/:departmentId',
+  SignInWithParams = '/sign-in/:companyId/:departmentId',
   ForgotPassword = '/forgot-password',
   ForgotNewPassword = '/password-reset/:uid/:token',
-  AcceptInviteNewUser = '/accept-invite-new-user/:hash/:hospitalId/:departmentId',
-  AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:hospitalId/:departmentId',
-  HospitalAdmin = '/hospitals/add',
-  AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients/import',
-  AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients',
-  InvoicesList = '/hospitals/:hospitalId/departments/:departmentId/invoices-list',
+  AcceptInviteNewUser = '/accept-invite-new-user/:hash/:companyId/:departmentId',
+  AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:companyId/:departmentId',
+  CompanyAdmin = '/companies/add',
+  AddPatients = '/companies/:companyId/departments/:departmentId/patients/import',
+  AddPatientsList = '/companies/:companyId/departments/:departmentId/patients',
+  InvoicesList = '/companies/:companyId/departments/:departmentId/invoices-list',
   CodeConfirmation = '/code-confirmation',
   SettingsPage = '/settings-page',
 }
@@ -44,8 +44,8 @@ export const ForgotNewPasswordRoute = () => {
 export const AcceptInviteNewUserRoute = () => {
   return navTypes.AcceptInviteNewUser;
 };
-export const HospitalAdminRoute = () => {
-  return navTypes.HospitalAdmin;
+export const CompanyAdminRoute = () => {
+  return navTypes.CompanyAdmin;
 };
 export const  AddPatientsRoute = () => {
   return navTypes.AddPatients;

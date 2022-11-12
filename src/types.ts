@@ -15,7 +15,7 @@ export type JoinWaitingListFormFields = {
 
 export type PreOrderFormFields = {
   email: string;
-  hospitalName: string;
+  companyName: string;
 };
 export type NewPatientFormFields = {
   firstName: string;

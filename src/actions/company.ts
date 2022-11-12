@@ -1,30 +1,30 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import * as api from '../api';
-import type { HospitalType } from '../api/apiTypes';
+import type { CompanyType } from '../api/apiTypes';
 import type { AppAsyncThunk } from './actionsTypes';
 
-export const hospitalActions = {
-  setCurrentHospital: createAction('hospitalSetCurrentHospital', (hospital: HospitalType | null) => ({
-    payload: hospital,
+export const companyActions = {
+  setCurrentCompany: createAction('companySetCurrentCompany', (company: CompanyType | null) => ({
+    payload: company,
   })),
 };
 
 // company. need to get company by user
-export const getHospital = (): AppAsyncThunk<HospitalType | null> => (
+export const getCompany = (): AppAsyncThunk<CompanyType | null> => (
   dispatch,
 ) => {
-  return dispatch(api.getHospital())
+  return dispatch(api.getCompany())
     .then((response) => {
       if (!response) return null;
       return response;
     });
 };
 
-export const addHospital = (name: string, logo: File): AppAsyncThunk<HospitalType | undefined> => (
+export const addCompany = (name: string, logo: File): AppAsyncThunk<CompanyType | undefined> => (
   dispatch,
 ) => {
-  return dispatch(api.addHospital({name, logo}))
+  return dispatch(api.addCompany({name, logo}))
     .then((response) => {
       if (!response.id) return;
       return response;
@@ -34,10 +34,10 @@ export const addHospital = (name: string, logo: File): AppAsyncThunk<HospitalTyp
     });
 };
 
-export const removeHospital = (hospitalId: string): AppAsyncThunk => (
+export const removeCompany = (companyId: string): AppAsyncThunk => (
   dispatch,
 ) => {
-  return dispatch(api.removeHospital(hospitalId))
+  return dispatch(api.removeCompany(companyId))
     .then((response) => {
       return response;
     })

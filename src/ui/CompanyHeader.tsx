@@ -21,7 +21,7 @@ const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
     alignItems: 'center',
     padding: title ? '16px 0' : '20px 0',
   },
-  hospitalName: {
+  companyName: {
     fontFamily: 'Poppins-semibold',
     fontWeight: 600,
     fontSize: 16,
@@ -34,14 +34,14 @@ const useStyles = makeStyles<{title?: string}>()((_theme: Theme, {title}) => ({
   },
 }));
 
-type HospitalHeaderType = {
+type CompanyHeaderType = {
   title?: string;
   buttonTitle?: string;
   disablePaddingLeft?: boolean;
   onClick?: () => void;
 };
 
-const HospitalHeader: React.FC<HospitalHeaderType> = ({
+const CompanyHeader: React.FC<CompanyHeaderType> = ({
     title,
     buttonTitle,
     disablePaddingLeft,
@@ -58,7 +58,7 @@ const HospitalHeader: React.FC<HospitalHeaderType> = ({
             height={16}
           />
           {title ? (
-            <div className={classes.hospitalName}>
+            <div className={classes.companyName}>
               <p>{title}</p>
             </div>
           ) : null }
@@ -78,4 +78,4 @@ const HospitalHeader: React.FC<HospitalHeaderType> = ({
   );
 };
 
-export default HospitalHeader;
+export default CompanyHeader;

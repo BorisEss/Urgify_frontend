@@ -13,7 +13,7 @@ const ForgotPassword = React.lazy(() => import('../pages/ForgotPassword'));
 const ForgotNewPassword = React.lazy(() => import('../pages/ForgotNewPassword'));
 const AcceptInviteNewUser = React.lazy(() => import('../pages/AcceptInviteNewUser'));
 const AddPatientsList = React.lazy(() => import('../pages/AddPatientsList'));
-const HospitalAdmin = React.lazy(() => import('../pages/HospitalAdmin'));
+const CompanyAdmin = React.lazy(() => import('../pages/CompanyAdmin'));
 const AddPatients = React.lazy(() => import('../pages/AddPatients'));
 const InvoicesList = React.lazy(() => import('../pages/InvoicesList'));
 const CodeConfirmation = React.lazy(() => import('../pages/CodeConfirmation'));
@@ -54,7 +54,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
         <>
           <Route path={`${navTypes.Home}`} element={<Home />} />
           <Route path={`${navTypes.SignIn}`} element={<SignIn />}>
-            <Route path={':hospitalId'} element={<SignIn />}>
+            <Route path={':companyId'} element={<SignIn />}>
               <Route path={':departmentId'} element={<SignIn />} />
             </Route>
           </Route>
@@ -67,7 +67,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
         </>
       ) : (
         <>
-          <Route path={`${navTypes.HospitalAdmin}`} element={<HospitalAdmin />} />
+          <Route path={`${navTypes.CompanyAdmin}`} element={<CompanyAdmin />} />
           <Route path={`${navTypes.AddPatients}`} element={<AddPatients />} />
           <Route path={`${navTypes.AddPatientsList}`} element={<AddPatientsList />} />
           <Route path={`${navTypes.InvoicesList}`} element={<InvoicesList />} />
@@ -77,7 +77,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
       )}
       {/* Redirect with React router 6 */}
       {!(location.pathname.includes('docs') || location.pathname.includes('swagger')) && (
-        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.HospitalAdmin} />} />
+        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.CompanyAdmin} />} />
       )}
     </Routes>
   );

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import auth from '../reducers/auth';
-import hospital from '../reducers/hospital';
+import company from '../reducers/company';
 import network from '../reducers/network';
 
 const reducersList = {
   network,
   auth,
-  hospital,
+  company,
 };
 
 export default combineReducers(reducersList);

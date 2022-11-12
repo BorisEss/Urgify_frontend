@@ -16,8 +16,8 @@ export const getExploreIdeaIsFetching = createSelector([getNetworkState], (state
   return !!byKey.exploreIdea;
 });
 
-export const getHospitalIsFetching = createSelector([getNetworkState], (state) => {
+export const getCompanyIsFetching = createSelector([getNetworkState], (state) => {
   const byKey = state.activeRequestsByKey;
   if (!byKey) return false;
-  return !!byKey.hospital;
+  return !!byKey.company;
 });

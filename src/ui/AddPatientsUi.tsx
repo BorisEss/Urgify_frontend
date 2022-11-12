@@ -2,9 +2,9 @@ import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
 import AddPatientWrapper from '../components/AddPatientWrapper';
-import HospitalDashboardWrapper from '../components/HospitalDashboardWrapper';
+import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
+import CompanyHeader from './CompanyHeader';
 import DropzonePatients from './DropzonePatients';
-import HospitalHeader from './HospitalHeader';
 
 const useStyles = makeStyles()({
   headerWrap: {
@@ -25,11 +25,11 @@ const AddPatientsUi = () => {
   const {classes} = useStyles();
 
   return (
-    <HospitalDashboardWrapper children={
+    <CompanyDashboardWrapper children={
       <>
         <div className={classes.headerWrap}>
-          <HospitalHeader
-            title="Hospital Pediatric WA – Billings"
+          <CompanyHeader
+            title="Company Pediatric WA – Billings"
             disablePaddingLeft
           />
         </div>

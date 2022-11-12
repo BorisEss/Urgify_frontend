@@ -6,14 +6,13 @@ import images from '../images';
 import Button from './Buttons/Button';
 import OutlinedButton from './Buttons/OutlinedButton';
 
-
 const useStyles = makeStyles()((theme: Theme) => ({
   container: {
     backgroundImage: `url(${images.background})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center right',
     width: '100%',
-    paddingLeft: 128,
+    paddingLeft: 112,
     paddingRight: 74,
     paddingBottom: 69,
     minHeight: '100%',

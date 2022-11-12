@@ -1,10 +1,10 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import HospitalDashboardWrapper from '../components/HospitalDashboardWrapper';
+import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
 import Button from './Buttons/Button';
-import HospitalHeader from './HospitalHeader';
-import HospitalTitleBox from './HospitalTitleBox';
+import CompanyHeader from './CompanyHeader';
+import CompanyTitleBox from './CompanyTitleBox';
 import SearchInput from './Inputs/SearchInput';
 import InvoicesListTable from './InvoicesListTable';
 import Modal from './Modal';
@@ -111,18 +111,18 @@ const InvoicesListUi = () => {
   };
 
   return (
-    <HospitalDashboardWrapper
+    <CompanyDashboardWrapper
       children={
         <>
           <div className={classes.headerWrap}>
-            <HospitalHeader
-              title="Hospital Pediatric WA – Billings"
+            <CompanyHeader
+              title="Company Pediatric WA – Billings"
               disablePaddingLeft
             />
           </div>
           <div className={classes.content}>
             <div>
-              <HospitalTitleBox
+              <CompanyTitleBox
                 title="Invoices"
               />
               <div className={classes.paymentWrap}>

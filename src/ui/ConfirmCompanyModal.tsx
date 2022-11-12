@@ -118,12 +118,12 @@ const useStyles = makeStyles()((_theme) => ({
   },
 }));
 
-type ConfirmHospitalModalType = {
+type ConfirmCompanyModalType = {
   handleClose: () => void;
   charges: number;
 };
 
-const ConfirmHospitalModal: React.FC<ConfirmHospitalModalType> = ({handleClose, charges}) => {
+const ConfirmCompanyModal: React.FC<ConfirmCompanyModalType> = ({handleClose, charges}) => {
   const {classes} = useStyles();
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -171,4 +171,4 @@ const ConfirmHospitalModal: React.FC<ConfirmHospitalModalType> = ({handleClose, 
   );
 };
 
-export default ConfirmHospitalModal;
+export default ConfirmCompanyModal;

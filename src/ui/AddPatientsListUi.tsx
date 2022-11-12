@@ -3,9 +3,9 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
 import AddPatientWrapper from '../components/AddPatientWrapper';
-import HospitalDashboardWrapper from '../components/HospitalDashboardWrapper';
+import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
 import { AddPatientsRoute } from '../navigation/navTypes';
-import HospitalHeader from './HospitalHeader';
+import CompanyHeader from './CompanyHeader';
 import SearchInput from './Inputs/SearchInput';
 import PaginationControls from './PagintationControls';
 import TablePatients from './TablePatients';
@@ -35,19 +35,19 @@ const useStyles = makeStyles()({
 });
 
 type Props = {
-  hospitalId: string,
+  companyId: string,
   departmentId: string,
 }
 
 const AddPatientsListUi: React.FC<Props> = ({
-  hospitalId,
+  companyId,
   departmentId,
 }) => {
   const {classes} = useStyles();
   const navigate = useNavigate();
 
   const navigateToImportPacients = () => {
-    navigate(generatePath(AddPatientsRoute(), { hospitalId, departmentId }));
+    navigate(generatePath(AddPatientsRoute(), { companyId, departmentId }));
   };
 
   const onChangePage = (page: number) => {
@@ -56,11 +56,11 @@ const AddPatientsListUi: React.FC<Props> = ({
     // getRequest
   };
   return (
-    <HospitalDashboardWrapper children={
+    <CompanyDashboardWrapper children={
       <>
         <div className={classes.headerWrap}>
-          <HospitalHeader
-            title="Hospital Pediatric WA – Billings"
+          <CompanyHeader
+            title="Company Pediatric WA – Billings"
             buttonTitle="Import patients"
             disablePaddingLeft
             onClick={navigateToImportPacients}

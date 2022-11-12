@@ -10,13 +10,13 @@ type Props = {
   children: React.ReactNode;
 }
 
-const HospitalDashboardWrapper: React.FC<Props> = ({
+const CompanyDashboardWrapper: React.FC<Props> = ({
   children,
 }) => {
-  let { hospitalId, departmentId } = useParams();
+  let { companyId, departmentId } = useParams();
   let location = useLocation();
 
-  if (!hospitalId || !departmentId) return null;
+  if (!companyId || !departmentId) return null;
 
   const links: DrawerLinkType[] = [
     {
@@ -24,7 +24,7 @@ const HospitalDashboardWrapper: React.FC<Props> = ({
       icon: images.idCard,
       to: AddPatientsListRoute(),
       pathParams: {
-        hospitalId,
+        companyId,
         departmentId,
       },
       isActive: location.pathname.includes('/patients'),
@@ -34,7 +34,7 @@ const HospitalDashboardWrapper: React.FC<Props> = ({
       icon: images.fileBlank,
       to: InvoicesListRoute(),
       pathParams: {
-        hospitalId,
+        companyId,
         departmentId,
       },
       isActive: location.pathname.includes('/invoices-list'),
@@ -49,4 +49,4 @@ const HospitalDashboardWrapper: React.FC<Props> = ({
   );
 };
 
-export default HospitalDashboardWrapper;
+export default CompanyDashboardWrapper;

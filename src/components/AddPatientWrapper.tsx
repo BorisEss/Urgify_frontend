@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HospitalTitleBox from '../ui/HospitalTitleBox';
+import CompanyTitleBox from '../ui/CompanyTitleBox';
 import Modal from '../ui/Modal';
 import NewPatientModal from '../ui/NewPatientModal';
 
@@ -16,7 +16,7 @@ const AddPatientWrapper = () => {
   };
   return (
     <>
-      <HospitalTitleBox
+      <CompanyTitleBox
         title="Patients"
         btnTitle="Create new"
         onClick={handleClickOpen}

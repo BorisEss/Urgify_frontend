@@ -96,24 +96,24 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-type HospitalAdminUiType = {
+type CompanyAdminUiType = {
   isFetching: boolean;
   image: File | null;
   setImage: (image: File | null) => void;
   onSubmit: () => void;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  hospitalNameError: string;
-  hospitalImageError: string;
+  companyNameError: string;
+  companyImageError: string;
 };
 
-const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
+const CompanyAdminUi:React.FC<CompanyAdminUiType> = ({
   // isFetching,
   image,
   setImage,
   onSubmit,
   onInputChange,
-  hospitalNameError,
-  hospitalImageError,
+  companyNameError,
+  companyImageError,
 }) => {
   const {classes} = useStyles();
 
@@ -129,7 +129,7 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
         </div>
         <div className={classes.titleSpacing}>
           <AuthPageTitle
-            title={'Let’s add your hospital'}
+            title={'Let’s add your company'}
             subtitle={
               <p className={classes.subtitle}>
                 Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.
@@ -140,30 +140,30 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
         <div className={classes.divider} />
         <div className={classes.mainForm}>
         <div className={classes.main}>
-          <p className={classes.label}>hospital Logo</p>
+          <p className={classes.label}>company Logo</p>
           <Dropzone
             image={image}
             setImage={setImage}
-            error={!!hospitalImageError}
-            errorText={hospitalImageError}
+            error={!!companyImageError}
+            errorText={companyImageError}
           />
         </div>
           <div className={classes.authFormSpacing}>
             <div className={classes.inputSpacing}>
               <Input
                 onChange={onInputChange}
-                label="Hospital Name"
+                label="Company Name"
                 type="text"
-                name="hospitalName"
-                error={!!hospitalNameError}
-                errorText={hospitalNameError}
+                name="companyName"
+                error={!!companyNameError}
+                errorText={companyNameError}
               />
             </div>
             <div className={classes.buttonContainer}>
               <Button
-                title="Add Hospital"
+                title="Add Company"
                 onClick={onSubmit}
-                disabled={!!hospitalNameError || !!hospitalImageError}
+                disabled={!!companyNameError || !!companyImageError}
                 w100
               />
             </div>
@@ -174,4 +174,4 @@ const HospitalAdminUi:React.FC<HospitalAdminUiType> = ({
   );
 };
 
-export default HospitalAdminUi;
+export default CompanyAdminUi;

@@ -54,14 +54,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-type HospitalNameType = {
+type CompanyNameType = {
   title: string;
   onClick?: () => void;
   open?: boolean;
   onRemoveClick?: () => void;
 };
 
-const HospitalName: React.FC<HospitalNameType> = ({
+const CompanyName: React.FC<CompanyNameType> = ({
   title,
   onClick,
   open,
@@ -97,4 +97,4 @@ const HospitalName: React.FC<HospitalNameType> = ({
   );
 };
 
-export default HospitalName;
+export default CompanyName;
