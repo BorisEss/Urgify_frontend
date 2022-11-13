@@ -36,18 +36,16 @@ const useStyles = makeStyles()({
 
 type Props = {
   companyId: string,
-  departmentId: string,
 }
 
 const AddPatientsListUi: React.FC<Props> = ({
   companyId,
-  departmentId,
 }) => {
   const {classes} = useStyles();
   const navigate = useNavigate();
 
   const navigateToImportPacients = () => {
-    navigate(generatePath(AddPatientsRoute(), { companyId, departmentId }));
+    navigate(generatePath(AddPatientsRoute(), { companyId }));
   };
 
   const onChangePage = (page: number) => {

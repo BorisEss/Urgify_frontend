@@ -41,12 +41,6 @@ export type SignUpUiFields = {
   firstName: string;
   lastName: string;
 };
-export type AddDepartmentEmployeeUiFields = {
-  email: string;
-  phone: string;
-  firstName: string;
-  lastName: string;
-};
 
 export type PasswordSecureFields = {
   minLength: boolean;

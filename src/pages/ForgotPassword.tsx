@@ -16,7 +16,7 @@ const initialErrors: ForgotPasswordUiErrors = {
 };
 
 const ForgotPassword: React.FC<ReduxProps> = ({
-  forgotPasswordSendEmail,
+  // forgotPasswordSendEmail,
 }) => {
   const [itemFields, setItemFields] = React.useState<ForgotPasswordUiFields>({
     email: '',
@@ -66,16 +66,16 @@ const ForgotPassword: React.FC<ReduxProps> = ({
     } else {
       setErrors(initialErrors);
       Log.message(form);
-      forgotPasswordSendEmail(itemFields.email)
-        .catch((e: any) => {
-          if (e) {
-            const newErrors: ForgotPasswordUiErrors = {...initialErrors};
-            if (e.email) {
-              newErrors.email = e.email[0];
-            }
-            setErrors(newErrors);
-          }
-        });
+      // forgotPasswordSendEmail(itemFields.email)
+      //   .catch((e: any) => {
+      //     if (e) {
+      //       const newErrors: ForgotPasswordUiErrors = {...initialErrors};
+      //       if (e.email) {
+      //         newErrors.email = e.email[0];
+      //       }
+      //       setErrors(newErrors);
+      //     }
+      //   });
     }
   };
 

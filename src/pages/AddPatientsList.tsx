@@ -4,12 +4,11 @@ import { useParams } from 'react-router-dom';
 import AddPatientsListUi from '../ui/AddPatientsListUi';
 
 const AddPatientsList = () => {
-  let { companyId, departmentId } = useParams();
+  let { companyId } = useParams();
 
-  if (!companyId || !departmentId) return null;
+  if (!companyId) return null;
   return <AddPatientsListUi
     companyId={companyId}
-    departmentId={departmentId}
   />;
 };
 

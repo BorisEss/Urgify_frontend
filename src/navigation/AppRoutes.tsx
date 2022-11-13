@@ -54,9 +54,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
         <>
           <Route path={`${navTypes.Home}`} element={<Home />} />
           <Route path={`${navTypes.SignIn}`} element={<SignIn />}>
-            <Route path={':companyId'} element={<SignIn />}>
-              <Route path={':departmentId'} element={<SignIn />} />
-            </Route>
+            <Route path={':companyId'} element={<SignIn />} />
           </Route>
           <Route path={`${navTypes.SignUp}`} element={<SignUp />} />
           <Route path={`${navTypes.ForgotPassword}`} element={<ForgotPassword />} />

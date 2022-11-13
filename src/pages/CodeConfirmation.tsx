@@ -1,34 +1,35 @@
 import React, { useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { confirmEmailCode } from '../actions/auth';
-import { SignInRoute } from '../navigation/navTypes';
+// import { SignInRoute } from '../navigation/navTypes';
 import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
-import Log from '../services/logger';
+// import Log from '../services/logger';
 import type { AppState } from '../store';
 import CodeConfirmationUi from '../ui/CodeConfirmationUi';
 
 const CodeConfirmation: React.FC<ReduxProps> = ({
-  confirmEmail,
+  // confirmEmail,
   // authErrors,
   // isFetching,
 }) => {
-  const [authCode, setAuthCode] = useState<string>('');
+  // const [authCode, setAuthCode] = useState<string>('');
+  const [_authCode, setAuthCode] = useState<string>('');
   const [error, setError] = useState<boolean>(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmit = () => {
-    confirmEmail(authCode)
-      .then(() => {
-        navigate(SignInRoute());
-      })
-      .catch((e: any) => {
-        // TODO: after this show some error or fake error from server. Need to confirm by design
-        Log.message(e);
-      });
+    // confirmEmail(authCode)
+    //   .then(() => {
+    //     navigate(SignInRoute());
+    //   })
+    //   .catch((e: any) => {
+    //     // TODO: after this show some error or fake error from server. Need to confirm by design
+    //     Log.message(e);
+    //   });
     setError(false);
   };
 

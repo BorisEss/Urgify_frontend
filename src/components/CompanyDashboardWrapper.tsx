@@ -13,10 +13,10 @@ type Props = {
 const CompanyDashboardWrapper: React.FC<Props> = ({
   children,
 }) => {
-  let { companyId, departmentId } = useParams();
+  let { companyId } = useParams();
   let location = useLocation();
 
-  if (!companyId || !departmentId) return null;
+  if (!companyId) return null;
 
   const links: DrawerLinkType[] = [
     {
@@ -25,7 +25,6 @@ const CompanyDashboardWrapper: React.FC<Props> = ({
       to: AddPatientsListRoute(),
       pathParams: {
         companyId,
-        departmentId,
       },
       isActive: location.pathname.includes('/patients'),
     },
@@ -35,7 +34,6 @@ const CompanyDashboardWrapper: React.FC<Props> = ({
       to: InvoicesListRoute(),
       pathParams: {
         companyId,
-        departmentId,
       },
       isActive: location.pathname.includes('/invoices-list'),
     },

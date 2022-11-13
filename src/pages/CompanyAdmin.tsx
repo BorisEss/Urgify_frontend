@@ -16,9 +16,10 @@ const CompanyAdmin: React.FC<ReduxProps> = ({
   company,
   companyIsFetching,
   fetchCompany,
-  createCompany,
+  // createCompany,
 }) => {
-  const [isFetching, setIsFetching] = React.useState<boolean>(true);
+  // const [isFetching, setIsFetching] = React.useState<boolean>(true);
+  const [isFetching] = React.useState<boolean>(true);
   const [companyName, setCompanyName] = React.useState<string>('');
   const [companyNameError, setCompanyNameError] = React.useState<string>('');
   const [companyImageError, setCompanyImageError] = React.useState<string>('');
@@ -61,28 +62,28 @@ const CompanyAdmin: React.FC<ReduxProps> = ({
 
   const onSubmit = () => {
     if (validate() && image) {
-      createCompany(companyName, image)
-        .then(resp => {
-          if (resp && resp.id) {
-            // navigate to dashboard
-          }
-        })
-        .catch((e: any) => {
-          if (e && e.name) {
-            setCompanyNameError(e.name);
-          }
-          if (e && e.logo) {
-            setCompanyImageError(e.logo);
-          }
-        });
+      // createCompany(companyName, image)
+      //   .then(resp => {
+      //     if (resp && resp.id) {
+      //       // navigate to dashboard
+      //     }
+      //   })
+      //   .catch((e: any) => {
+      //     if (e && e.name) {
+      //       setCompanyNameError(e.name);
+      //     }
+      //     if (e && e.logo) {
+      //       setCompanyImageError(e.logo);
+      //     }
+      //   });
     }
   };
 
   React.useEffect(() => {
-    fetchCompany()
-      .finally(() => {
-        setIsFetching(false);
-      });
+    // fetchCompany()
+    //   .finally(() => {
+    //     setIsFetching(false);
+    //   });
   }, [fetchCompany]);
 
   if (!companyIsFetching) {

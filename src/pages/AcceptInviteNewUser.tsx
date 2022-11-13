@@ -14,13 +14,13 @@ const AcceptInviteNewUser: React.FC<ReduxProps> = ({
   acceptInviteSendPassword,
 }) => {
   const navigate = useNavigate();
-  let { hash, companyId, departmentId } = useParams();
+  let { hash, companyId } = useParams();
 
   const onSubmit = (password:string, _repeatPassword:string): Promise<any> => {
     if (hash) {
       return acceptInviteSendPassword(password, hash)
         .then(() => {
-          navigate(generatePath(SignInWithParamsRoute(), { companyId, departmentId }));
+          navigate(generatePath(SignInWithParamsRoute(), { companyId }));
           return;
         })
         .catch((e: any) => {

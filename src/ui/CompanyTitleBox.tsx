@@ -4,7 +4,7 @@ import {makeStyles} from 'tss-react/mui';
 import OutlinedButton from './Buttons/OutlinedButton';
 
 const useStyles = makeStyles()({
-  departmentName: {
+  companyName: {
     display: 'flex',
     justifyContent: 'space-between',
     paddingTop: 32,
@@ -39,7 +39,7 @@ const CompanyTitleBox: React.FC<Props> = ({
   const {classes} = useStyles();
 
   return (
-    <div className={classes.departmentName}>
+    <div className={classes.companyName}>
       <h2 className={classes.title}>{title}</h2>
       {btnTitle && onClick && (
         <OutlinedButton

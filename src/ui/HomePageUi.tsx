@@ -1,4 +1,4 @@
-import type {Theme} from '@mui/material';
+import {Theme, useMediaQuery} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
@@ -15,15 +15,39 @@ const useStyles = makeStyles()((theme: Theme) => ({
     paddingLeft: 112,
     paddingRight: 74,
     paddingBottom: 69,
+    paddingTop: 52,
     minHeight: '100%',
+    [theme.breakpoints.down(1350)]: {
+      backgroundSize: '51%',
+      backgroundPositionY: '65%',
+    },
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 24,
+      paddingRight: 24,
+      paddingBottom: 24,
+      paddingTop: 20,
+    },
+    [theme.breakpoints.down(800)]: {
+      paddingLeft: 26,
+      paddingRight: 29,
+      paddingBottom: 26,
+      paddingTop: 29,
+      background: 'none',
+    },
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingTop: 52,
     paddingBottom: 177,
+    [theme.breakpoints.down('md')]: {
+      paddingBottom: 103,
+    },
+
+    [theme.breakpoints.down(800)]: {
+      paddingBottom: 57,
+    },
   },
   logo: {
     height: 20,
@@ -51,6 +75,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   buyNow: {
     paddingBottom: 169,
+
+    [theme.breakpoints.down('md')]: {
+      paddingBottom: 170,
+    },
+
+    [theme.breakpoints.down(800)]: {
+      paddingBottom: 75,
+    },
   },
   buyNowText: {
     paddingBottom: 32,
@@ -60,6 +92,15 @@ const useStyles = makeStyles()((theme: Theme) => ({
       fontSize: 72,
       lineHeight: '108px',
       color: '#000000',
+
+      [theme.breakpoints.down(800)]: {
+        fontSize: 40,
+        lineHeight: '60px',
+      },
+    },
+
+    [theme.breakpoints.down(800)]: {
+      paddingBottom: 30,
     },
   },
   smallText: {
@@ -68,6 +109,17 @@ const useStyles = makeStyles()((theme: Theme) => ({
     color: '#2B364D',
     paddingTop: 8,
     paddingBottom: 32,
+
+    [theme.breakpoints.down('md')]: {
+      paddingTop: 14,
+    },
+
+    [theme.breakpoints.down(800)]: {
+      paddingTop: 18,
+      paddingBottom: 27,
+      fontSize: 24,
+      lineHeight: '34px',
+    },
   },
   description: {
     fontFamily: 'Poppins-regular',
@@ -79,18 +131,38 @@ const useStyles = makeStyles()((theme: Theme) => ({
   buyNowBtns: {
     display: 'flex',
     gap: 24,
+
+    [theme.breakpoints.down(800)]: {
+      gap: 16,
+    },
   },
   btnsPadding: {
     padding: '11px 23px',
+
+    [theme.breakpoints.down(800)]: {
+      padding: '7px 15px',
+    },
+  },
+  earlyAccess: {
   },
   footer: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+
+    [theme.breakpoints.down(800)]: {
+      // gap: 18
+    },
   },
   socialsWrap: {
     display: 'flex',
     gap: 25,
+    [theme.breakpoints.down(800)]: {
+      justifyContent: 'center',
+      marginTop: 32,
+      gap: 78,
+      width: 235,
+    },
   },
   socials: {
     width: 24,
@@ -100,17 +172,36 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     gap: 48,
+
+    [theme.breakpoints.down(800)]: {
+      gap: 'unset',
+      display: 'block',
+    },
   },
   sponsoresItem: {
     display: 'flex',
     gap: 16,
     alignItems: 'center',
+
+    [theme.breakpoints.down(800)]: {
+      display: 'block',
+    },
+  },
+  sponsoresItemLast: {
+    [theme.breakpoints.down(800)]: {
+      paddingTop: 19,
+    },
   },
   sponsoresText: {
     fontFamily: 'Poppins-regular',
     fontSize: 16,
     lineHeight: '28px',
     color: '#000000',
+    [theme.breakpoints.down(800)]: {
+      fontSize: 14,
+      lineHeight: '28px',
+      textAlign: 'center',
+    },
   },
   iconWrap: {
     border: '1px solid #DBDBDB',
@@ -121,34 +212,67 @@ const useStyles = makeStyles()((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
 
+    [theme.breakpoints.down(800)]: {
+      height: 52,
+    },
+
     '& img': {
       maxHeight: '100%',
     },
   },
+  iconWrapLast: {
+    [theme.breakpoints.down(800)]: {
+      marginTop: 6,
+    },
+  },
+  footerMobileRight: {
+    flex: '0 0 235px',
+    position: 'relative',
+    right: -29,
+  },
+  footerImage: {
+    width: 235,
+  },
 }));
 
 const HomePageUi = () => {
-  const {classes} = useStyles();
+  const {classes, cx} = useStyles();
+  const isMobile = useMediaQuery('(max-width:800px)');
 
+  const changingTexts = [ 'later', 'with family & friends', 'with private capital', 'with investors', 'with equity' ];
+  const [textI, setTextI] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (textI < 4) {
+        setTextI(i => i + 1);
+      } else {
+        setTextI(0);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [textI]);
   return (
     <>
      <div className={classes.container}>
       <div className={classes.header}>
         <img src={images.logo} className={classes.logo} />
-        <div className={classes.headerBtns}>
-          <a className={classes.contact}>Contact Us</a>
-          <OutlinedButton
-            extraClass={classes.logIn}
-            title="Login"
-            color="orange"
-            type="button"
-          />
-        </div>
+        {!isMobile && (
+          <div className={classes.headerBtns}>
+            <a className={classes.contact}>Contact Us</a>
+            <OutlinedButton
+              extraClass={classes.logIn}
+              title="Login"
+              color="orange"
+              type="button"
+            />
+          </div>
+        )}
       </div>
       <div className={classes.buyNow}>
         <div className={classes.buyNowText}>
           <h2>Buy Now, Pay</h2>
-          <h4 className={classes.smallText}>later</h4>
+          <h4 className={classes.smallText}>{changingTexts[textI]}</h4>
           <p className={classes.description}>Meet the most flexible way to pay bills with large expenses associated with them.</p>
         </div>
         <div className={classes.buyNowBtns}>
@@ -164,16 +288,18 @@ const HomePageUi = () => {
              color="orange"
              type="link"
              rounded
-             extraClass={classes.btnsPadding}
+             extraClass={cx(classes.btnsPadding, classes.earlyAccess)}
              href="https://share.hsforms.com/1b1wQ2F89Sb6rcO4vDkaxfQ4yqxj"
             />
         </div>
       </div>
       <div className={classes.footer}>
-        <div className={classes.socialsWrap}>
-          <img className={classes.socials} src={images.linkedIn}/>
-          <img className={classes.socials} src={images.twitter}/>
-        </div>
+        {!isMobile && (
+          <div className={classes.socialsWrap}>
+            <img className={classes.socials} src={images.linkedIn}/>
+            <img className={classes.socials} src={images.twitter}/>
+          </div>
+        )}
         <div className={classes.sponsores}>
           <div className={classes.sponsoresItem}>
             <p className={classes.sponsoresText}>Top 10% on:</p>
@@ -181,16 +307,25 @@ const HomePageUi = () => {
               <img src={images.startupSchool}/>
             </div>
           </div>
-          <div className={classes.sponsoresItem}>
+          <div className={cx(classes.sponsoresItem, classes.sponsoresItemLast)}>
             <p className={classes.sponsoresText}>Powered by:</p>
             <div className={classes.iconWrap}>
               <img src={images.ibm}/>
             </div>
-            <div className={classes.iconWrap}>
+            <div className={cx(classes.iconWrap, classes.iconWrapLast)}>
               <img src={images.villageCapital}/>
             </div>
           </div>
         </div>
+        {isMobile && (
+          <div className={classes.footerMobileRight}>
+            <img src={images.background} className={classes.footerImage} alt="background" />
+            <div className={classes.socialsWrap}>
+              <img className={classes.socials} src={images.linkedIn}/>
+              <img className={classes.socials} src={images.twitter}/>
+            </div>
+          </div>
+        )}
       </div>
      </div>
     </>
