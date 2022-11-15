@@ -265,7 +265,11 @@ const HomePageUi: React.FC<Props> = ({
         <img src={images.logo} className={classes.logo} />
         {!isMobile && (
           <div className={classes.headerBtns}>
-            <a className={classes.contact}>Contact Us</a>
+            <a
+              className={classes.contact}
+              href="mailto:boris@urgify.io"
+              title="mailto:boris@urgify.io"
+            >Contact Us</a>
             <OutlinedButton
               extraClass={classes.logIn}
               onClick={redirectToSignIn}
@@ -303,22 +307,36 @@ const HomePageUi: React.FC<Props> = ({
       <div className={classes.footer}>
         {!isMobile && (
           <div className={classes.socialsWrap}>
-            <img className={classes.socials} src={images.linkedIn}/>
+            <a
+              href="https://www.linkedin.com/company/urgify"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img className={classes.socials} src={images.linkedIn}/>
+            </a>
             <img className={classes.socials} src={images.twitter}/>
           </div>
         )}
         <div className={classes.sponsores}>
           <div className={classes.sponsoresItem}>
             <p className={classes.sponsoresText}>Top 10% on:</p>
-            <div className={classes.iconWrap}>
+            <a
+              href="https://www.startupschool.org"
+              target="_blank"
+              rel="noreferrer"
+              className={classes.iconWrap}>
               <img src={images.startupSchool}/>
-            </div>
+            </a>
           </div>
           <div className={cx(classes.sponsoresItem, classes.sponsoresItemLast)}>
             <p className={classes.sponsoresText}>Powered by:</p>
-            <div className={classes.iconWrap}>
+            <a
+              href="https://community.ibm.com/community/user/ibmz-and-linuxone/groups/group-home?CommunityKey=378eb0a9-b968-4c46-ad72-2e1670c4ee92"
+              target="_blank"
+              rel="noreferrer"
+              className={classes.iconWrap}>
               <img src={images.ibm}/>
-            </div>
+            </a>
             <div className={cx(classes.iconWrap, classes.iconWrapLast)}>
               <img src={images.villageCapital}/>
             </div>
