@@ -111,7 +111,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   formWrap: {
     padding: '0 104px 104px',
   },
-  formWrapPatients: {
+  formWrapCustomers: {
     padding: '312px 208px 48px',
 
     [theme.breakpoints.down(1200)]: {
@@ -167,10 +167,10 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
         </div>
       </div>
       <div className={classes.buttonsWrap}>
-        <img className={classes.image} src={dialogType === 1 ? images.exploreBackground : images.exploreBackgroundPatients} />
+        <img className={classes.image} src={dialogType === 1 ? images.exploreBackground : images.exploreBackgroundCustomers} />
         <div className={classes.buttons}>
           <button className={cx(classes.button, dialogType === 1 ? classes.buttonActive : '')} onClick={() => setDialogType(1)}>Healthcare Providers</button>
-          <button className={cx(classes.button, dialogType === 2 ? classes.buttonActive : '')} onClick={() => setDialogType(2)}>Patients</button>
+          <button className={cx(classes.button, dialogType === 2 ? classes.buttonActive : '')} onClick={() => setDialogType(2)}>Customers</button>
         </div>
       </div>
       {dialogType === 1 ? (
@@ -178,7 +178,7 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
         <div className={classes.item}>
           <img className={classes.ellipseImg} src={images.ellipse} />
           <div>
-            <h5 className={classes.itemTitle}>Send a particular invoice to patients</h5>
+            <h5 className={classes.itemTitle}>Send a particular invoice to customers</h5>
             <p className={classes.itemSubtitle}>when emergencies happen, and they struggle to pay the hefty medical bills.</p>
           </div>
         </div>
@@ -186,14 +186,14 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
           <img className={classes.ellipseImg} src={images.ellipse} />
           <div>
             <h5 className={classes.itemTitle}>Increase Revenue Cycle & Access to aid</h5>
-            <p className={classes.itemSubtitle}>when collecting payments from patients based on different financial sources instantly available to them through URGIFY.</p>
+            <p className={classes.itemSubtitle}>when collecting payments from customers based on different financial sources instantly available to them through URGIFY.</p>
           </div>
         </div>
         <div className={classes.item}>
           <img className={classes.ellipseImg} src={images.ellipse} />
           <div>
             <h5 className={classes.itemTitle}>Avoid third-party collectors</h5>
-            <p className={classes.itemSubtitle}>when patients do not pay, and you have to eat those costs or shift them onto others.</p>
+            <p className={classes.itemSubtitle}>when customers do not pay, and you have to eat those costs or shift them onto others.</p>
           </div>
         </div>
       </div>
@@ -233,7 +233,7 @@ const ExploreIdeaModal: React.FC<ExploreIdeaModalType> = ({handleClose}) => {
           </div>
         </div>
         ) : (
-        <div className={classes.formWrapPatients}>
+        <div className={classes.formWrapCustomers}>
             <div className={cx(classes.form, classes.formSmall)}>
             <div className={classes.formHeader}>
               <h5 className={classes.formTitle}>Join our waiting list </h5>

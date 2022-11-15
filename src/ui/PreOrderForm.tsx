@@ -20,7 +20,7 @@ import type { PaymentOption, PreOrderFormErrors, PreOrderFormFields } from '../t
 import Modal from '../ui/Modal';
 import { formObj, validate } from '../utils/authValidation';
 import Button from './Buttons/Button';
-import ConfirmHospitalModal from './ConfirmHospitalModal';
+import ConfirmCompanyModal from './ConfirmCompanyModal';
 import Input from './Inputs/Input';
 import InvoicesDropdown from './PaymentDropdown';
 
@@ -102,10 +102,10 @@ const useStyles = makeStyles()((_theme: Theme) => ({
     lineHeight: '24px',
     color: '#666666',
   },
-  dataHospital: {
+  dataCompany: {
     display: 'flex',
     gap: 32,
-    paddingBottom: 32,
+    paddingBottom: 11,
   },
   halfInput: {
     flex: '50%',
@@ -230,7 +230,7 @@ const duration: PaymentOption[] = [
 
 const initialErrors: PreOrderFormErrors = {
   email: '',
-  hospitalName: '',
+  companyName: '',
 };
 
 const PreOrderForm: React.FC<ReduxProps> = ({
@@ -252,7 +252,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
 
   const [itemFields, setItemFields] = React.useState<PreOrderFormFields>({
     email: '',
-    hospitalName: '',
+    companyName: '',
   });
 
   const [errors, setErrors] = React.useState<PreOrderFormErrors>(initialErrors);
@@ -264,7 +264,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
   const validateField = (field: string) => {
     switch (field) {
       case 'email':
-      case 'hospitalName':
+      case 'companyName':
         updateErrors(field, !itemFields[field] ? 'Required field' + '! ' : '');
         break;
     }
@@ -273,7 +273,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
   const setValue = (field: string, value: string) => {
     switch (field) {
       case 'email':
-      case 'hospitalName': {
+      case 'companyName': {
         updateErrors(field, !value ? 'Required field' + '! ' : '');
         break;
       }
@@ -306,7 +306,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
     event.preventDefault();
     const form: formObj[] = [
       {valueType: 'email', value: itemFields.email},
-      {valueType: 'hospitalName', value: itemFields.hospitalName},
+      {valueType: 'companyName', value: itemFields.companyName},
     ];
     const errorMessages: {field: string, message: string}[] = validate(form);
     if (errorMessages.length) {
@@ -320,7 +320,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
       Log.message(form);
     }
 
-    if (!stripe || !elements || !itemFields.email.length || !itemFields.hospitalName.length) {
+    if (!stripe || !elements || !itemFields.email.length || !itemFields.companyName.length) {
       return;
     }
     const cardElement: stripeJs.StripeCardNumberElement | null = elements.getElement(CardNumberElement);
@@ -329,7 +329,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
         charges,
         'usd',
         'card',
-        itemFields.hospitalName,
+        itemFields.companyName,
         itemFields.email,
         activeInvoice.id,
         activeDuration.id,
@@ -341,8 +341,8 @@ const PreOrderForm: React.FC<ReduxProps> = ({
             if (e.email) {
               newErrors.email = e.email[0];
             }
-            if (e.hospital_name) {
-              newErrors.hospitalName = e.hospital_name[0];
+            if (e.company_name) {
+              newErrors.companyName = e.company_name[0];
             }
             if (e.amount) {
               newErrors.amount = e.amount[0];
@@ -395,7 +395,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
           <p className={classes.offersSubtitle}>per issued invoice</p>
         </div>
         <div className={classes.descriptionContainer}>
-          <p className={classes.offersDescription}>After pre-order, 4.99% of each amount paid by the patient plus 30 cents per transaction</p>
+          <p className={classes.offersDescription}>After pre-order, 4.99% of each amount paid by the customer plus 30 cents per transaction</p>
         </div>
       </div>
       <div className={classes.divider} />
@@ -403,10 +403,10 @@ const PreOrderForm: React.FC<ReduxProps> = ({
         <h6 className={classes.chargesTitle}>Total Charges</h6>
           <div className={classes.priceContainer}>
             <p className={classes.price}>${charges}</p>
-            <p className={classes.bonus}>+ 2.99% of each amount paid by the patient, charged by Stripe</p>
+            <p className={classes.bonus}>+ 2.99% of each amount paid by the customer, charged by Stripe</p>
           </div>
       </div>
-      <div className={classes.dataHospital}>
+      <div className={classes.dataCompany}>
         <div className={classes.halfInput}>
           <Input
             type="email"
@@ -416,19 +416,21 @@ const PreOrderForm: React.FC<ReduxProps> = ({
             onChange={onInputChange}
             name="email"
             error={!!errors.email}
+            errorText={errors.email}
             onBlur={() => validateField('email')}
           />
         </div>
         <div className={classes.halfInput}>
           <Input
             type="text"
-            label="Name of hospital"
-            placeholder="Enter hospital"
+            label="Name of company"
+            placeholder="Enter company"
             darkerPlaceholderColor
             onChange={onInputChange}
-            name="hospitalName"
-            error={!!errors.hospitalName}
-            onBlur={() => validateField('hospitalName')}
+            name="companyName"
+            error={!!errors.companyName}
+            errorText={errors.companyName}
+            onBlur={() => validateField('companyName')}
           />
         </div>
       </div>
@@ -474,7 +476,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
         maxWidth={800}
         borderRadius={24}
         children={
-          <ConfirmHospitalModal charges={charges} handleClose={handleClose} />
+          <ConfirmCompanyModal charges={charges} handleClose={handleClose} />
         }
       />
     </>

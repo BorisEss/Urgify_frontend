@@ -2,18 +2,18 @@ import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 import type { AppState } from '../store';
 import type { authActions } from './auth';
-import type { hospitalActions } from './hospital';
+import type { companyActions } from './company';
 import type { networkActions } from './network';
 
 // List of all actions
 export type AllActions =
-  | HospitalType
+  | CompanyType
   | NetworkType
   | AuthType;
 type ActionTypes<T extends { [K in string]: any }> = ReturnType<T[keyof T]>;
 
 // Actions types
-type HospitalType = ActionTypes<typeof hospitalActions>;
+type CompanyType = ActionTypes<typeof companyActions>;
 type NetworkType = ActionTypes<typeof networkActions>;
 type AuthType = ActionTypes<typeof authActions>;
 

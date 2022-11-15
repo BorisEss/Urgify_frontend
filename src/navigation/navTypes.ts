@@ -10,19 +10,15 @@ export enum navTypes {
   Home = '/',
   SignUp = '/sign-up',
   SignIn = '/sign-in',
-  SignInWithParams = '/sign-in/:hospitalId/:departmentId',
+  SignInWithParams = '/sign-in/:companyId',
   ForgotPassword = '/forgot-password',
   ForgotNewPassword = '/password-reset/:uid/:token',
-  AcceptInviteNewUser = '/accept-invite-new-user/:hash/:hospitalId/:departmentId',
-  AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:hospitalId/:departmentId',
-  HospitalAdmin = '/hospitals/add',
-  HospitalAddDepartments = '/hospitals/:hospitalId/departments/add',
-  Hospitals = '/hospitals/',
-  AddDepartmentEmployee = '/hospitals/:hospitalId/departments/:departmentId/employees/add',
-  EmployeeList = '/hospitals/:hospitalId/departments/:departmentId/employees',
-  AddPatients = '/hospitals/:hospitalId/departments/:departmentId/patients/import',
-  AddPatientsList = '/hospitals/:hospitalId/departments/:departmentId/patients',
-  InvoicesList = '/hospitals/:hospitalId/departments/:departmentId/invoices-list',
+  AcceptInviteNewUser = '/accept-invite-new-user/:hash/:companyId',
+  AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:companyId',
+  CompanyAdmin = '/companies/add',
+  AddCustomers = '/companies/:companyId/customers/import',
+  AddCustomersList = '/companies/:companyId/customers',
+  InvoicesList = '/companies/:companyId/invoices-list',
   CodeConfirmation = '/code-confirmation',
   SettingsPage = '/settings-page',
 }
@@ -48,26 +44,14 @@ export const ForgotNewPasswordRoute = () => {
 export const AcceptInviteNewUserRoute = () => {
   return navTypes.AcceptInviteNewUser;
 };
-export const HospitalAdminRoute = () => {
-  return navTypes.HospitalAdmin;
+export const CompanyAdminRoute = () => {
+  return navTypes.CompanyAdmin;
 };
-export const HospitalAddDepartmentsRoute = () => {
-  return navTypes.HospitalAddDepartments;
+export const  AddCustomersRoute = () => {
+  return navTypes.AddCustomers;
 };
-export const HospitalsRoute = () => {
-  return navTypes.Hospitals;
-};
-export const  AddDepartmentEmployeeRoute = () => {
-  return navTypes.AddDepartmentEmployee;
-};
-export const  EmployeeListRoute = () => {
-  return navTypes.EmployeeList;
-};
-export const  AddPatientsRoute = () => {
-  return navTypes.AddPatients;
-};
-export const  AddPatientsListRoute = () => {
-  return navTypes.AddPatientsList;
+export const  AddCustomersListRoute = () => {
+  return navTypes.AddCustomersList;
 };
 export const  InvoicesListRoute = () => {
   return navTypes.InvoicesList;

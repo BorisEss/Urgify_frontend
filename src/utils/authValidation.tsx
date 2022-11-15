@@ -61,14 +61,14 @@ export const validate = (form: formObj[]): {field: string, message: string}[] =>
           }
         }
         break;
-      case 'hospitalName':
+      case 'companyName':
         if (!value) {
-          errorMessages.push({field: 'hospitalName', message:'Please enter a hospital name'});
+          errorMessages.push({field: 'companyName', message:'Please enter a company name'});
         } else {
           if (minLength(value, 1)) {
-            errorMessages.push({field: 'hospitalName', message:'Hospital name must be more than 1 characters'});
+            errorMessages.push({field: 'companyName', message:'Company name must be more than 1 characters'});
           } else if (maxLength(value, 50)) {
-            errorMessages.push({field: 'hospitalName', message:'Hospital name must not exceed 50 characters'});
+            errorMessages.push({field: 'companyName', message:'Company name must not exceed 50 characters'});
           }
         }
         break;

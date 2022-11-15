@@ -77,10 +77,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   googleWrapper: {
@@ -127,7 +127,7 @@ const SignUpUi: React.FC<SignUpUiType> = ({
   const {classes, cx} = useStyles();
 
   return (
-    <AuthPageWrapper rightText="We make collecting medical bills easier for hospitals & less stressful for patients.">
+    <AuthPageWrapper rightText="We make collecting medical bills easier for companies & less stressful for customers.">
       <div className={classes.contentSpacing}>
         <Logo />
         <div className={classes.titleSpacing}>
@@ -161,6 +161,7 @@ const SignUpUi: React.FC<SignUpUiType> = ({
                 label="First Name"
                 type="string"
                 error={!!errors.firstName}
+                errorText={errors.firstName}
                 onBlur={() => validateField('firstName')}
                 name="firstName"
                 onChange={onInputChange}
@@ -171,6 +172,7 @@ const SignUpUi: React.FC<SignUpUiType> = ({
                 label="Last Name"
                 type="string"
                 error={!!errors.lastName}
+                errorText={errors.lastName}
                 onBlur={() => validateField('lastName')}
                 name="lastName"
                 onChange={onInputChange}
@@ -183,6 +185,7 @@ const SignUpUi: React.FC<SignUpUiType> = ({
               label="E-mail address"
               type="email"
               error={!!errors.email}
+              errorText={errors.email}
               onBlur={() => validateField('email')}
               name="email"
               />
@@ -192,6 +195,7 @@ const SignUpUi: React.FC<SignUpUiType> = ({
               label="Password"
               type="password"
               error={!!errors.password}
+              errorText={errors.password}
               onBlur={() => validateField('password')}
               name="password"
               />

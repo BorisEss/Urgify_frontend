@@ -1,34 +1,34 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { forgotSendPasswords } from '../actions/auth';
 import NewPasswordsWrapper from '../components/NewPasswordsWrapper';
-import { SignInRoute } from '../navigation/navTypes';
+// import { SignInRoute } from '../navigation/navTypes';
 import { getAuthorizeIsFetching } from '../selectors/network';
-import Log from '../services/logger';
+// import Log from '../services/logger';
 import type { AppState } from '../store';
 
 const ForgotNewPassword: React.FC<ReduxProps> = ({
-  forgotPasswordSendPassword,
+  // forgotPasswordSendPassword,
 }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   let { uid, token } = useParams();
 
-  const onSubmit = (password:string, repeatPassword:string): Promise<any> => {
-    if (uid && token) {
-      return forgotPasswordSendPassword(password, repeatPassword, uid, token)
-        .then(() => {
-          navigate(SignInRoute());
-          return;
-        })
-        .catch((e: any) => {
-          Log.message(e);
-          // here can be shown global error, about uid/token
-          throw e;
-        });
-    }
+  const onSubmit = (_password:string, _repeatPassword:string): Promise<any> => {
+    // if (uid && token) {
+    //   return forgotPasswordSendPassword(password, repeatPassword, uid, token)
+    //     .then(() => {
+    //       navigate(SignInRoute());
+    //       return;
+    //     })
+    //     .catch((e: any) => {
+    //       Log.message(e);
+    //       // here can be shown global error, about uid/token
+    //       throw e;
+    //     });
+    // }
     return Promise.resolve();
   };
 

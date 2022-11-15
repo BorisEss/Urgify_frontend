@@ -67,10 +67,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   actions: {
@@ -128,7 +128,7 @@ const ForgotPasswordUi : React.FC<ForgotPasswordType> = ({
 
   return (
     <AuthPageWrapper
-      rightText="Sit nisl adipiscing sed porta. Lobortis suscipit nisl, risus sollicitudin. Laoreet dictum suspendisse sem."
+      rightText="We make collecting bills easier for businesses & less stressful for customers."
       centeredContent>
       <div>
         <div className={classes.logoBox}>
@@ -153,6 +153,7 @@ const ForgotPasswordUi : React.FC<ForgotPasswordType> = ({
               onChange={onInputChange}
               name="email"
               error={!!errors.email}
+              errorText={errors.email}
               onBlur={() => validateField('email')}
               />
           </div>

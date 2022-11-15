@@ -15,9 +15,9 @@ export type JoinWaitingListFormFields = {
 
 export type PreOrderFormFields = {
   email: string;
-  hospitalName: string;
+  companyName: string;
 };
-export type NewPatientFormFields = {
+export type NewCustomerFormFields = {
   firstName: string;
   lastName: string;
   email: string;
@@ -26,16 +26,18 @@ export type NewPatientFormFields = {
   phone: string;
   address: string;
 };
+export type NewInvoiceFormFields = {
+  customerName: string;
+  dateServiceStart: string;
+  dateServiceEnd: string;
+  serviceDescription: string;
+  chargesAmount: string;
+  dueDate: string;
+};
 
 export type SignUpUiFields = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
-};
-export type AddDepartmentEmployeeUiFields = {
-  email: string;
-  phone: string;
   firstName: string;
   lastName: string;
 };
@@ -66,22 +68,11 @@ export type JoinWaitingListFormErrors = Record<string, string>;
 
 export type PreOrderFormErrors = Record<string, string>;
 
-export type NewPatientFormErrors = Record<string, string>;
+export type NewCustomerFormErrors = Record<string, string>;
+
+export type NewInvoiceFormErrors = Record<string, string>;
 
 export type SignUpUiErrors = Record<string, string>;
-
-export type AddDepartmentEmployeeUiErrors = Record<string, string>;
-
-export type DepartmentsFieldsType = Record<string, string>;
-
-export type DepartmentsFieldErrosType = Record<string, string>;
-
-export type EmployeeAttributeItem = {
-  id: number;
-  title: string;
-  description: string;
-  checked: boolean;
-}
 
 export type PaymentOption = {
   id: number;

@@ -79,57 +79,23 @@ export type PaymentIntentRequest = {
   amount: number;
   currency: string;
   payment_method_types: string;
-  hospital_name: string;
+  company_name: string;
   email: string;
   invoices: number;
   months: number;
 };
 
-// hospitals
-export type HospitalType = {
+// Companies
+export type CompanyType = {
   name: string;
   id: string;
   logo: string;
-  departments: DepartmentsArray;
 };
 
-export type HospitalsArray = HospitalType[];
-
-export type AddHospitalRequest = {
+export type AddCompanyRequest = {
   name: string;
   logo: File;
 };
-
-// departments
-
-export type DepartmentType = {
-  name: string;
-  id: string;
-  employees: EmployeesArray;
-};
-
-export type DepartmentsArray = DepartmentType[];
-
-// employee
-export type DepartmentEmployeeType = {
-  id: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  status: string;
-  attribution: string;
-};
-
-export type AddEmployeeRequest = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  hospitalId: string;
-  departmentId: string;
-};
-
-export type EmployeesArray = DepartmentEmployeeType[];
 
 // excel - example
 export type ExcelTemplateResponse = {

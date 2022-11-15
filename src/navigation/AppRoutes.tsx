@@ -12,13 +12,9 @@ const SignIn = React.lazy(() => import('../pages/SignIn'));
 const ForgotPassword = React.lazy(() => import('../pages/ForgotPassword'));
 const ForgotNewPassword = React.lazy(() => import('../pages/ForgotNewPassword'));
 const AcceptInviteNewUser = React.lazy(() => import('../pages/AcceptInviteNewUser'));
-const AddPatientsList = React.lazy(() => import('../pages/AddPatientsList'));
-const HospitalAdmin = React.lazy(() => import('../pages/HospitalAdmin'));
-const HospitalAddDepartments = React.lazy(() => import('../pages/HospitalAddDepartments'));
-const Hospitals = React.lazy(() => import('../pages/Hospitals'));
-const AddDepartmentEmployee = React.lazy(() => import('../pages/AddDepartmentEmployee'));
-const EmployeeList = React.lazy(() => import('../pages/EmployeeList'));
-const AddPatients = React.lazy(() => import('../pages/AddPatients'));
+const AddCustomersList = React.lazy(() => import('../pages/AddCustomersList'));
+const CompanyAdmin = React.lazy(() => import('../pages/CompanyAdmin'));
+const AddCustomers = React.lazy(() => import('../pages/AddCustomers'));
 const InvoicesList = React.lazy(() => import('../pages/InvoicesList'));
 const CodeConfirmation = React.lazy(() => import('../pages/CodeConfirmation'));
 const SettingsPage = React.lazy(() => import('../pages/SettingsPage'));
@@ -58,9 +54,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
         <>
           <Route path={`${navTypes.Home}`} element={<Home />} />
           <Route path={`${navTypes.SignIn}`} element={<SignIn />}>
-            <Route path={':hospitalId'} element={<SignIn />}>
-              <Route path={':departmentId'} element={<SignIn />} />
-            </Route>
+            <Route path={':companyId'} element={<SignIn />} />
           </Route>
           <Route path={`${navTypes.SignUp}`} element={<SignUp />} />
           <Route path={`${navTypes.ForgotPassword}`} element={<ForgotPassword />} />
@@ -71,13 +65,9 @@ const AppRoutes: React.FC<AppRoutesType> = ({
         </>
       ) : (
         <>
-          <Route path={`${navTypes.HospitalAdmin}`} element={<HospitalAdmin />} />
-          <Route path={`${navTypes.HospitalAddDepartments}`} element={<HospitalAddDepartments />} />
-          <Route path={`${navTypes.Hospitals}`} element={<Hospitals />} />
-          <Route path={`${navTypes.AddDepartmentEmployee}`} element={<AddDepartmentEmployee />} />
-          <Route path={`${navTypes.EmployeeList}`} element={<EmployeeList />} />
-          <Route path={`${navTypes.AddPatients}`} element={<AddPatients />} />
-          <Route path={`${navTypes.AddPatientsList}`} element={<AddPatientsList />} />
+          <Route path={`${navTypes.CompanyAdmin}`} element={<CompanyAdmin />} />
+          <Route path={`${navTypes.AddCustomers}`} element={<AddCustomers />} />
+          <Route path={`${navTypes.AddCustomersList}`} element={<AddCustomersList />} />
           <Route path={`${navTypes.InvoicesList}`} element={<InvoicesList />} />
           <Route path={`${navTypes.SettingsPage}`} element={<SettingsPage />} />
           <Route path={`${navTypes.AcceptInviteExistingUser}`} element={<AcceptInviteExistingUser />} />
@@ -85,7 +75,7 @@ const AppRoutes: React.FC<AppRoutesType> = ({
       )}
       {/* Redirect with React router 6 */}
       {!(location.pathname.includes('docs') || location.pathname.includes('swagger')) && (
-        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.HospitalAdmin} />} />
+        <Route path="*" element={<Navigate to={!isAuth ? navTypes.Home : navTypes.CompanyAdmin} />} />
       )}
     </Routes>
   );

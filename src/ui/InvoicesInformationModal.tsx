@@ -313,7 +313,7 @@ const InvoicesInformationModal: React.FC<InvoicesInformationModalType> = ({handl
             </div>
             <div className={classes.divider} />
             <div className={classes.recurringPayment}>
-              <h6 className={classes.recurringHeader}>This patient has recurring payment</h6>
+              <h6 className={classes.recurringHeader}>This customer has recurring payment</h6>
               <div>
                 <h2 className={classes.invoicePaid}>The invoice should be fully paid on <span className={classes.paymentDate}>11/20/2022</span>(estimated)</h2>
               </div>

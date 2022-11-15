@@ -43,13 +43,15 @@ type ButtonType = {
   disabled?: boolean;
   title: string;
   loading?: boolean;
-  onClick?: () => void;
+  onClick?: () => void; //only for type 'button'
   rounded?: boolean;
   smaller?: boolean;
   w100?: boolean;
   round?: boolean;
-  type?: 'submit' | 'button';
+  type?: 'submit' | 'button' | 'link';
   extraClass?: string;
+  href?: string;// only if use html <a> tag
+  titleAttr?: string;// only if use html <a> tag
 };
 
 const Button: React.FC<ButtonType> = ({
@@ -63,20 +65,38 @@ const Button: React.FC<ButtonType> = ({
   round,
   type,
   extraClass,
+  href,
+  titleAttr,
 }) => {
   const {classes, cx} = useStyles();
+  if (type === 'link') return <a
+    className={cx(
+      classes.button,
+      disabled || loading ? classes.disabled : '',
+      rounded ? classes.rounded : '',
+      smaller ? classes.smaller : '',
+      w100 ? classes.w100 : '',
+      round ? classes.round : '',
+      extraClass,
+    )}
+    href={href}
+    title={titleAttr}
+  >
+    {title}
+  </a>;
   return <button
     type={type}
     onClick={onClick}
     className={cx(
-    classes.button,
-    disabled || loading ? classes.disabled : '',
-    rounded ? classes.rounded : '',
-    smaller ? classes.smaller : '',
-    w100 ? classes.w100 : '',
-    round ? classes.round : '',
-    extraClass,
-  )}>{title}</button>;
+      classes.button,
+      disabled || loading ? classes.disabled : '',
+      rounded ? classes.rounded : '',
+      smaller ? classes.smaller : '',
+      w100 ? classes.w100 : '',
+      round ? classes.round : '',
+      extraClass,
+    )}
+  >{title}</button>;
 };
 
 export default Button;

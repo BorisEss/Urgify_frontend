@@ -86,6 +86,7 @@ type TextButtonType = {
   loading?: boolean;
   extraClass?: string;
   noUnderline?: boolean;
+  href?: string;
 };
 
 const TextButton: React.FC<TextButtonType> = ({
@@ -98,6 +99,7 @@ const TextButton: React.FC<TextButtonType> = ({
   loading,
   noUnderline,
   fontWeight = 'normal',
+  href,
 }) => {
   let navigate = useNavigate();
   const {classes, cx} = useStyles();
@@ -106,6 +108,18 @@ const TextButton: React.FC<TextButtonType> = ({
     if (onClick) onClick();
     if (type === 'link' && path) navigate(path);
   };
+  if (type === 'link' && href) return <a
+    className={cx(
+      classes.textButton,
+      classes[color],
+      noUnderline || noUnderline ? classes.noUnderline : '',
+      disabled || loading ? classes.disabled : '',
+      classes[fontWeight],
+    )}
+    href={href}
+  >
+    {title}
+  </a>;
   return (
     <button
       className={cx(

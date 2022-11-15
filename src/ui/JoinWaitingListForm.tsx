@@ -12,12 +12,12 @@ import type { JoinWaitingListFormErrors, JoinWaitingListFormFields } from '../ty
 import Modal from '../ui/Modal';
 import { formObj, validate } from '../utils/authValidation';
 import Button from './Buttons/Button';
-import ConfirmPatientsModal from './ConfirmPatientsModal';
+import ConfirmCustomerModal from './ConfirmCustomerModal';
 import Input from './Inputs/Input';
 
 const useStyles = makeStyles()((_theme: Theme) => ({
   buttonContainer: {
-    paddingTop: 32,
+    paddingTop: 11,
   },
 }));
 
@@ -109,6 +109,7 @@ const JoinWaitingListForm: React.FC<ReduxProps> = ({
         onChange={onInputChange}
         name="email"
         error={!!errors.email}
+        errorText={errors.email}
         onBlur={() => validateField('email')}
       />
       <div className={classes.buttonContainer}>
@@ -127,7 +128,7 @@ const JoinWaitingListForm: React.FC<ReduxProps> = ({
         borderRadius={24}
         backgroundColor="#F1F1F1"
         children={
-          <ConfirmPatientsModal handleClose={handleClose} />
+          <ConfirmCustomerModal handleClose={handleClose} />
         }
       />
     </>

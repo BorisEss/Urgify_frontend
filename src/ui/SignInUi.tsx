@@ -68,10 +68,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   inputSpacing: {
-    paddingBottom: 32,
+    paddingBottom: 11,
 
     [theme.breakpoints.down('sm')]: {
-      paddingBottom: 16,
+      paddingBottom: 0,
     },
   },
   actions: {
@@ -123,7 +123,7 @@ const SignInUi: React.FC<SignInUiType> = ({
   const {classes} = useStyles();
 
   return (
-    <AuthPageWrapper rightText="Nisi sed sit sed facilisis luctus odio eu mauris. Varius sed at nibh non ut tristique. Sit vel dictumst nisi.">
+    <AuthPageWrapper rightText="We make collecting bills easier for businesses & less stressful for customers.">
       <div className={classes.contentSpacing}>
         <Logo />
         <div className={classes.titleSpacing}>
@@ -149,6 +149,7 @@ const SignInUi: React.FC<SignInUiType> = ({
               onChange={onInputChange}
               name="email"
               error={!!errors.email}
+              errorText={errors.email}
               onBlur={() => validateField('email')}
             />
           </div>
@@ -159,6 +160,7 @@ const SignInUi: React.FC<SignInUiType> = ({
               onChange={onInputChange}
               name="password"
               error={!!errors.password}
+              errorText={errors.password}
               onBlur={() => validateField('password')}
             />
           </div>
@@ -180,10 +182,9 @@ const SignInUi: React.FC<SignInUiType> = ({
         </div>
         <div className={classes.changeAuthSpacing}>
           <ChangeAuthMethod
-            type="link"
-            path={navTypes.SignUp}
+            href="https://meetings.hubspot.com/boris48"
             title="Don't have an account?"
-            buttonTitle="Sign up for free"
+            buttonTitle="Book a demo"
           />
         </div>
       </div>

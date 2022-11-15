@@ -1,492 +1,340 @@
-import type {Theme} from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import {Theme, useMediaQuery} from '@mui/material';
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
+import Button from './Buttons/Button';
 import OutlinedButton from './Buttons/OutlinedButton';
-import ExploreIdea from './ExploreIdea';
-import Sticker from './Sticker';
 
 const useStyles = makeStyles()((theme: Theme) => ({
-  smallText: {
-    fontFamily: 'Poppins-regular',
-    fontWeight: 400,
-    fontSize: 12,
-    lineHeight: '18px',
-    color: '#FFFFFF',
-    [theme.breakpoints.down(720)]: {
-      fontSize: 12,
-      lineHeight: '18px',
-    },
-  },
-  bigText: {
-    fontFamily: 'Poppins-semibold',
-    fontWeight: 600,
-    fontSize: 16,
-    lineHeight: '24px',
-    color: '#FFFFFF',
-    textTransform: 'uppercase',
-    [theme.breakpoints.down(720)]: {
-      fontSize: 12,
-      lineHeight: '18px',
-    },
-  },
   container: {
-    padding: '56px 112px',
-    position: 'relative',
-
-    [theme.breakpoints.down(1252)]: {
-      padding: '40px 44px',
+    backgroundImage: `url(${images.background})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center right',
+    width: '100%',
+    paddingLeft: 112,
+    paddingRight: 74,
+    paddingBottom: 69,
+    paddingTop: 52,
+    minHeight: '100%',
+    [theme.breakpoints.down(1350)]: {
+      backgroundSize: '51%',
+      backgroundPositionY: '65%',
     },
-
-    [theme.breakpoints.up(1024)]: {
-      height: '100vh',
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 24,
+      paddingRight: 24,
+      paddingBottom: 24,
+      paddingTop: 20,
     },
-
-    [theme.breakpoints.down(720)]: {
-      padding: 24,
+    [theme.breakpoints.down(800)]: {
+      paddingLeft: 26,
+      paddingRight: 29,
+      paddingBottom: 26,
+      paddingTop: 29,
+      background: 'none',
     },
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'relative',
-
-    [theme.breakpoints.down(1300)]: {
-      alignItems: 'flex-start',
+    width: '100%',
+    paddingBottom: 177,
+    [theme.breakpoints.down('md')]: {
+      paddingBottom: 103,
     },
 
-    '& img': {
-      [theme.breakpoints.down(720)]: {
-        width: '124.5px',
-      },
+    [theme.breakpoints.down(800)]: {
+      paddingBottom: 57,
     },
   },
-  poweredBy: {
-    zIndex: 2,
-
-    [theme.breakpoints.up(721)]: {
-      display: 'flex',
-      alignItems: 'center',
-      marginRight: 16,
-    },
-
-    [theme.breakpoints.down(720)]: {
-      marginBottom: 8,
-    },
+  logo: {
+    height: 20,
   },
-  topLabels: {
-    display: 'flex',
+  headerBtns: {
+    display:'flex',
+    justifyContent: 'space-between',
     alignItems: 'center',
-
-    [theme.breakpoints.down(1300)]: {
-      flexDirection: 'column',
-      alignItems: 'end',
-    },
+    gap: 45,
   },
-  poweredAndVillageCapital: {
-    display: 'flex',
-    alignItems: 'center',
-
-    [theme.breakpoints.down(720)]: {
-      flexDirection: 'column',
-      alignItems: 'end',
-    },
-  },
-  startupSchool: {
-    zIndex: 2,
-
-    [theme.breakpoints.up(721)]: {
-      display: 'flex',
-      alignItems: 'center',
-      marginRight: 48,
-    },
-
-    [theme.breakpoints.down(1300)]: {
-      marginRight: 0,
-      marginTop: 16,
-    },
-  },
-  labelText: {
+  contact: {
+    fontFamily: 'Poppins-regular',
     fontSize: 16,
     lineHeight: '28px',
-    marginRight: 16,
-
+    color: '#000000',
     [theme.breakpoints.down(720)]: {
-      fontSize: 14,
-      lineHeight: '24px',
-      marginRight: 0,
-      marginBottom: 8,
+      fontSize: 12,
+      lineHeight: '18px',
     },
   },
-  imageBox: {
-    zIndex: 2,
-    lineHeight: 0,
-    display: 'block',
+  logIn: {
+    padding: '11px 23px',
+    border: '1px solid #F93922',
+    borderRadius: 4,
+  },
+  buyNow: {
+    paddingBottom: 169,
 
-    [theme.breakpoints.down(720)]: {
-      width: 92,
+    [theme.breakpoints.down('md')]: {
+      paddingBottom: 170,
     },
 
-    '& img': {
-      width: '100%',
+    [theme.breakpoints.down(800)]: {
+      paddingBottom: 75,
     },
   },
-  main: {
-    marginTop: 48,
+  buyNowText: {
+    paddingBottom: 32,
 
-    [theme.breakpoints.down(1300)]: {
-      marginTop: -51,
+    '& h2': {
+      fontFamily: 'Poppins-semibold',
+      fontSize: 72,
+      lineHeight: '108px',
+      color: '#000000',
+
+      [theme.breakpoints.down(800)]: {
+        fontSize: 40,
+        lineHeight: '60px',
+      },
     },
 
-    [theme.breakpoints.up(1081)]: {
-      maxWidth: 592,
-    },
-
-    [theme.breakpoints.between(1025, 1080)]: {
-      maxWidth: 500,
-    },
-
-    [theme.breakpoints.between(721, 1024)]: {
-      maxWidth: 400,
-    },
-
-    [theme.breakpoints.down(720)]: {
-      marginTop: -143,
+    [theme.breakpoints.down(800)]: {
+      paddingBottom: 30,
     },
   },
-  title: {
+  smallText: {
     fontSize: 40,
     lineHeight: '52px',
     color: '#2B364D',
-    fontFamily: 'Poppins-semibold',
+    paddingTop: 8,
+    paddingBottom: 32,
 
-    [theme.breakpoints.down(720)]: {
+    [theme.breakpoints.down('md')]: {
+      paddingTop: 14,
+    },
+
+    [theme.breakpoints.down(800)]: {
+      paddingTop: 18,
+      paddingBottom: 27,
       fontSize: 24,
       lineHeight: '34px',
     },
-
-    '& div': {
-      marginBottom: 8,
-      fontSize: 72,
-      lineHeight: '108px',
-      color: '#000',
-    },
-  },
-  subtitle: {
-    zIndex: 2,
-    position: 'relative',
   },
   description: {
+    fontFamily: 'Poppins-regular',
     fontSize: 16,
-    lineHeight: '28px',
-    color: '#666',
-    margin: '32px 0',
-
-    [theme.breakpoints.up(721)]: {
-      maxWidth: 384,
-    },
-
-    [theme.breakpoints.down(720)]: {
-      fontSize: 14,
-      lineHeight: '24px',
-      margin: '16px 0',
-    },
+    lineHeight: '24px',
+    color: '#666666',
+    maxWidth: 386,
   },
-  partOf: {
+  buyNowBtns: {
     display: 'flex',
-    padding: '56px 0',
+    gap: 24,
 
-    [theme.breakpoints.down(720)]: {
-      padding: '40px 0 0',
+    [theme.breakpoints.down(800)]: {
+      gap: 16,
     },
   },
-  info: {
-    maxWidth: 384,
-    fontSize: 16,
-    lineHeight: '28px',
-    color: '#666',
-    fontFamily: 'Poppins-Regular',
-    marginLeft: 24,
+  btnsPadding: {
+    padding: '11px 23px',
 
-    [theme.breakpoints.down(720)]: {
-      fontSize: 14,
-      lineHeight: '24px',
-    },
-
-    '& a': {
-      color: '#666',
-      textDecoration: 'underline',
+    [theme.breakpoints.down(800)]: {
+      padding: '7px 15px',
     },
   },
-  actions: {
+  earlyAccess: {
+  },
+  footer: {
     display: 'flex',
-  },
-  outlinedButtonSpacing: {
-    marginLeft: 24,
+    justifyContent: 'space-between',
+    alignItems: 'center',
 
-    // [theme.breakpoints.down(720)]: {
-    //   marginLeft: 16,
-    // },
-
-    [theme.breakpoints.down(1025)]: {
-      marginLeft: 0,
+    [theme.breakpoints.down(800)]: {
+      // gap: 18
     },
   },
-  pulseBlock: {
-    position: 'absolute',
-    height: 696,
-    width: 696,
-    top: 0,
-    right: 112,
-    zIndex: -1,
-
-    [theme.breakpoints.down(1252)]: {
-      right: 44,
-    },
-
-    [theme.breakpoints.down(1124)]: {
-      width: 536,
-      height: 536,
-    },
-
-    [theme.breakpoints.down(1024)]: {
-      width: 476,
-      height: 476,
-    },
-
-    [theme.breakpoints.down(720)]: {
-      width: 240,
-      height: 240,
-      right: 24,
-    },
-
-    '& img': {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-
-      [theme.breakpoints.down(720)]: {
-        width: 64,
-        height: 64,
-      },
-    },
-  },
-  pulse: {
-    background: '#F93822',
-    height: 696,
-    width: 696,
-    filter: 'blur(500px)',
-    animation: 'flickerAnimation 3s infinite',
-
-    [theme.breakpoints.down(1124)]: {
-      width: 536,
-      height: 536,
-    },
-
-    [theme.breakpoints.down(1024)]: {
-      width: 476,
-      height: 476,
-    },
-
-    [theme.breakpoints.down(720)]: {
-      width: 240,
-      height: 240,
-      filter: 'blur(250px)',
+  socialsWrap: {
+    display: 'flex',
+    gap: 25,
+    [theme.breakpoints.down(800)]: {
+      justifyContent: 'center',
+      marginTop: 32,
+      gap: 78,
+      width: 235,
     },
   },
   socials: {
-    [theme.breakpoints.up(721)]: {
-      position: 'absolute',
-      bottom: 112,
-      right: 224,
-    },
+    width: 24,
+    height: 24,
+  },
+  sponsores: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: 48,
 
-    [theme.breakpoints.down(1024)]: {
-      right: 124,
-    },
-
-    [theme.breakpoints.down(720)]: {
-      display: 'flex',
-      marginTop: 45,
+    [theme.breakpoints.down(800)]: {
+      gap: 'unset',
+      display: 'block',
     },
   },
-  item: {
+  sponsoresItem: {
+    display: 'flex',
+    gap: 16,
+    alignItems: 'center',
+
+    [theme.breakpoints.down(800)]: {
+      display: 'block',
+    },
+  },
+  sponsoresItemLast: {
+    [theme.breakpoints.down(800)]: {
+      paddingTop: 19,
+    },
+  },
+  sponsoresText: {
+    fontFamily: 'Poppins-regular',
+    fontSize: 16,
+    lineHeight: '28px',
+    color: '#000000',
+    [theme.breakpoints.down(800)]: {
+      fontSize: 14,
+      lineHeight: '28px',
+      textAlign: 'center',
+    },
+  },
+  iconWrap: {
+    border: '1px solid #DBDBDB',
+    borderRadius: 4,
+    width: 128,
+    height: 56,
     display: 'flex',
     alignItems: 'center',
-    fontSize: 24,
-    lineHeight: '36px',
-    color: '#2B364D',
-    cursor: 'pointer',
-    textDecoration: 'none',
-    fontFamily: 'Poppins-semibold',
+    justifyContent: 'center',
 
-    [theme.breakpoints.up(721)]: {
-      '&:first-child': {
-        marginBottom: 32,
-      },
+    [theme.breakpoints.down(800)]: {
+      height: 52,
     },
 
-    [theme.breakpoints.down(720)]: {
-      padding: '12px 0 12px 12px',
-      fontSize: 16,
-      lineHeight: '24px',
-
-      '&:first-child': {
-        marginRight: 52,
-      },
-    },
-
-    '&:hover': {
-      '& div': {
-        [theme.breakpoints.up(721)]: {
-          borderBottom: '3px solid #2B364D',
-        },
-      },
-    },
-
-    '& div': {
-      [theme.breakpoints.up(721)]: {
-        marginLeft: 12,
-        borderBottom: '3px solid transparent',
-      },
+    '& img': {
+      maxHeight: '100%',
     },
   },
-  youtube: {
-    [theme.breakpoints.down(720)]: {
-      display: 'none',
+  iconWrapLast: {
+    [theme.breakpoints.down(800)]: {
+      marginTop: 6,
     },
   },
-  linkedin: {
-    [theme.breakpoints.down(720)]: {
-      display: 'none',
-    },
+  footerMobileRight: {
+    flex: '0 0 235px',
+    position: 'relative',
+    right: -29,
   },
-  youtubeMobile: {
-    [theme.breakpoints.up(721)]: {
-      display: 'none',
-    },
-    [theme.breakpoints.down(720)]: {
-      marginRight: 24,
-    },
-  },
-  linkedinMobile: {
-    [theme.breakpoints.up(721)]: {
-      display: 'none',
-    },
-    [theme.breakpoints.down(720)]: {
-      marginRight: 24,
-    },
+  footerImage: {
+    width: 235,
   },
 }));
 
-const HomePageUi = () => {
-  const {classes, cx} = useStyles();
-  const isSmallPC = useMediaQuery('(max-width:1300px)');
-  const isMobile = useMediaQuery('(max-width:890px)');
-  const isTablet = useMediaQuery('(max-width:1024px)');
+type Props = {
+  redirectToSignIn: () => void;
+}
 
+const HomePageUi: React.FC<Props> = ({
+  redirectToSignIn,
+}) => {
+  const {classes, cx} = useStyles();
+  const isMobile = useMediaQuery('(max-width:800px)');
+
+  const changingTexts = [ 'later', 'with family & friends', 'with private capital', 'with investors', 'with equity' ];
+  const [textI, setTextI] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (textI < 4) {
+        setTextI(i => i + 1);
+      } else {
+        setTextI(0);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [textI]);
   return (
     <>
-      {isMobile ? <Sticker /> : null}
-      <div className={classes.container}>
-        <header className={classes.header}>
-          <img src={images.logo} alt="URGIFY Logo" />
-          {!isMobile ? <Sticker /> : null}
-          <div className={classes.topLabels}>
-            <div className={classes.poweredAndVillageCapital}>
-              {!isSmallPC ? (
-                <div className={classes.startupSchool}>
-                  <div className={classes.labelText}>Top 10% on:</div>
-                  <a
-                    href="https://www.startupschool.org"
-                    target="_blank"
-                    className={cx(classes.imageBox)}
-                    rel="noreferrer">
-                    <img src={images.startupSchool} alt="startupSchool" />
-                  </a>
-                </div>
-              ) : null}
-              <div className={classes.poweredBy}>
-                <div className={classes.labelText}>Powered by:</div>
-                <a
-                  href="https://community.ibm.com/community/user/ibmz-and-linuxone/groups/group-home?CommunityKey=378eb0a9-b968-4c46-ad72-2e1670c4ee92"
-                  target="_blank"
-                  className={cx(classes.imageBox)}
-                  rel="noreferrer">
-                  <img src={images.ibm} alt="IBM logo" />
-                </a>
-              </div>
-              <div className={classes.imageBox}>
-                <img src={images.villageCapital} alt="Village capital logo" />
-              </div>
-            </div>
-            {isSmallPC ? (
-              <div className={classes.startupSchool}>
-                <div className={classes.labelText}>Top 10% on:</div>
-                <a
-                  href="https://www.startupschool.org"
-                  target="_blank"
-                  className={cx(classes.imageBox)}
-                  rel="noreferrer">
-                  <img src={images.startupSchool} alt="startupSchool" />
-                </a>
-              </div>
-            ) : null}
+     <div className={classes.container}>
+      <div className={classes.header}>
+        <img src={images.logo} className={classes.logo} />
+        {!isMobile && (
+          <div className={classes.headerBtns}>
+            <a className={classes.contact}>Contact Us</a>
+            <OutlinedButton
+              extraClass={classes.logIn}
+              onClick={redirectToSignIn}
+              title="Login"
+              color="orange"
+              type="button"
+            />
           </div>
-        </header>
-        <div className={classes.main}>
-          <div>
-            <div className={classes.title}>
-              <div>Hey,</div>
-              <p className={classes.subtitle}>We make collecting medical bills easier for hospitals & less stressful for patients.</p>
-            </div>
-            <div className={classes.description}>
-              We believe that great ideas come from everywhere. So, if you would like to get a seat at the table and help us to make a product that you want and create an impact on, please get in touch and submit your idea, and we will make sure we build what matters most to you.
-            </div>
-            <div className={classes.actions}>
-            {!isTablet ? <ExploreIdea /> : null}
-              <OutlinedButton
-                color="orange"
-                rounded
-                title="Contact Us"
-                type="link"
-                href="mailto:boris@urgify.io"
-                titleAttr="mailto:boris@urgify.io"
-                extraClass={classes.outlinedButtonSpacing}
-              />
-            </div>
-          </div>
-          <div className={classes.partOf}>
-            <img src={images.ideactionLogo} alt="Ideaction logo" />
-            <div className={classes.info}>
-              Urgify is part of the <br />{' '}
-              <a href="https://ideaction.io" target="_blank" rel="noreferrer">
-                IDEACTION Startup Studio family
-              </a>
-            </div>
-          </div>
+        )}
+      </div>
+      <div className={classes.buyNow}>
+        <div className={classes.buyNowText}>
+          <h2>Buy Now, Pay</h2>
+          <h4 className={classes.smallText}>{changingTexts[textI]}</h4>
+          <p className={classes.description}>Meet the most flexible way to pay bills with large expenses associated with them.</p>
         </div>
-        <div className={classes.pulseBlock}>
-          <div className={classes.pulse} />
-          <img src={images.plus} alt="Plus icon" />
-        </div>
-        <div className={classes.socials}>
-          <a className={classes.item} href="https://www.linkedin.com/company/urgify" target="_blank" rel="noreferrer">
-            <img className={classes.linkedin} src={images.linkedin} alt="Linkedin logo" />
-            <img className={classes.linkedinMobile} src={images.linkedinMobile} alt="Linkedin logo" />
-            <div>Linkedin</div>
-          </a>
-          <div className={classes.item}>
-            <img className={classes.youtube} src={images.youtube} alt="Youtube logo" />
-            <img className={classes.youtubeMobile} src={images.youtubeMobile} alt="Youtube logo" />
-            <div>Youtube</div>
-          </div>
+        <div className={classes.buyNowBtns}>
+          <Button
+            rounded
+            title="BOOK A DEMO"
+            extraClass={classes.btnsPadding}
+            type="link"
+            href="https://meetings.hubspot.com/boris48"
+          />
+          <OutlinedButton
+             title="GET EARLY ACCESS"
+             color="orange"
+             type="link"
+             rounded
+             extraClass={cx(classes.btnsPadding, classes.earlyAccess)}
+             href="https://share.hsforms.com/1b1wQ2F89Sb6rcO4vDkaxfQ4yqxj"
+            />
         </div>
       </div>
+      <div className={classes.footer}>
+        {!isMobile && (
+          <div className={classes.socialsWrap}>
+            <img className={classes.socials} src={images.linkedIn}/>
+            <img className={classes.socials} src={images.twitter}/>
+          </div>
+        )}
+        <div className={classes.sponsores}>
+          <div className={classes.sponsoresItem}>
+            <p className={classes.sponsoresText}>Top 10% on:</p>
+            <div className={classes.iconWrap}>
+              <img src={images.startupSchool}/>
+            </div>
+          </div>
+          <div className={cx(classes.sponsoresItem, classes.sponsoresItemLast)}>
+            <p className={classes.sponsoresText}>Powered by:</p>
+            <div className={classes.iconWrap}>
+              <img src={images.ibm}/>
+            </div>
+            <div className={cx(classes.iconWrap, classes.iconWrapLast)}>
+              <img src={images.villageCapital}/>
+            </div>
+          </div>
+        </div>
+        {isMobile && (
+          <div className={classes.footerMobileRight}>
+            <img src={images.background} className={classes.footerImage} alt="background" />
+            <div className={classes.socialsWrap}>
+              <img className={classes.socials} src={images.linkedIn}/>
+              <img className={classes.socials} src={images.twitter}/>
+            </div>
+          </div>
+        )}
+      </div>
+     </div>
     </>
   );
 };
