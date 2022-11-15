@@ -39,11 +39,11 @@ const useStyles = makeStyles()((_theme) => ({
   },
 }));
 
-type ConfirmPatientsModalType = {
+type ConfirmCustomerModalType = {
   handleClose: () => void;
 };
 
-const ConfirmPatientsModal: React.FC<ConfirmPatientsModalType> = ({handleClose}) => {
+const ConfirmCustomerModal: React.FC<ConfirmCustomerModalType> = ({handleClose}) => {
   const {classes} = useStyles();
 
   return (
@@ -58,4 +58,4 @@ const ConfirmPatientsModal: React.FC<ConfirmPatientsModalType> = ({handleClose})
   );
 };
 
-export default ConfirmPatientsModal;
+export default ConfirmCustomerModal;

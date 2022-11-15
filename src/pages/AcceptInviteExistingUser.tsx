@@ -4,7 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { createSelector } from 'redux-views';
 
 import { acceptInviteExistingUser } from '../actions/auth';
-// import { AddPatientsRoute, SignInWithParamsRoute } from '../navigation/navTypes';
+// import { AddCustomersRoute, SignInWithParamsRoute } from '../navigation/navTypes';
 import { isAuthenticated } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 // import Log from '../services/logger';
@@ -23,7 +23,7 @@ const AcceptInviteExistingUser: React.FC<ReduxProps> = ({
   //     acceptInviteExisting(hash)
   //       .then(() => {
   //         if (isAuth) {
-  //           navigate(generatePath(AddPatientsRoute(), { companyId }));
+  //           navigate(generatePath(AddCustomersRoute(), { companyId }));
   //         } else {
   //           navigate(generatePath(SignInWithParamsRoute(), { companyId }));
   //         }

@@ -17,7 +17,7 @@ export type PreOrderFormFields = {
   email: string;
   companyName: string;
 };
-export type NewPatientFormFields = {
+export type NewCustomerFormFields = {
   firstName: string;
   lastName: string;
   email: string;
@@ -27,7 +27,7 @@ export type NewPatientFormFields = {
   address: string;
 };
 export type NewInvoiceFormFields = {
-  patientName: string;
+  customerName: string;
   dateServiceStart: string;
   dateServiceEnd: string;
   serviceDescription: string;
@@ -68,7 +68,7 @@ export type JoinWaitingListFormErrors = Record<string, string>;
 
 export type PreOrderFormErrors = Record<string, string>;
 
-export type NewPatientFormErrors = Record<string, string>;
+export type NewCustomerFormErrors = Record<string, string>;
 
 export type NewInvoiceFormErrors = Record<string, string>;
 

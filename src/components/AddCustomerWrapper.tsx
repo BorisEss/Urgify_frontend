@@ -2,9 +2,9 @@ import React from 'react';
 
 import CompanyTitleBox from '../ui/CompanyTitleBox';
 import Modal from '../ui/Modal';
-import NewPatientModal from '../ui/NewPatientModal';
+import NewCustomerModal from '../ui/NewCustomerModal';
 
-const AddPatientWrapper = () => {
+const AddCustomerWrapper = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -17,7 +17,7 @@ const AddPatientWrapper = () => {
   return (
     <>
       <CompanyTitleBox
-        title="Patients"
+        title="Customers"
         btnTitle="Create new"
         onClick={handleClickOpen}
       />
@@ -26,11 +26,11 @@ const AddPatientWrapper = () => {
         handleClose={handleClose}
         borderRadius={4}
         children={
-          <NewPatientModal handleClose={handleClose} />
+          <NewCustomerModal handleClose={handleClose} />
         }
       />
     </>
   );
 };
 
-export default AddPatientWrapper;
+export default AddCustomerWrapper;

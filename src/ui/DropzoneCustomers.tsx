@@ -93,7 +93,7 @@ type Props = {
   setImage?: (image: File | null) => void;
 }
 
-  const DropzonePatients: React.FC<Props> = ({ uploadedImage, disableRemove, image, setImage }) => {
+  const DropzoneCustomers: React.FC<Props> = ({ uploadedImage, disableRemove, image, setImage }) => {
   const {classes} = useStyles();
   const inputField = React.useRef<HTMLInputElement>(null);
 
@@ -160,7 +160,7 @@ type Props = {
               src={images.idCard}
             />
             <div className={classes.title}>
-              <h2 className={classes.dropTitle}>Import patients</h2>
+              <h2 className={classes.dropTitle}>Import customers</h2>
               <p className={classes.dropDescription}>Sit mi hendrerit nulla lobortis sed vitae id. Cras orci commodo diam dictumst adipiscing pellentesque. Quis ut et quam enim turpis.</p>
               <Button title="Import" />
             </div>
@@ -178,4 +178,4 @@ type Props = {
   );
 };
 
-export default DropzonePatients;
+export default DropzoneCustomers;

@@ -129,10 +129,10 @@ const CompanyAdminUi:React.FC<CompanyAdminUiType> = ({
         </div>
         <div className={classes.titleSpacing}>
           <AuthPageTitle
-            title={'Let’s add your company'}
+            title="Let’s finish setting up your account"
             subtitle={
               <p className={classes.subtitle}>
-                Aliquam convallis nam luctus egestas amet quis ut ac. Aliquet vulputate non elit turpis pellentesque. A cras a elementum faucibus egestas.
+                Please enter the name and the logo of your company. You can edit this later in your account settings.
               </p>
             }
           />
@@ -161,7 +161,7 @@ const CompanyAdminUi:React.FC<CompanyAdminUiType> = ({
             </div>
             <div className={classes.buttonContainer}>
               <Button
-                title="Add Company"
+                title="Create account"
                 onClick={onSubmit}
                 disabled={!!companyNameError || !!companyImageError}
                 w100

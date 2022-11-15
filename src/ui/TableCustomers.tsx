@@ -10,7 +10,7 @@ import {makeStyles} from 'tss-react/mui';
 import images from '../images';
 import Modal from '../ui/Modal';
 import { numberFormat } from '../utils/numberFormat';
-import PatientInformationModal from './PatientInformationModal';
+import CustomerInformationModal from './CustomerInformationModal';
 
 const useStyles = makeStyles()({
   tr: {
@@ -118,7 +118,7 @@ const rows = [
   createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', 475.22, 0),
 ];
 
-const TablePatients = () => {
+const TableCustomers = () => {
   const {classes,cx} = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -217,11 +217,11 @@ const TablePatients = () => {
         handleClose={handleClose}
         borderRadius={4}
         children={
-          <PatientInformationModal handleClose={handleClose}  />
+          <CustomerInformationModal handleClose={handleClose}  />
         }
       />
     </>
   );
 };
 
-export default TablePatients;
+export default TableCustomers;

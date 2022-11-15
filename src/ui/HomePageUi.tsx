@@ -235,7 +235,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
 }));
 
-const HomePageUi = () => {
+type Props = {
+  redirectToSignIn: () => void;
+}
+
+const HomePageUi: React.FC<Props> = ({
+  redirectToSignIn,
+}) => {
   const {classes, cx} = useStyles();
   const isMobile = useMediaQuery('(max-width:800px)');
 
@@ -262,6 +268,7 @@ const HomePageUi = () => {
             <a className={classes.contact}>Contact Us</a>
             <OutlinedButton
               extraClass={classes.logIn}
+              onClick={redirectToSignIn}
               title="Login"
               color="orange"
               type="button"

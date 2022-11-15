@@ -128,7 +128,7 @@ const ForgotPasswordUi : React.FC<ForgotPasswordType> = ({
 
   return (
     <AuthPageWrapper
-      rightText="Sit nisl adipiscing sed porta. Lobortis suscipit nisl, risus sollicitudin. Laoreet dictum suspendisse sem."
+      rightText="We make collecting bills easier for businesses & less stressful for customers."
       centeredContent>
       <div>
         <div className={classes.logoBox}>

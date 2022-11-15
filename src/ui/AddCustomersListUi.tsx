@@ -2,13 +2,13 @@ import React from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
-import AddPatientWrapper from '../components/AddPatientWrapper';
+import AddCustomerWrapper from '../components/AddCustomerWrapper';
 import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
-import { AddPatientsRoute } from '../navigation/navTypes';
+import { AddCustomersRoute } from '../navigation/navTypes';
 import CompanyHeader from './CompanyHeader';
 import SearchInput from './Inputs/SearchInput';
 import PaginationControls from './PagintationControls';
-import TablePatients from './TablePatients';
+import TableCustomers from './TableCustomers';
 
 const useStyles = makeStyles()({
   headerWrap: {
@@ -38,14 +38,14 @@ type Props = {
   companyId: string,
 }
 
-const AddPatientsListUi: React.FC<Props> = ({
+const AddCustomersListUi: React.FC<Props> = ({
   companyId,
 }) => {
   const {classes} = useStyles();
   const navigate = useNavigate();
 
   const navigateToImportPacients = () => {
-    navigate(generatePath(AddPatientsRoute(), { companyId }));
+    navigate(generatePath(AddCustomersRoute(), { companyId }));
   };
 
   const onChangePage = (page: number) => {
@@ -59,18 +59,18 @@ const AddPatientsListUi: React.FC<Props> = ({
         <div className={classes.headerWrap}>
           <CompanyHeader
             title="Company Pediatric WA – Billings"
-            buttonTitle="Import patients"
+            buttonTitle="Import customers"
             disablePaddingLeft
             onClick={navigateToImportPacients}
           />
         </div>
         <div className={classes.content}>
           <div>
-            <AddPatientWrapper />
+            <AddCustomerWrapper />
             <div className={classes.contentMargin} />
             <SearchInput />
             <div className={classes.tableWrap}>
-              <TablePatients />
+              <TableCustomers />
             </div>
             <div className={classes.divider} />
             <PaginationControls
@@ -86,4 +86,4 @@ const AddPatientsListUi: React.FC<Props> = ({
   );
 };
 
-export default  AddPatientsListUi;
+export default  AddCustomersListUi;

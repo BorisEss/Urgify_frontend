@@ -12,9 +12,9 @@ const SignIn = React.lazy(() => import('../pages/SignIn'));
 const ForgotPassword = React.lazy(() => import('../pages/ForgotPassword'));
 const ForgotNewPassword = React.lazy(() => import('../pages/ForgotNewPassword'));
 const AcceptInviteNewUser = React.lazy(() => import('../pages/AcceptInviteNewUser'));
-const AddPatientsList = React.lazy(() => import('../pages/AddPatientsList'));
+const AddCustomersList = React.lazy(() => import('../pages/AddCustomersList'));
 const CompanyAdmin = React.lazy(() => import('../pages/CompanyAdmin'));
-const AddPatients = React.lazy(() => import('../pages/AddPatients'));
+const AddCustomers = React.lazy(() => import('../pages/AddCustomers'));
 const InvoicesList = React.lazy(() => import('../pages/InvoicesList'));
 const CodeConfirmation = React.lazy(() => import('../pages/CodeConfirmation'));
 const SettingsPage = React.lazy(() => import('../pages/SettingsPage'));
@@ -66,8 +66,8 @@ const AppRoutes: React.FC<AppRoutesType> = ({
       ) : (
         <>
           <Route path={`${navTypes.CompanyAdmin}`} element={<CompanyAdmin />} />
-          <Route path={`${navTypes.AddPatients}`} element={<AddPatients />} />
-          <Route path={`${navTypes.AddPatientsList}`} element={<AddPatientsList />} />
+          <Route path={`${navTypes.AddCustomers}`} element={<AddCustomers />} />
+          <Route path={`${navTypes.AddCustomersList}`} element={<AddCustomersList />} />
           <Route path={`${navTypes.InvoicesList}`} element={<InvoicesList />} />
           <Route path={`${navTypes.SettingsPage}`} element={<SettingsPage />} />
           <Route path={`${navTypes.AcceptInviteExistingUser}`} element={<AcceptInviteExistingUser />} />

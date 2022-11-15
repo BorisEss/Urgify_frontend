@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { authActions, authByMail } from '../actions/auth';
-// import { navTypes } from '../navigation/navTypes';
+import { navTypes } from '../navigation/navTypes';
 import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -19,11 +19,11 @@ const initialErrors: SignInUiErrors = {
 };
 
 const SignIn: React.FC<ReduxProps> = ({
-    // loginByEmail,
+    loginByEmail,
     // authErrors,
     // isFetching,
   }) => {
-  // let { companyId } = useParams();
+  let { companyId } = useParams();
 
   const [itemFields, setItemFields] = React.useState<SignInUiFields>({
     email: '',
@@ -77,30 +77,30 @@ const SignIn: React.FC<ReduxProps> = ({
     } else {
       setErrors(initialErrors);
       Log.message(form);
-      // loginByEmail(itemFields.email, itemFields.password,
-      //   companyId ? {
-      //     to: navTypes.AddPatients,
-      //     options: {
-      //       companyId,
-      //     },
-      //   }
-      //   : {
-      //     to: navTypes.CompanyAdmin,
-      //     from: navTypes.SignIn,
-      //   }
-      // )
-      //   .catch((e: any) => {
-      //     if (e) {
-      //       const newErrors: SignInUiErrors = {...initialErrors};
-      //       if (e.email) {
-      //         newErrors.email = e.email[0];
-      //       }
-      //       if (e.password) {
-      //         newErrors.password = e.password[0];
-      //       }
-      //       setErrors(newErrors);
-      //     }
-      //   });
+      loginByEmail(itemFields.email, itemFields.password,
+        companyId ? {
+          to: navTypes.AddCustomers,
+          options: {
+            companyId,
+          },
+        }
+        : {
+          to: navTypes.CompanyAdmin,
+          from: navTypes.SignIn,
+        }
+      )
+        .catch((e: any) => {
+          if (e) {
+            const newErrors: SignInUiErrors = {...initialErrors};
+            if (e.email) {
+              newErrors.email = e.email[0];
+            }
+            if (e.password) {
+              newErrors.password = e.password[0];
+            }
+            setErrors(newErrors);
+          }
+        });
     }
   };
 

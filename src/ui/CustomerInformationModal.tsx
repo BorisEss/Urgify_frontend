@@ -3,7 +3,7 @@ import {makeStyles} from 'tss-react/mui';
 
 import Button from './Buttons/Button';
 import CloseButton from './Buttons/CloseButton';
-import TablePacientsInformationModal from './TablePacientsInformationModal';
+import TableCustomerInformationModal from './TableCustomerInformationModal';
 
 const useStyles = makeStyles()((_theme) => ({
   main: {
@@ -96,11 +96,11 @@ const useStyles = makeStyles()((_theme) => ({
   },
 }));
 
-type PatientInformationModalType = {
+type CustomerInformationModalType = {
   handleClose: () => void;
 };
 
-const PatientInformationModal: React.FC<PatientInformationModalType> = ({handleClose}) => {
+const CustomerInformationModal: React.FC<CustomerInformationModalType> = ({handleClose}) => {
   const {classes} = useStyles();
 
   return (
@@ -143,7 +143,7 @@ const PatientInformationModal: React.FC<PatientInformationModalType> = ({handleC
       </div>
       <div className={classes.divider} />
       <div className={classes.tableWrap}>
-        <TablePacientsInformationModal />
+        <TableCustomerInformationModal />
       </div>
       <div className={classes.divider} />
       <div className={classes.bigButtonWrap}>
@@ -152,4 +152,4 @@ const PatientInformationModal: React.FC<PatientInformationModalType> = ({handleC
     </div>
   );
 };
-export default PatientInformationModal;
+export default CustomerInformationModal;

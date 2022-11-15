@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
 import { regByMail } from '../actions/auth';
-// import { CodeConfirmationRoute } from '../navigation/navTypes';
+import { CodeConfirmationRoute } from '../navigation/navTypes';
 import { getAuthErrors } from '../selectors/auth';
 import { getAuthorizeIsFetching } from '../selectors/network';
 import Log from '../services/logger';
@@ -22,11 +22,11 @@ const initialErrors: SignUpUiErrors = {
 };
 
 const SignUp: React.FC<ReduxProps> = ({
-  // registerbyMail,
+  registerbyMail,
   // authErrors,
   // isFetching,
 }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [itemFields, setItemFields] = React.useState<SignUpUiFields>({
     email: '',
     password: '',
@@ -109,28 +109,28 @@ const SignUp: React.FC<ReduxProps> = ({
     } else {
       setErrors(initialErrors);
       Log.message(form);
-      // registerbyMail(itemFields.firstName, itemFields.lastName, itemFields.email, itemFields.password)
-      //   .then(() => {
-      //     navigate(CodeConfirmationRoute());
-      //   })
-      //   .catch((e: any) => {
-      //     if (e) {
-      //       const newErrors: SignUpUiErrors = {...initialErrors};
-      //       if (e.email) {
-      //         newErrors.email = e.email[0];
-      //       }
-      //       if (e.first_name) {
-      //         newErrors.firstFame = e.first_name[0];
-      //       }
-      //       if (e.last_name) {
-      //         newErrors.lastName = e.last_name[0];
-      //       }
-      //       if (e.password) {
-      //         newErrors.password = e.password[0];
-      //       }
-      //       setErrors(newErrors);
-      //     }
-      //   });
+      registerbyMail(itemFields.firstName, itemFields.lastName, itemFields.email, itemFields.password)
+        .then(() => {
+          navigate(CodeConfirmationRoute());
+        })
+        .catch((e: any) => {
+          if (e) {
+            const newErrors: SignUpUiErrors = {...initialErrors};
+            if (e.email) {
+              newErrors.email = e.email[0];
+            }
+            if (e.first_name) {
+              newErrors.firstFame = e.first_name[0];
+            }
+            if (e.last_name) {
+              newErrors.lastName = e.last_name[0];
+            }
+            if (e.password) {
+              newErrors.password = e.password[0];
+            }
+            setErrors(newErrors);
+          }
+        });
     }
   };
 

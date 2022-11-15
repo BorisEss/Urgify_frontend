@@ -16,8 +16,8 @@ export enum navTypes {
   AcceptInviteNewUser = '/accept-invite-new-user/:hash/:companyId',
   AcceptInviteExistingUser = '/accept-invite-existing-user/:hash/:companyId',
   CompanyAdmin = '/companies/add',
-  AddPatients = '/companies/:companyId/patients/import',
-  AddPatientsList = '/companies/:companyId/patients',
+  AddCustomers = '/companies/:companyId/customers/import',
+  AddCustomersList = '/companies/:companyId/customers',
   InvoicesList = '/companies/:companyId/invoices-list',
   CodeConfirmation = '/code-confirmation',
   SettingsPage = '/settings-page',
@@ -47,11 +47,11 @@ export const AcceptInviteNewUserRoute = () => {
 export const CompanyAdminRoute = () => {
   return navTypes.CompanyAdmin;
 };
-export const  AddPatientsRoute = () => {
-  return navTypes.AddPatients;
+export const  AddCustomersRoute = () => {
+  return navTypes.AddCustomers;
 };
-export const  AddPatientsListRoute = () => {
-  return navTypes.AddPatientsList;
+export const  AddCustomersListRoute = () => {
+  return navTypes.AddCustomersList;
 };
 export const  InvoicesListRoute = () => {
   return navTypes.InvoicesList;

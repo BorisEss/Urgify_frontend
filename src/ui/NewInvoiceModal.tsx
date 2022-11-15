@@ -96,7 +96,7 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
   const {classes, cx} = useStyles();
 
   const [itemFields, setItemFields] = React.useState<NewInvoiceFormFields>({
-    patientName: '',
+    customerName: '',
     dateServiceStart: '',
     dateServiceEnd: '',
     serviceDescription: '',
@@ -105,7 +105,7 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
   });
 
   const initialErrors: NewInvoiceFormErrors = {
-    patientName: '',
+    customerName: '',
     dateServiceStart: '',
     dateServiceEnd: '',
     serviceDescription: '',
@@ -121,7 +121,7 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
 
   const validateField = (field: string) => {
     switch (field) {
-      case 'patientName':
+      case 'customerName':
       case 'dateServiceStart':
       case 'dateServiceEnd':
       case 'serviceDescription':
@@ -134,7 +134,7 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
 
   const setValue = (field: string, value: string) => {
     switch (field) {
-      case 'patientName':
+      case 'customerName':
       case 'dateServiceStart':
       case 'dateServiceEnd':
       case 'serviceDescription':
@@ -155,7 +155,7 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
 
   const onSubmit = () => {
     const form: formObj[] = [
-      {valueType: 'patientName', value: itemFields.patientName},
+      {valueType: 'customerName', value: itemFields.customerName},
       {valueType: 'dateServiceStart', value: itemFields.dateServiceStart},
       {valueType: 'dateServiceEnd', value: itemFields.dateServiceEnd},
       {valueType: 'serviceDescription', value: itemFields.serviceDescription},
@@ -186,11 +186,11 @@ const NewInvoiceModal: React.FC<NewInvoiceModalType> = ({handleClose}) => {
         <div className={classes.halfInput}>
           <Input
             type="text"
-            label="Patient Name"
+            label="Customer Name"
             onChange={onInputChange}
-            name="patientName"
-            error={!!errors.patientName}
-            onBlur={() => validateField('patientName')}
+            name="customerName"
+            error={!!errors.customerName}
+            onBlur={() => validateField('customerName')}
           />
         </div>
         <div className={classes.medicalNumberWrap}>

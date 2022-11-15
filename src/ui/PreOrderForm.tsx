@@ -395,7 +395,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
           <p className={classes.offersSubtitle}>per issued invoice</p>
         </div>
         <div className={classes.descriptionContainer}>
-          <p className={classes.offersDescription}>After pre-order, 4.99% of each amount paid by the patient plus 30 cents per transaction</p>
+          <p className={classes.offersDescription}>After pre-order, 4.99% of each amount paid by the customer plus 30 cents per transaction</p>
         </div>
       </div>
       <div className={classes.divider} />
@@ -403,7 +403,7 @@ const PreOrderForm: React.FC<ReduxProps> = ({
         <h6 className={classes.chargesTitle}>Total Charges</h6>
           <div className={classes.priceContainer}>
             <p className={classes.price}>${charges}</p>
-            <p className={classes.bonus}>+ 2.99% of each amount paid by the patient, charged by Stripe</p>
+            <p className={classes.bonus}>+ 2.99% of each amount paid by the customer, charged by Stripe</p>
           </div>
       </div>
       <div className={classes.dataCompany}>

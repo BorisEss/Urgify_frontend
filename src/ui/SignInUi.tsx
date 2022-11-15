@@ -123,7 +123,7 @@ const SignInUi: React.FC<SignInUiType> = ({
   const {classes} = useStyles();
 
   return (
-    <AuthPageWrapper rightText="Nisi sed sit sed facilisis luctus odio eu mauris. Varius sed at nibh non ut tristique. Sit vel dictumst nisi.">
+    <AuthPageWrapper rightText="We make collecting bills easier for businesses & less stressful for customers.">
       <div className={classes.contentSpacing}>
         <Logo />
         <div className={classes.titleSpacing}>
@@ -182,10 +182,9 @@ const SignInUi: React.FC<SignInUiType> = ({
         </div>
         <div className={classes.changeAuthSpacing}>
           <ChangeAuthMethod
-            type="link"
-            path={navTypes.SignUp}
+            href="https://meetings.hubspot.com/boris48"
             title="Don't have an account?"
-            buttonTitle="Sign up for free"
+            buttonTitle="Book a demo"
           />
         </div>
       </div>

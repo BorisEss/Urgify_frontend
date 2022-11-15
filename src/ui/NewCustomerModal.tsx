@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
 import Log from '../services/logger';
-import type { NewPatientFormErrors, NewPatientFormFields } from '../types';
+import type { NewCustomerFormErrors, NewCustomerFormFields } from '../types';
 import { formObj, validate } from '../utils/authValidation';
 import Button from './Buttons/Button';
 import CloseButton from './Buttons/CloseButton';
@@ -25,7 +25,7 @@ const useStyles = makeStyles()((_theme) => ({
     lineHeight: '48px',
     color: '#2B364D',
   },
-  patientForm: {
+  customerForm: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -39,14 +39,14 @@ const useStyles = makeStyles()((_theme) => ({
   },
 }));
 
-type NewPatientModalType = {
+type NewCustomerModalType = {
   handleClose: () => void;
 };
 
-const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
+const NewCustomerModal: React.FC<NewCustomerModalType> = ({handleClose}) => {
   const {classes} = useStyles();
 
-  const [itemFields, setItemFields] = React.useState<NewPatientFormFields>({
+  const [itemFields, setItemFields] = React.useState<NewCustomerFormFields>({
     firstName: '',
     lastName: '',
     email: '',
@@ -56,7 +56,7 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
     address: '',
   });
 
-  const initialErrors: NewPatientFormErrors = {
+  const initialErrors: NewCustomerFormErrors = {
     firstName: '',
     lastName: '',
     email: '',
@@ -66,7 +66,7 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
     address: '',
   };
 
-  const [errors, setErrors] = React.useState<NewPatientFormErrors>(initialErrors);
+  const [errors, setErrors] = React.useState<NewCustomerFormErrors>(initialErrors);
 
   const updateErrors = (field: string, error: string) => {
     setErrors({...errors, [field]: error});
@@ -121,7 +121,7 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
 
     const errorMessages: {field: string, message: string}[] = validate(form);
     if (errorMessages.length) {
-      const newErrors: NewPatientFormErrors = {...initialErrors};
+      const newErrors: NewCustomerFormErrors = {...initialErrors};
       for (const message of errorMessages) {
         newErrors[message.field] = message.message;
       }
@@ -135,10 +135,10 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
   return (
     <div className={classes.main}>
       <div className={classes.header}>
-        <h2 className={classes.title}>New Patient</h2>
+        <h2 className={classes.title}>New Customer</h2>
         <CloseButton handleClose={handleClose} />
       </div>
-      <div className={classes.patientForm}>
+      <div className={classes.customerForm}>
         <div className={classes.halfInput}>
           <Input
             type="text"
@@ -217,7 +217,7 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
           />
          <div className={classes.button}>
           <Button
-            title="Add new patient"
+            title="Add new customer"
             onClick={onSubmit}
           />
          </div>
@@ -225,4 +225,4 @@ const NewPatientModal: React.FC<NewPatientModalType> = ({handleClose}) => {
     </div>
   );
 };
-export default NewPatientModal;
+export default NewCustomerModal;

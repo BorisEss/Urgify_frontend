@@ -127,7 +127,7 @@ const SignUpUi: React.FC<SignUpUiType> = ({
   const {classes, cx} = useStyles();
 
   return (
-    <AuthPageWrapper rightText="We make collecting medical bills easier for companies & less stressful for patients.">
+    <AuthPageWrapper rightText="We make collecting medical bills easier for companies & less stressful for customers.">
       <div className={classes.contentSpacing}>
         <Logo />
         <div className={classes.titleSpacing}>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import AddPatientsListUi from '../ui/AddPatientsListUi';
+import AddCustomersListUi from '../ui/AddCustomersListUi';
 
-const AddPatientsList = () => {
+const AddCustomersList = () => {
   let { companyId } = useParams();
 
   if (!companyId) return null;
-  return <AddPatientsListUi
+  return <AddCustomersListUi
     companyId={companyId}
   />;
 };
 
-export default AddPatientsList;
+export default AddCustomersList;

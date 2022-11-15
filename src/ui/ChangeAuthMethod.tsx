@@ -19,18 +19,35 @@ const useStyles = makeStyles()((theme: Theme) => ({
 type ChangeAuthMethodType = {
   title: string;
   buttonTitle: string;
-  path: string;
-  type: string;
+  path?: string;
+  type?: 'link' | 'button';
   disabled?: boolean;
   loading?: boolean;
+  href?: string;
 };
 
-const ChangeAuthMethod: React.FC<ChangeAuthMethodType> = ({title, buttonTitle, path, disabled, loading}) => {
+const ChangeAuthMethod: React.FC<ChangeAuthMethodType> = ({
+  title,
+  buttonTitle,
+  path,
+  type = 'link',
+  disabled,
+  loading,
+  href,
+}) => {
   const {classes} = useStyles();
   return (
     <p className={classes.check}>
       {title}&nbsp;
-      <TextButton disabled={disabled} loading={loading} type="link" path={path} color="orange" title={buttonTitle} />
+      <TextButton
+        disabled={disabled}
+        loading={loading}
+        type={type}
+        path={path}
+        color="orange"
+        title={buttonTitle}
+        href={href}
+      />
     </p>
   );
 };

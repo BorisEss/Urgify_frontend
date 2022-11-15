@@ -66,7 +66,7 @@ const rows = [
   createData('#123456', '9/23/2021', '11/23/2022', '$567,890', 'Paid', 'Open Dispute',),
 ];
 
-const TablePacientsInformationModal = () => {
+const TableCustomerInformationModal = () => {
   const {classes, cx} = useStyles();
 
   return (
@@ -126,4 +126,4 @@ const TablePacientsInformationModal = () => {
   );
 };
 
-export default TablePacientsInformationModal;
+export default TableCustomerInformationModal;

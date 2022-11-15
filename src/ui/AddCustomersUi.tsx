@@ -1,10 +1,10 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import AddPatientWrapper from '../components/AddPatientWrapper';
+import AddCustomerWrapper from '../components/AddCustomerWrapper';
 import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
 import CompanyHeader from './CompanyHeader';
-import DropzonePatients from './DropzonePatients';
+import DropzoneCustomers from './DropzoneCustomers';
 
 const useStyles = makeStyles()({
   headerWrap: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles()({
   },
 });
 
-const AddPatientsUi = () => {
+const AddCustomersUi = () => {
   const {classes} = useStyles();
 
   return (
@@ -29,18 +29,18 @@ const AddPatientsUi = () => {
       <>
         <div className={classes.headerWrap}>
           <CompanyHeader
-            title="Company Pediatric WA – Billings"
+            title="ABC Company"
             disablePaddingLeft
           />
         </div>
         <div className={classes.content}>
-          <AddPatientWrapper />
+          <AddCustomerWrapper />
           <div className={classes.contentMargin} />
-          <DropzonePatients />
+          <DropzoneCustomers />
         </div>
       </>
     } />
   );
 };
 
-export default  AddPatientsUi;
+export default  AddCustomersUi;

@@ -16,7 +16,7 @@ import dueArrow from './images/due-arrow.png';
 import ellipse from './images/ellipse.svg';
 import error from './images/error.svg';
 import exploreBackground from './images/explore-background.png';
-import exploreBackgroundPatients from './images/explore-background-patients.png';
+import exploreBackgroundCustomers from './images/explore-background-patients.png';
 import fileBlank from './images/file-blank.svg';
 import filePDF from './images/file-pdf.svg';
 import google from './images/google.svg';
@@ -72,7 +72,7 @@ const images = {
   sticker,
   exploreBackground,
   ellipse,
-  exploreBackgroundPatients,
+  exploreBackgroundCustomers,
   search,
   show,
   dueArrow,
