@@ -289,6 +289,7 @@ const HomePageUi: React.FC<Props> = ({
                 'with investors',
                 1000,
                 'with equity',
+                1000,
               ]}
               wrapper="span"
               cursor={true}
