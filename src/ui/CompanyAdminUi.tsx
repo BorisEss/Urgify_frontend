@@ -56,8 +56,10 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     paddingTop: 32,
+    gap: 32,
   },
   authFormSpacing: {
+    flex: 1,
     [theme.breakpoints.down('sm')]: {
       paddingTop: 23,
     },
