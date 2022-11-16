@@ -1,5 +1,6 @@
 import {Theme, useMediaQuery} from '@mui/material';
 import React from 'react';
+import { TypeAnimation } from 'react-type-animation';
 import {makeStyles} from 'tss-react/mui';
 
 import images from '../images';
@@ -17,6 +18,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
     paddingBottom: 69,
     paddingTop: 52,
     minHeight: '100%',
+
+    [theme.breakpoints.up(800)]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+    },
+
     [theme.breakpoints.down(1350)]: {
       backgroundSize: '51%',
       backgroundPositionY: '65%',
@@ -27,7 +35,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingBottom: 24,
       paddingTop: 20,
     },
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       paddingLeft: 26,
       paddingRight: 29,
       paddingBottom: 26,
@@ -45,7 +53,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingBottom: 103,
     },
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       paddingBottom: 57,
     },
   },
@@ -80,7 +88,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingBottom: 170,
     },
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       paddingBottom: 75,
     },
   },
@@ -93,13 +101,13 @@ const useStyles = makeStyles()((theme: Theme) => ({
       lineHeight: '108px',
       color: '#000000',
 
-      [theme.breakpoints.down(800)]: {
+      [theme.breakpoints.down(801)]: {
         fontSize: 40,
         lineHeight: '60px',
       },
     },
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       paddingBottom: 30,
     },
   },
@@ -114,7 +122,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
       paddingTop: 14,
     },
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       paddingTop: 18,
       paddingBottom: 27,
       fontSize: 24,
@@ -132,14 +140,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
     display: 'flex',
     gap: 24,
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       gap: 16,
     },
   },
   btnsPadding: {
     padding: '11px 23px',
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       padding: '7px 15px',
     },
   },
@@ -150,14 +158,14 @@ const useStyles = makeStyles()((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       // gap: 18
     },
   },
   socialsWrap: {
     display: 'flex',
     gap: 25,
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       justifyContent: 'center',
       marginTop: 32,
       gap: 78,
@@ -173,7 +181,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     justifyContent: 'space-between',
     gap: 48,
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       gap: 'unset',
       display: 'block',
     },
@@ -183,12 +191,12 @@ const useStyles = makeStyles()((theme: Theme) => ({
     gap: 16,
     alignItems: 'center',
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       display: 'block',
     },
   },
   sponsoresItemLast: {
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       paddingTop: 19,
     },
   },
@@ -197,7 +205,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     fontSize: 16,
     lineHeight: '28px',
     color: '#000000',
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       fontSize: 14,
       lineHeight: '28px',
       textAlign: 'center',
@@ -212,7 +220,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
 
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       height: 52,
     },
 
@@ -221,7 +229,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
     },
   },
   iconWrapLast: {
-    [theme.breakpoints.down(800)]: {
+    [theme.breakpoints.down(801)]: {
       marginTop: 6,
     },
   },
@@ -244,20 +252,6 @@ const HomePageUi: React.FC<Props> = ({
 }) => {
   const {classes, cx} = useStyles();
   const isMobile = useMediaQuery('(max-width:800px)');
-
-  const changingTexts = [ 'later', 'with family & friends', 'with private capital', 'with investors', 'with equity' ];
-  const [textI, setTextI] = React.useState(0);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (textI < 4) {
-        setTextI(i => i + 1);
-      } else {
-        setTextI(0);
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [textI]);
   return (
     <>
      <div className={classes.container}>
@@ -283,7 +277,24 @@ const HomePageUi: React.FC<Props> = ({
       <div className={classes.buyNow}>
         <div className={classes.buyNowText}>
           <h2>Buy Now, Pay</h2>
-          <h4 className={classes.smallText}>{changingTexts[textI]}</h4>
+          <h4 className={classes.smallText}>
+            <TypeAnimation
+              sequence={[
+                'later',
+                1000,
+                'with family & friends',
+                1000,
+                'with private capital',
+                1000,
+                'with investors',
+                1000,
+                'with equity',
+              ]}
+              wrapper="span"
+              cursor={true}
+              repeat={Infinity}
+            />
+          </h4>
           <p className={classes.description}>Meet the most flexible way to pay bills with large expenses associated with them.</p>
         </div>
         <div className={classes.buyNowBtns}>
