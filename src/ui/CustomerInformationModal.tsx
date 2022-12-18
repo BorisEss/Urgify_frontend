@@ -110,7 +110,7 @@ const CustomerInformationModal: React.FC<CustomerInformationModalType> = ({handl
         <div className={classes.personInfo}>
           <div className={classes.infoItem}>
             <div className={classes.personID}>
-              <h2 className={classes.title}>Courtney Henry</h2>
+              <h2 className={classes.title}>Courtney Henryy</h2>
               <span className={classes.email}>binhan628@gmail.com</span>
             </div>
           </div>
