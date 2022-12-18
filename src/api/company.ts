@@ -4,12 +4,12 @@ import { decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
 // Company
-export const getCompany = (): AppAsyncThunk<CompanyType> => (dispatch) => {
+export const getCompany = (companyId: string): AppAsyncThunk<CompanyType> => (dispatch) => {
   return dispatch(
     makeRequest({
       key: 'companies',
       method: 'get',
-      path: '/companies/',
+      path: `/accounts/${companyId}`,
       isAuth: true,
     }),
   ).then(decodeCompany);
@@ -20,7 +20,7 @@ export const addCompany = (params: AddCompanyRequest): AppAsyncThunk<CompanyType
     makeRequest({
       key: 'company',
       method: 'post',
-      path: '/companies/',
+      path: '/accounts/',
       isAuth: true,
       params: {
         name: params.name,

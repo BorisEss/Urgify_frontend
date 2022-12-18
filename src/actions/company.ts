@@ -10,13 +10,13 @@ export const companyActions = {
   })),
 };
 
-// company. need to get company by user
-export const getCompany = (): AppAsyncThunk<CompanyType | null> => (
+export const getCompany = (companyId: string): AppAsyncThunk<CompanyType | null> => (
   dispatch,
 ) => {
-  return dispatch(api.getCompany())
+  return dispatch(api.getCompany(companyId))
     .then((response) => {
       if (!response) return null;
+      dispatch(companyActions.setCurrentCompany(response));
       return response;
     });
 };
@@ -27,6 +27,7 @@ export const addCompany = (name: string, logo: File): AppAsyncThunk<CompanyType 
   return dispatch(api.addCompany({name, logo}))
     .then((response) => {
       if (!response.id) return;
+      dispatch(companyActions.setCurrentCompany(response));
       return response;
     })
     .catch(e => {

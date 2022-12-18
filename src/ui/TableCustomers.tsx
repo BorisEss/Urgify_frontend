@@ -102,20 +102,20 @@ const useStyles = makeStyles()({
 });
 
 function createData(
-  medicalNumber: string,
+  customerNumber: string,
   ssn: string,
   name: string,
   total: number,
   paid: number,
 ) {
-  return { medicalNumber, ssn, name, total, paid};
+  return { customerNumber, ssn, name, total, paid};
 }
 
 const rows = [
-  createData('SD9212969', '999-88-7777', 'Bastian Schweinsteiger', 567890, 247890),
-  createData('SD9212969', '010-14-1234', 'Annette Black', 1574.09, 943.65),
-  createData('SD9212969', '010-87-6541', 'Savannah Nguyen', 778.35, 778.35),
-  createData('BA9212320', '321-67-6541', 'Brooklyn Simmons', 475.22, 0),
+  createData('#123456', '999-88-7777', 'Bastian Schweinsteiger', 567890, 247890),
+  createData('#123456', '010-14-1234', 'Annette Black', 1574.09, 943.65),
+  createData('#123456', '010-87-6541', 'Savannah Nguyen', 778.35, 778.35),
+  createData('#123456', '321-67-6541', 'Brooklyn Simmons', 475.22, 0),
 ];
 
 const TableCustomers = () => {
@@ -137,7 +137,7 @@ const TableCustomers = () => {
         <MaterialTable sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className={classes.th}>Medical Record Number</TableCell>
+              <TableCell className={classes.th}>Invoice ID</TableCell>
               <TableCell align="left" className={classes.th}>SSN</TableCell>
               <TableCell align="left" className={classes.th}>Name</TableCell>
               <TableCell align="left" className={classes.th}>Total</TableCell>
@@ -145,7 +145,7 @@ const TableCustomers = () => {
                 align="left"
                 className={cx(classes.th,)}>
                 <span>Paid</span>
-                <span className={classes.remainItem}>Remain</span>
+                <span className={classes.remainItem}>Due</span>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -164,7 +164,7 @@ const TableCustomers = () => {
                   <TableCell className={classes.td}>
                     <span className={classes.tdTitle}>
                     <img className={classes.icon} src={images.show}/>
-                    {row.medicalNumber}
+                    {row.customerNumber}
                     </span>
                   </TableCell>
                   <TableCell align="left" className={classes.td}>

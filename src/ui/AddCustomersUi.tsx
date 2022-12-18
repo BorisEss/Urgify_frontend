@@ -1,6 +1,7 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import type { CompanyType } from '../api/apiTypes';
 import AddCustomerWrapper from '../components/AddCustomerWrapper';
 import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
 import CompanyHeader from './CompanyHeader';
@@ -21,7 +22,13 @@ const useStyles = makeStyles()({
   },
 });
 
-const AddCustomersUi = () => {
+type Props = {
+  company: CompanyType;
+};
+
+const AddCustomersUi: React.FC<Props> = ({
+  company,
+}) => {
   const {classes} = useStyles();
 
   return (
@@ -29,12 +36,12 @@ const AddCustomersUi = () => {
       <>
         <div className={classes.headerWrap}>
           <CompanyHeader
-            title="ABC Company"
+            title={company.name}
             disablePaddingLeft
           />
         </div>
         <div className={classes.content}>
-          <AddCustomerWrapper />
+          <AddCustomerWrapper withTitle />
           <div className={classes.contentMargin} />
           <DropzoneCustomers />
         </div>

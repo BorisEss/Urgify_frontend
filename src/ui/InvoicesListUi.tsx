@@ -1,14 +1,14 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import type { CompanyType } from '../api/apiTypes';
 import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
+import CreateNewInvoiceWrapper from '../components/CreateNewInvoiceWrapper';
 import Button from './Buttons/Button';
 import CompanyHeader from './CompanyHeader';
 import CompanyTitleBox from './CompanyTitleBox';
 import SearchInput from './Inputs/SearchInput';
 import InvoicesListTable from './InvoicesListTable';
-import Modal from './Modal';
-import NewInvoiceModal from './NewInvoiceModal';
 
 const useStyles = makeStyles()({
   headerWrap: {
@@ -97,18 +97,14 @@ const useStyles = makeStyles()({
   },
 });
 
-const InvoicesListUi = () => {
+type Props = {
+  company: CompanyType;
+};
+
+const InvoicesListUi: React.FC<Props> = ({
+  company,
+}) => {
   const {cx,classes} = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <CompanyDashboardWrapper
@@ -116,7 +112,7 @@ const InvoicesListUi = () => {
         <>
           <div className={classes.headerWrap}>
             <CompanyHeader
-              title="Company Pediatric WA – Billings"
+              title={company.name}
               disablePaddingLeft
             />
           </div>
@@ -149,7 +145,7 @@ const InvoicesListUi = () => {
                 <div className={classes.lastBlock}>
                   <div>
                     <div className={classes.paymentItem}>
-                      <p className={classes.paymentTitle}>Remain to pay</p>
+                      <p className={classes.paymentTitle}>Outstanding</p>
                       <span className={cx(classes.paymentPrice, classes.red)}>$321,408.79</span>
                     </div>
                     <div className={classes.paymentItem}>
@@ -169,10 +165,7 @@ const InvoicesListUi = () => {
               <div className={classes.contentMargin} />
               <div className={classes.actionsWrap}>
                 <div className={classes.createBtnWrap}>
-                  <Button
-                    title="Create new invoice"
-                    onClick={handleClickOpen}
-                  />
+                  <CreateNewInvoiceWrapper />
                 </div>
                 <div className={classes.searchWrap}>
                   <SearchInput />
@@ -183,14 +176,6 @@ const InvoicesListUi = () => {
               </div>
             </div>
           </div>
-          <Modal
-            open={open}
-            handleClose={handleClose}
-            borderRadius={4}
-            children={
-              <NewInvoiceModal handleClose={handleClose}  />
-            }
-          />
         </>
       }
     />

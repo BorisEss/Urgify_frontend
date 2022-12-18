@@ -2,6 +2,7 @@ import React from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {makeStyles} from 'tss-react/mui';
 
+import type { CompanyType } from '../api/apiTypes';
 import AddCustomerWrapper from '../components/AddCustomerWrapper';
 import CompanyDashboardWrapper from '../components/CompanyDashboardWrapper';
 import { AddCustomersRoute } from '../navigation/navTypes';
@@ -35,17 +36,17 @@ const useStyles = makeStyles()({
 });
 
 type Props = {
-  companyId: string,
-}
+  company: CompanyType;
+};
 
 const AddCustomersListUi: React.FC<Props> = ({
-  companyId,
-}) => {
+    company,
+  }) => {
   const {classes} = useStyles();
   const navigate = useNavigate();
 
   const navigateToImportPacients = () => {
-    navigate(generatePath(AddCustomersRoute(), { companyId }));
+    navigate(generatePath(AddCustomersRoute(), { companyId: company.id }));
   };
 
   const onChangePage = (page: number) => {
@@ -58,7 +59,7 @@ const AddCustomersListUi: React.FC<Props> = ({
       <>
         <div className={classes.headerWrap}>
           <CompanyHeader
-            title="Company Pediatric WA – Billings"
+            title={company.name}
             buttonTitle="Import customers"
             disablePaddingLeft
             onClick={navigateToImportPacients}
@@ -66,7 +67,7 @@ const AddCustomersListUi: React.FC<Props> = ({
         </div>
         <div className={classes.content}>
           <div>
-            <AddCustomerWrapper />
+            <AddCustomerWrapper withTitle />
             <div className={classes.contentMargin} />
             <SearchInput />
             <div className={classes.tableWrap}>

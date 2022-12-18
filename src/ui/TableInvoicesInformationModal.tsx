@@ -7,8 +7,11 @@ import TableRow from '@mui/material/TableRow';
 import * as React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
+import { formatApiDate } from '../utils/formatters';
+
 const useStyles = makeStyles()({
   tr: {
+    verticalAlign: 'top',
   },
   th: {
     fontFamily: 'Poppins-medium',
@@ -22,13 +25,19 @@ const useStyles = makeStyles()({
   },
   td: {
     padding: '16px 8px',
-    lineHeight: 0,
   },
   tdTitle: {
     fontFamily: 'Poppins-semibold',
     fontWeight: 600,
     fontSize: 16,
     color: '#2B364D',
+  },
+  totalChargesTr: {
+
+  },
+  totalChargesTd: {
+    padding: '16.5px 8px',
+    background: 'rgba(184, 184, 184, 0.2)',
   },
 });
 
@@ -42,12 +51,23 @@ function createData(
 }
 
 const rows = [
-  createData('9/23/2021', 'Medical care', '$78,000','30 days'),
-  createData('to 9/27/2021', 'Lab test', '$1,005.3',''),
+  createData('9/23/2021 to 9/27/2021', 'Medical care', '$78,000','30 days'),
+  // createData('9/23/2021 to 9/27/2021', 'Lab test', '$1,005.3',''),
 ];
 
-const TableInvoicesInformationModal = () => {
-  const {classes} = useStyles();
+type Props = {
+  withTotalChargesLine?: boolean;
+}
+
+const TableInvoicesInformationModal:React.FC<Props> = ({
+  withTotalChargesLine,
+}) => {
+  const {classes, cx} = useStyles();
+
+  const totalCharges = '$79,005.3';
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [date, setDate] = React.useState<number>(Date.now());
 
   return (
     <TableContainer>
@@ -67,7 +87,7 @@ const TableInvoicesInformationModal = () => {
               key={row.date}
               sx={{ '& td, & th': { border: 0 } }}
             >
-              <TableCell className={classes.td}>
+              <TableCell className={classes.td} width={174}>
                 <span className={classes.tdTitle}>
                   {row.date}
                 </span>
@@ -89,6 +109,31 @@ const TableInvoicesInformationModal = () => {
               </TableCell>
             </TableRow>
           ))}
+          {withTotalChargesLine ? (
+            <TableRow
+              className={cx(classes.tr, classes.totalChargesTr)}
+              key="totalCharges"
+              sx={{ '& td, & th': { border: 0 } }}
+            >
+              <TableCell className={cx(classes.td, classes.totalChargesTd)} />
+
+              <TableCell className={cx(classes.td, classes.totalChargesTd)}>
+                <span className={classes.tdTitle}>
+                  Total Charges
+                </span>
+              </TableCell>
+              <TableCell className={cx(classes.td, classes.totalChargesTd)}>
+                <span className={classes.tdTitle}>
+                  {totalCharges}
+                </span>
+              </TableCell>
+              <TableCell className={cx(classes.td, classes.totalChargesTd)}>
+                <span className={classes.tdTitle}>
+                  Due {formatApiDate(date, 'M/dd/yyyy')}
+                </span>
+              </TableCell>
+            </TableRow>
+          ) : null}
         </TableBody>
       </MaterialTable>
     </TableContainer>

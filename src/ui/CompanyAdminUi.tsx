@@ -99,7 +99,6 @@ const useStyles = makeStyles()((theme: Theme) => ({
 }));
 
 type CompanyAdminUiType = {
-  isFetching: boolean;
   image: File | null;
   setImage: (image: File | null) => void;
   onSubmit: () => void;
@@ -109,7 +108,6 @@ type CompanyAdminUiType = {
 };
 
 const CompanyAdminUi:React.FC<CompanyAdminUiType> = ({
-  // isFetching,
   image,
   setImage,
   onSubmit,

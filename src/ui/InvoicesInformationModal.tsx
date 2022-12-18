@@ -305,7 +305,7 @@ const InvoicesInformationModal: React.FC<InvoicesInformationModalType> = ({handl
             </div>
             <DownloadPdfButton url={'Explanation of Benefits.pdf'} />
             <div className={classes.tablesTitle}>
-              <p>Summary of inpatient service </p>
+              <p>Summary of customer service </p>
             </div>
             <div className={classes.bigDivider} />
             <div className={classes.tableWrap}>
