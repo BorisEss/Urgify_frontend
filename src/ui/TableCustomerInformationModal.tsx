@@ -62,7 +62,7 @@ function createData(
 }
 
 const rows = [
-  createData('#123456', '9/23/2021', '11/23/2022', '$567,890', 'Paid','Open dispute'),
+  createData('#123455', '9/23/2021', '11/23/2022', '$567,890', 'Paid','Open dispute'),
   createData('#123456', '9/23/2021', '11/23/2022', '$567,890', 'Paid', 'Open dispute',),
 ];
 
