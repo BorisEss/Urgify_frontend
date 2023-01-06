@@ -1,36 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { createSelector } from 'redux-views';
 
-import { addCompany, getCompany } from '../actions/company';
-import { getCurrentCompany } from '../selectors/company';
-import { getCompanyIsFetching } from '../selectors/network';
+import { addCompany } from '../actions/company';
+import { AddCustomersRoute } from '../navigation/navTypes';
+import { getUserCompanyId } from '../selectors/auth';
 import type { AppState } from '../store';
 import CompanyAdminUi from '../ui/CompanyAdminUi';
-import LoaderBox from '../ui/LoaderBox';
-import { isUrlFromAuth } from '../utils/loginRedirectFlow';
 import { maxLength, minLength } from '../utils/strings';
 
 const CompanyAdmin: React.FC<ReduxProps> = ({
-  company,
-  companyIsFetching,
-  fetchCompany,
-  // createCompany,
+  userCompanyId,
+  createCompany,
 }) => {
-  const [isFetching, setIsFetching] = React.useState<boolean>(true);
+  const navigate = useNavigate();
+
   const [companyName, setCompanyName] = React.useState<string>('');
   const [companyNameError, setCompanyNameError] = React.useState<string>('');
   const [companyImageError, setCompanyImageError] = React.useState<string>('');
   const [image, setImage] = React.useState<File | null>(null);
-  let location = useLocation();
-
-  const checkCompanyExistence = () => {
-    console.log(company);
-    if (isUrlFromAuth(location.state)) {
-
-    }
-  };
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCompanyNameError('');
@@ -40,6 +29,10 @@ const CompanyAdmin: React.FC<ReduxProps> = ({
   const onImageChange = (img: File | null) => {
     setCompanyImageError('');
     setImage(img);
+  };
+
+  const navigateToDashboard = (companyId: string) => {
+    navigate(generatePath(AddCustomersRoute(), { companyId }));
   };
 
   const validate = () => {
@@ -61,60 +54,62 @@ const CompanyAdmin: React.FC<ReduxProps> = ({
 
   const onSubmit = () => {
     if (validate() && image) {
-      // createCompany(companyName, image)
-      //   .then(resp => {
-      //     if (resp && resp.id) {
-      //       // navigate to dashboard
-      //     }
-      //   })
-      //   .catch((e: any) => {
-      //     if (e && e.name) {
-      //       setCompanyNameError(e.name);
-      //     }
-      //     if (e && e.logo) {
-      //       setCompanyImageError(e.logo);
-      //     }
-      //   });
+      createCompany(companyName, image)
+        .then(resp => {
+          if (resp && resp.id) {
+            navigateToDashboard(resp.id);
+          }
+        })
+        .catch((e: any) => {
+          if (e && e.name) {
+            setCompanyNameError(e.name);
+          }
+          if (e && e.logo) {
+            setCompanyImageError(e.logo);
+          }
+        });
     }
   };
 
-  React.useEffect(() => {
-    fetchCompany()
-      .finally(() => {
-        setIsFetching(false);
-      });
-  }, [fetchCompany]);
+  // Here, we can check if companyId exist in localStorage, maybe, or need to fac getRequest to get userData
+  // and then check if companyId exist
+  // if no userData in localStorage then user is unlogged
 
-  if (!companyIsFetching) {
-    checkCompanyExistence();
-  }
-  if (companyIsFetching || isFetching) return <LoaderBox />;
-  if (!companyIsFetching && !isFetching) {
-    return <CompanyAdminUi
-      isFetching={companyIsFetching}
-      image={image}
-      setImage={onImageChange}
-      onSubmit={onSubmit}
-      onInputChange={onInputChange}
-      companyNameError={companyNameError}
-      companyImageError={companyImageError}
-    />;
-  }
-  return null;
+  useEffect(() => {
+    if (userCompanyId) {
+      navigateToDashboard(userCompanyId);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // useEffect(() => {
+  //   if (!userCompanyId) {
+  //     fetchUserData();
+  //   }
+  // }, [userCompanyId, fetchUserData]);
+
+  // if (isFetching) return <LoaderBox />;
+
+  return <CompanyAdminUi
+    image={image}
+    setImage={onImageChange}
+    onSubmit={onSubmit}
+    onInputChange={onInputChange}
+    companyNameError={companyNameError}
+    companyImageError={companyImageError}
+  />;
 };
 
 const getData = createSelector(
-  [getCurrentCompany, getCompanyIsFetching],
-  (company, companyIsFetching) => {
+  [getUserCompanyId],
+  (userCompanyId) => {
     return {
-      company,
-      companyIsFetching,
+      userCompanyId,
     };
   },
 );
 
 const connector = connect((state: AppState) => getData(state), {
-  fetchCompany: getCompany,
   createCompany: addCompany,
 });
 

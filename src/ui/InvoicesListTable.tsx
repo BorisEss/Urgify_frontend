@@ -105,7 +105,8 @@ const InvoicesListTable = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleClickOpenReminder = () => {
+  const handleClickOpenReminder = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
     setOpenReminder(true);
   };
 

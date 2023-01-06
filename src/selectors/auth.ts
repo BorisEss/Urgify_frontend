@@ -20,3 +20,9 @@ export const getRedirectAuthParams = createSelector(
   [getAuthState],
   (authState) => authState.redirectParams,
 );
+
+export const getUserCompanyId = createSelector(
+  [getAuthState],
+  (authState) => authState.companyId,
+);
+

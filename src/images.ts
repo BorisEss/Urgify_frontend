@@ -5,6 +5,7 @@ import arrowRight from './images/arrow-right.svg';
 import arrowUp from './images/arrow-up.svg';
 import building from './images/building.svg';
 import burger from './images/burger.svg';
+import arrowDownBolder from './images/chevron-down.svg';
 import circleCheck from './images/circle-check.svg';
 import circleCheckWhite from './images/circle-checkwhite.svg';
 import closeBurger from './images/close-burger.svg';
@@ -60,6 +61,7 @@ const images = {
   arrowLeft,
   arrowRight,
   arrowDown,
+  arrowDownBolder,
   radio,
   cloudUp,
   uploadTrash,

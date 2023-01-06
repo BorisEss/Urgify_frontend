@@ -1,11 +1,11 @@
 import type { AppAsyncThunk } from '../actions/actionsTypes';
-import type { AcceptInviteNewUserRequest, AuthByMailRequest, AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, RegByMailRequest } from './apiTypes';
+import type { AcceptInviteNewUserRequest, AuthByMailRequest, AuthTokens, ConfirmEmailCodeRequest, ForgotSendPasswordsRequest, RegByMailRequest, UserData } from './apiTypes';
 import { decodeString } from './decoders';
 import { makeRequest } from './makeRequest';
 
 export const authByMail = (
   params: AuthByMailRequest,
-): AppAsyncThunk<AuthTokens | undefined> => (dispatch) => {
+): AppAsyncThunk<UserData | undefined> => (dispatch) => {
   return dispatch(
     makeRequest({
       key: 'auth',
@@ -14,7 +14,7 @@ export const authByMail = (
       isAuth: true,
       params,
     }),
-  ).then(decodeTokens);
+  ).then(decodeAuthData);
 };
 
 export const registrateByMail = (
@@ -121,6 +121,14 @@ export const refreshTokens = (
       params: { refresh: params.refreshToken },
     }),
   ).then(decodeTokens);
+};
+
+const decodeAuthData = (data: any): UserData | undefined => {
+  if (!data) return undefined;
+  return {
+    tokens: decodeTokens(data),
+    companyId: decodeString(data.company_id),
+  };
 };
 
 const decodeTokens = (data: any): AuthTokens | undefined => {

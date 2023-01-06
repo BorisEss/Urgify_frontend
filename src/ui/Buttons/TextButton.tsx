@@ -79,7 +79,7 @@ type TextButtonType = {
   title: string;
   color: 'gray' | 'orange' | 'black';
   fontWeight?: 'normal' | 'semibold';
-  onClick?: () => void; //only for type 'button'
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void; //only for type 'button'
   type?: 'link' | 'button';
   path?: string; //only for type 'link'
   disabled?: boolean;
@@ -104,8 +104,8 @@ const TextButton: React.FC<TextButtonType> = ({
   let navigate = useNavigate();
   const {classes, cx} = useStyles();
 
-  const onClickHandle = () => {
-    if (onClick) onClick();
+  const onClickHandle = (e: React.MouseEvent<HTMLElement>) => {
+    if (onClick) onClick(e);
     if (type === 'link' && path) navigate(path);
   };
   if (type === 'link' && href) return <a

@@ -74,6 +74,12 @@ export type AcceptInviteNewUserRequest = {
   hash: string;
 };
 
+// userData
+export type UserData = {
+  companyId: string;
+  tokens: AuthTokens | undefined;
+};
+
 // payment
 export type PaymentIntentRequest = {
   amount: number;

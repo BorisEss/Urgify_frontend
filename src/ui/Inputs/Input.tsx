@@ -53,6 +53,11 @@ const useStyles = makeStyles()((theme: Theme) => ({
       color: '#B8B8B8',
     },
 
+    '&::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      '-moz-appearance': 'textfield',
+    },
+
     [theme.breakpoints.down('sm')]: {
       border: '1px solid #DBDBDB',
       fontFamily: 'Poppins-regular',
@@ -98,6 +103,20 @@ const useStyles = makeStyles()((theme: Theme) => ({
     paddingTop: 3,
     minHeight: 21, // Do this to avoid changing height when error appears/disappers
   },
+  leftSymbol: {
+    fontFamily: 'Poppins-medium',
+    fontWeight: 500,
+    fontSize: 16,
+    lineHeight: '24px',
+    textTransform: 'uppercase',
+    color: '#2B364D',
+    position: 'absolute',
+    left: 12,
+    top: 16,
+  },
+  inputWithLeftSymbol: {
+    paddingLeft: 21,
+  },
 }));
 
 type InputType = {
@@ -115,6 +134,7 @@ type InputType = {
   placeholder?: string;
   darkerPlaceholderColor?: boolean;
   fullWidth?: boolean;
+  leftSymbol?: string;
 };
 
 const Input: React.FC<InputType> = ({
@@ -131,12 +151,14 @@ const Input: React.FC<InputType> = ({
   placeholder,
   labelCenter,
   darkerPlaceholderColor,
+  leftSymbol,
 }) => {
   const {classes, cx} = useStyles();
   return (
     <div className={cx(onDelete ? classes.rootRelative : '', classes.fullWidth )}>
       <p className={cx(classes.label, labelCenter ? classes.labelCenter : '')}>{label}</p>
       <div className={classes.inputWrap}>
+        {leftSymbol && <span className={classes.leftSymbol}>{leftSymbol}</span>}
         <input
           name={name}
           type={type}
@@ -144,6 +166,7 @@ const Input: React.FC<InputType> = ({
             classes.input,
             error ? classes.error : '',
             darkerPlaceholderColor ? classes.darkerPlaceholderColor : '',
+            leftSymbol ? classes.inputWithLeftSymbol : '',
           )}
           disabled={disabled}
           onChange={(e) => (onChange ? onChange(e) : () => {})}

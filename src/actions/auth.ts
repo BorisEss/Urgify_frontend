@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import * as api from '../api';
-import type { AuthTokens } from '../api/apiTypes';
+import type { AuthTokens, UserData } from '../api/apiTypes';
 import { getApiRefreshToken, getApiToken } from '../selectors/auth';
 import Log from '../services/logger';
 import type { RedirectParamsType } from '../types';
@@ -21,14 +21,23 @@ export const authActions = {
   setRedirectParams: createAction('authSetRedirectParams', (redirectParams?: RedirectParamsType) => ({
     payload: redirectParams,
   })),
+  setCompanyId: createAction('authSetCompanyId', (companyId: string) => ({
+    payload: companyId,
+  })),
 };
 
 export const getTokens = (): AppThunk => (dispatch) => {
   const localTokensJSON = localStorage.getItem('auth');
+  const localCompanyIdJSON = localStorage.getItem('companyId');
   if (localTokensJSON) {
     const token = JSON.parse(localTokensJSON);
     dispatch(authActions.setTokens(token));
     dispatch(authActions.setAuthenticated(true));
+
+    if (localCompanyIdJSON) {
+      const companyId = JSON.parse(localCompanyIdJSON);
+      dispatch(authActions.setCompanyId(companyId));
+    }
     return Promise.resolve();
   } else return Promise.resolve();
 };
@@ -42,12 +51,16 @@ export const authByMail = (
 ) => {
   return dispatch(api.authByMail({ email, password }))
     .then((response) => {
-      if (!response) return;
+      if (!response || !response.tokens) return;
       // save authenticated flag just after other loadings. IF needed
       // Make if to prevent changing page. Fom nonAuth pages to authPages.
       // But to leave possibility to make authRequests
       dispatch(getUserInfoOnTokenUpdate(response));
-      if (redirectParams) {
+      // if (redirectParams) {//old version
+      //   dispatch(authActions.setRedirectParams(redirectParams));
+      // }
+      if (response.companyId) {//I'll check if companyId exist and redirect to 1 of 2 routes which will be in redirectparams
+        // redirect Params will be with 'to' params. From not needed now, and options also, companyId I can't know before login
         dispatch(authActions.setRedirectParams(redirectParams));
       }
       dispatch(authActions.setAuthenticated(true));
@@ -197,6 +210,7 @@ export const refreshTokens = (): AppAsyncThunk => (dispatch, getState) => {
     .catch((e) => {
       if (!e.response.data.isSuccess) {
         localStorage.removeItem('auth');
+        localStorage.removeItem('companyId');
         dispatch(authActions.deleteTokens());
       }
     });
@@ -204,10 +218,11 @@ export const refreshTokens = (): AppAsyncThunk => (dispatch, getState) => {
 
 export const logout = (): AppThunk => (dispatch) => {
   localStorage.removeItem('auth');
+  localStorage.removeItem('companyId');
   dispatch(authActions.deleteTokens());
 };
 
-export const saveTokens = (response: AuthTokens | undefined): AppAsyncThunk => (
+const saveTokens = (response: AuthTokens | undefined): AppAsyncThunk => (
   dispatch,
 ) => {
   if (!response) return Promise.resolve();
@@ -219,9 +234,13 @@ export const saveTokens = (response: AuthTokens | undefined): AppAsyncThunk => (
 
 api.setAuthRefreshAction(refreshTokens);
 
-export const getUserInfoOnTokenUpdate = (response: AuthTokens): AppThunk => (
+const getUserInfoOnTokenUpdate = (response: UserData): AppThunk => (
   dispatch,
 ) => {
-  dispatch(authActions.setTokens(response));
-  localStorage.setItem('auth', JSON.stringify(response));
+  if (response.tokens) {
+    dispatch(authActions.setTokens(response.tokens));
+    dispatch(authActions.setCompanyId(response.companyId));
+    localStorage.setItem('auth', JSON.stringify(response.tokens));
+    localStorage.setItem('companyId', JSON.stringify(response.companyId));
+  }
 };

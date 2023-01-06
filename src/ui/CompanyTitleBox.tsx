@@ -1,12 +1,13 @@
 import React from 'react';
 import {makeStyles} from 'tss-react/mui';
 
-import OutlinedButton from './Buttons/OutlinedButton';
+import CreateNewCustomerBtn from './CreateNewCustomerBtn';
 
 const useStyles = makeStyles()({
   companyName: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingTop: 32,
   },
   title: {
@@ -15,13 +16,6 @@ const useStyles = makeStyles()({
     fontSize: 32,
     lineHeight: '48px',
     color: '#2B364D',
-  },
-  button: {
-    fontSize: 12,
-    lineHeight: '18px',
-    color: '#F93822',
-    padding: '6px 14px',
-    border: '2px solid #F93822',
   },
 });
 
@@ -42,13 +36,9 @@ const CompanyTitleBox: React.FC<Props> = ({
     <div className={classes.companyName}>
       <h2 className={classes.title}>{title}</h2>
       {btnTitle && onClick && (
-        <OutlinedButton
+        <CreateNewCustomerBtn
           onClick={onClick}
-          type="button"
           title={btnTitle}
-          color="orange"
-          lowerCase
-          extraClass={classes.button}
         />
       )}
     </div>

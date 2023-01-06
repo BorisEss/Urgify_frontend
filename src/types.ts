@@ -27,12 +27,8 @@ export type NewCustomerFormFields = {
   address: string;
 };
 export type NewInvoiceFormFields = {
-  customerName: string;
   dateServiceStart: string;
   dateServiceEnd: string;
-  serviceDescription: string;
-  chargesAmount: string;
-  dueDate: string;
 };
 
 export type SignUpUiFields = {
@@ -93,5 +89,16 @@ export type RedirectParamsType = {
   to: string;
   from?: string;
   options?: Record<string, string>;
+}
+
+export type UserSelectOption = {
+  label: string;
+  value: string;
+}
+
+export type InvoiceServiceType = {
+  id: string;
+  description: string;
+  chargesAmount: number;
 }
 

@@ -9,6 +9,7 @@ export interface AuthState {
   authenticated: boolean;
   errors: string[];
   redirectParams?: RedirectParamsType;
+  companyId: string;
 }
 
 export default createReducer(createInitialState(), (builder) => {
@@ -31,6 +32,10 @@ export default createReducer(createInitialState(), (builder) => {
   builder.addCase(authActions.setRedirectParams, (state, action) => {
     state.redirectParams = action.payload;
   });
+  builder.addCase(authActions.setCompanyId, (state, action) => {
+    const companyId = action.payload;
+    state.companyId = companyId;
+  });
 });
 
 function createInitialState(): AuthState {
@@ -40,5 +45,6 @@ function createInitialState(): AuthState {
     authenticated: false,
     errors: [],
     redirectParams: undefined,
+    companyId: '',
   };
 }
