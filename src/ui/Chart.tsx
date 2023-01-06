@@ -65,10 +65,12 @@ type ChartItemDataType = {
 
 type ChartDataType = Record<number, ChartItemDataType>
 
-const respData: ChartDataType = {
+const respData: ChartDataType = {};
+
+const defaultData: ChartDataType = {//this is default data if data empty- to show just gray line.
   1641852000000: {
     dateLabel: '1/11/2022',
-    amount: 250.11,
+    amount: 0,
     payType: 'Visa *4589',
     paidBy: 'Brooklyn Simmons',
     email: 'test@test.gmail',
@@ -76,7 +78,7 @@ const respData: ChartDataType = {
   },
   1644530400000: {
     dateLabel: '2/11/2022',
-    amount: 260.11,
+    amount: 150.11,
     payType: 'Visa *4589',
     paidBy: 'Brooklyn Simmons',
     email: 'test@test.gmail',
@@ -84,7 +86,7 @@ const respData: ChartDataType = {
   },
   1668117600000: {
     dateLabel: '11/11/2022',
-    amount: 240.11,
+    amount: 150.11,
     payType: 'Visa *4589',
     paidBy: 'Brooklyn Simmons',
     email: 'brooklyn.simmons@gmail.com',
@@ -92,7 +94,7 @@ const respData: ChartDataType = {
   },
   1641938400000: {
     dateLabel: '1/12/2022',
-    amount: 250.11,
+    amount: 239.11,
     payType: 'Visa *4589',
     paidBy: 'Brooklyn Simmons',
     email: 'test@test.gmail',
@@ -100,15 +102,22 @@ const respData: ChartDataType = {
   },
   1677708000000: {
     dateLabel: '3/2/2023',
-    amount: 259.11,
+    amount: 239.11,
+    payType: 'Visa *4589',
+    paidBy: 'Brooklyn Simmons',
+    email: 'brooklyn.simmons@gmail.com',
+    phone: '(209) 123-0104',
+  },
+  168000000000: {
+    dateLabel: '3/2/2023',
+    amount: 270,
     payType: 'Visa *4589',
     paidBy: 'Brooklyn Simmons',
     email: 'brooklyn.simmons@gmail.com',
     phone: '(209) 123-0104',
   },
 };
-
-const labels: string[] = Object.keys(respData);
+// DEFAULT DATA + GRAY LINE + NO FILL + NO POINTS + NO TICKS
 
 type Props = {};
 
@@ -175,7 +184,7 @@ const Chart: React.FC<Props> = () => {
           amountEl.style.marginTop = '8px';
           amountEl.style.fontSize = '16px';
           amountEl.style.lineHeight = '24px';
-          amountEl.style.color = '#2B364D';
+          amountEl.style.color = '#2B364D'; // second color: #2FC77B
           amountEl.style.fontFamily = 'Poppins-semibold';
           amountEl.style.fontWeight = '600';
 
@@ -258,7 +267,7 @@ const Chart: React.FC<Props> = () => {
     // Display, position, and set styles for font
     tooltipEl.style.opacity = 1;
     tooltipEl.style.background = 'rgb(255, 255, 255)';
-    tooltipEl.style.borderColor = 'rgb(43, 54, 77)';
+    tooltipEl.style.borderColor = 'rgb(43, 54, 77)'; // second color will be #2FC77B
     tooltipEl.style.borderWidth = '2px';
     tooltipEl.style.borderRadius = '0';
     tooltipEl.style.borderStyle = 'solid';
@@ -287,7 +296,7 @@ const Chart: React.FC<Props> = () => {
       tooltip: {
         enabled: false,
         position: 'nearest',
-        external: externalTooltipHandler,
+        external: true ? null : externalTooltipHandler,// second value null || externalTooltipHandler - when default enabled
       },
     },
     scales: {
@@ -324,14 +333,33 @@ const Chart: React.FC<Props> = () => {
     }
   }, []);
 
+  const getChartDataArray = () => {
+    const dataArray = Object.values(respData);
+    const defaultDataArray = Object.values(defaultData);
+    if (dataArray.length) {
+      return dataArray.map(item => item.amount);
+    }
+    return defaultDataArray.map(item => item.amount);
+  };
+
+  const labels: string[] = Object.keys(respData);
+  const defaultLabels: string[] = Object.keys(defaultData);
   const data = {
-    labels,
+    labels: labels.length ? labels : defaultLabels,
     datasets: [
       {
         fill: true,
-        data: Object.values(respData).map(item => item.amount),
-        borderColor: 'transparent',
-        backgroundColor: gradient,
+        data: getChartDataArray(),
+        borderColor: '#DBDBDB',
+        borderWidth: 1,
+        backgroundColor: true ? 'transparent' : gradient,// or gradient or transparent( when default )
+        pointBorderWidth: 2,
+        pointRadius: true ? 0 : 10,// 0 when default , 10 when is data
+        pointBorderColor: 'white',
+        pointBackgroundColor: 'rgb(47, 199, 123)',// here will be second colod: #2B364D
+        pointHoverRadius: true ? 0 : 10,// 0 when default , 10 when is data
+        pointHoverBorderWidth: 1,
+        pointHoverBorderColor: 'white',
       },
     ],
   };
